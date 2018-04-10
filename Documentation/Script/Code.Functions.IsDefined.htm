@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Code :: Functions :: IsDefined</title>
+<meta name="MS-HKWD" content="Advanced Engine Control">
+</head>
+
+<body Background="/Images/BGCode.gif">
+<font size="5">Code :: Functions :: IsDefined</font><br />
+<hr /><br /><br />
+
+<b>Description:</b>
+<blockquote>
+<!-- ##BEGIN_DESCRIPTION## -->
+Determines if a specified function exists.
+<!-- ##END_DESCRIPTION## -->
+</blockquote>
+
+<b>Syntax:</b>
+<blockquote>
+<font color="0000EE">Code.Functions.IsDefined</font>(<font color="#000088">FunctionName</font> as <font color="MediumVioletRed">String</font>) as <font color="MediumVioletRed">Numeric</font> </blockquote>
+
+<b>Parameters:</b>
+<blockquote>
+<ul><li><font color="#000088">FunctionName</font> as <font color="MediumVioletRed">String</font><ul><li>
+The name of the function to be tested for existence.
+</ul></ul>
+</blockquote>
+
+<b>Example:</b>
+<table  ><tr><td nowrap><div style=""><div style="display:none;" id="closed634383059971320865_1"><img src="/images/Code/PlusNoLines.gif" align=top onclick="open634383059971320865_1.style.display='block'; closed634383059971320865_1.style.display='none'; "><b><span style="color:#00008b;background-color:#c0c0c0;">&lt;%...%&gt;</span></b></div><div style="display:block;" id="open634383059971320865_1"><img src="/images/Code/minusNoTopLine.gif" align=top onclick="open634383059971320865_1.style.display='none'; closed634383059971320865_1.style.display='block'; "><span style="color:#000000;background-color:#ffff00;">&lt;%</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<div style="display:none;" id="closed634383059971320865_3"><img src="/images/Code/plus.gif" align=top onclick="open634383059971320865_3.style.display='block'; closed634383059971320865_3.style.display='none'; "><b><span style="color:#00008b;background-color:#c0c0c0;">Function&nbsp;OneThousand()&nbsp;as&nbsp;Numeric&nbsp;...</span></b></div><div style="display:block;" id="open634383059971320865_3"><img src="/images/Code/minus.gif" align=top onclick="open634383059971320865_3.style.display='none'; closed634383059971320865_3.style.display='block'; "><b><span style="color:#0000ff">Function</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">OneThousand</span><span style="color:#ff0000">(</span><span style="color:#ff0000">)</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">as</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#c71585">Numeric</span></b><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000"></span><span style="color:#000000">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">Return</span></b><span style="color:#ff0000">(</span><b><span style="color:#008080">1000</span></b><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/L.gif"  align=top><b><span style="color:#0000ff">End&nbsp;Function</span></b></div>
+<img src="/images/Code/I.gif"  align=top><br>
+<div style="display:none;" id="closed634383059971320865_7"><img src="/images/Code/plus.gif" align=top onclick="open634383059971320865_7.style.display='block'; closed634383059971320865_7.style.display='none'; "><b><span style="color:#00008b;background-color:#c0c0c0;">If&nbsp;(Code.Functions.IsDefined("OneThousand"))&nbsp;...</span></b></div><div style="display:block;" id="open634383059971320865_7"><img src="/images/Code/minus.gif" align=top onclick="open634383059971320865_7.style.display='none'; closed634383059971320865_7.style.display='block'; "><b><span style="color:#0000ff">If</span></b><span style="color:#ff0000">(</span><span style="color:#ff00ff">Code.Functions.IsDefined</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">OneThousand</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000"></span><span style="color:#000000">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#000000"></span><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Value</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">of</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">[OneThousand]:</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000"></span><span style="color:#ff0000">"</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000">OneThousand</span><span style="color:#ff0000">(</span><span style="color:#ff0000">)</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><b><span style="color:#0000ff">Else</span></b><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000"></span><span style="color:#000000">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#000000"></span><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">The</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">function</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">is</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">not</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">defined.</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/L.gif"  align=top><b><span style="color:#0000ff">End&nbsp;If</span></b></div>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/L.gif"  align=top><span style="color:#000000;background-color:#ffff00;">%&gt;</span></div>
+<img src="/images/Code/clear.gif"  align=top><br>
+</div></td></tr></table>
+
+</body>
+</html>

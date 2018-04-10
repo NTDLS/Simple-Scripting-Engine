@@ -1,0 +1,36 @@
+<%
+	Declare Type FindFileInfo
+		Path as String
+		FileAttributes as Integer
+		'ftCreationTime as FILETIME? 'Not yet Implemented!
+		'ftLastAccessTime as FILETIME? 'Not yet Implemented!
+		'ftLastWriteTime as FILETIME? 'Not yet Implemented!
+		FileSizeHigh as Integer
+		FileSizeLow as Integer
+		FileName as String
+		AltFileName as String
+		FindHandle as Handle
+		IsDirectory as Boolean
+	End Type
+	
+	Function ListFolderContents(sPath as String) as Boolean
+		
+		Dim MyFFI as FindFileInfo
+		
+		MyFFI.Path = sPath
+		
+		While(FindFile(@MyFFI))
+			
+			If(((StrCmp(MyFFI.FileName, "..") <> 0) AND (StrCmp(MyFFI.FileName, ".") <> 0)))
+				Print("Name: ", MyFFI.FileName)
+				'Print("FileAttributes: ", MyFFI.FileAttributes)
+				'Print("FileSizeHigh: ", MyFFI.FileSizeHigh)
+				Print("FileSize: ", MyFFI.FileSizeLow)
+				'Print("AltFileName: ", MyFFI.AltFileName)
+				Print("IsDirectory: ", MyFFI.IsDirectory)
+				Print("-------------------------------------------------------------")
+			End If
+		WEnd		
+		
+	End Function
+%>

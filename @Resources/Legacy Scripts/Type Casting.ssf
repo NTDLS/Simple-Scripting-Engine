@@ -1,0 +1,13 @@
+<%
+	Dim iMyInt as Integer = iVal("45654.56564")
+	Dim dMyDbl as Double = dVal("45654.56564")
+	Dim sMyStr as String = Str(dVal(45654.56564, 2))
+	
+	Dim x as String = "10"
+	Dim y as String = "50"
+	
+	Print("Math: ", iVal(x) * iVal(y))
+	Print("iMyInt: ", iMyInt)
+	Print("dMyDbl: ", dMyDbl)
+	Print("sMyStr: ", sMyStr)
+%>

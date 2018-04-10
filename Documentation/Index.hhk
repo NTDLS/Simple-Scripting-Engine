@@ -1,0 +1,2555 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Abs">
+		<param name="Name" value="Math.Abs">
+		<param name="Local" value="Script\Math.Abs.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Add">
+		<param name="Name" value="List.Add">
+		<param name="Local" value="Script\List.Add.htm">
+		<param name="Name" value="XML.Writer.Add">
+		<param name="Local" value="Script\XML.Writer.Add.htm">
+		<param name="Name" value="XML.Writer.AddXML">
+		<param name="Local" value="Script\XML.Writer.AddXML.htm">
+		<param name="Name" value="Socket.Client.PeerAddress">
+		<param name="Local" value="Script\Socket.Client.PeerAddress.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="AddXML">
+		<param name="Name" value="XML.Writer.AddXML">
+		<param name="Local" value="Script\XML.Writer.AddXML.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Allocated">
+		<param name="Name" value="List.Allocated">
+		<param name="Local" value="Script\List.Allocated.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Append">
+		<param name="Name" value="String.Append">
+		<param name="Local" value="Script\String.Append.htm">
+		<param name="Name" value="Code.Append">
+		<param name="Local" value="Script\Code.Append.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ASCII">
+		<param name="Local" value="Script\ASCII.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="AttributeLength">
+		<param name="Name" value="XML.Reader.AttributeLength">
+		<param name="Local" value="Script\XML.Reader.AttributeLength.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="AvailablePageFile">
+		<param name="Name" value="Sys.Memory.AvailablePageFile">
+		<param name="Local" value="Script\Sys.Memory.AvailablePageFile.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="AvailablePhysical">
+		<param name="Name" value="Sys.Memory.AvailablePhysical">
+		<param name="Local" value="Script\Sys.Memory.AvailablePhysical.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="AvailableVirtual">
+		<param name="Name" value="Sys.Memory.AvailableVirtual">
+		<param name="Local" value="Script\Sys.Memory.AvailableVirtual.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Base64Decode">
+		<param name="Local" value="Script\Base64Decode.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Base64Encode">
+		<param name="Local" value="Script\Base64Encode.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Begin">
+		<param name="Name" value="File.Seek.FromBeginning">
+		<param name="Local" value="Script\File.Seek.FromBeginning.htm">
+		<param name="Name" value="SQL.Connection.Transaction.Begin">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Begin.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BinPrint">
+		<param name="Local" value="Script\BinPrint.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Break">
+		<param name="Name" value="Debug.Break">
+		<param name="Local" value="Script\Debug.Break.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ByIndex">
+		<param name="Name" value="Form.Value.ByIndex">
+		<param name="Local" value="Script\Form.Value.ByIndex.htm">
+		<param name="Name" value="Query.Value.ByIndex">
+		<param name="Local" value="Script\Query.Value.ByIndex.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ByName">
+		<param name="Name" value="Form.Value.ByName">
+		<param name="Local" value="Script\Form.Value.ByName.htm">
+		<param name="Name" value="Query.Value.ByName">
+		<param name="Local" value="Script\Query.Value.ByName.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Call">
+		<param name="Name" value="Code.Functions.Call">
+		<param name="Local" value="Script\Code.Functions.Call.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="CanRead">
+		<param name="Name" value="File.CanRead">
+		<param name="Local" value="Script\File.CanRead.htm">
+		<param name="Name" value="File.CanReadWrite">
+		<param name="Local" value="Script\File.CanReadWrite.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="CanReadWrite">
+		<param name="Name" value="File.CanReadWrite">
+		<param name="Local" value="Script\File.CanReadWrite.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="CanWrite">
+		<param name="Name" value="File.CanWrite">
+		<param name="Local" value="Script\File.CanWrite.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Char">
+		<param name="Local" value="Script\Char.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Checksum">
+		<param name="Local" value="Script\Checksum.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Clear">
+		<param name="Name" value="List.Clear">
+		<param name="Local" value="Script\List.Clear.htm">
+		<param name="Name" value="Error.Clear">
+		<param name="Local" value="Script\Error.Clear.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Client">
+		<param name="Name" value="Socket.Client.WasConnect">
+		<param name="Local" value="Script\Socket.Client.WasConnect.htm">
+		<param name="Name" value="Socket.Client.IsDisconnectSet">
+		<param name="Local" value="Script\Socket.Client.IsDisconnectSet.htm">
+		<param name="Name" value="Socket.Client.PeerAddress">
+		<param name="Local" value="Script\Socket.Client.PeerAddress.htm">
+		<param name="Name" value="Socket.Client.PeerID">
+		<param name="Local" value="Script\Socket.Client.PeerID.htm">
+		<param name="Name" value="Socket.Client.PeerPort">
+		<param name="Local" value="Script\Socket.Client.PeerPort.htm">
+		<param name="Name" value="Socket.Client.IsConnected">
+		<param name="Local" value="Script\Socket.Client.IsConnected.htm">
+		<param name="Name" value="Socket.Client.IsSendPending">
+		<param name="Local" value="Script\Socket.Client.IsSendPending.htm">
+		<param name="Name" value="Socket.Client.IsRecvPending">
+		<param name="Local" value="Script\Socket.Client.IsRecvPending.htm">
+		<param name="Name" value="Socket.Client.Recv">
+		<param name="Local" value="Script\Socket.Client.Recv.htm">
+		<param name="Name" value="Socket.Client.Disconnect">
+		<param name="Local" value="Script\Socket.Client.Disconnect.htm">
+		<param name="Name" value="Socket.Client.Send">
+		<param name="Local" value="Script\Socket.Client.Send.htm">
+		<param name="Name" value="Socket.Client.TryRecv">
+		<param name="Local" value="Script\Socket.Client.TryRecv.htm">
+		<param name="Name" value="Socket.Client.TrySend">
+		<param name="Local" value="Script\Socket.Client.TrySend.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Close">
+		<param name="Name" value="File.Close">
+		<param name="Local" value="Script\File.Close.htm">
+		<param name="Name" value="SQL.RecordSet.Close">
+		<param name="Local" value="Script\SQL.RecordSet.Close.htm">
+		<param name="Name" value="SQL.Connection.Close">
+		<param name="Local" value="Script\SQL.Connection.Close.htm">
+		<param name="Name" value="XML.Reader.Close">
+		<param name="Local" value="Script\XML.Reader.Close.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Cls">
+		<param name="Local" value="Script\Cls.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Code">
+		<param name="Name" value="Base64Encode">
+		<param name="Local" value="Script\Base64Encode.htm">
+		<param name="Name" value="Base64Decode">
+		<param name="Local" value="Script\Base64Decode.htm">
+		<param name="Name" value="Web.URLEncode">
+		<param name="Local" value="Script\Web.URLEncode.htm">
+		<param name="Name" value="Web.URLDecode">
+		<param name="Local" value="Script\Web.URLDecode.htm">
+		<param name="Name" value="Code.Scope">
+		<param name="Local" value="Script\Code.Scope.htm">
+		<param name="Name" value="Code.Scope.Enter">
+		<param name="Local" value="Script\Code.Scope.Enter.htm">
+		<param name="Name" value="Code.Scope.Exit">
+		<param name="Local" value="Script\Code.Scope.Exit.htm">
+		<param name="Name" value="Code.Line">
+		<param name="Local" value="Script\Code.Line.htm">
+		<param name="Name" value="Code.File">
+		<param name="Local" value="Script\Code.File.htm">
+		<param name="Name" value="Code.Namespace">
+		<param name="Local" value="Script\Code.Namespace.htm">
+		<param name="Name" value="Code.Variables.Free">
+		<param name="Local" value="Script\Code.Variables.Free.htm">
+		<param name="Name" value="Code.Variables.IsDefined">
+		<param name="Local" value="Script\Code.Variables.IsDefined.htm">
+		<param name="Name" value="Code.Functions.IsDefined">
+		<param name="Local" value="Script\Code.Functions.IsDefined.htm">
+		<param name="Name" value="Code.Functions.Call">
+		<param name="Local" value="Script\Code.Functions.Call.htm">
+		<param name="Name" value="Code.Variables.Undefine">
+		<param name="Local" value="Script\Code.Variables.Undefine.htm">
+		<param name="Name" value="Code.Variables.Define">
+		<param name="Local" value="Script\Code.Variables.Define.htm">
+		<param name="Name" value="Code.Inject">
+		<param name="Local" value="Script\Code.Inject.htm">
+		<param name="Name" value="Code.Append">
+		<param name="Local" value="Script\Code.Append.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Code.Append">
+		<param name="Local" value="Script\Code.Append.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Code.File">
+		<param name="Local" value="Script\Code.File.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Code.Functions.Call">
+		<param name="Local" value="Script\Code.Functions.Call.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Code.Functions.IsDefined">
+		<param name="Local" value="Script\Code.Functions.IsDefined.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Code.Inject">
+		<param name="Local" value="Script\Code.Inject.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Code.Line">
+		<param name="Local" value="Script\Code.Line.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Code.Namespace">
+		<param name="Local" value="Script\Code.Namespace.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Code.Scope">
+		<param name="Local" value="Script\Code.Scope.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Code.Scope.Enter">
+		<param name="Local" value="Script\Code.Scope.Enter.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Code.Scope.Exit">
+		<param name="Local" value="Script\Code.Scope.Exit.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Code.Variables.Define">
+		<param name="Local" value="Script\Code.Variables.Define.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Code.Variables.Free">
+		<param name="Local" value="Script\Code.Variables.Free.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Code.Variables.IsDefined">
+		<param name="Local" value="Script\Code.Variables.IsDefined.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Code.Variables.Undefine">
+		<param name="Local" value="Script\Code.Variables.Undefine.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Columns">
+		<param name="Name" value="SQL.RecordSet.Columns.Name">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Name.htm">
+		<param name="Name" value="SQL.RecordSet.Columns.Index">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Index.htm">
+		<param name="Name" value="SQL.RecordSet.Columns.Count">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Count.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="CommandLine">
+		<param name="Name" value="Env.CommandLine.Get">
+		<param name="Local" value="Script\Env.CommandLine.Get.htm">
+		<param name="Name" value="Env.CommandLine.Count">
+		<param name="Local" value="Script\Env.CommandLine.Count.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Commit">
+		<param name="Name" value="SQL.Connection.Transaction.Commit">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Commit.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Compact">
+		<param name="Name" value="List.Compact">
+		<param name="Local" value="Script\List.Compact.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Connect">
+		<param name="Name" value="SQL.Connection.Connect">
+		<param name="Local" value="Script\SQL.Connection.Connect.htm">
+		<param name="Name" value="SQL.Connection.Transaction.Begin">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Begin.htm">
+		<param name="Name" value="SQL.Connection.Transaction.Commit">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Commit.htm">
+		<param name="Name" value="SQL.Connection.Transaction.Rollback">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Rollback.htm">
+		<param name="Name" value="SQL.Connection.Transaction.Depth">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Depth.htm">
+		<param name="Name" value="SQL.Connection.Value">
+		<param name="Local" value="Script\SQL.Connection.Value.htm">
+		<param name="Name" value="SQL.Connection.Execute">
+		<param name="Local" value="Script\SQL.Connection.Execute.htm">
+		<param name="Name" value="SQL.Connection.Close">
+		<param name="Local" value="Script\SQL.Connection.Close.htm">
+		<param name="Name" value="Socket.Server.Connect">
+		<param name="Local" value="Script\Socket.Server.Connect.htm">
+		<param name="Name" value="Socket.Server.Connections">
+		<param name="Local" value="Script\Socket.Server.Connections.htm">
+		<param name="Name" value="Socket.Server.Connection">
+		<param name="Local" value="Script\Socket.Server.Connection.htm">
+		<param name="Name" value="Socket.Client.WasConnect">
+		<param name="Local" value="Script\Socket.Client.WasConnect.htm">
+		<param name="Name" value="Socket.Client.IsDisconnectSet">
+		<param name="Local" value="Script\Socket.Client.IsDisconnectSet.htm">
+		<param name="Name" value="Socket.Client.IsConnected">
+		<param name="Local" value="Script\Socket.Client.IsConnected.htm">
+		<param name="Name" value="Socket.Client.Disconnect">
+		<param name="Local" value="Script\Socket.Client.Disconnect.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Connection">
+		<param name="Name" value="SQL.Connection.Connect">
+		<param name="Local" value="Script\SQL.Connection.Connect.htm">
+		<param name="Name" value="SQL.Connection.Transaction.Begin">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Begin.htm">
+		<param name="Name" value="SQL.Connection.Transaction.Commit">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Commit.htm">
+		<param name="Name" value="SQL.Connection.Transaction.Rollback">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Rollback.htm">
+		<param name="Name" value="SQL.Connection.Transaction.Depth">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Depth.htm">
+		<param name="Name" value="SQL.Connection.Value">
+		<param name="Local" value="Script\SQL.Connection.Value.htm">
+		<param name="Name" value="SQL.Connection.Execute">
+		<param name="Local" value="Script\SQL.Connection.Execute.htm">
+		<param name="Name" value="SQL.Connection.Close">
+		<param name="Local" value="Script\SQL.Connection.Close.htm">
+		<param name="Name" value="Socket.Server.Connections">
+		<param name="Local" value="Script\Socket.Server.Connections.htm">
+		<param name="Name" value="Socket.Server.Connection">
+		<param name="Local" value="Script\Socket.Server.Connection.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Connections">
+		<param name="Name" value="Socket.Server.Connections">
+		<param name="Local" value="Script\Socket.Server.Connections.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Contains">
+		<param name="Name" value="List.Contains">
+		<param name="Local" value="Script\List.Contains.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Count">
+		<param name="Name" value="Env.CommandLine.Count">
+		<param name="Local" value="Script\Env.CommandLine.Count.htm">
+		<param name="Name" value="Env.Count">
+		<param name="Local" value="Script\Env.Count.htm">
+		<param name="Name" value="Process.PageFaultCount">
+		<param name="Local" value="Script\Process.PageFaultCount.htm">
+		<param name="Name" value="Sys.TickCount">
+		<param name="Local" value="Script\Sys.TickCount.htm">
+		<param name="Name" value="List.Count">
+		<param name="Local" value="Script\List.Count.htm">
+		<param name="Name" value="Error.Count">
+		<param name="Local" value="Script\Error.Count.htm">
+		<param name="Name" value="SQL.RecordSet.Columns.Count">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Count.htm">
+		<param name="Name" value="Form.Value.Count">
+		<param name="Local" value="Script\Form.Value.Count.htm">
+		<param name="Name" value="Query.Value.Count">
+		<param name="Local" value="Script\Query.Value.Count.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="DataLen">
+		<param name="Local" value="Script\DataLen.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Date">
+		<param name="Name" value="Date.Now">
+		<param name="Local" value="Script\Date.Now.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Date.Now">
+		<param name="Local" value="Script\Date.Now.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Debug">
+		<param name="Name" value="Math.DebugMode">
+		<param name="Local" value="Script\Math.DebugMode.htm">
+		<param name="Name" value="Debug.IsAttached">
+		<param name="Local" value="Script\Debug.IsAttached.htm">
+		<param name="Name" value="Debug.Evaluate">
+		<param name="Local" value="Script\Debug.Evaluate.htm">
+		<param name="Name" value="Debug.Break">
+		<param name="Local" value="Script\Debug.Break.htm">
+		<param name="Name" value="Debug.Dump.Memory">
+		<param name="Local" value="Script\Debug.Dump.Memory.htm">
+		<param name="Name" value="Debug.Dump.Vars">
+		<param name="Local" value="Script\Debug.Dump.Vars.htm">
+		<param name="Name" value="Debug.Dump.Procs">
+		<param name="Local" value="Script\Debug.Dump.Procs.htm">
+		<param name="Name" value="Debug.Dump.Scripts">
+		<param name="Local" value="Script\Debug.Dump.Scripts.htm">
+		<param name="Name" value="Debug.Dump.Lines">
+		<param name="Local" value="Script\Debug.Dump.Lines.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Debug.Break">
+		<param name="Local" value="Script\Debug.Break.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Debug.Dump.Lines">
+		<param name="Local" value="Script\Debug.Dump.Lines.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Debug.Dump.Memory">
+		<param name="Local" value="Script\Debug.Dump.Memory.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Debug.Dump.Procs">
+		<param name="Local" value="Script\Debug.Dump.Procs.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Debug.Dump.Scripts">
+		<param name="Local" value="Script\Debug.Dump.Scripts.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Debug.Dump.Vars">
+		<param name="Local" value="Script\Debug.Dump.Vars.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Debug.Evaluate">
+		<param name="Local" value="Script\Debug.Evaluate.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Debug.IsAttached">
+		<param name="Local" value="Script\Debug.IsAttached.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="DebugMode">
+		<param name="Name" value="Math.DebugMode">
+		<param name="Local" value="Script\Math.DebugMode.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Define">
+		<param name="Name" value="Code.Variables.IsDefined">
+		<param name="Local" value="Script\Code.Variables.IsDefined.htm">
+		<param name="Name" value="Code.Functions.IsDefined">
+		<param name="Local" value="Script\Code.Functions.IsDefined.htm">
+		<param name="Name" value="Code.Variables.Undefine">
+		<param name="Local" value="Script\Code.Variables.Undefine.htm">
+		<param name="Name" value="Code.Variables.Define">
+		<param name="Local" value="Script\Code.Variables.Define.htm">
+		<param name="Name" value="Form.Value.IsDefined">
+		<param name="Local" value="Script\Form.Value.IsDefined.htm">
+		<param name="Name" value="Form.Value.Define">
+		<param name="Local" value="Script\Form.Value.Define.htm">
+		<param name="Name" value="Query.Value.IsDefined">
+		<param name="Local" value="Script\Query.Value.IsDefined.htm">
+		<param name="Name" value="Query.Value.Define">
+		<param name="Local" value="Script\Query.Value.Define.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Delete">
+		<param name="Name" value="List.DeleteOne">
+		<param name="Local" value="Script\List.DeleteOne.htm">
+		<param name="Name" value="List.DeleteAll">
+		<param name="Local" value="Script\List.DeleteAll.htm">
+		<param name="Name" value="List.DeleteAt">
+		<param name="Local" value="Script\List.DeleteAt.htm">
+		<param name="Name" value="File.Delete">
+		<param name="Local" value="Script\File.Delete.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="DeleteAll">
+		<param name="Name" value="List.DeleteAll">
+		<param name="Local" value="Script\List.DeleteAll.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="DeleteAt">
+		<param name="Name" value="List.DeleteAt">
+		<param name="Local" value="Script\List.DeleteAt.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="DeleteOne">
+		<param name="Name" value="List.DeleteOne">
+		<param name="Local" value="Script\List.DeleteOne.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Depth">
+		<param name="Name" value="SQL.Connection.Transaction.Depth">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Depth.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Disconnect">
+		<param name="Name" value="Socket.Client.IsDisconnectSet">
+		<param name="Local" value="Script\Socket.Client.IsDisconnectSet.htm">
+		<param name="Name" value="Socket.Client.Disconnect">
+		<param name="Local" value="Script\Socket.Client.Disconnect.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Drive">
+		<param name="Name" value="File.Drive">
+		<param name="Local" value="Script\File.Drive.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Dump">
+		<param name="Name" value="Debug.Dump.Memory">
+		<param name="Local" value="Script\Debug.Dump.Memory.htm">
+		<param name="Name" value="Debug.Dump.Vars">
+		<param name="Local" value="Script\Debug.Dump.Vars.htm">
+		<param name="Name" value="Debug.Dump.Procs">
+		<param name="Local" value="Script\Debug.Dump.Procs.htm">
+		<param name="Name" value="Debug.Dump.Scripts">
+		<param name="Local" value="Script\Debug.Dump.Scripts.htm">
+		<param name="Name" value="Debug.Dump.Lines">
+		<param name="Local" value="Script\Debug.Dump.Lines.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Enter">
+		<param name="Name" value="Code.Scope.Enter">
+		<param name="Local" value="Script\Code.Scope.Enter.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Env">
+		<param name="Name" value="Env.CommandLine.Get">
+		<param name="Local" value="Script\Env.CommandLine.Get.htm">
+		<param name="Name" value="Env.CommandLine.Count">
+		<param name="Local" value="Script\Env.CommandLine.Count.htm">
+		<param name="Name" value="Env.Get">
+		<param name="Local" value="Script\Env.Get.htm">
+		<param name="Name" value="Env.Set">
+		<param name="Local" value="Script\Env.Set.htm">
+		<param name="Name" value="Env.Index">
+		<param name="Local" value="Script\Env.Index.htm">
+		<param name="Name" value="Env.Name">
+		<param name="Local" value="Script\Env.Name.htm">
+		<param name="Name" value="Env.Value">
+		<param name="Local" value="Script\Env.Value.htm">
+		<param name="Name" value="Env.Count">
+		<param name="Local" value="Script\Env.Count.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Env.CommandLine.Count">
+		<param name="Local" value="Script\Env.CommandLine.Count.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Env.CommandLine.Get">
+		<param name="Local" value="Script\Env.CommandLine.Get.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Env.Count">
+		<param name="Local" value="Script\Env.Count.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Env.Get">
+		<param name="Local" value="Script\Env.Get.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Env.Index">
+		<param name="Local" value="Script\Env.Index.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Env.Name">
+		<param name="Local" value="Script\Env.Name.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Env.Set">
+		<param name="Local" value="Script\Env.Set.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Env.Value">
+		<param name="Local" value="Script\Env.Value.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Equals">
+		<param name="Name" value="Numeric.Equals">
+		<param name="Local" value="Script\Numeric.Equals.htm">
+		<param name="Name" value="Numeric.NotEquals">
+		<param name="Local" value="Script\Numeric.NotEquals.htm">
+		<param name="Name" value="String.Equals">
+		<param name="Local" value="Script\String.Equals.htm">
+		<param name="Name" value="String.NotEquals">
+		<param name="Local" value="Script\String.NotEquals.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Error">
+		<param name="Name" value="Error.Throw">
+		<param name="Local" value="Script\Error.Throw.htm">
+		<param name="Name" value="Error.UnWind">
+		<param name="Local" value="Script\Error.UnWind.htm">
+		<param name="Name" value="Error.Count">
+		<param name="Local" value="Script\Error.Count.htm">
+		<param name="Name" value="Error.Clear">
+		<param name="Local" value="Script\Error.Clear.htm">
+		<param name="Name" value="Error.Text">
+		<param name="Local" value="Script\Error.Text.htm">
+		<param name="Name" value="Error.File">
+		<param name="Local" value="Script\Error.File.htm">
+		<param name="Name" value="Error.Line">
+		<param name="Local" value="Script\Error.Line.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Error.Clear">
+		<param name="Local" value="Script\Error.Clear.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Error.Count">
+		<param name="Local" value="Script\Error.Count.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Error.File">
+		<param name="Local" value="Script\Error.File.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Error.Line">
+		<param name="Local" value="Script\Error.Line.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Error.Text">
+		<param name="Local" value="Script\Error.Text.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Error.Throw">
+		<param name="Local" value="Script\Error.Throw.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Error.UnWind">
+		<param name="Local" value="Script\Error.UnWind.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Evaluate">
+		<param name="Name" value="Debug.Evaluate">
+		<param name="Local" value="Script\Debug.Evaluate.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Exception">
+		<param name="Name" value="Exception.GetText">
+		<param name="Local" value="Script\Exception.GetText.htm">
+		<param name="Name" value="Exception.GetLine">
+		<param name="Local" value="Script\Exception.GetLine.htm">
+		<param name="Name" value="Exception.GetFile">
+		<param name="Local" value="Script\Exception.GetFile.htm">
+		<param name="Name" value="Exception.SetText">
+		<param name="Local" value="Script\Exception.SetText.htm">
+		<param name="Name" value="Settings.ThrowSoftExceptions">
+		<param name="Local" value="Script\Settings.ThrowSoftExceptions.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Exception.GetFile">
+		<param name="Local" value="Script\Exception.GetFile.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Exception.GetLine">
+		<param name="Local" value="Script\Exception.GetLine.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Exception.GetText">
+		<param name="Local" value="Script\Exception.GetText.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Exception.SetText">
+		<param name="Local" value="Script\Exception.SetText.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Execute">
+		<param name="Name" value="SQL.Connection.Execute">
+		<param name="Local" value="Script\SQL.Connection.Execute.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Exists">
+		<param name="Name" value="File.Exists">
+		<param name="Local" value="Script\File.Exists.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Exit">
+		<param name="Local" value="Script\Exit.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Extension">
+		<param name="Name" value="File.Extension">
+		<param name="Local" value="Script\File.Extension.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Fetch">
+		<param name="Name" value="SQL.RecordSet.Fetch">
+		<param name="Local" value="Script\SQL.RecordSet.Fetch.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File">
+		<param name="Name" value="Process.PagefileUsage">
+		<param name="Local" value="Script\Process.PagefileUsage.htm">
+		<param name="Name" value="Process.PeakPagefileUsage">
+		<param name="Local" value="Script\Process.PeakPagefileUsage.htm">
+		<param name="Name" value="Sys.Memory.TotalPageFile">
+		<param name="Local" value="Script\Sys.Memory.TotalPageFile.htm">
+		<param name="Name" value="Sys.Memory.AvailablePageFile">
+		<param name="Local" value="Script\Sys.Memory.AvailablePageFile.htm">
+		<param name="Name" value="Error.File">
+		<param name="Local" value="Script\Error.File.htm">
+		<param name="Name" value="Exception.GetFile">
+		<param name="Local" value="Script\Exception.GetFile.htm">
+		<param name="Name" value="File.Drive">
+		<param name="Local" value="Script\File.Drive.htm">
+		<param name="Name" value="File.Path">
+		<param name="Local" value="Script\File.Path.htm">
+		<param name="Name" value="File.Name">
+		<param name="Local" value="Script\File.Name.htm">
+		<param name="Name" value="File.NameOnly">
+		<param name="Local" value="Script\File.NameOnly.htm">
+		<param name="Name" value="File.Extension">
+		<param name="Local" value="Script\File.Extension.htm">
+		<param name="Name" value="File.Exists">
+		<param name="Local" value="Script\File.Exists.htm">
+		<param name="Name" value="File.CanRead">
+		<param name="Local" value="Script\File.CanRead.htm">
+		<param name="Name" value="File.CanWrite">
+		<param name="Local" value="Script\File.CanWrite.htm">
+		<param name="Name" value="File.CanReadWrite">
+		<param name="Local" value="Script\File.CanReadWrite.htm">
+		<param name="Name" value="File.Open">
+		<param name="Local" value="Script\File.Open.htm">
+		<param name="Name" value="File.Close">
+		<param name="Local" value="Script\File.Close.htm">
+		<param name="Name" value="File.Handle">
+		<param name="Local" value="Script\File.Handle.htm">
+		<param name="Name" value="File.Read">
+		<param name="Local" value="Script\File.Read.htm">
+		<param name="Name" value="File.Write">
+		<param name="Local" value="Script\File.Write.htm">
+		<param name="Name" value="File.Seek">
+		<param name="Local" value="Script\File.Seek.htm">
+		<param name="Name" value="File.Seek.FromBeginning">
+		<param name="Local" value="Script\File.Seek.FromBeginning.htm">
+		<param name="Name" value="File.Seek.FromEnd">
+		<param name="Local" value="Script\File.Seek.FromEnd.htm">
+		<param name="Name" value="File.Delete">
+		<param name="Local" value="Script\File.Delete.htm">
+		<param name="Name" value="File.Size">
+		<param name="Local" value="Script\File.Size.htm">
+		<param name="Name" value="Code.File">
+		<param name="Local" value="Script\Code.File.htm">
+		<param name="Name" value="XML.Reader.ToFile">
+		<param name="Local" value="Script\XML.Reader.ToFile.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.CanRead">
+		<param name="Local" value="Script\File.CanRead.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.CanReadWrite">
+		<param name="Local" value="Script\File.CanReadWrite.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.CanWrite">
+		<param name="Local" value="Script\File.CanWrite.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.Close">
+		<param name="Local" value="Script\File.Close.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.Delete">
+		<param name="Local" value="Script\File.Delete.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.Drive">
+		<param name="Local" value="Script\File.Drive.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.Exists">
+		<param name="Local" value="Script\File.Exists.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.Extension">
+		<param name="Local" value="Script\File.Extension.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.Handle">
+		<param name="Local" value="Script\File.Handle.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.Name">
+		<param name="Local" value="Script\File.Name.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.NameOnly">
+		<param name="Local" value="Script\File.NameOnly.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.Open">
+		<param name="Local" value="Script\File.Open.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.Path">
+		<param name="Local" value="Script\File.Path.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.Read">
+		<param name="Local" value="Script\File.Read.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.Seek">
+		<param name="Local" value="Script\File.Seek.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.Seek.FromBeginning">
+		<param name="Local" value="Script\File.Seek.FromBeginning.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.Seek.FromEnd">
+		<param name="Local" value="Script\File.Seek.FromEnd.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.Size">
+		<param name="Local" value="Script\File.Size.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="File.Write">
+		<param name="Local" value="Script\File.Write.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Form">
+		<param name="Name" value="FormatNumeric">
+		<param name="Local" value="Script\FormatNumeric.htm">
+		<param name="Name" value="FormatSize">
+		<param name="Local" value="Script\FormatSize.htm">
+		<param name="Name" value="Form.Value.Count">
+		<param name="Local" value="Script\Form.Value.Count.htm">
+		<param name="Name" value="Form.Value.IsDefined">
+		<param name="Local" value="Script\Form.Value.IsDefined.htm">
+		<param name="Name" value="Form.Value.Define">
+		<param name="Local" value="Script\Form.Value.Define.htm">
+		<param name="Name" value="Form.Value.ByIndex">
+		<param name="Local" value="Script\Form.Value.ByIndex.htm">
+		<param name="Name" value="Form.Value.Index">
+		<param name="Local" value="Script\Form.Value.Index.htm">
+		<param name="Name" value="Form.Value.ByName">
+		<param name="Local" value="Script\Form.Value.ByName.htm">
+		<param name="Name" value="Form.Value.Name">
+		<param name="Local" value="Script\Form.Value.Name.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Form.Value.ByIndex">
+		<param name="Local" value="Script\Form.Value.ByIndex.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Form.Value.ByName">
+		<param name="Local" value="Script\Form.Value.ByName.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Form.Value.Count">
+		<param name="Local" value="Script\Form.Value.Count.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Form.Value.Define">
+		<param name="Local" value="Script\Form.Value.Define.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Form.Value.Index">
+		<param name="Local" value="Script\Form.Value.Index.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Form.Value.IsDefined">
+		<param name="Local" value="Script\Form.Value.IsDefined.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Form.Value.Name">
+		<param name="Local" value="Script\Form.Value.Name.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="FormatNumeric">
+		<param name="Local" value="Script\FormatNumeric.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="FormatSize">
+		<param name="Local" value="Script\FormatSize.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Free">
+		<param name="Name" value="String.Free">
+		<param name="Local" value="Script\String.Free.htm">
+		<param name="Name" value="Code.Variables.Free">
+		<param name="Local" value="Script\Code.Variables.Free.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="FromBeginning">
+		<param name="Name" value="File.Seek.FromBeginning">
+		<param name="Local" value="Script\File.Seek.FromBeginning.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="FromEnd">
+		<param name="Name" value="File.Seek.FromEnd">
+		<param name="Local" value="Script\File.Seek.FromEnd.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Functions">
+		<param name="Name" value="Code.Functions.IsDefined">
+		<param name="Local" value="Script\Code.Functions.IsDefined.htm">
+		<param name="Name" value="Code.Functions.Call">
+		<param name="Local" value="Script\Code.Functions.Call.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="GenerateDocumentation">
+		<param name="Local" value="Script\GenerateDocumentation.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Get">
+		<param name="Name" value="Env.CommandLine.Get">
+		<param name="Local" value="Script\Env.CommandLine.Get.htm">
+		<param name="Name" value="Env.Get">
+		<param name="Local" value="Script\Env.Get.htm">
+		<param name="Name" value="Exception.GetText">
+		<param name="Local" value="Script\Exception.GetText.htm">
+		<param name="Name" value="Exception.GetLine">
+		<param name="Local" value="Script\Exception.GetLine.htm">
+		<param name="Name" value="Exception.GetFile">
+		<param name="Local" value="Script\Exception.GetFile.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="GetFile">
+		<param name="Name" value="Exception.GetFile">
+		<param name="Local" value="Script\Exception.GetFile.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="GetLine">
+		<param name="Name" value="Exception.GetLine">
+		<param name="Local" value="Script\Exception.GetLine.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="GetText">
+		<param name="Name" value="Exception.GetText">
+		<param name="Local" value="Script\Exception.GetText.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="GreaterThan">
+		<param name="Name" value="Numeric.GreaterThan">
+		<param name="Local" value="Script\Numeric.GreaterThan.htm">
+		<param name="Name" value="String.GreaterThan">
+		<param name="Local" value="Script\String.GreaterThan.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="GUID">
+		<param name="Local" value="Script\GUID.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Handle">
+		<param name="Name" value="File.Handle">
+		<param name="Local" value="Script\File.Handle.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Id">
+		<param name="Name" value="Process.Id">
+		<param name="Local" value="Script\Process.Id.htm">
+		<param name="Name" value="Socket.Client.PeerID">
+		<param name="Local" value="Script\Socket.Client.PeerID.htm">
+		<param name="Name" value="GUID">
+		<param name="Local" value="Script\GUID.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="IIF">
+		<param name="Local" value="Script\IIF.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Index">
+		<param name="Name" value="Env.Index">
+		<param name="Local" value="Script\Env.Index.htm">
+		<param name="Name" value="List.IndexOf">
+		<param name="Local" value="Script\List.IndexOf.htm">
+		<param name="Name" value="String.IndexOf">
+		<param name="Local" value="Script\String.IndexOf.htm">
+		<param name="Name" value="IndexOf">
+		<param name="Local" value="Script\IndexOf.htm">
+		<param name="Name" value="SQL.RecordSet.Columns.Index">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Index.htm">
+		<param name="Name" value="Form.Value.ByIndex">
+		<param name="Local" value="Script\Form.Value.ByIndex.htm">
+		<param name="Name" value="Form.Value.Index">
+		<param name="Local" value="Script\Form.Value.Index.htm">
+		<param name="Name" value="Query.Value.ByIndex">
+		<param name="Local" value="Script\Query.Value.ByIndex.htm">
+		<param name="Name" value="Query.Value.Index">
+		<param name="Local" value="Script\Query.Value.Index.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="IndexOf">
+		<param name="Local" value="Script\IndexOf.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="InitializeCGI">
+		<param name="Name" value="Web.InitializeCGI">
+		<param name="Local" value="Script\Web.InitializeCGI.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Inject">
+		<param name="Name" value="Code.Inject">
+		<param name="Local" value="Script\Code.Inject.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="IsAttached">
+		<param name="Name" value="Debug.IsAttached">
+		<param name="Local" value="Script\Debug.IsAttached.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="IsConnected">
+		<param name="Name" value="Socket.Client.IsConnected">
+		<param name="Local" value="Script\Socket.Client.IsConnected.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="IsDefined">
+		<param name="Name" value="Code.Variables.IsDefined">
+		<param name="Local" value="Script\Code.Variables.IsDefined.htm">
+		<param name="Name" value="Code.Functions.IsDefined">
+		<param name="Local" value="Script\Code.Functions.IsDefined.htm">
+		<param name="Name" value="Form.Value.IsDefined">
+		<param name="Local" value="Script\Form.Value.IsDefined.htm">
+		<param name="Name" value="Query.Value.IsDefined">
+		<param name="Local" value="Script\Query.Value.IsDefined.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="IsDisconnectSet">
+		<param name="Name" value="Socket.Client.IsDisconnectSet">
+		<param name="Local" value="Script\Socket.Client.IsDisconnectSet.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="IsRecvPending">
+		<param name="Name" value="Socket.Client.IsRecvPending">
+		<param name="Local" value="Script\Socket.Client.IsRecvPending.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="IsSendPending">
+		<param name="Name" value="Socket.Client.IsSendPending">
+		<param name="Local" value="Script\Socket.Client.IsSendPending.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Length">
+		<param name="Local" value="Script\Length.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="LessThan">
+		<param name="Name" value="Numeric.LessThan">
+		<param name="Local" value="Script\Numeric.LessThan.htm">
+		<param name="Name" value="String.LessThan">
+		<param name="Local" value="Script\String.LessThan.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Line">
+		<param name="Name" value="Env.CommandLine.Get">
+		<param name="Local" value="Script\Env.CommandLine.Get.htm">
+		<param name="Name" value="Env.CommandLine.Count">
+		<param name="Local" value="Script\Env.CommandLine.Count.htm">
+		<param name="Name" value="Error.Line">
+		<param name="Local" value="Script\Error.Line.htm">
+		<param name="Name" value="Exception.GetLine">
+		<param name="Local" value="Script\Exception.GetLine.htm">
+		<param name="Name" value="Code.Line">
+		<param name="Local" value="Script\Code.Line.htm">
+		<param name="Name" value="Debug.Dump.Lines">
+		<param name="Local" value="Script\Debug.Dump.Lines.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Lines">
+		<param name="Name" value="Debug.Dump.Lines">
+		<param name="Local" value="Script\Debug.Dump.Lines.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="List">
+		<param name="Name" value="List.Add">
+		<param name="Local" value="Script\List.Add.htm">
+		<param name="Name" value="List.Count">
+		<param name="Local" value="Script\List.Count.htm">
+		<param name="Name" value="List.Allocated">
+		<param name="Local" value="Script\List.Allocated.htm">
+		<param name="Name" value="List.Clear">
+		<param name="Local" value="Script\List.Clear.htm">
+		<param name="Name" value="List.Compact">
+		<param name="Local" value="Script\List.Compact.htm">
+		<param name="Name" value="List.Contains">
+		<param name="Local" value="Script\List.Contains.htm">
+		<param name="Name" value="List.DeleteOne">
+		<param name="Local" value="Script\List.DeleteOne.htm">
+		<param name="Name" value="List.DeleteAll">
+		<param name="Local" value="Script\List.DeleteAll.htm">
+		<param name="Name" value="List.DeleteAt">
+		<param name="Local" value="Script\List.DeleteAt.htm">
+		<param name="Name" value="List.IndexOf">
+		<param name="Local" value="Script\List.IndexOf.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="List.Add">
+		<param name="Local" value="Script\List.Add.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="List.Allocated">
+		<param name="Local" value="Script\List.Allocated.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="List.Clear">
+		<param name="Local" value="Script\List.Clear.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="List.Compact">
+		<param name="Local" value="Script\List.Compact.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="List.Contains">
+		<param name="Local" value="Script\List.Contains.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="List.Count">
+		<param name="Local" value="Script\List.Count.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="List.DeleteAll">
+		<param name="Local" value="Script\List.DeleteAll.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="List.DeleteAt">
+		<param name="Local" value="Script\List.DeleteAt.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="List.DeleteOne">
+		<param name="Local" value="Script\List.DeleteOne.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="List.IndexOf">
+		<param name="Local" value="Script\List.IndexOf.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Load">
+		<param name="Name" value="Sys.Memory.Load">
+		<param name="Local" value="Script\Sys.Memory.Load.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="MachineName">
+		<param name="Name" value="Sys.MachineName">
+		<param name="Local" value="Script\Sys.MachineName.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Math">
+		<param name="Name" value="Math.Pow">
+		<param name="Local" value="Script\Math.Pow.htm">
+		<param name="Name" value="Math.Round">
+		<param name="Local" value="Script\Math.Round.htm">
+		<param name="Name" value="Math.SmartRound">
+		<param name="Local" value="Script\Math.SmartRound.htm">
+		<param name="Name" value="Math.ParseDoubleExpression">
+		<param name="Local" value="Script\Math.ParseDoubleExpression.htm">
+		<param name="Name" value="Math.ParseIntegerExpression">
+		<param name="Local" value="Script\Math.ParseIntegerExpression.htm">
+		<param name="Name" value="Math.DebugMode">
+		<param name="Local" value="Script\Math.DebugMode.htm">
+		<param name="Name" value="Math.Abs">
+		<param name="Local" value="Script\Math.Abs.htm">
+		<param name="Name" value="Math.Random">
+		<param name="Local" value="Script\Math.Random.htm">
+		<param name="Name" value="Math.SetRandom">
+		<param name="Local" value="Script\Math.SetRandom.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Math.Abs">
+		<param name="Local" value="Script\Math.Abs.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Math.DebugMode">
+		<param name="Local" value="Script\Math.DebugMode.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Math.ParseDoubleExpression">
+		<param name="Local" value="Script\Math.ParseDoubleExpression.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Math.ParseIntegerExpression">
+		<param name="Local" value="Script\Math.ParseIntegerExpression.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Math.Pow">
+		<param name="Local" value="Script\Math.Pow.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Math.Random">
+		<param name="Local" value="Script\Math.Random.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Math.Round">
+		<param name="Local" value="Script\Math.Round.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Math.SetRandom">
+		<param name="Local" value="Script\Math.SetRandom.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Math.SmartRound">
+		<param name="Local" value="Script\Math.SmartRound.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Memory">
+		<param name="Name" value="Sys.Memory.Load">
+		<param name="Local" value="Script\Sys.Memory.Load.htm">
+		<param name="Name" value="Sys.Memory.TotalPhysical">
+		<param name="Local" value="Script\Sys.Memory.TotalPhysical.htm">
+		<param name="Name" value="Sys.Memory.AvailablePhysical">
+		<param name="Local" value="Script\Sys.Memory.AvailablePhysical.htm">
+		<param name="Name" value="Sys.Memory.TotalPageFile">
+		<param name="Local" value="Script\Sys.Memory.TotalPageFile.htm">
+		<param name="Name" value="Sys.Memory.AvailablePageFile">
+		<param name="Local" value="Script\Sys.Memory.AvailablePageFile.htm">
+		<param name="Name" value="Sys.Memory.TotalVirtual">
+		<param name="Local" value="Script\Sys.Memory.TotalVirtual.htm">
+		<param name="Name" value="Sys.Memory.AvailableVirtual">
+		<param name="Local" value="Script\Sys.Memory.AvailableVirtual.htm">
+		<param name="Name" value="Debug.Dump.Memory">
+		<param name="Local" value="Script\Debug.Dump.Memory.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ModuleName">
+		<param name="Name" value="Process.ModuleName">
+		<param name="Local" value="Script\Process.ModuleName.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Name">
+		<param name="Name" value="Env.Name">
+		<param name="Local" value="Script\Env.Name.htm">
+		<param name="Name" value="Process.ModuleName">
+		<param name="Local" value="Script\Process.ModuleName.htm">
+		<param name="Name" value="Process.Username">
+		<param name="Local" value="Script\Process.Username.htm">
+		<param name="Name" value="Sys.MachineName">
+		<param name="Local" value="Script\Sys.MachineName.htm">
+		<param name="Name" value="File.Name">
+		<param name="Local" value="Script\File.Name.htm">
+		<param name="Name" value="File.NameOnly">
+		<param name="Local" value="Script\File.NameOnly.htm">
+		<param name="Name" value="Code.Namespace">
+		<param name="Local" value="Script\Code.Namespace.htm">
+		<param name="Name" value="SQL.RecordSet.Columns.Name">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Name.htm">
+		<param name="Name" value="Form.Value.ByName">
+		<param name="Local" value="Script\Form.Value.ByName.htm">
+		<param name="Name" value="Form.Value.Name">
+		<param name="Local" value="Script\Form.Value.Name.htm">
+		<param name="Name" value="Query.Value.ByName">
+		<param name="Local" value="Script\Query.Value.ByName.htm">
+		<param name="Name" value="Query.Value.Name">
+		<param name="Local" value="Script\Query.Value.Name.htm">
+		<param name="Name" value="XML.Writer.SetName">
+		<param name="Local" value="Script\XML.Writer.SetName.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="NameOnly">
+		<param name="Name" value="File.NameOnly">
+		<param name="Local" value="Script\File.NameOnly.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Namespace">
+		<param name="Name" value="Code.Namespace">
+		<param name="Local" value="Script\Code.Namespace.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="NotEquals">
+		<param name="Name" value="Numeric.NotEquals">
+		<param name="Local" value="Script\Numeric.NotEquals.htm">
+		<param name="Name" value="String.NotEquals">
+		<param name="Local" value="Script\String.NotEquals.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Now">
+		<param name="Name" value="Date.Now">
+		<param name="Local" value="Script\Date.Now.htm">
+		<param name="Name" value="Time.Now">
+		<param name="Local" value="Script\Time.Now.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Numeric">
+		<param name="Name" value="Numeric.Equals">
+		<param name="Local" value="Script\Numeric.Equals.htm">
+		<param name="Name" value="Numeric.GreaterThan">
+		<param name="Local" value="Script\Numeric.GreaterThan.htm">
+		<param name="Name" value="Numeric.LessThan">
+		<param name="Local" value="Script\Numeric.LessThan.htm">
+		<param name="Name" value="Numeric.NotEquals">
+		<param name="Local" value="Script\Numeric.NotEquals.htm">
+		<param name="Name" value="Numeric.Length">
+		<param name="Local" value="Script\Numeric.Length.htm">
+		<param name="Name" value="Numeric.ToInteger">
+		<param name="Local" value="Script\Numeric.ToInteger.htm">
+		<param name="Name" value="Numeric.ToDouble">
+		<param name="Local" value="Script\Numeric.ToDouble.htm">
+		<param name="Name" value="Numeric.ToString">
+		<param name="Local" value="Script\Numeric.ToString.htm">
+		<param name="Name" value="FormatNumeric">
+		<param name="Local" value="Script\FormatNumeric.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Numeric.Equals">
+		<param name="Local" value="Script\Numeric.Equals.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Numeric.GreaterThan">
+		<param name="Local" value="Script\Numeric.GreaterThan.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Numeric.Length">
+		<param name="Local" value="Script\Numeric.Length.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Numeric.LessThan">
+		<param name="Local" value="Script\Numeric.LessThan.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Numeric.NotEquals">
+		<param name="Local" value="Script\Numeric.NotEquals.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Numeric.ToDouble">
+		<param name="Local" value="Script\Numeric.ToDouble.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Numeric.ToInteger">
+		<param name="Local" value="Script\Numeric.ToInteger.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Numeric.ToString">
+		<param name="Local" value="Script\Numeric.ToString.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Open">
+		<param name="Name" value="File.Open">
+		<param name="Local" value="Script\File.Open.htm">
+		<param name="Name" value="XML.Reader.Open">
+		<param name="Local" value="Script\XML.Reader.Open.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="OSVersion">
+		<param name="Name" value="Sys.OSVersion">
+		<param name="Local" value="Script\Sys.OSVersion.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="PageFaultCount">
+		<param name="Name" value="Process.PageFaultCount">
+		<param name="Local" value="Script\Process.PageFaultCount.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="PagefileUsage">
+		<param name="Name" value="Process.PagefileUsage">
+		<param name="Local" value="Script\Process.PagefileUsage.htm">
+		<param name="Name" value="Process.PeakPagefileUsage">
+		<param name="Local" value="Script\Process.PeakPagefileUsage.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Parse">
+		<param name="Name" value="Math.ParseDoubleExpression">
+		<param name="Local" value="Script\Math.ParseDoubleExpression.htm">
+		<param name="Name" value="Math.ParseIntegerExpression">
+		<param name="Local" value="Script\Math.ParseIntegerExpression.htm">
+		<param name="Name" value="XML.Reader.Parse">
+		<param name="Local" value="Script\XML.Reader.Parse.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ParseDoubleExpression">
+		<param name="Name" value="Math.ParseDoubleExpression">
+		<param name="Local" value="Script\Math.ParseDoubleExpression.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ParseIntegerExpression">
+		<param name="Name" value="Math.ParseIntegerExpression">
+		<param name="Local" value="Script\Math.ParseIntegerExpression.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Path">
+		<param name="Name" value="File.Path">
+		<param name="Local" value="Script\File.Path.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Pause">
+		<param name="Local" value="Script\Pause.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="PeakPagefileUsage">
+		<param name="Name" value="Process.PeakPagefileUsage">
+		<param name="Local" value="Script\Process.PeakPagefileUsage.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="PeakWorkingSetSize">
+		<param name="Name" value="Process.PeakWorkingSetSize">
+		<param name="Local" value="Script\Process.PeakWorkingSetSize.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="PeerAddress">
+		<param name="Name" value="Socket.Client.PeerAddress">
+		<param name="Local" value="Script\Socket.Client.PeerAddress.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="PeerID">
+		<param name="Name" value="Socket.Client.PeerID">
+		<param name="Local" value="Script\Socket.Client.PeerID.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="PeerPort">
+		<param name="Name" value="Socket.Client.PeerPort">
+		<param name="Local" value="Script\Socket.Client.PeerPort.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Pow">
+		<param name="Name" value="Math.Pow">
+		<param name="Local" value="Script\Math.Pow.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Print">
+		<param name="Local" value="Script\Print.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Prints">
+		<param name="Local" value="Script\Prints.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Process">
+		<param name="Name" value="Process.ModuleName">
+		<param name="Local" value="Script\Process.ModuleName.htm">
+		<param name="Name" value="Process.PageFaultCount">
+		<param name="Local" value="Script\Process.PageFaultCount.htm">
+		<param name="Name" value="Process.PagefileUsage">
+		<param name="Local" value="Script\Process.PagefileUsage.htm">
+		<param name="Name" value="Process.PeakPagefileUsage">
+		<param name="Local" value="Script\Process.PeakPagefileUsage.htm">
+		<param name="Name" value="Process.PeakWorkingSetSize">
+		<param name="Local" value="Script\Process.PeakWorkingSetSize.htm">
+		<param name="Name" value="Process.WorkingSetSize">
+		<param name="Local" value="Script\Process.WorkingSetSize.htm">
+		<param name="Name" value="Process.Id">
+		<param name="Local" value="Script\Process.Id.htm">
+		<param name="Name" value="Process.Username">
+		<param name="Local" value="Script\Process.Username.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Process.Id">
+		<param name="Local" value="Script\Process.Id.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Process.ModuleName">
+		<param name="Local" value="Script\Process.ModuleName.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Process.PageFaultCount">
+		<param name="Local" value="Script\Process.PageFaultCount.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Process.PagefileUsage">
+		<param name="Local" value="Script\Process.PagefileUsage.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Process.PeakPagefileUsage">
+		<param name="Local" value="Script\Process.PeakPagefileUsage.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Process.PeakWorkingSetSize">
+		<param name="Local" value="Script\Process.PeakWorkingSetSize.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Process.Username">
+		<param name="Local" value="Script\Process.Username.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Process.WorkingSetSize">
+		<param name="Local" value="Script\Process.WorkingSetSize.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Procs">
+		<param name="Name" value="Debug.Dump.Procs">
+		<param name="Local" value="Script\Debug.Dump.Procs.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ProgressiveScan">
+		<param name="Name" value="XML.Reader.ProgressiveScan">
+		<param name="Local" value="Script\XML.Reader.ProgressiveScan.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Query">
+		<param name="Name" value="Query.Value.Count">
+		<param name="Local" value="Script\Query.Value.Count.htm">
+		<param name="Name" value="Query.Value.IsDefined">
+		<param name="Local" value="Script\Query.Value.IsDefined.htm">
+		<param name="Name" value="Query.Value.Define">
+		<param name="Local" value="Script\Query.Value.Define.htm">
+		<param name="Name" value="Query.Value.ByIndex">
+		<param name="Local" value="Script\Query.Value.ByIndex.htm">
+		<param name="Name" value="Query.Value.Index">
+		<param name="Local" value="Script\Query.Value.Index.htm">
+		<param name="Name" value="Query.Value.ByName">
+		<param name="Local" value="Script\Query.Value.ByName.htm">
+		<param name="Name" value="Query.Value.Name">
+		<param name="Local" value="Script\Query.Value.Name.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Query.Value.ByIndex">
+		<param name="Local" value="Script\Query.Value.ByIndex.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Query.Value.ByName">
+		<param name="Local" value="Script\Query.Value.ByName.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Query.Value.Count">
+		<param name="Local" value="Script\Query.Value.Count.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Query.Value.Define">
+		<param name="Local" value="Script\Query.Value.Define.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Query.Value.Index">
+		<param name="Local" value="Script\Query.Value.Index.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Query.Value.IsDefined">
+		<param name="Local" value="Script\Query.Value.IsDefined.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Query.Value.Name">
+		<param name="Local" value="Script\Query.Value.Name.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Random">
+		<param name="Name" value="Math.Random">
+		<param name="Local" value="Script\Math.Random.htm">
+		<param name="Name" value="Math.SetRandom">
+		<param name="Local" value="Script\Math.SetRandom.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Read">
+		<param name="Name" value="File.CanRead">
+		<param name="Local" value="Script\File.CanRead.htm">
+		<param name="Name" value="File.CanReadWrite">
+		<param name="Local" value="Script\File.CanReadWrite.htm">
+		<param name="Name" value="File.Read">
+		<param name="Local" value="Script\File.Read.htm">
+		<param name="Name" value="XML.Reader.Open">
+		<param name="Local" value="Script\XML.Reader.Open.htm">
+		<param name="Name" value="XML.Reader.ProgressiveScan">
+		<param name="Local" value="Script\XML.Reader.ProgressiveScan.htm">
+		<param name="Name" value="XML.Reader.Close">
+		<param name="Local" value="Script\XML.Reader.Close.htm">
+		<param name="Name" value="XML.Reader.ToString">
+		<param name="Local" value="Script\XML.Reader.ToString.htm">
+		<param name="Name" value="XML.Reader.ToInteger">
+		<param name="Local" value="Script\XML.Reader.ToInteger.htm">
+		<param name="Name" value="XML.Reader.ToDouble">
+		<param name="Local" value="Script\XML.Reader.ToDouble.htm">
+		<param name="Name" value="XML.Reader.ToReader">
+		<param name="Local" value="Script\XML.Reader.ToReader.htm">
+		<param name="Name" value="XML.Reader.Text">
+		<param name="Local" value="Script\XML.Reader.Text.htm">
+		<param name="Name" value="XML.Reader.Length">
+		<param name="Local" value="Script\XML.Reader.Length.htm">
+		<param name="Name" value="XML.Reader.ToFile">
+		<param name="Local" value="Script\XML.Reader.ToFile.htm">
+		<param name="Name" value="XML.Reader.ScanPosition">
+		<param name="Local" value="Script\XML.Reader.ScanPosition.htm">
+		<param name="Name" value="XML.Reader.Parse">
+		<param name="Local" value="Script\XML.Reader.Parse.htm">
+		<param name="Name" value="XML.Reader.AttributeLength">
+		<param name="Local" value="Script\XML.Reader.AttributeLength.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Reader">
+		<param name="Name" value="XML.Reader.Open">
+		<param name="Local" value="Script\XML.Reader.Open.htm">
+		<param name="Name" value="XML.Reader.ProgressiveScan">
+		<param name="Local" value="Script\XML.Reader.ProgressiveScan.htm">
+		<param name="Name" value="XML.Reader.Close">
+		<param name="Local" value="Script\XML.Reader.Close.htm">
+		<param name="Name" value="XML.Reader.ToString">
+		<param name="Local" value="Script\XML.Reader.ToString.htm">
+		<param name="Name" value="XML.Reader.ToInteger">
+		<param name="Local" value="Script\XML.Reader.ToInteger.htm">
+		<param name="Name" value="XML.Reader.ToDouble">
+		<param name="Local" value="Script\XML.Reader.ToDouble.htm">
+		<param name="Name" value="XML.Reader.ToReader">
+		<param name="Local" value="Script\XML.Reader.ToReader.htm">
+		<param name="Name" value="XML.Reader.Text">
+		<param name="Local" value="Script\XML.Reader.Text.htm">
+		<param name="Name" value="XML.Reader.Length">
+		<param name="Local" value="Script\XML.Reader.Length.htm">
+		<param name="Name" value="XML.Reader.ToFile">
+		<param name="Local" value="Script\XML.Reader.ToFile.htm">
+		<param name="Name" value="XML.Reader.ScanPosition">
+		<param name="Local" value="Script\XML.Reader.ScanPosition.htm">
+		<param name="Name" value="XML.Reader.Parse">
+		<param name="Local" value="Script\XML.Reader.Parse.htm">
+		<param name="Name" value="XML.Reader.AttributeLength">
+		<param name="Local" value="Script\XML.Reader.AttributeLength.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="RecordSet">
+		<param name="Name" value="SQL.RecordSet.Value">
+		<param name="Local" value="Script\SQL.RecordSet.Value.htm">
+		<param name="Name" value="SQL.RecordSet.Columns.Name">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Name.htm">
+		<param name="Name" value="SQL.RecordSet.Columns.Index">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Index.htm">
+		<param name="Name" value="SQL.RecordSet.Columns.Count">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Count.htm">
+		<param name="Name" value="SQL.RecordSet.Fetch">
+		<param name="Local" value="Script\SQL.RecordSet.Fetch.htm">
+		<param name="Name" value="SQL.RecordSet.Close">
+		<param name="Local" value="Script\SQL.RecordSet.Close.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Recv">
+		<param name="Name" value="Socket.Client.IsRecvPending">
+		<param name="Local" value="Script\Socket.Client.IsRecvPending.htm">
+		<param name="Name" value="Socket.Client.Recv">
+		<param name="Local" value="Script\Socket.Client.Recv.htm">
+		<param name="Name" value="Socket.Client.TryRecv">
+		<param name="Local" value="Script\Socket.Client.TryRecv.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Replace">
+		<param name="Local" value="Script\Replace.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Return">
+		<param name="Local" value="Script\Return.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Reverse">
+		<param name="Local" value="Script\Reverse.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Rollback">
+		<param name="Name" value="SQL.Connection.Transaction.Rollback">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Rollback.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Round">
+		<param name="Name" value="Math.Round">
+		<param name="Local" value="Script\Math.Round.htm">
+		<param name="Name" value="Math.SmartRound">
+		<param name="Local" value="Script\Math.SmartRound.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Save">
+		<param name="Name" value="XML.Writer.Save">
+		<param name="Local" value="Script\XML.Writer.Save.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ScanPosition">
+		<param name="Name" value="XML.Reader.ScanPosition">
+		<param name="Local" value="Script\XML.Reader.ScanPosition.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Scope">
+		<param name="Name" value="Code.Scope">
+		<param name="Local" value="Script\Code.Scope.htm">
+		<param name="Name" value="Code.Scope.Enter">
+		<param name="Local" value="Script\Code.Scope.Enter.htm">
+		<param name="Name" value="Code.Scope.Exit">
+		<param name="Local" value="Script\Code.Scope.Exit.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Scripts">
+		<param name="Name" value="Debug.Dump.Scripts">
+		<param name="Local" value="Script\Debug.Dump.Scripts.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Seek">
+		<param name="Name" value="File.Seek">
+		<param name="Local" value="Script\File.Seek.htm">
+		<param name="Name" value="File.Seek.FromBeginning">
+		<param name="Local" value="Script\File.Seek.FromBeginning.htm">
+		<param name="Name" value="File.Seek.FromEnd">
+		<param name="Local" value="Script\File.Seek.FromEnd.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Send">
+		<param name="Name" value="Socket.Client.IsSendPending">
+		<param name="Local" value="Script\Socket.Client.IsSendPending.htm">
+		<param name="Name" value="Socket.Client.Send">
+		<param name="Local" value="Script\Socket.Client.Send.htm">
+		<param name="Name" value="Socket.Client.TrySend">
+		<param name="Local" value="Script\Socket.Client.TrySend.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Server">
+		<param name="Name" value="Socket.Server.Start">
+		<param name="Local" value="Script\Socket.Server.Start.htm">
+		<param name="Name" value="Socket.Server.Stop">
+		<param name="Local" value="Script\Socket.Server.Stop.htm">
+		<param name="Name" value="Socket.Server.Connect">
+		<param name="Local" value="Script\Socket.Server.Connect.htm">
+		<param name="Name" value="Socket.Server.Connections">
+		<param name="Local" value="Script\Socket.Server.Connections.htm">
+		<param name="Name" value="Socket.Server.Connection">
+		<param name="Local" value="Script\Socket.Server.Connection.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Set">
+		<param name="Name" value="Env.Set">
+		<param name="Local" value="Script\Env.Set.htm">
+		<param name="Name" value="Process.PeakWorkingSetSize">
+		<param name="Local" value="Script\Process.PeakWorkingSetSize.htm">
+		<param name="Name" value="Process.WorkingSetSize">
+		<param name="Local" value="Script\Process.WorkingSetSize.htm">
+		<param name="Name" value="Math.SetRandom">
+		<param name="Local" value="Script\Math.SetRandom.htm">
+		<param name="Name" value="Exception.SetText">
+		<param name="Local" value="Script\Exception.SetText.htm">
+		<param name="Name" value="SQL.RecordSet.Value">
+		<param name="Local" value="Script\SQL.RecordSet.Value.htm">
+		<param name="Name" value="SQL.RecordSet.Columns.Name">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Name.htm">
+		<param name="Name" value="SQL.RecordSet.Columns.Index">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Index.htm">
+		<param name="Name" value="SQL.RecordSet.Columns.Count">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Count.htm">
+		<param name="Name" value="SQL.RecordSet.Fetch">
+		<param name="Local" value="Script\SQL.RecordSet.Fetch.htm">
+		<param name="Name" value="SQL.RecordSet.Close">
+		<param name="Local" value="Script\SQL.RecordSet.Close.htm">
+		<param name="Name" value="Settings.ThrowSoftExceptions">
+		<param name="Local" value="Script\Settings.ThrowSoftExceptions.htm">
+		<param name="Name" value="XML.Writer.SetName">
+		<param name="Local" value="Script\XML.Writer.SetName.htm">
+		<param name="Name" value="Socket.Client.IsDisconnectSet">
+		<param name="Local" value="Script\Socket.Client.IsDisconnectSet.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SetName">
+		<param name="Name" value="XML.Writer.SetName">
+		<param name="Local" value="Script\XML.Writer.SetName.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SetRandom">
+		<param name="Name" value="Math.SetRandom">
+		<param name="Local" value="Script\Math.SetRandom.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SetText">
+		<param name="Name" value="Exception.SetText">
+		<param name="Local" value="Script\Exception.SetText.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Settings">
+		<param name="Name" value="Settings.ThrowSoftExceptions">
+		<param name="Local" value="Script\Settings.ThrowSoftExceptions.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Settings.ThrowSoftExceptions">
+		<param name="Local" value="Script\Settings.ThrowSoftExceptions.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SHA1">
+		<param name="Local" value="Script\SHA1.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Size">
+		<param name="Name" value="Process.PeakWorkingSetSize">
+		<param name="Local" value="Script\Process.PeakWorkingSetSize.htm">
+		<param name="Name" value="Process.WorkingSetSize">
+		<param name="Local" value="Script\Process.WorkingSetSize.htm">
+		<param name="Name" value="FormatSize">
+		<param name="Local" value="Script\FormatSize.htm">
+		<param name="Name" value="File.Size">
+		<param name="Local" value="Script\File.Size.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Sleep">
+		<param name="Local" value="Script\Sleep.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SmartRound">
+		<param name="Name" value="Math.SmartRound">
+		<param name="Local" value="Script\Math.SmartRound.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket">
+		<param name="Name" value="Socket.Server.Start">
+		<param name="Local" value="Script\Socket.Server.Start.htm">
+		<param name="Name" value="Socket.Server.Stop">
+		<param name="Local" value="Script\Socket.Server.Stop.htm">
+		<param name="Name" value="Socket.Server.Connect">
+		<param name="Local" value="Script\Socket.Server.Connect.htm">
+		<param name="Name" value="Socket.Server.Connections">
+		<param name="Local" value="Script\Socket.Server.Connections.htm">
+		<param name="Name" value="Socket.Server.Connection">
+		<param name="Local" value="Script\Socket.Server.Connection.htm">
+		<param name="Name" value="Socket.Client.WasConnect">
+		<param name="Local" value="Script\Socket.Client.WasConnect.htm">
+		<param name="Name" value="Socket.Client.IsDisconnectSet">
+		<param name="Local" value="Script\Socket.Client.IsDisconnectSet.htm">
+		<param name="Name" value="Socket.Client.PeerAddress">
+		<param name="Local" value="Script\Socket.Client.PeerAddress.htm">
+		<param name="Name" value="Socket.Client.PeerID">
+		<param name="Local" value="Script\Socket.Client.PeerID.htm">
+		<param name="Name" value="Socket.Client.PeerPort">
+		<param name="Local" value="Script\Socket.Client.PeerPort.htm">
+		<param name="Name" value="Socket.Client.IsConnected">
+		<param name="Local" value="Script\Socket.Client.IsConnected.htm">
+		<param name="Name" value="Socket.Client.IsSendPending">
+		<param name="Local" value="Script\Socket.Client.IsSendPending.htm">
+		<param name="Name" value="Socket.Client.IsRecvPending">
+		<param name="Local" value="Script\Socket.Client.IsRecvPending.htm">
+		<param name="Name" value="Socket.Client.Recv">
+		<param name="Local" value="Script\Socket.Client.Recv.htm">
+		<param name="Name" value="Socket.Client.Disconnect">
+		<param name="Local" value="Script\Socket.Client.Disconnect.htm">
+		<param name="Name" value="Socket.Client.Send">
+		<param name="Local" value="Script\Socket.Client.Send.htm">
+		<param name="Name" value="Socket.Client.TryRecv">
+		<param name="Local" value="Script\Socket.Client.TryRecv.htm">
+		<param name="Name" value="Socket.Client.TrySend">
+		<param name="Local" value="Script\Socket.Client.TrySend.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Client.Disconnect">
+		<param name="Local" value="Script\Socket.Client.Disconnect.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Client.IsConnected">
+		<param name="Local" value="Script\Socket.Client.IsConnected.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Client.IsDisconnectSet">
+		<param name="Local" value="Script\Socket.Client.IsDisconnectSet.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Client.IsRecvPending">
+		<param name="Local" value="Script\Socket.Client.IsRecvPending.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Client.IsSendPending">
+		<param name="Local" value="Script\Socket.Client.IsSendPending.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Client.PeerAddress">
+		<param name="Local" value="Script\Socket.Client.PeerAddress.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Client.PeerID">
+		<param name="Local" value="Script\Socket.Client.PeerID.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Client.PeerPort">
+		<param name="Local" value="Script\Socket.Client.PeerPort.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Client.Recv">
+		<param name="Local" value="Script\Socket.Client.Recv.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Client.Send">
+		<param name="Local" value="Script\Socket.Client.Send.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Client.TryRecv">
+		<param name="Local" value="Script\Socket.Client.TryRecv.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Client.TrySend">
+		<param name="Local" value="Script\Socket.Client.TrySend.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Client.WasConnect">
+		<param name="Local" value="Script\Socket.Client.WasConnect.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Server.Connect">
+		<param name="Local" value="Script\Socket.Server.Connect.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Server.Connection">
+		<param name="Local" value="Script\Socket.Server.Connection.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Server.Connections">
+		<param name="Local" value="Script\Socket.Server.Connections.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Server.Start">
+		<param name="Local" value="Script\Socket.Server.Start.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Socket.Server.Stop">
+		<param name="Local" value="Script\Socket.Server.Stop.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Space">
+		<param name="Local" value="Script\Space.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SQL">
+		<param name="Name" value="SQL.Connection.Connect">
+		<param name="Local" value="Script\SQL.Connection.Connect.htm">
+		<param name="Name" value="SQL.Connection.Transaction.Begin">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Begin.htm">
+		<param name="Name" value="SQL.Connection.Transaction.Commit">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Commit.htm">
+		<param name="Name" value="SQL.Connection.Transaction.Rollback">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Rollback.htm">
+		<param name="Name" value="SQL.Connection.Transaction.Depth">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Depth.htm">
+		<param name="Name" value="SQL.Connection.Value">
+		<param name="Local" value="Script\SQL.Connection.Value.htm">
+		<param name="Name" value="SQL.Connection.Execute">
+		<param name="Local" value="Script\SQL.Connection.Execute.htm">
+		<param name="Name" value="SQL.RecordSet.Value">
+		<param name="Local" value="Script\SQL.RecordSet.Value.htm">
+		<param name="Name" value="SQL.RecordSet.Columns.Name">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Name.htm">
+		<param name="Name" value="SQL.RecordSet.Columns.Index">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Index.htm">
+		<param name="Name" value="SQL.RecordSet.Columns.Count">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Count.htm">
+		<param name="Name" value="SQL.RecordSet.Fetch">
+		<param name="Local" value="Script\SQL.RecordSet.Fetch.htm">
+		<param name="Name" value="SQL.RecordSet.Close">
+		<param name="Local" value="Script\SQL.RecordSet.Close.htm">
+		<param name="Name" value="SQL.Connection.Close">
+		<param name="Local" value="Script\SQL.Connection.Close.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SQL.Connection.Close">
+		<param name="Local" value="Script\SQL.Connection.Close.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SQL.Connection.Connect">
+		<param name="Local" value="Script\SQL.Connection.Connect.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SQL.Connection.Execute">
+		<param name="Local" value="Script\SQL.Connection.Execute.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SQL.Connection.Transaction.Begin">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Begin.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SQL.Connection.Transaction.Commit">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Commit.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SQL.Connection.Transaction.Depth">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Depth.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SQL.Connection.Transaction.Rollback">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Rollback.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SQL.Connection.Value">
+		<param name="Local" value="Script\SQL.Connection.Value.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SQL.RecordSet.Close">
+		<param name="Local" value="Script\SQL.RecordSet.Close.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SQL.RecordSet.Columns.Count">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Count.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SQL.RecordSet.Columns.Index">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Index.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SQL.RecordSet.Columns.Name">
+		<param name="Local" value="Script\SQL.RecordSet.Columns.Name.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SQL.RecordSet.Fetch">
+		<param name="Local" value="Script\SQL.RecordSet.Fetch.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SQL.RecordSet.Value">
+		<param name="Local" value="Script\SQL.RecordSet.Value.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Start">
+		<param name="Name" value="Socket.Server.Start">
+		<param name="Local" value="Script\Socket.Server.Start.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Stop">
+		<param name="Name" value="Socket.Server.Stop">
+		<param name="Local" value="Script\Socket.Server.Stop.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String">
+		<param name="Name" value="Numeric.ToString">
+		<param name="Local" value="Script\Numeric.ToString.htm">
+		<param name="Name" value="String.Trim">
+		<param name="Local" value="Script\String.Trim.htm">
+		<param name="Name" value="String.Replace">
+		<param name="Local" value="Script\String.Replace.htm">
+		<param name="Name" value="String.IndexOf">
+		<param name="Local" value="Script\String.IndexOf.htm">
+		<param name="Name" value="SubString">
+		<param name="Local" value="Script\SubString.htm">
+		<param name="Name" value="String.Equals">
+		<param name="Local" value="Script\String.Equals.htm">
+		<param name="Name" value="String.GreaterThan">
+		<param name="Local" value="Script\String.GreaterThan.htm">
+		<param name="Name" value="String.LessThan">
+		<param name="Local" value="Script\String.LessThan.htm">
+		<param name="Name" value="String.NotEquals">
+		<param name="Local" value="Script\String.NotEquals.htm">
+		<param name="Name" value="String.ToUpper">
+		<param name="Local" value="Script\String.ToUpper.htm">
+		<param name="Name" value="String.ToLower">
+		<param name="Local" value="Script\String.ToLower.htm">
+		<param name="Name" value="String.SubString">
+		<param name="Local" value="Script\String.SubString.htm">
+		<param name="Name" value="String.Reverse">
+		<param name="Local" value="Script\String.Reverse.htm">
+		<param name="Name" value="String.Append">
+		<param name="Local" value="Script\String.Append.htm">
+		<param name="Name" value="String.ToDouble">
+		<param name="Local" value="Script\String.ToDouble.htm">
+		<param name="Name" value="String.ToInteger">
+		<param name="Local" value="Script\String.ToInteger.htm">
+		<param name="Name" value="String.Length">
+		<param name="Local" value="Script\String.Length.htm">
+		<param name="Name" value="String.Free">
+		<param name="Local" value="Script\String.Free.htm">
+		<param name="Name" value="XML.Reader.ToString">
+		<param name="Local" value="Script\XML.Reader.ToString.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String.Append">
+		<param name="Local" value="Script\String.Append.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String.Equals">
+		<param name="Local" value="Script\String.Equals.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String.Free">
+		<param name="Local" value="Script\String.Free.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String.GreaterThan">
+		<param name="Local" value="Script\String.GreaterThan.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String.IndexOf">
+		<param name="Local" value="Script\String.IndexOf.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String.Length">
+		<param name="Local" value="Script\String.Length.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String.LessThan">
+		<param name="Local" value="Script\String.LessThan.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String.NotEquals">
+		<param name="Local" value="Script\String.NotEquals.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String.Replace">
+		<param name="Local" value="Script\String.Replace.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String.Reverse">
+		<param name="Local" value="Script\String.Reverse.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String.SubString">
+		<param name="Local" value="Script\String.SubString.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String.ToDouble">
+		<param name="Local" value="Script\String.ToDouble.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String.ToInteger">
+		<param name="Local" value="Script\String.ToInteger.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String.ToLower">
+		<param name="Local" value="Script\String.ToLower.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String.ToUpper">
+		<param name="Local" value="Script\String.ToUpper.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="String.Trim">
+		<param name="Local" value="Script\String.Trim.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SubString">
+		<param name="Local" value="Script\SubString.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Sys">
+		<param name="Name" value="Sys.TickCount">
+		<param name="Local" value="Script\Sys.TickCount.htm">
+		<param name="Name" value="Sys.MachineName">
+		<param name="Local" value="Script\Sys.MachineName.htm">
+		<param name="Name" value="Sys.OSVersion">
+		<param name="Local" value="Script\Sys.OSVersion.htm">
+		<param name="Name" value="Sys.Memory.Load">
+		<param name="Local" value="Script\Sys.Memory.Load.htm">
+		<param name="Name" value="Sys.Memory.TotalPhysical">
+		<param name="Local" value="Script\Sys.Memory.TotalPhysical.htm">
+		<param name="Name" value="Sys.Memory.AvailablePhysical">
+		<param name="Local" value="Script\Sys.Memory.AvailablePhysical.htm">
+		<param name="Name" value="Sys.Memory.TotalPageFile">
+		<param name="Local" value="Script\Sys.Memory.TotalPageFile.htm">
+		<param name="Name" value="Sys.Memory.AvailablePageFile">
+		<param name="Local" value="Script\Sys.Memory.AvailablePageFile.htm">
+		<param name="Name" value="Sys.Memory.TotalVirtual">
+		<param name="Local" value="Script\Sys.Memory.TotalVirtual.htm">
+		<param name="Name" value="Sys.Memory.AvailableVirtual">
+		<param name="Local" value="Script\Sys.Memory.AvailableVirtual.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Sys.MachineName">
+		<param name="Local" value="Script\Sys.MachineName.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Sys.Memory.AvailablePageFile">
+		<param name="Local" value="Script\Sys.Memory.AvailablePageFile.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Sys.Memory.AvailablePhysical">
+		<param name="Local" value="Script\Sys.Memory.AvailablePhysical.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Sys.Memory.AvailableVirtual">
+		<param name="Local" value="Script\Sys.Memory.AvailableVirtual.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Sys.Memory.Load">
+		<param name="Local" value="Script\Sys.Memory.Load.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Sys.Memory.TotalPageFile">
+		<param name="Local" value="Script\Sys.Memory.TotalPageFile.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Sys.Memory.TotalPhysical">
+		<param name="Local" value="Script\Sys.Memory.TotalPhysical.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Sys.Memory.TotalVirtual">
+		<param name="Local" value="Script\Sys.Memory.TotalVirtual.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Sys.OSVersion">
+		<param name="Local" value="Script\Sys.OSVersion.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Sys.TickCount">
+		<param name="Local" value="Script\Sys.TickCount.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Text">
+		<param name="Name" value="Error.Text">
+		<param name="Local" value="Script\Error.Text.htm">
+		<param name="Name" value="Exception.GetText">
+		<param name="Local" value="Script\Exception.GetText.htm">
+		<param name="Name" value="Exception.SetText">
+		<param name="Local" value="Script\Exception.SetText.htm">
+		<param name="Name" value="XML.Writer.Text">
+		<param name="Local" value="Script\XML.Writer.Text.htm">
+		<param name="Name" value="XML.Reader.Text">
+		<param name="Local" value="Script\XML.Reader.Text.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Throw">
+		<param name="Name" value="Error.Throw">
+		<param name="Local" value="Script\Error.Throw.htm">
+		<param name="Name" value="Settings.ThrowSoftExceptions">
+		<param name="Local" value="Script\Settings.ThrowSoftExceptions.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ThrowSoftExceptions">
+		<param name="Name" value="Settings.ThrowSoftExceptions">
+		<param name="Local" value="Script\Settings.ThrowSoftExceptions.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="TickCount">
+		<param name="Name" value="Sys.TickCount">
+		<param name="Local" value="Script\Sys.TickCount.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Time">
+		<param name="Name" value="Time.Now">
+		<param name="Local" value="Script\Time.Now.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Time.Now">
+		<param name="Local" value="Script\Time.Now.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ToDouble">
+		<param name="Local" value="Script\ToDouble.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ToFile">
+		<param name="Name" value="XML.Reader.ToFile">
+		<param name="Local" value="Script\XML.Reader.ToFile.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ToInteger">
+		<param name="Local" value="Script\ToInteger.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ToLower">
+		<param name="Local" value="Script\ToLower.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ToReader">
+		<param name="Name" value="XML.Reader.ToReader">
+		<param name="Local" value="Script\XML.Reader.ToReader.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ToString">
+		<param name="Name" value="Numeric.ToString">
+		<param name="Local" value="Script\Numeric.ToString.htm">
+		<param name="Name" value="XML.Reader.ToString">
+		<param name="Local" value="Script\XML.Reader.ToString.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="TotalPageFile">
+		<param name="Name" value="Sys.Memory.TotalPageFile">
+		<param name="Local" value="Script\Sys.Memory.TotalPageFile.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="TotalPhysical">
+		<param name="Name" value="Sys.Memory.TotalPhysical">
+		<param name="Local" value="Script\Sys.Memory.TotalPhysical.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="TotalVirtual">
+		<param name="Name" value="Sys.Memory.TotalVirtual">
+		<param name="Local" value="Script\Sys.Memory.TotalVirtual.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ToUpper">
+		<param name="Local" value="Script\ToUpper.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Transaction">
+		<param name="Name" value="SQL.Connection.Transaction.Begin">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Begin.htm">
+		<param name="Name" value="SQL.Connection.Transaction.Commit">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Commit.htm">
+		<param name="Name" value="SQL.Connection.Transaction.Rollback">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Rollback.htm">
+		<param name="Name" value="SQL.Connection.Transaction.Depth">
+		<param name="Local" value="Script\SQL.Connection.Transaction.Depth.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Trim">
+		<param name="Local" value="Script\Trim.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="TryRecv">
+		<param name="Name" value="Socket.Client.TryRecv">
+		<param name="Local" value="Script\Socket.Client.TryRecv.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="TrySend">
+		<param name="Name" value="Socket.Client.TrySend">
+		<param name="Local" value="Script\Socket.Client.TrySend.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Undefine">
+		<param name="Name" value="Code.Variables.Undefine">
+		<param name="Local" value="Script\Code.Variables.Undefine.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="UnWind">
+		<param name="Name" value="Error.UnWind">
+		<param name="Local" value="Script\Error.UnWind.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="URLDecode">
+		<param name="Name" value="Web.URLDecode">
+		<param name="Local" value="Script\Web.URLDecode.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="URLEncode">
+		<param name="Name" value="Web.URLEncode">
+		<param name="Local" value="Script\Web.URLEncode.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Username">
+		<param name="Name" value="Process.Username">
+		<param name="Local" value="Script\Process.Username.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Value">
+		<param name="Name" value="Env.Value">
+		<param name="Local" value="Script\Env.Value.htm">
+		<param name="Name" value="SQL.Connection.Value">
+		<param name="Local" value="Script\SQL.Connection.Value.htm">
+		<param name="Name" value="SQL.RecordSet.Value">
+		<param name="Local" value="Script\SQL.RecordSet.Value.htm">
+		<param name="Name" value="Form.Value.Count">
+		<param name="Local" value="Script\Form.Value.Count.htm">
+		<param name="Name" value="Form.Value.IsDefined">
+		<param name="Local" value="Script\Form.Value.IsDefined.htm">
+		<param name="Name" value="Form.Value.Define">
+		<param name="Local" value="Script\Form.Value.Define.htm">
+		<param name="Name" value="Form.Value.ByIndex">
+		<param name="Local" value="Script\Form.Value.ByIndex.htm">
+		<param name="Name" value="Form.Value.Index">
+		<param name="Local" value="Script\Form.Value.Index.htm">
+		<param name="Name" value="Form.Value.ByName">
+		<param name="Local" value="Script\Form.Value.ByName.htm">
+		<param name="Name" value="Form.Value.Name">
+		<param name="Local" value="Script\Form.Value.Name.htm">
+		<param name="Name" value="Query.Value.Count">
+		<param name="Local" value="Script\Query.Value.Count.htm">
+		<param name="Name" value="Query.Value.IsDefined">
+		<param name="Local" value="Script\Query.Value.IsDefined.htm">
+		<param name="Name" value="Query.Value.Define">
+		<param name="Local" value="Script\Query.Value.Define.htm">
+		<param name="Name" value="Query.Value.ByIndex">
+		<param name="Local" value="Script\Query.Value.ByIndex.htm">
+		<param name="Name" value="Query.Value.Index">
+		<param name="Local" value="Script\Query.Value.Index.htm">
+		<param name="Name" value="Query.Value.ByName">
+		<param name="Local" value="Script\Query.Value.ByName.htm">
+		<param name="Name" value="Query.Value.Name">
+		<param name="Local" value="Script\Query.Value.Name.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Variables">
+		<param name="Name" value="Code.Variables.Free">
+		<param name="Local" value="Script\Code.Variables.Free.htm">
+		<param name="Name" value="Code.Variables.IsDefined">
+		<param name="Local" value="Script\Code.Variables.IsDefined.htm">
+		<param name="Name" value="Code.Variables.Undefine">
+		<param name="Local" value="Script\Code.Variables.Undefine.htm">
+		<param name="Name" value="Code.Variables.Define">
+		<param name="Local" value="Script\Code.Variables.Define.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Vars">
+		<param name="Name" value="Debug.Dump.Vars">
+		<param name="Local" value="Script\Debug.Dump.Vars.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="WasConnect">
+		<param name="Name" value="Socket.Client.WasConnect">
+		<param name="Local" value="Script\Socket.Client.WasConnect.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Web">
+		<param name="Name" value="Web.InitializeCGI">
+		<param name="Local" value="Script\Web.InitializeCGI.htm">
+		<param name="Name" value="Web.URLEncode">
+		<param name="Local" value="Script\Web.URLEncode.htm">
+		<param name="Name" value="Web.URLDecode">
+		<param name="Local" value="Script\Web.URLDecode.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Web.InitializeCGI">
+		<param name="Local" value="Script\Web.InitializeCGI.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Web.URLDecode">
+		<param name="Local" value="Script\Web.URLDecode.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Web.URLEncode">
+		<param name="Local" value="Script\Web.URLEncode.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="WorkingSetSize">
+		<param name="Name" value="Process.PeakWorkingSetSize">
+		<param name="Local" value="Script\Process.PeakWorkingSetSize.htm">
+		<param name="Name" value="Process.WorkingSetSize">
+		<param name="Local" value="Script\Process.WorkingSetSize.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Write">
+		<param name="Name" value="File.CanWrite">
+		<param name="Local" value="Script\File.CanWrite.htm">
+		<param name="Name" value="File.CanReadWrite">
+		<param name="Local" value="Script\File.CanReadWrite.htm">
+		<param name="Name" value="File.Write">
+		<param name="Local" value="Script\File.Write.htm">
+		<param name="Name" value="XML.Writer.Save">
+		<param name="Local" value="Script\XML.Writer.Save.htm">
+		<param name="Name" value="XML.Writer.Text">
+		<param name="Local" value="Script\XML.Writer.Text.htm">
+		<param name="Name" value="XML.Writer.Length">
+		<param name="Local" value="Script\XML.Writer.Length.htm">
+		<param name="Name" value="XML.Writer.Add">
+		<param name="Local" value="Script\XML.Writer.Add.htm">
+		<param name="Name" value="XML.Writer.AddXML">
+		<param name="Local" value="Script\XML.Writer.AddXML.htm">
+		<param name="Name" value="XML.Writer.SetName">
+		<param name="Local" value="Script\XML.Writer.SetName.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Writer">
+		<param name="Name" value="XML.Writer.Save">
+		<param name="Local" value="Script\XML.Writer.Save.htm">
+		<param name="Name" value="XML.Writer.Text">
+		<param name="Local" value="Script\XML.Writer.Text.htm">
+		<param name="Name" value="XML.Writer.Length">
+		<param name="Local" value="Script\XML.Writer.Length.htm">
+		<param name="Name" value="XML.Writer.Add">
+		<param name="Local" value="Script\XML.Writer.Add.htm">
+		<param name="Name" value="XML.Writer.AddXML">
+		<param name="Local" value="Script\XML.Writer.AddXML.htm">
+		<param name="Name" value="XML.Writer.SetName">
+		<param name="Local" value="Script\XML.Writer.SetName.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML">
+		<param name="Name" value="XML.Writer.Save">
+		<param name="Local" value="Script\XML.Writer.Save.htm">
+		<param name="Name" value="XML.Writer.Text">
+		<param name="Local" value="Script\XML.Writer.Text.htm">
+		<param name="Name" value="XML.Writer.Length">
+		<param name="Local" value="Script\XML.Writer.Length.htm">
+		<param name="Name" value="XML.Writer.Add">
+		<param name="Local" value="Script\XML.Writer.Add.htm">
+		<param name="Name" value="XML.Writer.AddXML">
+		<param name="Local" value="Script\XML.Writer.AddXML.htm">
+		<param name="Name" value="XML.Writer.SetName">
+		<param name="Local" value="Script\XML.Writer.SetName.htm">
+		<param name="Name" value="XML.Reader.Open">
+		<param name="Local" value="Script\XML.Reader.Open.htm">
+		<param name="Name" value="XML.Reader.ProgressiveScan">
+		<param name="Local" value="Script\XML.Reader.ProgressiveScan.htm">
+		<param name="Name" value="XML.Reader.Close">
+		<param name="Local" value="Script\XML.Reader.Close.htm">
+		<param name="Name" value="XML.Reader.ToString">
+		<param name="Local" value="Script\XML.Reader.ToString.htm">
+		<param name="Name" value="XML.Reader.ToInteger">
+		<param name="Local" value="Script\XML.Reader.ToInteger.htm">
+		<param name="Name" value="XML.Reader.ToDouble">
+		<param name="Local" value="Script\XML.Reader.ToDouble.htm">
+		<param name="Name" value="XML.Reader.ToReader">
+		<param name="Local" value="Script\XML.Reader.ToReader.htm">
+		<param name="Name" value="XML.Reader.Text">
+		<param name="Local" value="Script\XML.Reader.Text.htm">
+		<param name="Name" value="XML.Reader.Length">
+		<param name="Local" value="Script\XML.Reader.Length.htm">
+		<param name="Name" value="XML.Reader.ToFile">
+		<param name="Local" value="Script\XML.Reader.ToFile.htm">
+		<param name="Name" value="XML.Reader.ScanPosition">
+		<param name="Local" value="Script\XML.Reader.ScanPosition.htm">
+		<param name="Name" value="XML.Reader.Parse">
+		<param name="Local" value="Script\XML.Reader.Parse.htm">
+		<param name="Name" value="XML.Reader.AttributeLength">
+		<param name="Local" value="Script\XML.Reader.AttributeLength.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Reader.AttributeLength">
+		<param name="Local" value="Script\XML.Reader.AttributeLength.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Reader.Close">
+		<param name="Local" value="Script\XML.Reader.Close.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Reader.Length">
+		<param name="Local" value="Script\XML.Reader.Length.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Reader.Open">
+		<param name="Local" value="Script\XML.Reader.Open.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Reader.Parse">
+		<param name="Local" value="Script\XML.Reader.Parse.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Reader.ProgressiveScan">
+		<param name="Local" value="Script\XML.Reader.ProgressiveScan.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Reader.ScanPosition">
+		<param name="Local" value="Script\XML.Reader.ScanPosition.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Reader.Text">
+		<param name="Local" value="Script\XML.Reader.Text.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Reader.ToDouble">
+		<param name="Local" value="Script\XML.Reader.ToDouble.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Reader.ToFile">
+		<param name="Local" value="Script\XML.Reader.ToFile.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Reader.ToInteger">
+		<param name="Local" value="Script\XML.Reader.ToInteger.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Reader.ToReader">
+		<param name="Local" value="Script\XML.Reader.ToReader.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Reader.ToString">
+		<param name="Local" value="Script\XML.Reader.ToString.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Writer.Add">
+		<param name="Local" value="Script\XML.Writer.Add.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Writer.AddXML">
+		<param name="Local" value="Script\XML.Writer.AddXML.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Writer.Length">
+		<param name="Local" value="Script\XML.Writer.Length.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Writer.Save">
+		<param name="Local" value="Script\XML.Writer.Save.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Writer.SetName">
+		<param name="Local" value="Script\XML.Writer.SetName.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="XML.Writer.Text">
+		<param name="Local" value="Script\XML.Writer.Text.htm">
+		</OBJECT>
+</UL>
+</BODY></HTML>

@@ -1,0 +1,11 @@
+Engine:
+* Optional parameters for script functions.
+* Make form variables available via function such as Form.Value.Get("Username"), Form.Value.IsDefined("Username")
+* Implement Code.Functions.Call() method to allow the user to dynamicly call functions.
+* Auto declare Form.* variables when they are referenced.
+* XML
+
+IDE:
+* Auto-completion for script functions and variables.
+* Fix problem when performing "find-next" for occurences on same line.
+* Add stack-view when hitting a break point.

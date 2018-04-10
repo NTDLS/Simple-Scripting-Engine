@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9F5C7AC8-4D69-4B17-851F-7E6C0DD6EF02}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SSIDE</RootNamespace>
+    <AssemblyName>SSIDE</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>SSIDE.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AxInterop.SHDocVw">
+      <HintPath>..\..\..\@Libraries\HtmlHelp\libs\AxInterop.SHDocVw.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlHelp">
+      <HintPath>..\..\..\@Libraries\HtmlHelp\bin\Release\HtmlHelp.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\..\@Libraries\HtmlHelp\bin\Release\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.SHDocVw">
+      <HintPath>..\..\..\@Libraries\HtmlHelp\libs\Interop.SHDocVw.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.8.0.2\lib\net35\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NTDLS.CodeEditor">
+      <HintPath>..\..\..\@Libraries\FireBall\Release\NTDLS.CodeEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="NTDLS.CodeEditor.SyntaxFiles">
+      <HintPath>..\..\..\@Libraries\FireBall\Release\NTDLS.CodeEditor.SyntaxFiles.dll</HintPath>
+    </Reference>
+    <Reference Include="NTDLS.Core">
+      <HintPath>..\..\..\@Libraries\FireBall\Release\NTDLS.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NTDLS.Docking">
+      <HintPath>..\..\..\@Libraries\FireBall\Release\NTDLS.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="NTDLS.SyntaxDocument">
+      <HintPath>..\..\..\@Libraries\FireBall\Release\NTDLS.SyntaxDocument.dll</HintPath>
+    </Reference>
+    <Reference Include="NTDLS.Win32">
+      <HintPath>..\..\..\@Libraries\FireBall\Release\NTDLS.Win32.dll</HintPath>
+    </Reference>
+    <Reference Include="NTDLS.Windows.Forms">
+      <HintPath>..\..\..\@Libraries\FireBall\Release\NTDLS.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Management.Instrumentation" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\AutoCompleteItem.cs" />
+    <Compile Include="Classes\AutoCompleteItems.cs" />
+    <Compile Include="Classes\CodeEditor.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\DocTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\global.cs" />
+    <Compile Include="Classes\IDEOptions.cs" />
+    <Compile Include="Classes\Program.cs" />
+    <Compile Include="Classes\ProjectTreeNode.cs" />
+    <Compile Include="Forms\frmAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAbout.Designer.cs">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmExport.Designer.cs">
+      <DependentUpon>frmExport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCodeBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCodeBrowser.Designer.cs">
+      <DependentUpon>frmCodeBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.CodeEditor.AutoComplete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.CodeEditor.Events.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.CodeEditor.Tabs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.CodeEditor.Tooltips.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.Debugging.Breakpoints.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.Debugging.Threads.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.ToolTab.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.ToolTab.Errors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.ToolTab.Files.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.ToolTab.Immediate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.ToolTab.Locals.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.ToolTab.Output.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.ToolTab.Watch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmOptions.Designer.cs">
+      <DependentUpon>frmOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmWatchExpression.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmWatchExpression.Designer.cs">
+      <DependentUpon>frmWatchExpression.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Help\CustomizeContent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Help\DumpCfg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\frmMain.Debugging.Control.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Help\Preferences.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Help\Viewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\QuickWatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\QuickWatch.Designer.cs">
+      <DependentUpon>QuickWatch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Classes\CodeEditor.resx">
+      <DependentUpon>CodeEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAbout.resx">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmExport.resx">
+      <DependentUpon>frmExport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmCodeBrowser.resx">
+      <DependentUpon>frmCodeBrowser.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmOptions.resx">
+      <DependentUpon>frmOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmWatchExpression.resx">
+      <DependentUpon>frmWatchExpression.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Help\CustomizeContent.resx">
+      <DependentUpon>CustomizeContent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Help\DumpCfg.resx">
+      <DependentUpon>DumpCfg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Help\Preferences.resx">
+      <DependentUpon>Preferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Help\Viewer.resx">
+      <DependentUpon>Viewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\QuickWatch.resx">
+      <DependentUpon>QuickWatch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <Compile Include="Forms\Main\frmMain.Project.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AppIcon.ico" />
+    <Content Include="Resources\AppIcon.ico" />
+    <Content Include="Resources\back.bmp" />
+    <Content Include="Resources\contents.bmp" />
+    <Content Include="Resources\CustomizeContent.bmp" />
+    <Content Include="Resources\HelpApp.ico" />
+    <Content Include="Resources\home.bmp" />
+    <Content Include="Resources\hr.gif" />
+    <Content Include="Resources\index.bmp" />
+    <Content Include="Resources\next.bmp" />
+    <Content Include="Resources\refresh.bmp" />
+    <Content Include="Resources\search.bmp" />
+    <Content Include="Resources\stop.bmp" />
+    <Content Include="Resources\synch.bmp" />
+    <Content Include="Resources\TabFiles.bmp" />
+    <Content Include="Resources\TabIconModified.bmp" />
+    <Content Include="Resources\TabIconModifiedRun.bmp" />
+    <Content Include="Resources\TabIconSaved.bmp" />
+    <Content Include="Resources\TabIconSavedRun.bmp" />
+    <Content Include="Resources\TabImmediate.bmp" />
+    <Content Include="Resources\TabLocals.bmp" />
+    <Content Include="Resources\TabThreads.bmp" />
+    <None Include="Resources\TreeJavaScript.ico" />
+    <None Include="Resources\TreeXMLFile.ico" />
+    <None Include="Resources\TreeBatchFile.ico" />
+    <None Include="Resources\TreeJavaScriptTree.ico" />
+    <None Include="Resources\TreeTextFile.ico" />
+    <None Include="Resources\ToolWebRun.bmp" />
+    <None Include="Resources\TreeScriptFile.ico" />
+    <None Include="Resources\TreeStyleFile.ico" />
+    <None Include="Resources\TreeExplore.ico" />
+    <None Include="Resources\TreeHTMLFile.ico" />
+    <None Include="Resources\ToolDelete2.bmp" />
+    <Content Include="Resources\ToolExamples.bmp" />
+    <None Include="Resources\ToolExistingItem.bmp" />
+    <Content Include="Resources\ToolLibrary.bmp" />
+    <None Include="Resources\ToolNewItem.bmp" />
+    <None Include="Resources\TreeCodeFileDefault.ico" />
+    <None Include="Resources\TreeFolderFile.ico" />
+    <None Include="Resources\TreeUnknownFile.ico" />
+    <None Include="Resources\TreeProjectFile.ico" />
+    <None Include="Resources\TreeImageFile.ico" />
+    <None Include="Resources\TreeCodeFile.ico" />
+    <None Include="Resources\TreeProject.ico" />
+    <None Include="Resources\TreeProject.bmp" />
+    <None Include="Resources\ToolNewProject.bmp" />
+    <None Include="Resources\ToolToolsPanel.bmp" />
+    <None Include="Resources\ToolProjectPanel.bmp" />
+    <None Include="Resources\ToolOutputPanel.bmp" />
+    <None Include="Resources\Options.bmp" />
+    <None Include="Resources\ToolHelp.bmp" />
+    <None Include="Resources\TabErrors.bmp" />
+    <None Include="Resources\TabWatch.bmp" />
+    <None Include="Resources\TabOutput.bmp" />
+    <None Include="Resources\ToolCommentLines.bmp" />
+    <None Include="Resources\ToolCloseFile.bmp" />
+    <None Include="Resources\ToolClearBreakpoints.bmp" />
+    <None Include="Resources\ToolClearBookmarks.bmp" />
+    <None Include="Resources\ToolBreakpoint.bmp" />
+    <None Include="Resources\ToolUndo.bmp" />
+    <None Include="Resources\ToolUnCommentLines.bmp" />
+    <None Include="Resources\ToolStop.bmp" />
+    <None Include="Resources\ToolStepOver.bmp" />
+    <None Include="Resources\ToolStepOut.bmp" />
+    <None Include="Resources\ToolStepInto.bmp" />
+    <None Include="Resources\ToolSnippets.bmp" />
+    <None Include="Resources\ToolSaveAll.bmp" />
+    <None Include="Resources\ToolSave.bmp" />
+    <None Include="Resources\ToolRun.bmp" />
+    <None Include="Resources\ToolRestart.bmp" />
+    <None Include="Resources\ToolReplace.bmp" />
+    <None Include="Resources\ToolRedo.bmp" />
+    <None Include="Resources\ToolPause.bmp" />
+    <None Include="Resources\ToolPaste.bmp" />
+    <None Include="Resources\ToolOpenFile.bmp" />
+    <None Include="Resources\ToolNewFile.bmp" />
+    <None Include="Resources\ToolIncreaseIndent.bmp" />
+    <None Include="Resources\ToolGoToLine.bmp" />
+    <None Include="Resources\ToolFind.bmp" />
+    <None Include="Resources\ToolErrors.bmp" />
+    <None Include="Resources\ToolDelete.bmp" />
+    <None Include="Resources\ToolDecreaseIndent.bmp" />
+    <None Include="Resources\ToolCut.bmp" />
+    <None Include="Resources\ToolCopy.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

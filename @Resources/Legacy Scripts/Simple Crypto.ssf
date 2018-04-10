@@ -1,0 +1,73 @@
+<%
+	Dim sPass as String = "MyPassword"
+	Dim sRaw as String = "Hello Cruel World!"
+	Dim sEnc as String = Cipher(sRaw, sPass)
+	Dim sDec as String = Cipher(sEnc , sPass)
+	
+	Print("sRaw: ", sRaw)
+	Print("sEnc: ", sEnc)
+	Print("sDec: ", sDec)
+%>
+
+<%
+	Function CipherFile(sSourceFile as String, sTargetFile as String, sKey as String) as Boolean
+		
+		Dim sBuf as String
+		Dim iBufSz as Integer = 14
+		Dim iMutegen as Integer = FileSize(sSourceFile)
+		
+		Dim hSourceFile as Handle = OpenFile(sSourceFile, GENERIC_READ)
+		If(hSourceFile = 0)
+			Print("Failed to open 'source' file: [", sSourceFile, "]")
+			Return(False)
+		End If
+		
+		Dim hTargetFile as Handle = OpenFile(sTargetFile, GENERIC_WRITE)
+		If(hSourceFile = 0)
+			Print("Failed to open 'target' file :[", sTargetFile , "]")
+			CloseFile(hSourceFile)
+			Return(False)
+		End If
+		
+		While(iBufSz > 0)
+			iMutegen = (iMutegen + iBufSz)
+		
+			sKey = Cipher(sKey, iMutegen)
+		
+			iBufSz = ReadFile(hSourceFile, @sBuf, iBufSz)
+			WriteFile(hTargetFile, Cipher(sBuf, sKey), iBufSz)
+		WEnd
+		
+		CloseFile(hSourceFile)
+		CloseFile(hTargetFile)
+		
+		Return(True)
+	
+	End Function
+%>
+
+<%
+	Function Cipher(sBuf as String, sKey as String) as String
+		
+		Dim sReturn as String
+		Dim iPassSz as Integer = Len(sKey)
+		Dim iPassPos as Integer
+		Dim iStrgSz as Integer = Len(sBuf)
+		Dim iStrgPos as Integer
+		
+		While(iStrgPos < iStrgSz)
+		
+			If(iPassPos >= iPassSz)
+				iPassPos = 0
+			End If
+				
+			sReturn[iStrgPos] = Char( (ASCII(sBuf[iStrgPos]) XOR (ASCII(sKey[iPassPos]) + iStrgPos)) )
+			
+			iPassPos++
+			iStrgPos++
+		WEnd
+		
+		Return(sReturn)
+			
+	End Function
+%>

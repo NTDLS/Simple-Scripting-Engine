@@ -1,0 +1,38 @@
+<%
+	Print("IsWhiteSpace: ", IsWhiteSpace(" "))
+	Print("IsWhiteSpace: ", IsWhiteSpace("j"))
+	
+	Print("IsNumeric1: ", IsNumeric("A"))
+	Print("IsNumeric2: ", IsNumeric("0"))
+	
+	Print("IsDouble1: ", IsDouble("121.50"))
+	Print("IsDouble2: ", IsDouble("121"))
+	
+	Print("IsLong1: ", IsLong("121.50"))
+	Print("IsLong2: ", IsLong("121"))
+	
+	Print("IsHex1: ", IsHex("fsd456f"))
+	Print("IsHex2: ", IsHex("0xFab54"))
+	
+	Print("GetLastCharPos: ", GetLastCharPos("            HELLO          "))
+	Print("GetFirstCharPos: ", GetFirstCharPos("            HELLO          "))
+	
+	'------------------------
+	Prints("IsHexDigit: ")
+	
+	If(IsHexDigit("0"))
+		Print("True")
+	Else
+		Print("False")
+	End If
+	
+	'------------------------
+	Prints("IsAlNum: ")
+	
+	If(IsAlNum("A"))
+		Print("True")
+	Else
+		Print("False")
+	End If
+	'------------------------
+%>

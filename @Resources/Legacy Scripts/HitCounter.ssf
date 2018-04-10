@@ -1,0 +1,23 @@
+<%
+	Dim hFile as Handle
+	Dim lCount as Integer
+	Dim sBuf as String
+	Dim sFile as String = DOCUMENT_ROOT, "\\Counter.txt"
+	Dim lFileSz as Integer = FileSize(sFile)
+	
+	If(lFileSz > 0)
+		hFile = OpenFile(sFile, GENERIC_READ)
+		ReadFile(hFile, @sBuf, lFileSz)
+		CloseFile(hFile)
+	Else
+		sBuf = "0"
+	End If
+	
+	lCount = iVal(sBuf) + 1
+	
+	hFile = OpenFile(sFile, GENERIC_WRITE)
+	WriteFile(hFile, lCount)
+	CloseFile(hFile)
+	
+	Print(lCount)
+%>

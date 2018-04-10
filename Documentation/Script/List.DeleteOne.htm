@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>List :: DeleteOne</title>
+</head>
+
+<body Background="/images/Code/BGCode.gif">
+<font size="5">List :: DeleteOne</font><br />
+<hr /><br /><br />
+
+<b>Description:</b>
+<blockquote>
+<!-- ##BEGIN_DESCRIPTION## -->
+Searches the list for a given value and deletes only the first occurrence of it. Returns true if the item was found and deleted, otherwise returns false.
+<!-- ##END_DESCRIPTION## -->
+</blockquote>
+
+<b>Syntax:</b>
+<blockquote>
+<font color="0000EE">List.DeleteOne</font>(<font color="#000088">Value</font> as <font color="MediumVioletRed">String</font>) as <font color="MediumVioletRed">String</font> </blockquote>
+
+<b>Parameters:</b>
+<blockquote>
+<ul><li><font color="#000088">Value</font> as <font color="MediumVioletRed">String</font><ul><li>
+The value to search for and remove.
+</ul></ul>
+</blockquote>
+
+<b>Example:</b>
+<blockquote>
+<table  ><tr><td nowrap><div style=""><div style="display:none;" id="closed635920335290455282_1"><img src="/images/Code/PlusNoLines.gif" align=top onclick="open635920335290455282_1.style.display='block'; closed635920335290455282_1.style.display='none'; "><b><span style="color:#00008b;background-color:#c0c0c0;">&lt;%...%&gt;</span></b></div><div style="display:block;" id="open635920335290455282_1"><img src="/images/Code/minusNoTopLine.gif" align=top onclick="open635920335290455282_1.style.display='none'; closed635920335290455282_1.style.display='block'; "><span style="color:#000000;background-color:#ffff00;">&lt;%</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><b><span style="color:#0000ff">var</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">listItems</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">as</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#0000ff">List</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Adding</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">Items.</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Add</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Hello</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Add</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Cruel</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Add</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Cruel</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Add</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Cruel</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Add</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Cruel</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Add</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Cruel</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Add</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">World</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">\nEnumeration</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">before</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">remove:</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<div style="display:none;" id="closed635920335290455282_15"><img src="/images/Code/plus.gif" align=top onclick="open635920335290455282_15.style.display='block'; closed635920335290455282_15.style.display='none'; "><b><span style="color:#00008b;background-color:#c0c0c0;">For&nbsp;(i&nbsp;as&nbsp;Numeric&nbsp;to&nbsp;listItems.Count())&nbsp;...</span></b></div><div style="display:block;" id="open635920335290455282_15"><img src="/images/Code/minus.gif" align=top onclick="open635920335290455282_15.style.display='none'; closed635920335290455282_15.style.display='block'; "><b><span style="color:#0000ff">For</span></b><span style="color:#ff0000">(</span><span style="color:#000000">i</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">as</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#c71585">Numeric</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">to</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Count</span><span style="color:#ff0000">(</span><span style="color:#ff0000">)</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000"></span><span style="color:#000000">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#000000"></span><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">\tList[</span><span style="color:#ff0000">"</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000">i</span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">"</span><span style="color:#ff0000">]:</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000"></span><span style="color:#ff0000">"</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000">listItems</span><span style="color:#ff0000">[</span><span style="color:#000000">i</span><span style="color:#ff0000">]</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/L.gif"  align=top><b><span style="color:#0000ff">Next</span></b></div>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#000000">DeleteOne</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Cruel</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">\nEnumeration</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">after</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">remove:</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<div style="display:none;" id="closed635920335290455282_22"><img src="/images/Code/plus.gif" align=top onclick="open635920335290455282_22.style.display='block'; closed635920335290455282_22.style.display='none'; "><b><span style="color:#00008b;background-color:#c0c0c0;">For&nbsp;(i&nbsp;as&nbsp;Numeric&nbsp;to&nbsp;listItems.Count())&nbsp;...</span></b></div><div style="display:block;" id="open635920335290455282_22"><img src="/images/Code/minus.gif" align=top onclick="open635920335290455282_22.style.display='none'; closed635920335290455282_22.style.display='block'; "><b><span style="color:#0000ff">For</span></b><span style="color:#ff0000">(</span><span style="color:#000000">i</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">as</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#c71585">Numeric</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">to</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Count</span><span style="color:#ff0000">(</span><span style="color:#ff0000">)</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000"></span><span style="color:#000000">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#000000"></span><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">\tList[</span><span style="color:#ff0000">"</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000">i</span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">"</span><span style="color:#ff0000">]:</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000"></span><span style="color:#ff0000">"</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000">listItems</span><span style="color:#ff0000">[</span><span style="color:#000000">i</span><span style="color:#ff0000">]</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/L.gif"  align=top><b><span style="color:#0000ff">Next</span></b></div>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/L.gif"  align=top><span style="color:#000000;background-color:#ffff00;">%&gt;</span></div>
+<img src="/images/Code/clear.gif"  align=top><br>
+</div></td></tr></table>
+</blockquote>
+
+</body>
+</html>

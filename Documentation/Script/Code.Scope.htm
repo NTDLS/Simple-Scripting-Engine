@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>Code :: Scope</title>
+<meta name="MS-HKWD" content="Advanced Engine Control">
+</head>
+
+<body Background="/Images/BGCode.gif">
+<font size="5">Code :: Scope</font><br />
+<hr /><br /><br />
+
+<b>Description:</b>
+<blockquote>
+<!-- ##BEGIN_DESCRIPTION## -->
+Gets the current scope level, the scope is incremented for every function fall, loop and logical block and decremented when the end of these blocks are met or exited explicitly.
+<!-- ##END_DESCRIPTION## -->
+</blockquote>
+
+<b>Syntax:</b>
+<blockquote>
+<font color="0000EE">Code.Scope</font>() as <font color="MediumVioletRed">Numeric</font> </blockquote>
+
+<b>Parameters:</b>
+<blockquote>
+<ul></ul>
+</blockquote>
+
+<b>Example:</b>
+<table  ><tr><td nowrap><div style=""><div style="display:none;" id="closed634287939396049071_1"><img src="/images/Code/PlusNoLines.gif" align=top onclick="open634287939396049071_1.style.display='block'; closed634287939396049071_1.style.display='none'; "><b><span style="color:#00008b;background-color:#c0c0c0;">&lt;%...%&gt;</span></b></div><div style="display:block;" id="open634287939396049071_1"><img src="/images/Code/minusNoTopLine.gif" align=top onclick="open634287939396049071_1.style.display='none'; closed634287939396049071_1.style.display='block'; "><span style="color:#000000;background-color:#ffff00;">&lt;%</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Top</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">scope</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000"></span><span style="color:#ff0000">"</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff00ff">Code.Scope</span><span style="color:#ff0000">(</span><span style="color:#ff0000">)</span><span style="color:#ff0000">)</span><br>
+<div style="display:none;" id="closed634287939396049071_4"><img src="/images/Code/plus.gif" align=top onclick="open634287939396049071_4.style.display='block'; closed634287939396049071_4.style.display='none'; "><b><span style="color:#00008b;background-color:#c0c0c0;">For&nbsp;(iLoop&nbsp;as&nbsp;Numeric&nbsp;to&nbsp;5)&nbsp;...</span></b></div><div style="display:block;" id="open634287939396049071_4"><img src="/images/Code/minus.gif" align=top onclick="open634287939396049071_4.style.display='none'; closed634287939396049071_4.style.display='block'; "><b><span style="color:#0000ff">For</span></b><span style="color:#ff0000">(</span><span style="color:#000000">iLoop</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">as</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#c71585">Numeric</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">to</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#008080">5</span></b><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Loop</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">scope</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000"></span><span style="color:#ff0000">"</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff00ff">Code.Scope</span><span style="color:#ff0000">(</span><span style="color:#ff0000">)</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">iLoop</span><span style="color:#ff0000">+</span><span style="color:#ff0000">+</span><br>
+<img src="/images/Code/L.gif"  align=top><b><span style="color:#0000ff">Next</span></b></div>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Bottom</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">scope</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000"></span><span style="color:#ff0000">"</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff00ff">Code.Scope</span><span style="color:#ff0000">(</span><span style="color:#ff0000">)</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/L.gif"  align=top><span style="color:#000000;background-color:#ffff00;">%&gt;</span></div>
+</div></td></tr></table>
+
+</body>
+</html>

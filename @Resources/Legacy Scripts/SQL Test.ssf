@@ -1,0 +1,18 @@
+<%
+	Dim MySQL AS SQL.Client
+	Dim rsTemp AS SQL.RecordSet
+	
+	SQL.Open(@MySQL, "{SQL Server}", "CLT51NTFS", "BI")
+	SQL.Exec(@MySQL, "SELECT Name, Balance FROM Customer", @rsTemp)
+
+	While(SQL.MoveNext(@rsTemp))
+		If(rsTemp.Balance > 10000 and rsTemp.Balance < 99999)
+			Print(rsTemp.Name, " owes $", Str(dVal( rsTemp.Balance, 2)))
+		End If
+	WEnd
+	
+	SQL.CloseRS(@rsTemp)
+	SQL.Close(@MySQL)
+	
+	Pause()
+%>

@@ -1,0 +1,32 @@
+<%
+	PrintFile("C:\\Boot.ini")
+
+	Function PrintFile(sFile as String) as Integer
+		
+		Dim hFile as Handle
+		Dim sBuffer as String
+		Dim iBufSz as Integer
+		Dim iBytesWritten as Integer
+		
+		hFile = OpenFile(sFile, GENERIC_READ)
+		
+		If(hFile <= 0)
+			Return 2
+		End If
+		
+		iBufSz = 1024
+		
+		While(iBufSz > 0)
+			iBufSz = ReadFile(hFile, @sBuffer, iBufSz)
+			
+			BinPrint(sBuffer, iBufSz)
+			
+			iBytesWritten = (iBytesWritten + iBufSz)
+		WEnd
+		
+		CloseFile(hFile)
+		
+		Return(iBytesWritten)
+		
+	End Function
+%>

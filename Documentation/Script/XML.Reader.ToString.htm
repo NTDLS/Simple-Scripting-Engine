@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>XML :: Reader :: ToString</title>
+</head>
+
+<body Background="/Images/BGCode.gif">
+<font size="5">XML :: Reader :: ToString</font><br />
+<hr /><br /><br />
+
+<b>Description:</b>
+<blockquote>
+<!-- ##BEGIN_DESCRIPTION## -->
+Returns an XML value as a literal string value.
+<!-- ##END_DESCRIPTION## -->
+</blockquote>
+
+<b>Syntax:</b>
+<blockquote>
+<font color="0000EE">XML.Reader.ToString</font>(<font color="#000088">TagName</font> as <font color="MediumVioletRed">String</font>, <font color="#000088">DefaultValue</font> as <font color="MediumVioletRed">String</font> = NULL) as <font color="MediumVioletRed">String</font> </blockquote>
+
+<b>Parameters:</b>
+<blockquote>
+<ul><li><font color="#000088">TagName</font> as <font color="MediumVioletRed">String</font><ul><li>
+The name of the element to retrieve.
+</ul><li><font color="#000088">DefaultValue</font> as <font color="MediumVioletRed">String</font><ul><li>
+[optional] The default value to return if the tag is not found.
+</ul></ul>
+</blockquote>
+
+<b>Example:</b>
+<blockquote>
+<table  ><tr><td nowrap><div style=""><div style="display:none;" id="closed635947702715818762_1"><img src="/images/Code/PlusNoLines.gif" align=top onclick="open635947702715818762_1.style.display='block'; closed635947702715818762_1.style.display='none'; "><b><span style="color:#00008b;background-color:#c0c0c0;">&lt;%...%&gt;</span></b></div><div style="display:block;" id="open635947702715818762_1"><img src="/images/Code/minusNoTopLine.gif" align=top onclick="open635947702715818762_1.style.display='none'; closed635947702715818762_1.style.display='block'; "><span style="color:#000000;background-color:#ffff00;">&lt;%</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><b><span style="color:#0000ff">var</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">xmlText</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">as</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#c71585">String</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">=</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">"</span><span style="color:#ff0000">&lt;People&gt;&lt;Person&gt;&lt;Id&gt;101&lt;/Id&gt;&lt;FirstName&gt;Steve_101&lt;/FirstName&gt;&lt;LastName&gt;Jobs_101&lt;/LastName&gt;&lt;/Person&gt;&lt;/People&gt;</span><span style="color:#ff0000">"</span><br>
+<img src="/images/Code/I.gif"  align=top><b><span style="color:#0000ff">var</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">people</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">as</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#c71585">XML.Reader</span></b><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">people</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Parse</span><span style="color:#ff0000">(</span><span style="color:#000000">xmlText</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#000000">people</span><span style="color:#ff0000">.</span><span style="color:#0000ff">ToString</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">FirstName</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/L.gif"  align=top><span style="color:#000000;background-color:#ffff00;">%&gt;</span></div>
+<img src="/images/Code/clear.gif"  align=top><br>
+</div></td></tr></table>
+</blockquote>
+
+</body>
+</html>

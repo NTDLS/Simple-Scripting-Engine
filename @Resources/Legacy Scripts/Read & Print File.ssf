@@ -1,0 +1,17 @@
+<%
+	PrintMyBootINI()
+	
+	Function PrintMyBootINI()
+		
+		Dim sBuf as String
+		Dim hSource as Handle = OpenFile("C:\\Boot.Ini", GENERIC_READ)
+		
+		ReadFile(hSource, @sBuf, FileSize(hSource))
+		
+		CloseFile(hSource)
+		
+		Print(sBuf)
+		MsgBox(sBuf)
+		
+	End Function
+%>

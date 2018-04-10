@@ -1,0 +1,18 @@
+<%
+	Dim dBefore as Double
+	Dim dAfter as Double
+	Dim iCalculations as Integer = 10000
+
+	dBefore = GetTickCount()
+	
+	For(iCount = 0 To iCalculations)
+		
+	Next
+	
+	dAfter = GetTickCount()
+	
+	Print("Count to ", iCalculations, _
+		" completed in ", (dAfter - dBefore), " ms,", _
+		" thats ", iVal(iCalculations / ((dAfter - dBefore) / 1000)), _
+		" calculations per second.")
+%>

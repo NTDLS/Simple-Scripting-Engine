@@ -1,0 +1,1 @@
+A very special thanks to DotNetFireBall, as they provided (the now highly customized) code-editor control in use in this IDE.

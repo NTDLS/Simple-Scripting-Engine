@@ -1,0 +1,13 @@
+<%
+	TestSystemVars()
+	
+	Function TestSystemVars()
+		Print("ProcsDeep: ", Sys.ProcsDeep)
+		Print("AllocLines: ", Sys.AllocLines)
+		Print("FilesLoaded: ", Sys.FilesLoaded)
+		Print("LOC: ", Sys.LOC)
+		Print("LOCCount: ", Sys.LOCCount)
+		Print("ProcAlloc: ", Sys.ProcAlloc)
+		Print("ProcCount: ", Sys.ProcCount)
+	End Function
+%>

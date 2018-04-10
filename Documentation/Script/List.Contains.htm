@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>List :: Contains</title>
+</head>
+
+<body Background="/images/Code/BGCode.gif">
+<font size="5">List :: Contains</font><br />
+<hr /><br /><br />
+
+<b>Description:</b>
+<blockquote>
+<!-- ##BEGIN_DESCRIPTION## -->
+Determines if given a value exists in the list.
+<!-- ##END_DESCRIPTION## -->
+</blockquote>
+
+<b>Syntax:</b>
+<blockquote>
+<font color="0000EE">List.Contains</font>(<font color="#000088">Value</font> as <font color="MediumVioletRed">String</font>) as <font color="MediumVioletRed">String</font> </blockquote>
+
+<b>Parameters:</b>
+<blockquote>
+<ul><li><font color="#000088">Value</font> as <font color="MediumVioletRed">String</font><ul><li>
+The value of any type to search for in the list.
+</ul></ul>
+</blockquote>
+
+<b>Example:</b>
+<blockquote>
+<table  ><tr><td nowrap><div style=""><div style="display:none;" id="closed635920331984933460_1"><img src="/images/Code/PlusNoLines.gif" align=top onclick="open635920331984933460_1.style.display='block'; closed635920331984933460_1.style.display='none'; "><b><span style="color:#00008b;background-color:#c0c0c0;">&lt;%...%&gt;</span></b></div><div style="display:block;" id="open635920331984933460_1"><img src="/images/Code/minusNoTopLine.gif" align=top onclick="open635920331984933460_1.style.display='none'; closed635920331984933460_1.style.display='block'; "><span style="color:#000000;background-color:#ffff00;">&lt;%</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><b><span style="color:#0000ff">var</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">listItems</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">as</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#0000ff">List</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Adding</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">Items.</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Add</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Hello</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Add</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Cruel</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Add</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">World</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Contains</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">'Cruel':</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000"></span><span style="color:#ff0000">"</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#0000ff">IIF</span><span style="color:#ff0000">(</span><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#000000">Contains</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Cruel</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><span style="color:#000000">,</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">"</span><span style="color:#ff0000">Yes</span><span style="color:#ff0000">"</span><span style="color:#000000">,</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">"</span><span style="color:#ff0000">No</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Contains</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">'Plesant':</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000"></span><span style="color:#ff0000">"</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#0000ff">IIF</span><span style="color:#ff0000">(</span><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#000000">Contains</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Plesant</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><span style="color:#000000">,</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">"</span><span style="color:#ff0000">Yes</span><span style="color:#ff0000">"</span><span style="color:#000000">,</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">"</span><span style="color:#ff0000">No</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/L.gif"  align=top><span style="color:#000000;background-color:#ffff00;">%&gt;</span></div>
+<img src="/images/Code/clear.gif"  align=top><br>
+</div></td></tr></table>
+</blockquote>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+<%
+	Dim sString as String = "Hello Cruel World"
+	Dim sDuplicate as String
+	
+	For(iPos = 0 To Len(sString))
+		sDuplicate[iPos] = sString[iPos]
+	Next
+	
+	Print("sString: [", sString, "], sDuplicate: [", sDuplicate, "]")
+%>

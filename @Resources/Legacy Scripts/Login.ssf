@@ -1,0 +1,107 @@
+<HTML>
+	<HEAD>
+		<Title>Simple Login</Title>
+	</HEAD>
+	<Body>
+<%
+	'------------------------------------------------------------------------------------------------
+	
+	Dim sCorrect_Username as String = "Administrator"
+	Dim sCorrect_Password as String = "Password"
+	
+	Dim sUsername as String = Request("Username")
+	Dim sPassword as String = Request("Password")
+	
+	If(CheckLogin() = True)
+		LoginSuccess()
+	Else
+		LoginTable()
+	End If
+	
+	'------------------------------------------------------------------------------------------------
+	
+	Function CheckLogin() as Boolean
+		
+		If(Len(sUsername) > 0)
+			If(StrCmpI(sUsername, sCorrect_Username) = 0)
+				If(StrCmpI(sPassword, sCorrect_Password) == 0)
+					Return(True)
+				End If
+			End If
+			
+			Print("<Center>Login failed for user '", sUsername, "'.</Center>")
+		Else
+			sUserName = "Administrator"
+		End If
+		
+		Return(False)
+		
+	End Function
+	
+	'------------------------------------------------------------------------------------------------
+	
+	Function LoginSuccess()
+		
+		Print("Login was successfull.<BR><BR><HR>")
+		
+		LoadCGIEnv()
+		
+		Print "GATEWAY_INTERFACE: ", GATEWAY_INTERFACE, "<BR>"
+		Print "SERVER_PROTOCOL: ", SERVER_PROTOCOL, "<BR>"
+		Print "PATH_INFO: ", PATH_INFO, "<BR>"
+		Print "PATH_TRANSLATED: ", PATH_TRANSLATED, "<BR>"
+		Print "QUERY_STRING: ", QUERY_STRING, "<BR>"
+		Print "CONTNT_TYPE: ", CONTENT_TYPE, "<BR>"
+		Print "CONTENT_LENGTH: ", CONTENT_LENGTH, "<BR>"
+		Print "REQUEST_METHOD: ", REQUEST_METHOD, "<BR>"
+		Print "SERVER_SOFTWARE: ", SERVER_SOFTWARE, "<BR>"
+		Print "SERVER_NAME: ", SERVER_NAME, "<BR>"
+		Print "SERVER_ADMIN: ", SERVER_ADMIN, "<BR>"
+		Print "SERVER_PORT: ", SERVER_PORT, "<BR>"
+		Print "SCRIPT_NAME: ", SCRIPT_NAME, "<BR>"
+		Print "DOCUMENT_ROOT: ", DOCUMENT_ROOT, "<BR>"
+		Print "REMOTE_HOST: ", REMOTE_HOST, "<BR>"
+		Print "REMOTE_ADDR: ", REMOTE_ADDR, "<BR>"
+		Print "REMOTE_USER: ", REMOTE_USER, "<BR>"
+		Print "REMOTE_GROUP: ", REMOTE_GROUP, "<BR>"
+		Print "AUTH_TYPE: ", AUTH_TYPE, "<BR>"
+		Print "REMOTE_IDENT: ", REMOTE_IDENT, "<BR>"
+		Print "HTTP_ACCEPT: ", HTTP_ACCEPT, "<BR>"
+		Print "HTTP_COOKIE: ", HTTP_COOKIE, "<BR>"
+		Print "HTTP_ACCEPT_LANGUAGE: ", HTTP_ACCEPT_LANGUAGE, "<BR>"
+		Print "HTTP_REFERER: ", HTTP_REFERER, "<BR>"
+		Print "HTTP_USER_AGENT: ", HTTP_USER_AGENT, "<BR>"
+		
+	End Function
+	
+	'------------------------------------------------------------------------------------------------
+%>	
+	<%Function LoginTable()%>
+		
+		<Center>
+		<FORM METHOD="POST" ACTION="">
+		<TABLE BORDER="1" CellPadding="1" CellSpacing="0">
+		
+		<TR>
+			<TD>Username :</TD>
+			<TD><input type="input" name="Username" size="17" Value="<%?sUsername%>"></TD>
+		</TR>
+		
+		<TR>
+			<TD>Password :</TD>
+			<TD><input type="password" name="Password" size="17" Value="<%?sPassword%>"></TD>
+		</TR>
+		
+		<TR>
+			<TD>&nbsp;</TD>
+			<TD><Input TYPE="submit" VALUE="Login"></TD>
+		</TR>
+		
+		</TABLE>
+		<Form>
+		</Center>
+		
+	<%End Function%>
+	
+	</Body>
+</HTML>

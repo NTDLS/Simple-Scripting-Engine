@@ -1,0 +1,1456 @@
+<%
+
+	'--------------------------------------------------------------------------------------------
+	Function MAKELANGID(p as Integer, s as Integer)  as Integer
+		Return bwOR((s << 10), p)
+	End Function
+	
+	Function PRIMARYLANGID(lgid as Integer)  as Integer
+		Return bwAnd(lgid, 0x3ff)
+	End Function
+	
+	Function SUBLANGID(lgid as Integer)  as Integer
+		Return (lgid >> 10)
+	End Function
+	
+	Function MAKELCID(lgid as Integer, srtid as Integer)  as Integer
+		Return bwOR(srtid << 16, lgid)
+	End Function
+	
+	Function MAKESORTLCID(lgid as Integer, srtid as Integer, ver as Integer) as Integer
+		Return bwOR(MAKELCID(lgid, srtid), (ver << 20))
+	End Function
+	
+	Function LANGIDFROMLCID(lcid as Integer) as Integer
+	   Return lcid
+	End Function
+	
+	Function SORTIDFROMLCID(lcid as Integer) as Integer
+		Return bwAnd((lcid >> 16), 0xf)
+	End Function
+		
+	Function SORTVERSIONFROMLCID(lcid as Integer) as Integer
+		Return bwAnd((lcid >> 20), 0xf)
+	End Function
+
+	'--------------------------------------------------------------------------------------------
+	'  Sorting IDs.
+	@define SORT_DEFAULT                     0x0     ' sorting default
+	
+	@define SORT_JAPANESE_XJIS               0x0     ' Japanese XJIS order
+	@define SORT_JAPANESE_UNICODE            0x1     ' Japanese Unicode order
+	
+	@define SORT_CHINESE_BIG5                0x0     ' Chinese BIG5 order
+	@define SORT_CHINESE_PRCP                0x0     ' PRC Chinese Phonetic order
+	@define SORT_CHINESE_UNICODE             0x1     ' Chinese Unicode order
+	@define SORT_CHINESE_PRC                 0x2     ' PRC Chinese Stroke Count order
+	@define SORT_CHINESE_BOPOMOFO            0x3     ' Traditional Chinese Bopomofo order
+	
+	@define SORT_KOREAN_KSC                  0x0     ' Korean KSC order
+	@define SORT_KOREAN_UNICODE              0x1     ' Korean Unicode order
+	
+	@define SORT_GERMAN_PHONE_BOOK           0x1     ' German Phone Book order
+	
+	@define SORT_HUNGARIAN_DEFAULT           0x0     ' Hungarian Default order
+	@define SORT_HUNGARIAN_TECHNICAL         0x1     ' Hungarian Technical order
+	
+	@define SORT_GEORGIAN_TRADITIONAL        0x0     ' Georgian Traditional order
+	@define SORT_GEORGIAN_MODERN             0x1     ' Georgian Modern order
+
+	'--------------------------------------------------------------------------------------------
+	'  Language IDs.
+	'
+	'  The following two combinations of primary language ID and
+	'  sublanguage ID have special semantics:
+	'
+	'    Primary Language ID   Sublanguage ID      Result
+	'    -------------------   ---------------     ------------------------
+	'    LANG_NEUTRAL          SUBLANG_NEUTRAL     Language neutral
+	'    LANG_NEUTRAL          SUBLANG_DEFAULT     User default language
+	'    LANG_NEUTRAL          SUBLANG_SYS_DEFAULT System default language
+	'    LANG_INVARIANT        SUBLANG_NEUTRAL     Invariant locale
+	'
+	'--------------------------------------------------------------------------------------------
+	
+	'--------------------------------------------------------------------------------------------
+	'
+	'  Primary language IDs.
+	'
+
+	@define LANG_NEUTRAL                     0x00
+	@define LANG_INVARIANT                   0x7f
+	
+	@define LANG_AFRIKAANS                   0x36
+	@define LANG_ALBANIAN                    0x1c
+	@define LANG_ARABIC                      0x01
+	@define LANG_ARMENIAN                    0x2b
+	@define LANG_ASSAMESE                    0x4d
+	@define LANG_AZERI                       0x2c
+	@define LANG_BASQUE                      0x2d
+	@define LANG_BELARUSIAN                  0x23
+	@define LANG_BENGALI                     0x45
+	@define LANG_BULGARIAN                   0x02
+	@define LANG_CATALAN                     0x03
+	@define LANG_CHINESE                     0x04
+	@define LANG_CROATIAN                    0x1a
+	@define LANG_CZECH                       0x05
+	@define LANG_DANISH                      0x06
+	@define LANG_DIVEHI                      0x65
+	@define LANG_DUTCH                       0x13
+	@define LANG_ENGLISH                     0x09
+	@define LANG_ESTONIAN                    0x25
+	@define LANG_FAEROESE                    0x38
+	@define LANG_FARSI                       0x29
+	@define LANG_FINNISH                     0x0b
+	@define LANG_FRENCH                      0x0c
+	@define LANG_GALICIAN                    0x56
+	@define LANG_GEORGIAN                    0x37
+	@define LANG_GERMAN                      0x07
+	@define LANG_GREEK                       0x08
+	@define LANG_GUJARATI                    0x47
+	@define LANG_HEBREW                      0x0d
+	@define LANG_HINDI                       0x39
+	@define LANG_HUNGARIAN                   0x0e
+	@define LANG_ICELANDIC                   0x0f
+	@define LANG_INDONESIAN                  0x21
+	@define LANG_ITALIAN                     0x10
+	@define LANG_JAPANESE                    0x11
+	@define LANG_KANNADA                     0x4b
+	@define LANG_KASHMIRI                    0x60
+	@define LANG_KAZAK                       0x3f
+	@define LANG_KONKANI                     0x57
+	@define LANG_KOREAN                      0x12
+	@define LANG_KYRGYZ                      0x40
+	@define LANG_LATVIAN                     0x26
+	@define LANG_LITHUANIAN                  0x27
+	@define LANG_MACEDONIAN                  0x2f   ' the Former Yugoslav Republic of Macedonia
+	@define LANG_MALAY                       0x3e
+	@define LANG_MALAYALAM                   0x4c
+	@define LANG_MANIPURI                    0x58
+	@define LANG_MARATHI                     0x4e
+	@define LANG_MONGOLIAN                   0x50
+	@define LANG_NEPALI                      0x61
+	@define LANG_NORWEGIAN                   0x14
+	@define LANG_ORIYA                       0x48
+	@define LANG_POLISH                      0x15
+	@define LANG_PORTUGUESE                  0x16
+	@define LANG_PUNJABI                     0x46
+	@define LANG_ROMANIAN                    0x18
+	@define LANG_RUSSIAN                     0x19
+	@define LANG_SANSKRIT                    0x4f
+	@define LANG_SERBIAN                     0x1a
+	@define LANG_SINDHI                      0x59
+	@define LANG_SLOVAK                      0x1b
+	@define LANG_SLOVENIAN                   0x24
+	@define LANG_SPANISH                     0x0a
+	@define LANG_SWAHILI                     0x41
+	@define LANG_SWEDISH                     0x1d
+	@define LANG_SYRIAC                      0x5a
+	@define LANG_TAMIL                       0x49
+	@define LANG_TATAR                       0x44
+	@define LANG_TELUGU                      0x4a
+	@define LANG_THAI                        0x1e
+	@define LANG_TURKISH                     0x1f
+	@define LANG_UKRAINIAN                   0x22
+	@define LANG_URDU                        0x20
+	@define LANG_UZBEK                       0x43
+	@define LANG_VIETNAMESE                  0x2a
+
+	'--------------------------------------------------------------------------------------------
+	'  Sublanguage IDs.
+	'
+	'  The name immediately following SUBLANG_ dictates which primary
+	'  language ID that sublanguage ID can be combined with to form a
+	'  valid language ID.
+	'
+	'--------------------------------------------------------------------------------------------
+	
+	@define SUBLANG_NEUTRAL                  0x00    ' language neutral
+	@define SUBLANG_DEFAULT                  0x01    ' user default
+	@define SUBLANG_SYS_DEFAULT              0x02    ' system default
+	
+	@define SUBLANG_ARABIC_SAUDI_ARABIA      0x01    ' Arabic (Saudi Arabia)
+	@define SUBLANG_ARABIC_IRAQ              0x02    ' Arabic (Iraq)
+	@define SUBLANG_ARABIC_EGYPT             0x03    ' Arabic (Egypt)
+	@define SUBLANG_ARABIC_LIBYA             0x04    ' Arabic (Libya)
+	@define SUBLANG_ARABIC_ALGERIA           0x05    ' Arabic (Algeria)
+	@define SUBLANG_ARABIC_MOROCCO           0x06    ' Arabic (Morocco)
+	@define SUBLANG_ARABIC_TUNISIA           0x07    ' Arabic (Tunisia)
+	@define SUBLANG_ARABIC_OMAN              0x08    ' Arabic (Oman)
+	@define SUBLANG_ARABIC_YEMEN             0x09    ' Arabic (Yemen)
+	@define SUBLANG_ARABIC_SYRIA             0x0a    ' Arabic (Syria)
+	@define SUBLANG_ARABIC_JORDAN            0x0b    ' Arabic (Jordan)
+	@define SUBLANG_ARABIC_LEBANON           0x0c    ' Arabic (Lebanon)
+	@define SUBLANG_ARABIC_KUWAIT            0x0d    ' Arabic (Kuwait)
+	@define SUBLANG_ARABIC_UAE               0x0e    ' Arabic (U.A.E)
+	@define SUBLANG_ARABIC_BAHRAIN           0x0f    ' Arabic (Bahrain)
+	@define SUBLANG_ARABIC_QATAR             0x10    ' Arabic (Qatar)
+	@define SUBLANG_AZERI_LATIN              0x01    ' Azeri (Latin)
+	@define SUBLANG_AZERI_CYRILLIC           0x02    ' Azeri (Cyrillic)
+	@define SUBLANG_CHINESE_TRADITIONAL      0x01    ' Chinese (Taiwan)
+	@define SUBLANG_CHINESE_SIMPLIFIED       0x02    ' Chinese (PR China)
+	@define SUBLANG_CHINESE_HONGKONG         0x03    ' Chinese (Hong Kong S.A.R., P.R.C.)
+	@define SUBLANG_CHINESE_SINGAPORE        0x04    ' Chinese (Singapore)
+	@define SUBLANG_CHINESE_MACAU            0x05    ' Chinese (Macau S.A.R.)
+	@define SUBLANG_DUTCH                    0x01    ' Dutch
+	@define SUBLANG_DUTCH_BELGIAN            0x02    ' Dutch (Belgian)
+	@define SUBLANG_ENGLISH_US               0x01    ' English (USA)
+	@define SUBLANG_ENGLISH_UK               0x02    ' English (UK)
+	@define SUBLANG_ENGLISH_AUS              0x03    ' English (Australian)
+	@define SUBLANG_ENGLISH_CAN              0x04    ' English (Canadian)
+	@define SUBLANG_ENGLISH_NZ               0x05    ' English (New Zealand)
+	@define SUBLANG_ENGLISH_EIRE             0x06    ' English (Irish)
+	@define SUBLANG_ENGLISH_SOUTH_AFRICA     0x07    ' English (South Africa)
+	@define SUBLANG_ENGLISH_JAMAICA          0x08    ' English (Jamaica)
+	@define SUBLANG_ENGLISH_CARIBBEAN        0x09    ' English (Caribbean)
+	@define SUBLANG_ENGLISH_BELIZE           0x0a    ' English (Belize)
+	@define SUBLANG_ENGLISH_TRINIDAD         0x0b    ' English (Trinidad)
+	@define SUBLANG_ENGLISH_ZIMBABWE         0x0c    ' English (Zimbabwe)
+	@define SUBLANG_ENGLISH_PHILIPPINES      0x0d    ' English (Philippines)
+	@define SUBLANG_FRENCH                   0x01    ' French
+	@define SUBLANG_FRENCH_BELGIAN           0x02    ' French (Belgian)
+	@define SUBLANG_FRENCH_CANADIAN          0x03    ' French (Canadian)
+	@define SUBLANG_FRENCH_SWISS             0x04    ' French (Swiss)
+	@define SUBLANG_FRENCH_LUXEMBOURG        0x05    ' French (Luxembourg)
+	@define SUBLANG_FRENCH_MONACO            0x06    ' French (Monaco)
+	@define SUBLANG_GERMAN                   0x01    ' German
+	@define SUBLANG_GERMAN_SWISS             0x02    ' German (Swiss)
+	@define SUBLANG_GERMAN_AUSTRIAN          0x03    ' German (Austrian)
+	@define SUBLANG_GERMAN_LUXEMBOURG        0x04    ' German (Luxembourg)
+	@define SUBLANG_GERMAN_LIECHTENSTEIN     0x05    ' German (Liechtenstein)
+	@define SUBLANG_ITALIAN                  0x01    ' Italian
+	@define SUBLANG_ITALIAN_SWISS            0x02    ' Italian (Swiss)
+	@define SUBLANG_KASHMIRI_SASIA           0x02    ' Kashmiri (South Asia)
+	@define SUBLANG_KASHMIRI_INDIA           0x02    ' For app compatibility only
+	@define SUBLANG_KOREAN                   0x01    ' Korean (Extended Wansung)
+	@define SUBLANG_LITHUANIAN               0x01    ' Lithuanian
+	@define SUBLANG_MALAY_MALAYSIA           0x01    ' Malay (Malaysia)
+	@define SUBLANG_MALAY_BRUNEI_DARUSSALAM  0x02    ' Malay (Brunei Darussalam)
+	@define SUBLANG_NEPALI_INDIA             0x02    ' Nepali (India)
+	@define SUBLANG_NORWEGIAN_BOKMAL         0x01    ' Norwegian (Bokmal)
+	@define SUBLANG_NORWEGIAN_NYNORSK        0x02    ' Norwegian (Nynorsk)
+	@define SUBLANG_PORTUGUESE               0x02    ' Portuguese
+	@define SUBLANG_PORTUGUESE_BRAZILIAN     0x01    ' Portuguese (Brazilian)
+	@define SUBLANG_SERBIAN_LATIN            0x02    ' Serbian (Latin)
+	@define SUBLANG_SERBIAN_CYRILLIC         0x03    ' Serbian (Cyrillic)
+	@define SUBLANG_SPANISH                  0x01    ' Spanish (Castilian)
+	@define SUBLANG_SPANISH_MEXICAN          0x02    ' Spanish (Mexican)
+	@define SUBLANG_SPANISH_MODERN           0x03    ' Spanish (Spain)
+	@define SUBLANG_SPANISH_GUATEMALA        0x04    ' Spanish (Guatemala)
+	@define SUBLANG_SPANISH_COSTA_RICA       0x05    ' Spanish (Costa Rica)
+	@define SUBLANG_SPANISH_PANAMA           0x06    ' Spanish (Panama)
+	@define SUBLANG_SPANISH_DOMINICAN_REPUBLIC 0x07  ' Spanish (Dominican Republic)
+	@define SUBLANG_SPANISH_VENEZUELA        0x08    ' Spanish (Venezuela)
+	@define SUBLANG_SPANISH_COLOMBIA         0x09    ' Spanish (Colombia)
+	@define SUBLANG_SPANISH_PERU             0x0a    ' Spanish (Peru)
+	@define SUBLANG_SPANISH_ARGENTINA        0x0b    ' Spanish (Argentina)
+	@define SUBLANG_SPANISH_ECUADOR          0x0c    ' Spanish (Ecuador)
+	@define SUBLANG_SPANISH_CHILE            0x0d    ' Spanish (Chile)
+	@define SUBLANG_SPANISH_URUGUAY          0x0e    ' Spanish (Uruguay)
+	@define SUBLANG_SPANISH_PARAGUAY         0x0f    ' Spanish (Paraguay)
+	@define SUBLANG_SPANISH_BOLIVIA          0x10    ' Spanish (Bolivia)
+	@define SUBLANG_SPANISH_EL_SALVADOR      0x11    ' Spanish (El Salvador)
+	@define SUBLANG_SPANISH_HONDURAS         0x12    ' Spanish (Honduras)
+	@define SUBLANG_SPANISH_NICARAGUA        0x13    ' Spanish (Nicaragua)
+	@define SUBLANG_SPANISH_PUERTO_RICO      0x14    ' Spanish (Puerto Rico)
+	@define SUBLANG_SWEDISH                  0x01    ' Swedish
+	@define SUBLANG_SWEDISH_FINLAND          0x02    ' Swedish (Finland)
+	@define SUBLANG_URDU_PAKISTAN            0x01    ' Urdu (Pakistan)
+	@define SUBLANG_URDU_INDIA               0x02    ' Urdu (India)
+	@define SUBLANG_UZBEK_LATIN              0x01    ' Uzbek (Latin)
+	@define SUBLANG_UZBEK_CYRILLIC           0x02    ' Uzbek (Cyrillic)
+
+	'--------------------------------------------------------------------------------------------
+	'Definitions for use with the built-in system function MsgBox().
+	@Define IDOK						0x1
+	@Define IDCANCEL					0x2
+	@Define IDABORT						0x3
+	@Define IDRETRY						0x4
+	@Define IDIGNORE					0x5
+	@Define IDYES						0x6
+	@Define IDNO						0x7
+	@Define IDCLOSE						0x8
+	@Define IDHELP						0x9
+
+	@Define MB_OK                       0x00000000
+	@Define MB_OKCANCEL                 0x00000001
+	@Define MB_ABORTRETRYIGNORE         0x00000002
+	@Define MB_YESNOCANCEL              0x00000003
+	@Define MB_YESNO                    0x00000004
+	@Define MB_RETRYCANCEL              0x00000005
+	
+	@Define MB_ICONHAND                 0x00000010
+	@Define MB_ICONQUESTION             0x00000020
+	@Define MB_ICONEXCLAMATION          0x00000030
+	@Define MB_ICONASTERISK             0x00000040
+	
+	@Define MB_USERICON                 0x00000080
+	@Define MB_ICONWARNING              MB_ICONEXCLAMATION
+	@Define MB_ICONERROR                MB_ICONHAND
+	@Define MB_ICONINFORMATION          MB_ICONASTERISK
+	@Define MB_ICONSTOP                 MB_ICONHAND
+	
+	@Define MB_DEFBUTTON1               0x00000000
+	@Define MB_DEFBUTTON2               0x00000100
+	@Define MB_DEFBUTTON3               0x00000200
+	@Define MB_DEFBUTTON4               0x00000300
+	
+	@Define MB_APPLMODAL                0x00000000
+	@Define MB_SYSTEMMODAL              0x00001000
+	@Define MB_TASKMODAL                0x00002000
+	@Define MB_HELP                     0x00004000 
+	
+	@Define MB_NOFOCUS                  0x00008000
+	@Define MB_SETFOREGROUND            0x00010000
+	@Define MB_DEFAULT_DESKTOP_ONLY     0x00020000
+	
+	@Define MB_TOPMOST                  0x00040000
+	@Define MB_RIGHT                    0x00080000
+	@Define MB_RTLREADING               0x00100000
+	
+	@Define MB_TYPEMASK                 0x0000000F
+	@Define MB_ICONMASK                 0x000000F0
+	@Define MB_DEFMASK                  0x00000F00
+	@Define MB_MODEMASK                 0x00003000
+	@Define MB_MISCMASK                 0x0000C000
+
+	'--------------------------------------------------------------------------------------------
+	'GetFileAttributes() & CreateFile() (Standard file attributes)
+	@Define FILE_ATTRIBUTE_READONLY             0x00000001
+	@Define FILE_ATTRIBUTE_HIDDEN               0x00000002  
+	@Define FILE_ATTRIBUTE_SYSTEM               0x00000004  
+	@Define FILE_ATTRIBUTE_DIRECTORY            0x00000010  
+	@Define FILE_ATTRIBUTE_ARCHIVE              0x00000020  
+	@Define FILE_ATTRIBUTE_ENCRYPTED            0x00000040  
+	@Define FILE_ATTRIBUTE_NORMAL               0x00000080  
+	@Define FILE_ATTRIBUTE_TEMPORARY            0x00000100  
+	@Define FILE_ATTRIBUTE_SPARSE_FILE          0x00000200  
+	@Define FILE_ATTRIBUTE_REPARSE_POINT        0x00000400  
+	@Define FILE_ATTRIBUTE_COMPRESSED           0x00000800  
+	@Define FILE_ATTRIBUTE_OFFLINE              0x00001000  
+	@Define FILE_ATTRIBUTE_NOT_CONTENT_INDEXED  0x00002000  
+	
+	
+	'--------------------------------------------------------------------------------------------
+	'Default System and User IDs for language and locale.
+	Dim LANG_SYSTEM_DEFAULT as Integer		= MAKELANGID(LANG_NEUTRAL, SUBLANG_SYS_DEFAULT)
+	Dim LANG_USER_DEFAULT as Integer		= MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT)
+	Dim LOCALE_SYSTEM_DEFAULT as Integer	= MAKELCID(LANG_SYSTEM_DEFAULT, SORT_DEFAULT)
+	Dim LOCALE_USER_DEFAULT as Integer		= MAKELCID(LANG_USER_DEFAULT, SORT_DEFAULT)
+	Dim LOCALE_NEUTRAL as Integer			= MAKELCID(MAKELANGID(LANG_NEUTRAL, SUBLANG_NEUTRAL), SORT_DEFAULT)
+	Dim LOCALE_INVARIANT as Integer			= MAKELCID(MAKELANGID(LANG_INVARIANT, SUBLANG_NEUTRAL), SORT_DEFAULT)
+
+	'--------------------------------------------------------------------------------------------
+	'GetDateFomet() & GetTimeFormet()
+	@DEFINE TIME_NOMINUTESORSECONDS		0x1
+	@DEFINE TIME_NOSECONDS				0x2
+	@DEFINE TIME_NOTIMEMARKER			0x4
+	@DEFINE TIME_FORCE24HOURFORMAT		0x8
+
+	'--------------------------------------------------------------------------------------------
+	'GetFileType()
+	@Define FILE_TYPE_UNKNOWN   		0x0000
+	@Define FILE_TYPE_DISK      		0x0001
+	@Define FILE_TYPE_CHAR      		0x0002
+	@Define FILE_TYPE_PIPE      		0x0003
+	@Define FILE_TYPE_REMOTE    		0x8000
+	
+	'--------------------------------------------------------------------------------------------
+	'CreateFile() dwShareMode Parameter
+	@Define FILE_SHARE_READ             0x00000001  
+	@Define FILE_SHARE_WRITE            0x00000002  
+	@Define FILE_SHARE_DELETE           0x00000004  
+
+	'--------------------------------------------------------------------------------------------
+	'ExitWindows() & ExitWindowsEx()
+	@Define EWX_LOGOFF           		0
+	@Define EWX_SHUTDOWN         		0x00000001
+	@Define EWX_REBOOT           		0x00000002
+	@Define EWX_FORCE            		0x00000004
+	@Define EWX_POWEROFF         		0x00000008
+	@Define EWX_FORCEIFHUNG      		0x00000010
+		
+%><%
+	Declare Type Rect
+		lLeft	as Integer
+		lTop	as Integer
+		lRight	as Integer
+		lBottom	as Integer
+	End Type
+	
+	DECLARE TYPE SystemTime
+		Year			as Short
+		Month			as Short
+		DayOfWeek		as Short
+		Day				as Short
+		Hour			as Short
+		Minute			as Short
+		Second			as Short
+		Milliseconds	as Short
+	End Type
+%><%
+	Declare AbortDoc, "gdi32", AbortDoc (hdc as Integer) as Integer
+	Declare AbortPath, "gdi32", AbortPath (hdc as Integer) as Integer
+	Declare AbortPrinter, "winspool.drv", AbortPrinter (hPrinter as Integer) as Integer
+	Declare AbortSystemShutdown, "advapi32.dll", AbortSystemShutdownA (lpMachineName as String) as Integer
+	Declare ActivateKeyboardLayout, "user32", ActivateKeyboardLayout (HKL as Integer, flags as Integer) as Integer
+	Declare AddAtom, "kernel32", AddAtomA (lpString as String) as Integer
+	Declare AddFontResource, "gdi32", AddFontResourceA (lpFileName as String) as Integer
+	Declare AddPort, "winspool.drv", AddPortA (pName as String, hwnd as Integer, pMonitorName as String) as Integer
+	Declare AddPrinterConnection, "winspool.drv", AddPrinterConnectionA (pName as String) as Integer
+	Declare AddPrintProcessor, "winspool.drv", AddPrintProcessorA (pName as String, pEnvironment as String, pPathName as String, pPrintProcessorName as String) as Integer
+	Declare AllocConsole, "kernel32", AllocConsole () as Integer
+	Declare AngleArc, "gdi32", AngleArc (hdc as Integer, x as Integer, y as Integer, dwRadius as Integer, eStartAngle as Double, eSweepAngle as Double) as Integer
+	Declare AnyPopup, "user32", AnyPopup () as Integer
+	Declare AppendMenu, "user32", AppendMenuA (hMenu as Integer, wFlags as Integer, wIDNewItem as Integer, lpNewItem as String) as Integer
+	Declare Arc, "gdi32", Arc (hdc as Integer, X1 as Integer, Y1 as Integer, X2 as Integer, Y2 as Integer, X3 as Integer, Y3 as Integer, X4 as Integer, Y4 as Integer) as Integer
+	Declare ArcTo, "gdi32", ArcTo (hdc as Integer, X1 as Integer, Y1 as Integer, X2 as Integer, Y2 as Integer, X3 as Integer, Y3 as Integer, X4 as Integer, Y4 as Integer) as Integer
+	Declare AreAllAccessesGranted, "advapi32.dll", AreAllAccessesGranted (GrantedAccess as Integer, DesiredAccess as Integer) as Integer
+	Declare AreAnyAccessesGranted, "advapi32.dll", AreAnyAccessesGranted (GrantedAccess as Integer, DesiredAccess as Integer) as Integer
+	Declare ArrangeIconicWindows, "user32", ArrangeIconicWindows (hwnd as Integer) as Integer
+	Declare AttachThreadInput, "user32", AttachThreadInput (idAttach as Integer, idAttachTo as Integer, fAttach as Integer) as Integer
+	Declare auxGetNumDevs, "winmm.dll", auxGetNumDevs () as Integer
+	Declare auxGetVolume, "winmm.dll", auxGetVolume (uDeviceID as Integer, lpdwVolume as Integer) as Integer
+	Declare auxOutMessage, "winmm.dll", auxOutMessage (uDeviceID as Integer, msg as Integer, dw1 as Integer, dw2 as Integer) as Integer
+	Declare auxSetVolume, "winmm.dll", auxSetVolume (uDeviceID as Integer, dwVolume as Integer) as Integer
+	Declare BackupEventLog, "advapi32.dll", BackupEventLogA (hEventLog as Integer, lpBackupFileName as String) as Integer
+	Declare BackupSeek, "kernel32", BackupSeek (hFile as Integer, dwLowBytesToSeek as Integer, dwHighBytesToSeek as Integer, lpdwLowByteSeeked as Integer, lpdwHighByteSeeked as Integer, lpContext as Integer) as Integer
+	Declare Beep, "kernel32", Beep (dwFreq as Integer, dwDuration as Integer) as Integer
+	Declare BeginDeferWindowPos, "user32", BeginDeferWindowPos (nNumWindows as Integer) as Integer
+	Declare BeginPath, "gdi32", BeginPath (hdc as Integer) as Integer
+	Declare BeginUpdateResource, "kernel32", BeginUpdateResourceA (pFileName as String, bDeleteExistingResources as Integer) as Integer
+	Declare BitBlt, "gdi32", BitBlt (hDestDC as Integer, x as Integer, y as Integer, nWidth as Integer, nHeight as Integer, hSrcDC as Integer, xSrc as Integer, ySrc as Integer, dwRop as Integer) as Integer
+	Declare BringWindowToTop, "user32", BringWindowToTop (hwnd as Integer) as Integer
+	Declare BroadcastSystemMessage, "user32", BroadcastSystemMessage (dw as Integer, pdw as Integer, un as Integer, wParam as Integer, lParam as Integer) as Integer
+	Declare CallNamedPipe, "kernel32", CallNamedPipeA (lpNamedPipeName as String, lpInBuffer as Any, nInBufferSize as Integer, lpOutBuffer as Any, nOutBufferSize as Integer, lpBytesRead as Integer, nTimeOut as Integer) as Integer
+	Declare CallNextHookEx, "user32", CallNextHookEx (hHook as Integer, ncode as Integer, wParam as Integer, lParam as Any) as Integer
+	Declare CallWindowProc, "user32", CallWindowProcA (lpPrevWndFunc as Integer, hWnd as Integer, Msg as Integer, wParam as Integer, lParam as Integer) as Integer
+	Declare CancelDC, "gdi32", CancelDC (hdc as Integer) as Integer
+	Declare ChangeClipboardChain, "user32", ChangeClipboardChain (hwnd as Integer, hWndNext as Integer) as Integer
+	Declare ChangeMenu, "user32", ChangeMenuA (hMenu as Integer, cmd as Integer, lpszNewItem as String, cmdInsert as Integer, flags as Integer) as Boolean
+	Declare ChangeServiceConfig, "advapi32.dll", ChangeServiceConfigA (hService as Integer, dwServiceType as Integer, dwStartType as Integer, dwErrorControl as Integer, lpBinaryPathName as String, lpLoadOrderGroup as String, lpdwTagId as Integer, lpDependencies as String, lpServiceStartName as String, lpPassword as String, lpDisplayName as String) as Integer
+	Declare CharLower, "user32", CharLowerA (lpsz as String) as String
+	Declare CharLowerBuff, "user32", CharLowerBuffA (lpsz as String, cchLength as Integer) as Integer
+	Declare CharNext, "user32", CharNextA (lpsz as String) as String
+	Declare CharPrev, "user32", CharPrevA (lpszStart as String, lpszCurrent as String) as String
+	Declare CharToOem, "user32", CharToOemA (lpszSrc as String, lpszDst as String) as Integer
+	Declare CharToOemBuff, "user32", CharToOemBuffA (lpszSrc as String, lpszDst as String, cchDstLength as Integer) as Integer
+	Declare CharUpper, "user32", CharUpperA (lpsz as String) as String
+	Declare CharUpperBuff, "user32", CharUpperBuffA (lpsz as String, cchLength as Integer) as Integer
+	Declare CheckColorsInGamut, "gdi32", CheckColorsInGamut (hdc as Integer, lpv as Any, lpv2 as Any, dw as Integer) as Integer
+	Declare CheckDlgButton, "user32", CheckDLGButtonA (hDlg as Integer, nIDButton as Integer, wCheck as Integer) as Integer
+	Declare CheckMenuItem, "user32", CheckMenuItem (hMenu as Integer, wIDCheckItem as Integer, wCheck as Integer) as Integer
+	Declare CheckMenuRadioItem, "user32", CheckMenuRadioItem (hMenu as Integer, un1 as Integer, un2 as Integer, un3 as Integer, un4 as Integer) as Boolean
+	Declare CheckRadioButton, "user32", CheckRadioButtonA (hDlg as Integer, nIDFirstButton as Integer, nIDLastButton as Integer, nIDCheckButton as Integer) as Integer
+	Declare ChildWindowFromPoint, "user32", ChildWindowFromPoint (hWnd as Integer, xPoint as Integer, yPoint as Integer) as Integer
+	Declare Chord, "gdi32", Chord (hdc as Integer, X1 as Integer, Y1 as Integer, X2 as Integer, Y2 as Integer, X3 as Integer, Y3 as Integer, X4 as Integer, Y4 as Integer) as Integer
+	Declare ClearCommBreak, "kernel32", ClearCommBreak (nCid as Integer) as Integer
+	Declare ClearEventLog, "advapi32.dll", ClearEventLogA (hEventLog as Integer, lpBackupFileName as String) as Integer
+	Declare ClipCursor, "user32", ClipCursor (lpRect as Any) as Integer
+	Declare CloseClipboard, "user32", CloseClipboard () as Integer
+	Declare CloseDesktop, "user32", CloseDesktop (hDesktop as Integer) as Boolean
+	Declare CloseDriver, "winmm.dll", CloseDriver (hDriver as Integer, lParam1 as Integer, lParam2 as Integer) as Integer
+	Declare CloseEnhMetaFile, "gdi32", CloseEnhMetaFile (hdc as Integer) as Integer
+	Declare CloseEventLog, "advapi32.dll", CloseEventLog (hEventLog as Integer) as Integer
+	Declare CloseFigure, "gdi32", CloseFigure (hdc as Integer) as Integer
+	Declare CloseHandle, "Kernel32.Dll", CloseHandleA(hObject as Handle) as Boolean
+	Declare CloseMetaFile, "gdi32", CloseMetaFile (hMF as Integer) as Integer
+	Declare ClosePrinter, "winspool.drv", ClosePrinter (hPrinter as Integer) as Integer
+	Declare CloseServiceHandle, "advapi32.dll", CloseServiceHandle (hSCObject as Integer) as Integer
+	Declare CloseWindow, "user32", CloseWindow (hwnd as Integer) as Integer
+	Declare CloseWindowStation, "user32", CloseWindowStation (hWinSta as Integer) as Boolean
+	Declare ColorMatchToTarget, "gdi32", ColorMatchToTarget (hdc as Integer, hdc2 as Integer, dw as Integer) as Integer
+	Declare CombineRgn, "gdi32", CombineRgn (hDestRgn as Integer, hSrcRgn1 as Integer, hSrcRgn2 as Integer, nCombineMode as Integer) as Integer
+	Declare CommandLineToArgv, "shell32", CommandLineToArgvW (lpCmdLine as String, pNumArgs as Integer) as Integer
+	Declare CommDlgExtendedError, "comdlg32.dll", CommDlgExtendedError () as Integer
+	Declare CompareString, "kernel32", CompareStringA (Locale as Integer, dwCmpFlags as Integer, lpString1 as String, cchCount1 as Integer, lpString2 as String, cchCount2 as Integer) as Integer
+	Declare ConfigurePort, "winspool.drv", ConfigurePortA (pName as String, hwnd as Integer, pPortName as String) as Integer
+	Declare ConnectToPrinterDlg, "winspool.drv", ConnectToPrinterDlg (hwnd as Integer, flags as Integer) as Integer
+	Declare ContinueDebugEvent, "kernel32", ContinueDebugEvent (dwProcessId as Integer, dwThreadId as Integer, dwContinueStatus as Integer) as Integer
+	Declare ConvertDefaultLocale, "KERNEL32", ConvertDefaultLocale (Locale as Integer) as Integer
+	Declare CopyCursor, "user32", CopyCursor (hcur as Integer) as Integer
+	Declare CopyEnhMetaFile, "gdi32", CopyEnhMetaFileA (hemfSrc as Integer, lpszFile as String) as Integer
+	Declare CopyFile, "kernel32", CopyFileA (lpExistingFileName as String, lpNewFileName as String, bFailIfExists as Integer) as Integer
+	Declare CopyIcon, "user32", CopyIcon (hIcon as Integer) as Integer
+	Declare CopyImage, "user32", CopyImage (Handle as Integer, un1 as Integer, n1 as Integer, n2 as Integer, un2 as Integer) as Integer
+	Declare CopyLZFile, "lz32", CopyLZFile (n1 as Integer, n2 as Integer) as Integer
+	Declare CopyMetaFile, "gdi32", CopyMetaFileA (hMF as Integer, lpFileName as String) as Integer
+	Declare CopySid, "advapi32.dll", CopySid (nDestinationSidLength as Integer, pDestinationSid as Any, pSourceSid as Any) as Integer
+	Declare CountClipboardFormats, "user32", CountClipboardFormats () as Integer
+	Declare CreateBitmap, "gdi32", CreateBitmap (nWidth as Integer, nHeight as Integer, nPlanes as Integer, nBitCount as Integer, lpBits as Any) as Integer
+	Declare CreateCaret, "user32", CreateCaret (hwnd as Integer, hBitmap as Integer, nWidth as Integer, nHeight as Integer) as Integer
+	Declare CreateCompatibleBitmap, "gdi32", CreateCompatibleBitmap (hdc as Integer, nWidth as Integer, nHeight as Integer) as Integer
+	Declare CreateCompatibleDC, "gdi32", CreateCompatibleDC (hdc as Integer) as Integer
+	Declare CreateCursor, "user32", CreateCursor (hInstance as Integer, nXhotspot as Integer, nYhotspot as Integer, nWidth as Integer, nHeight as Integer, lpANDbitPlane as Any, lpXORbitPlane as Any) as Integer
+	Declare CreateDialogParam, "user32", CreateDialogParamA (hInstance as Integer, lpName as String, hWndParent as Integer, lpDialogFunc as Integer, lParamInit as Integer) as Integer
+	Declare CreateDIBPatternBrush, "gdi32", CreateDIBPatternBrush (hPackedDIB as Integer, wUsage as Integer) as Integer
+	Declare CreateDIBPatternBrushPt, "gdi32", CreateDIBPatternBrushPt (lpPackedDIB as Any, iUsage as Integer) as Integer
+	Declare CreateDirectory, "Kernel32.Dll", CreateDirectoryA(sPathName as String, sSecurityAttributes as Any) as Boolean
+	Declare CreateDiscardableBitmap, "gdi32", CreateDiscardableBitmap (hdc as Integer, nWidth as Integer, nHeight as Integer) as Integer
+	Declare CreateEllipticRgn, "gdi32", CreateEllipticRgn (X1 as Integer, Y1 as Integer, X2 as Integer, Y2 as Integer) as Integer
+	Declare CreateFile, "Kernel32.Dll", CreateFileA(lpFileName as String, dwDesiredAccess as Integer, dwShareMode as Integer, lpSecurityAttributes as Any, CreationDisposition as Integer, FlagsAndAttributes as Integer, hTemplateFile as Handle) as Handle
+	Declare CreateFont, "gdi32", CreateFontA (H as Integer, W as Integer, E as Integer, O as Integer, W as Integer, I as Integer, u as Integer, S as Integer, C as Integer, OP as Integer, CP as Integer, Q as Integer, PAF as Integer, F as String) as Integer
+	Declare CreateHalftonePalette, "gdi32", CreateHalftonePalette (hdc as Integer) as Integer
+	Declare CreateHatchBrush, "gdi32", CreateHatchBrush (nIndex as Integer, crColor as Integer) as Integer
+	Declare CreateIoCompletionPort, "kernel32", CreateIoCompletionPort (FileHandle as Integer, ExistingCompletionPort as Integer, CompletionKey as Integer, NumberOfConcurrentThreads as Integer) as Integer
+	Declare CreateMDIWindow, "user32", CreateMDIWindowA (lpClassName as String, lpWindowName as String, dwStyle as Integer, x as Integer, y as Integer, nWidth as Integer, nHeight as Integer, hWndParent as Integer, hInstance as Integer, lParam as Integer) as Integer
+	Declare CreateMenu, "user32", CreateMenu () as Integer
+	Declare CreateMetaFile, "gdi32", CreateMetaFileA (lpString as String) as Integer
+	Declare CreatePatternBrush, "gdi32", CreatePatternBrush (hBitmap as Integer) as Integer
+	Declare CreatePen, "gdi32", CreatePen (nPenStyle as Integer, nWidth as Integer, crColor as Integer) as Integer
+	Declare CreatePopupMenu, "user32", CreatePopupMenu () as Integer
+	Declare CreateRectRgn, "gdi32", CreateRectRgn (X1 as Integer, Y1 as Integer, X2 as Integer, Y2 as Integer) as Integer
+	Declare CreateRoundRectRgn, "gdi32", CreateRoundRectRgn (X1 as Integer, Y1 as Integer, X2 as Integer, Y2 as Integer, X3 as Integer, Y3 as Integer) as Integer
+	Declare CreateScalableFontResource, "gdi32", CreateScalableFontResourceA (fHidden as Integer, lpszResourceFile as String, lpszFontFile as String, lpszCurrentPath as String) as Integer
+	Declare CreateService, "advapi32.dll", CreateServiceA (hSCManager as Integer, lpServiceName as String, lpDisplayName as String, dwDesiredAccess as Integer, dwServiceType as Integer, dwStartType as Integer, dwErrorControl as Integer, lpBinaryPathName as String, lpLoadOrderGroup as String, lpdwTagId as Integer, lpDependencies as String, lp as String, lpPassword as String) as Integer
+	Declare CreateSolidBrush, "gdi32", CreateSolidBrush (crColor as Integer) as Integer
+	Declare CreateTapePartition, "kernel32", CreateTapePartition (hDevice as Integer, dwPartitionMethod as Integer, dwCount as Integer, dwSize as Integer) as Integer
+	Declare CreateWindow, "user32", CreateWindowA (lpClassName as String, lpWindowName as String, dwStyle as Integer, x as Integer, y as Integer, nWidth as Integer, nHeight as Integer, hWndParent as Integer, hMenu as Integer, hInstance as Integer, lpParam as Any) as Integer
+	Declare CreateWindowEx, "user32", CreateWindowEx (dwExStyle as Integer, lpClassName as String, lpWindowName as String, dwStyle as Integer, x as Integer, y as Integer, nWidth as Integer, nHeight as Integer, hWndParent as Integer, hMenu as Integer, hInstance as Integer, lpParam as Any) as Integer
+	Declare DdeAbandonTransaction, "user32", DdeAbandonTransaction (idInst as Integer, hConv as Integer, idTransaction as Integer) as Integer
+	Declare DdeAccessData, "user32", DdeAccessDataA (hData as Integer, pcbDataSize as Integer) as Integer
+	Declare DdeCmpStringHandles, "user32", DdeCmpStringHandles (hsz1 as Integer, hsz2 as Integer) as Integer
+	Declare DdeCreateStringHandle, "user32", DdeCreateStringHandleA (idInst as Integer, psz as String, iCodePage as Integer) as Integer
+	Declare DdeDisconnect, "user32", DdeDisconnect (hConv as Integer) as Integer
+	Declare DdeDisconnectList, "user32", DdeDisconnectList (hConvList as Integer) as Integer
+	Declare DdeEnableCallback, "user32", DdeEnableCallback (idInst as Integer, hConv as Integer, wCmd as Integer) as Integer
+	Declare DdeFreeDataHandle, "user32", DdeFreeDataHandle (hData as Integer) as Integer
+	Declare DdeFreeStringHandle, "user32", DdeFreeStringHandle (idInst as Integer, hsz as Integer) as Integer
+	Declare DdeGetLastError, "user32", DdeGetLastError (idInst as Integer) as Integer
+	Declare DdeImpersonateClient, "user32", DdeImpersonateClient (hConv as Integer) as Integer
+	Declare DdeInitialize, "user32", DdeInitializeA (pidInst as Integer, pfnCallback as Integer, afCmd as Integer, ulRes as Integer) as Integer
+	Declare DdeKeepStringHandle, "user32", DdeKeepStringHandle (idInst as Integer, hsz as Integer) as Integer
+	Declare DdeNameService, "user32", DdeNameService (idInst as Integer, hsz1 as Integer, hsz2 as Integer, afCmd as Integer) as Integer
+	Declare DdePostAdvise, "user32", DdePostAdvise (idInst as Integer, hszTopic as Integer, hszItem as Integer) as Integer
+	Declare DdeQueryNextServer, "user32", DdeQueryNextServer (hConvList as Integer, hConvPrev as Integer) as Integer
+	Declare DdeQueryString, "user32", DdeQueryStringA (idInst as Integer, hsz as Integer, psz as String, cchMax as Integer, iCodePage as Integer) as Integer
+	Declare DdeReconnect, "user32", DdeReconnect (hConv as Integer) as Integer
+	Declare DdeSetUserHandle, "user32", DdeSetUserHandle (hConv as Integer, id as Integer, hUser as Integer) as Integer
+	Declare DdeUnaccessData, "user32", DdeUnaccessDataA (hData as Integer) as Integer
+	Declare DdeUninitialize, "user32", DdeUninitialize (idInst as Integer) as Integer
+	Declare DebugActiveProcess, "kernel32", DebugActiveProcess (dwProcessId as Integer) as Integer
+	Declare DebugBreak, "kernel32", DebugBreak ()
+	Declare DefDlgProc, "user32", DefDlgProcA (hDlg as Integer, wMsg as Integer, wParam as Integer, lParam as Integer) as Integer
+	Declare DefDriverProc, "winmm.dll", DefDriverProc (dwDriverIdentifier as Integer, hdrvr as Integer, uMsg as Integer, lParam1 as Integer, lParam2 as Integer) as Integer
+	Declare DeferWindowPos, "user32", DeferWindowPos (hWinPosInfo as Integer, hwnd as Integer, hWndInsertAfter as Integer, x as Integer, y as Integer, cx as Integer, cy as Integer, wFlags as Integer) as Integer
+	Declare DefFrameProc, "user32", DefFrameProcA (hwnd as Integer, hWndMDIClient as Integer, wMsg as Integer, wParam as Integer, lParam as Integer) as Integer
+	Declare DefineDosDevice, "kernel32", DefineDosDeviceA (dwFlags as Integer, lpDeviceName as String, lpTargetPath as String) as Integer
+	Declare DefMDIChildProc, "user32", DefMDIChildProcA (hwnd as Integer, wMsg as Integer, wParam as Integer, lParam as Integer) as Integer
+	Declare DefWindowProc, "user32", DefWindowProcA (hwnd as Integer, wMsg as Integer, wParam as Integer, lParam as Integer) as Integer
+	Declare DeleteAtom, "kernel32", DeleteAtom (nAtom as Integer) as Integer
+	Declare DeleteColorSpace, "gdi32", DeleteColorSpace (hcolorspace as Integer) as Integer
+	Declare DeleteDC, "gdi32", DeleteDC (hdc as Integer) as Integer
+	Declare DeleteEnhMetaFile, "gdi32", DeleteEnhMetaFile (hemf as Integer) as Integer
+	Declare DeleteFile, "Kernel32.Dll", DeleteFileA(sFileName as String) as Boolean
+	Declare DeleteForm, "winspool.drv", DeleteFormA (hPrinter as Integer, pFormName as String) as Integer
+	Declare DeleteMenu, "user32", DeleteMenu (hMenu as Integer, nPosition as Integer, wFlags as Integer) as Integer
+	Declare DeleteMetaFile, "gdi32", DeleteMetaFile (hMF as Integer) as Integer
+	Declare DeleteMonitor, "winspool.drv", DeleteMonitorA (pName as String, pEnvironment as String, pMonitorName as String) as Integer
+	Declare DeleteObject, "gdi32", DeleteObject (hObject as Integer) as Integer
+	Declare DeletePort, "winspool.drv", DeletePortA (pName as String, hwnd as Integer, pPortName as String) as Integer
+	Declare DeletePrinter, "winspool", DeletePrinter (hPrinter as Integer) as Boolean
+	Declare DeletePrinterConnection, "winspool.drv", DeletePrinterConnectionA (pName as String) as Integer
+	Declare DeletePrinterDriver, "winspool.drv", DeletePrinterDriverA (pName as String, pEnvironment as String, pDriverName as String) as Integer
+	Declare DeletePrintProcessor, "winspool.drv", DeletePrintProcessorA (pName as String, pEnvironment as String, pPrintProcessorName as String) as Integer
+	Declare DeletePrintProvidor, "winspool.drv", DeletePrintProvidorA (pName as String, pEnvironment as String, pPrintProvidorName as String) as Integer
+	Declare DeleteService, "advapi32.dll", DeleteService (hService as Integer) as Integer
+	Declare DeregisterEventSource, "advapi32.dll", DeregisterEventSource (hEventLog as Integer) as Integer
+	Declare DestroyAcceleratorTable, "user32", DestroyAcceleratorTable (haccel as Integer) as Integer
+	Declare DestroyCaret, "user32", DestroyCaret () as Integer
+	Declare DestroyCursor, "user32", DestroyCursor (hCursor as Integer) as Integer
+	Declare DestroyIcon, "user32", DestroyIcon (hIcon as Integer) as Integer
+	Declare DestroyMenu, "user32", DestroyMenu (hMenu as Integer) as Integer
+	Declare DestroyWindow, "user32", DestroyWindow (hwnd as Integer) as Integer
+	Declare DisableThreadLibraryCalls, "kernel32", DisableThreadLibraryCalls (hLibModule as Integer) as Boolean
+	Declare DisconnectNamedPipe, "kernel32", DisconnectNamedPipe (hNamedPipe as Integer) as Integer
+	Declare DlgDirList, "user32", DlgDirListA (hDlg as Integer, lpPathSpec as String, nIDListBox as Integer, nIDStaticPath as Integer, wFileType as Integer) as Integer
+	Declare DlgDirListComboBox, "user32", DlgDirListComboBoxA (hDlg as Integer, lpPathSpec as String, nIDComboBox as Integer, nIDStaticPath as Integer, wFileType as Integer) as Integer
+	Declare DlgDirSelectComboBoxEx, "user32", DlgDirSelectComboBoxExA (hWndDlg as Integer, lpszPath as String, cbPath as Integer, idComboBox as Integer) as Integer
+	Declare DlgDirSelectEx, "user32", DlgDirSelectExA (hWndDlg as Integer, lpszPath as String, cbPath as Integer, idListBox as Integer) as Integer
+	Declare DoEnvironmentSubst, "shell32.dll", DoEnvironmentSubstA (szString as String, cbString as Integer) as Integer
+	Declare DragAcceptFiles, "shell32.dll", DragAcceptFiles (hwnd as Integer, fAccept as Integer)
+	Declare DragFinish, "shell32.dll", DragFinish (hDrop as Integer)
+	Declare DragObject, "user32", DragObject (hWnd1 as Integer, hWnd2 as Integer, un as Integer, dw as Integer, hCursor as Integer) as Integer
+	Declare DragQueryFile, "shell32.dll", DragQueryFileA (HDROP as Integer, UINT as Integer, lpStr as String, ch as Integer) as Integer
+	Declare DrawEscape, "gdi32", DrawEscape (hdc as Integer, nEscape as Integer, cbInput as Integer, lpszInData as String) as Integer
+	Declare DrawIcon, "user32", DrawIcon (hdc as Integer, x as Integer, y as Integer, hIcon as Integer) as Integer
+	Declare DrawIconEx, "user32", DrawIconEx (hdc as Integer, xLeft as Integer, yTop as Integer, hIcon as Integer, cxWidth as Integer, cyWidth as Integer, istepIfAniCur as Integer, hbrFlickerFreeDraw as Integer, diFlags as Integer) as Boolean
+	Declare DrawMenuBar, "user32", DrawMenuBar (hwnd as Integer) as Integer
+	Declare DrawState, "user32", DrawStateA (hDC as Integer, hBrush as Integer, lpDrawStateProc as Integer, lParam as Integer, wParam as Integer, n1 as Integer, n2 as Integer, n3 as Integer, n4 as Integer, un as Integer) as Boolean
+	Declare DrvGetModuleHandle, "winmm.dll", DrvGetModuleHandle (hDriver as Integer) as Integer
+	Declare DuplicateHandle, "kernel32", DuplicateHandle (hSourceProcessHandle as Integer, hSourceHandle as Integer, hTargetProcessHandle as Integer, lpTargetHandle as Integer, dwDesiredAccess as Integer, bInheritHandle as Integer, dwOptions as Integer) as Integer
+	Declare DuplicateIcon, "shell32.dll", DuplicateIcon (hInst as Integer, hIcon as Integer) as Integer
+	Declare DuplicateToken, "advapi32.dll", DuplicateToken (ExistingTokenHandle as Integer, ImpersonationLevel as Integer, DuplicateTokenHandle as Integer) as Integer
+	Declare Ellipse, "gdi32", Ellipse (hdc as Integer, X1 as Integer, Y1 as Integer, X2 as Integer, Y2 as Integer) as Integer
+	Declare EmptyClipboard, "user32", EmptyClipboard () as Integer
+	Declare EnableMenuItem, "user32", EnableMenuItem (hMenu as Integer, wIDEnableItem as Integer, wEnable as Integer) as Integer
+	Declare EnableScrollBar, "user32", EnableScrollBar (hwnd as Integer, wSBflags as Integer, wArrows as Integer) as Integer
+	Declare EnableWindow, "user32", EnableWindow (hwnd as Integer, fEnable as Integer) as Integer
+	Declare EndDeferWindowPos, "user32", EndDeferWindowPos (hWinPosInfo as Integer) as Integer
+	Declare EndDialog, "user32", EndDialog (hDlg as Integer, nResult as Integer) as Integer
+	Declare EndDoc, "gdi32", EndDoc (hdc as Integer) as Integer
+	Declare EndDoc, "gdi32", EndDoc (hDC as Integer) as Integer
+	Declare EndDocPrinter, "winspool.drv", EndDocPrinter (hPrinter as Integer) as Integer
+	Declare EndPage, "gdi32", EndPage (hdc as Integer) as Integer
+	Declare EndPagePrinter, "winspool.drv", EndPagePrinter (hPrinter as Integer) as Integer
+	Declare EndPath, "gdi32", EndPath (hdc as Integer) as Integer
+	Declare EndUpdateResource, "kernel32", EndUpdateResourceA (hUpdate as Integer, fDiscard as Integer) as Integer
+	Declare EnumCalendarInfo, "kernel32", EnumCalendarInfoA (lpCalInfoEnumProc as Integer, Locale as Integer, Calendar as Integer, CalType as Integer) as Boolean
+	Declare EnumChildWindows, "user32", EnumChildWindows (hWndParent as Integer, lpEnumFunc as Integer, lParam as Integer) as Boolean
+	Declare EnumClipboardFormats, "user32", EnumClipboardFormats (wFormat as Integer) as Integer
+	Declare EnumDateFormats, "KERNEL32", EnumDateFormats (lpDateFmtEnumProc as Integer, Locale as Integer, dwFlags as Integer) as Integer
+	Declare EnumDesktops, "user32", EnumDesktopsA (hwinsta as Integer, lpEnumFunc as Integer, lParam as Integer) as Boolean
+	Declare EnumDesktopWindows, "user32", EnumDesktopWindows (hDesktop as Integer, lpfn as Integer, lParam as Integer) as Boolean
+	Declare EnumFontFamilies, "gdi32", EnumFontFamiliesA (hdc as Integer, lpszFamily as String, lpEnumFontFamProc as Integer, lParam as Integer) as Integer
+	Declare EnumFonts, "gdi32", EnumFontsA (hDC as Integer, lpsz as String, lpFontEnumProc as Integer, lParam as Integer) as Integer
+	Declare EnumICMProfiles, "gdi32", EnumICMProfilesA (hdc as Integer, icmEnumProc as Integer, lParam as Integer) as Integer
+	Declare EnumMetaFile, "gdi32", EnumMetaFile (hDC as Integer, hMetafile as Integer, lpMFEnumProc as Integer, lParam as Integer) as Boolean
+	Declare EnumObjects, "gdi32", EnumObjects (hDC as Integer, n as Integer, lpGOBJEnumProc as Integer, lpVoid as Any) as Integer
+	Declare EnumPorts, "winspool.drv", EnumPortsA (pName as String, Level as Integer, lpbPorts as Integer, cbBuf as Integer, pcbNeeded as Integer, pcReturned as Integer) as Integer
+	Declare EnumPrinterPropertySheets, "winspool.drv", EnumPrinterPropertySheets (hPrinter as Integer, hwnd as Integer, lpfnAdd as Integer, lParam as Integer) as Integer
+	Declare EnumProps, "user32", EnumPropsA (hWnd as Integer, lpEnumFunc as Integer) as Integer
+	Declare EnumPropsEx, "user32", EnumPropsExA (hWnd as Integer, lpEnumFunc as Integer, lParam as Integer) as Integer
+	Declare EnumResourceLanguages, "kernel32", EnumResourceLanguagesA (hModule as Integer, lpType as String, lpName as String, lpEnumFunc as Integer, lParam as Integer) as Boolean
+	Declare EnumResourceNames, "kernel32", EnumResourceNamesA (hModule as Integer, lpType as String, lpEnumFunc as Integer, lParam as Integer) as Boolean
+	Declare EnumResourceTypes, "kernel32", EnumResourceTypesA (hModule as Integer, lpEnumFunc as Integer, lParam as Integer) as Boolean
+	Declare EnumSystemCodePages, "KERNEL32", EnumSystemCodePages (lpCodePageEnumProc as Integer, dwFlags as Integer) as Integer
+	Declare EnumSystemLocales, "KERNEL32", EnumSystemLocales (lpLocaleEnumProc as Integer, dwFlags as Integer) as Integer
+	Declare EnumThreadWindows, "user32", EnumThreadWindows (dwThreadId as Integer, lpfn as Integer, lParam as Integer) as Boolean
+	Declare EnumTimeFormats, "KERNEL32", EnumTimeFormats (lpTimeFmtEnumProc as Integer, Locale as Integer, dwFlags as Integer) as Integer
+	Declare EnumWindowStations, "user32", EnumWindowStationsA (lpEnumFunc as Integer, lParam as Integer) as Boolean
+	Declare EqualPrefixSid, "advapi32.dll", EqualPrefixSid (pSid1 as Any, pSid2 as Any) as Integer
+	Declare EqualRgn, "gdi32", EqualRgn (hSrcRgn1 as Integer, hSrcRgn2 as Integer) as Integer
+	Declare EqualSid, "advapi32.dll", EqualSid (pSid1 as Any, pSid2 as Any) as Integer
+	Declare EraseTape, "kernel32", EraseTape (hDevice as Integer, dwEraseType as Integer, bimmediate as Integer) as Integer
+	Declare Escape, "gdi32", Escape (hdc as Integer, nEscape as Integer, nCount as Integer, lpInData as String, lpOutData as Any) as Integer
+	Declare ExcludeClipRect, "gdi32", ExcludeClipRect (hdc as Integer, X1 as Integer, Y1 as Integer, X2 as Integer, Y2 as Integer) as Integer
+	Declare ExcludeUpdateRgn, "user32", ExcludeUpdateRgn (hdc as Integer, hwnd as Integer) as Integer
+	Declare ExitProcess, "kernel32", ExitProcess (uExitCode as Integer)
+	Declare ExitThread, "kernel32", ExitThread (dwExitCode as Integer)
+	Declare ExitWindows, "user32.Dll", ExitWindowsEx(iFlags as Integer, iReason as Integer) as Integer
+	Declare ExitWindowsEx, "user32", ExitWindowsEx (uFlags as Integer, dwReserved as Integer) as Integer
+	Declare ExpandEnvironmentStrings, "kernel32", ExpandEnvironmentStringsA (lpSrc as String, lpDst as String, nSize as Integer) as Integer
+	Declare ExtEscape, "gdi32", ExtEscape (hdc as Integer, nEscape as Integer, cbInput as Integer, lpszInData as String, cbOutput as Integer, lpszOutData as String) as Integer
+	Declare ExtFloodFill, "gdi32", ExtFloodFill (hdc as Integer, x as Integer, y as Integer, crColor as Integer, wFillType as Integer) as Integer
+	Declare ExtractAssociatedIcon, "shell32.dll", ExtractAssociateIconA (hInst as Integer, lpIconPath as String, lpiIcon as Integer) as Integer
+	Declare ExtractIcon, "shell32.dll", ExtractIconA (hInst as Integer, lpszExeFileName as String, nIconIndex as Integer) as Integer
+	Declare ExtractIconEx, "shell32.dll", ExtractIconExA (lpszFile as String, nIconIndex as Integer, phiconLarge as Integer, phiconSmall as Integer, nIcons as Integer) as Integer
+	Declare ExtSelectClipRgn, "gdi32", ExtSelectClipRgn (hdc as Integer, hRgn as Integer, fnMode as Integer) as Integer
+	Declare FatalAppExit, "kernel32", FatalAppExitA (uAction as Integer, lpMessageText as String)
+	Declare FatalExit, "kernel32", FatalExit (code as Integer)
+	Declare FillPath, "gdi32", FillPath (hdc as Integer) as Integer
+	Declare FillRgn, "gdi32", FillRgn (hdc as Integer, hRgn as Integer, hBrush as Integer) as Integer
+	Declare FindAtom, "kernel32", FindAtomA (lpString as String) as Integer
+	Declare FindClose, "kernel32", FindClose (hFindFile as Integer) as Integer
+	Declare FindCloseChangeNotification, "kernel32", FindCloseChangeNotification (hChangeHandle as Integer) as Integer
+	Declare FindClosePrinterChangeNotification, "winspool", FindClosePrinterChangeNotification (hChange as Integer) as Boolean
+	Declare FindEnvironmentString, "shell32.dll", FindEnvironmentStringA (szEnvVar as String) as String
+	Declare FindExecutable, "shell32.dll", FindExecutableA (lpFile as String, lpDirectory as String, lpResult as String) as Integer
+	Declare FindFirstChangeNotification, "kernel32", FindFirstChangeNotificationA (lpPathName as String, bWatchSubtree as Integer, dwNotifyFilter as Integer) as Integer
+	Declare FindFirstPrinterChangeNotification, "winspool", FindFirstPrinterChangeNotification (hPrinter as Integer, fdwFlags as Integer, fdwOptions as Integer, pPrinterNotifyOptions as String) as Integer
+	Declare FindNextChangeNotification, "kernel32", FindNextChangeNotification (hChangeHandle as Integer) as Integer
+	Declare FindNextPrinterChangeNotification, "winspool", FindNextPrinterChangeNotification (hChange as Integer, pdwChange as Integer, pvReserved as String, ppPrinterNotifyInfo as Integer) as Boolean
+	Declare FindResource, "kernel32", FindResourceA (hInstance as Integer, lpName as String, lpType as String) as Integer
+	Declare FindResourceEx, "kernel32", FindResourceExA (hModule as Integer, lpType as String, lpName as String, wLanguage as Integer) as Integer
+	Declare FindWindow, "user32", FindWindowA (lpClassName as String, lpWindowName as String) as Integer
+	Declare FindWindowEx, "user32", FindWindowExA (hWnd1 As Integer, hWnd2 As Integer, lpsz1 As String, lpsz2 As String) As Integer
+	Declare FindWindowEx, "user32", FindWindowExA (hWnd1 as Integer, hWnd2 as Integer, lpsz1 as String, lpsz2 as String) as Integer
+	Declare FlashWindow, "user32", FlashWindow (hwnd as Integer, bInvert as Integer) as Integer
+	Declare FlattenPath, "gdi32", FlattenPath (hdc as Integer) as Integer
+	Declare FloodFill, "gdi32", FloodFill (hdc as Integer, x as Integer, y as Integer, crColor as Integer) as Integer
+	Declare FlushConsoleInputBuffer, "kernel32", FlushConsoleInputBuffer (hConsoleInput as Integer) as Integer
+	Declare FlushFileBuffers, "kernel32", FlushFileBuffers (hFile as Integer) as Integer
+	Declare FlushInstructionCache, "kernel32", FlushInstructionCache (hProcess as Integer, lpBaseAddress as Any, dwSize as Integer) as Integer
+	Declare FlushViewOfFile, "kernel32", FlushViewOfFile (lpBaseAddress as Any, dwNumberOfBytesToFlush as Integer) as Integer
+	Declare FoldString, "kernel32", FoldStringA (dwMapFlags as Integer, lpSrcStr as String, cchSrc as Integer, lpDestStr as String, cchDest as Integer) as Integer
+	Declare FormatMessage, "kernel32", FormatMessageA (dwFlags as Integer, lpSource as Any, dwMessageId as Integer, dwLanguageId as Integer, lpBuffer as String, nSize as Integer, Arguments as Integer) as Integer
+	Declare FrameRgn, "gdi32", FrameRgn (hdc as Integer, hRgn as Integer, hBrush as Integer, nWidth as Integer, nHeight as Integer) as Integer
+	Declare FreeConsole, "kernel32", FreeConsole () as Integer
+	Declare FreeDDElParam, "user32", FreeDDElParam (msg as Integer, lParam as Integer) as Integer
+	Declare FreeEnvironmentStrings, "kernel32", FreeEnvironmentStringsA (lpsz as String) as Boolean
+	Declare FreeLibrary, "kernel32", FreeLibrary (hLibModule as Integer) as Integer
+	Declare FreeLibraryAndExitThread, "kernel32", FreeLibraryAndExitThread (hLibModule as Integer, dwExitCode as Integer)
+	Declare FreeResource, "kernel32", FreeResource (hResData as Integer) as Boolean
+	Declare FreeSid, "advapi32.dll", FreeSid (pSid as Any)
+	Declare GdiFlush, "gdi32", GdiFlush () as Integer
+	Declare GdiGetBatchLimit, "gdi32", GdiGetBatchLimit () as Integer
+	Declare GdiSetBatchLimit, "gdi32", GdiSetBatchLimit (dwLimit as Integer) as Integer
+	Declare GenerateConsoleCtrlEvent, "kernel32", GenerateConsoleCtrlEvent (dwCtrlEvent as Integer, dwProcessGroupId as Integer) as Integer
+	Declare GetACP, "kernel32", GetACP () as Integer
+	Declare GetActiveWindow, "User32.Dll", GetActiveWindow() as Handle
+	Declare GetArcDirection, "gdi32", GetArcDirection (hdc as Integer) as Integer
+	Declare GetAsyncKeyState, "user32", GetAsyncKeyState (vKey as Integer) as Integer
+	Declare GetAtomName, "kernel32", GetAtomNameA (nAtom as Integer, lpBuffer as String, nSize as Integer) as Integer
+	Declare GetBinaryType, "kernel32", GetBinaryTypeA (lpApplicationName as String, lpBinaryType as Integer) as Integer
+	Declare GetBitmapBits, "gdi32", GetBitmapBits (hBitmap as Integer, dwCount as Integer, lpBits as Any) as Integer
+	Declare GetBkColor, "gdi32", GetBkColor (hdc as Integer) as Integer
+	Declare GetBkMode, "gdi32", GetBkMode (hdc as Integer) as Integer
+	Declare GetCapture, "user32", GetCapture () as Integer
+	Declare GetCaretBlinkTime, "user32", GetCaretBlinkTime () as Integer
+	Declare GetCharWidth, "gdi32", GetCharWidthA (hDC as Integer, un1 as Integer, un2 as Integer, lpn as Integer) as Boolean
+	Declare GetCharWidth, "gdi32", GetCharWidthA (hdc as Integer, wFirstChar as Integer, wLastChar as Integer, lpBuffer as Integer) as Integer
+	Declare GetCharWidth32, "gdi32", GetCharWidth32A (hdc as Integer, iFirstChar as Integer, iLastChar as Integer, lpBuffer as Integer) as Integer
+	Declare GetCharWidthFloat, "gdi32", GetCharWidthFloatA (hdc as Integer, iFirstChar as Integer, iLastChar as Integer, pxBuffer as Double) as Integer
+	Declare GetClassLong, "user32", GetClassLongA (hwnd as Integer, nIndex as Integer) as Integer
+	Declare GetClassName, "user32", GetClassNameA (hwnd as Integer, lpClassName as String, nMaxCount as Integer) as Integer
+	Declare GetClassWord, "user32", GetClassWord (hwnd as Integer, nIndex as Integer) as Integer
+	Declare GetClipboardData, "user32", GetClipboardDataA (wFormat as Integer) as Integer
+	Declare GetClipboardFormatName, "user32", GetClipboardFormatNameA (wFormat as Integer, lpString as String, nMaxCount as Integer) as Integer
+	Declare GetClipboardOwner, "user32", GetClipboardOwner () as Integer
+	Declare GetClipboardViewer, "user32", GetClipboardViewer () as Integer
+	Declare GetClipRgn, "gdi32", GetClipRgn (hdc as Integer, hRgn as Integer) as Integer
+	Declare GetColorSpace, "gdi32", GetColorSpace (hdc as Integer) as Integer
+	Declare GetCommandLine, "kernel32", GetCommandLineA () as String
+	Declare GetCommMask, "kernel32", GetCommMask (hFile as Integer, lpEvtMask as Integer) as Integer
+	Declare GetCommModemStatus, "kernel32", GetCommModemStatus (hFile as Integer, lpModemStat as Integer) as Integer
+	Declare GetCompressedFileSize, "kernel32", GetCompressedFileSizeA (lpFileName as String, lpFileSizeHigh as Integer) as Integer
+	Declare GetComputerName, "kernel32", GetComputerNameA (lpBuffer as String, nSize as Integer) as Integer
+	Declare GetConsoleCP, "kernel32", GetConsoleCP () as Integer
+	Declare GetConsoleMode, "kernel32", GetConsoleMode (hConsoleHandle as Integer, lpMode as Integer) as Integer
+	Declare GetConsoleOutputCP, "kernel32", GetConsoleOutputCP () as Integer
+	Declare GetConsoleTitle, "kernel32", GetConsoleTitleA (lpConsoleTitle as String, nSize as Integer) as Integer
+	Declare GetCurrentDirectory, "kernel32", GetCurrentDirectory (nBufferLength as Integer, lpBuffer as String) as Integer
+	Declare GetCurrentObject, "gdi32", GetCurrentObject (hdc as Integer, uObjectType as Integer) as Integer
+	Declare GetCurrentProcess, "kernel32", GetCurrentProcess () as Integer
+	Declare GetCurrentProcessId, "kernel32", GetCurrentProcessId () as Integer
+	Declare GetCurrentThread, "kernel32", GetCurrentThread () as Integer
+	Declare GetCurrentThreadId, "kernel32", GetCurrentThreadId () as Integer
+	Declare GetCursor, "user32", GetCursor () as Integer
+	Declare GetDateFormat, "kernel32", GetDateFormatA(Locale As Integer, dwFlags As Integer, lpDate As SYSTEMTIME, lpFormat As String, ByRef lpDateStr As String, cchDate As Integer) As Integer
+	Declare GetDC, "user32", GetDC (hwnd as Integer) as Integer
+	Declare GetDCEx, "user32", GetDCEx (hwnd as Integer, hrgnclip as Integer, fdwOptions as Integer) as Integer
+	Declare GetDesktopWindow, "User32.Dll", GetDesktopWindow() as Handle
+	Declare GetDeviceCaps, "gdi32", GetDeviceCaps (hdc as Integer, nIndex as Integer) as Integer
+	Declare GetDeviceGammaRamp, "gdi32", GetDeviceGammaRamp (hdc as Integer, lpv as Any) as Integer
+	Declare GetDialogBaseUnits, "user32", GetDialogBaseUnits () as Integer
+	Declare GetDiskFreeSpace, "kernel32", GetDiskFreeSpaceA (lpRootPathName as String, lpSectorsPerCluster as Integer, lpBytesPerSector as Integer, lpNumberOfFreeClusters as Integer, lpTtoalNumberOfClusters as Integer) as Integer
+	Declare GetDiskFreeSpaceEx, "kernel32", GetDiskFreeSpaceExA (lpRootPathName As String, lpFreeBytesAvailableToCaller As Integer, lpTotalNumberOfBytes As Integer, lpTotalNumberOfFreeBytes As Integer) As Integer
+	Declare GetDlgCtrlID, "user32", GetDlgCtrlID (hwnd as Integer) as Integer
+	Declare GetDlgItem, "user32", GetDlgItem (hDlg as Integer, nIDDlgItem as Integer) as Integer
+	Declare GetDlgItemInt, "user32", GetDlgItemInt (hDlg as Integer, nIDDlgItem as Integer, lpTranslated as Integer, bSigned as Integer) as Integer
+	Declare GetDlgItemText, "user32", GetDlgItemTextA (hDlg as Integer, nIDDlgItem as Integer, lpString as String, nMaxCount as Integer) as Integer
+	Declare GetDoubleClickTime, "user32", GetDoubleClickTime () as Integer
+	Declare GetDriverModuleHandle, "winmm.dll", GetDriverModuleHandle (hDriver as Integer) as Integer
+	Declare GetDriveType, "kernel32", GetDriveTypeA (nDrive As String) As Integer
+	Declare GetDriveType, "kernel32", GetDriveTypeA (nDrive as String) as Integer
+	Declare GetEnhMetaFile, "gdi32", GetEnhMetaFileA (lpszMetaFile as String) as Integer
+	Declare GetEnhMetaFileDescription, "gdi32", GetEnhMetaFileDescriptionA (hemf as Integer, cchBuffer as Integer, lpszDescription as String) as Integer
+	Declare GetEnvironmentStrings, "kernel32", GetEnvironmentStringsA () as String
+	Declare GetEnvironmentVariable, "kernel32", GetEnvironmentVariableA (lpName as String, lpBuffer as String, nSize as Integer) as Integer
+	Declare GetExitCodeProcess, "kernel32", GetExitCodeProcess (hProcess as Integer, lpExitCode as Integer) as Integer
+	Declare GetExitCodeThread, "kernel32", GetExitCodeThread (hThread as Integer, lpExitCode as Integer) as Integer
+	Declare GetExpandedName, "lz32.dll", GetExpandedNameA (lpszSource as String, lpszBuffer as String) as Integer
+	Declare GetFileAttributes, "kernel32", GetFileAttributesA (lpFileName as String) as Integer
+	Declare GetFileSize, "Kernel32.Dll", GetFileSizeA(hFile as Handle, HighSize as Integer) as Integer
+	Declare GetFileTime, "Kernel32.Dll", GetFileTimeA(hFile as Handle, CreationTime as Any, LastAccessTime as Any, LastWriteTime as Any) as Boolean
+	Declare GetFileTitle, "comdlg32.dll", GetFileTitleA (lpszFile as String, lpszTitle as String, cbBuf as Integer) as Integer
+	Declare GetFileType, "Kernel32.Dll", GetFileTypeA(hFile as Handle) as Integer
+	Declare GetFileVersionInfo, "version.dll" , GetFileVersionInfoA (lptstrFilename as String, dwHandle as Integer, dwLen as Integer, lpData as Any) as Integer
+	Declare GetFileVersionInfoSize, "version.dll", GetFileVersionInfoSizeA (lptstrFilename as String, lpdwHandle as Integer) as Integer
+	Declare GetFocus, "user32", GetFocus () as Integer
+	Declare GetFontData, "gdi32", GetFontDataA (hdc as Integer, dwTable as Integer, dwOffset as Integer, lpvBuffer as Any, cbData as Integer) as Integer
+	Declare GetFontLanguageInfo, "gdi32", GetFontLanguageInfo (hdc as Integer) as Integer
+	Declare GetForegroundWindow, "user32", GetForegroundWindow () as Integer
+	Declare GetFullPathName, "kernel32", GetFullPathNameA (lpFileName as String, nBufferLength as Integer, lpBuffer as String, lpFilePart as String) as Integer
+	Declare GetGraphicsMode, "gdi32", GetGraphicsMode (hdc as Integer) as Integer
+	Declare GetHandleInformation, "kernel32", GetHandleInformation (hObject as Integer, lpdwFlags as Integer) as Boolean
+	Declare GetICMProfile, "gdi32", GetICMProfileA (hdc as Integer, dw as Integer, lpStr as String) as Integer
+	Declare GetInputState, "user32", GetInputState () as Integer
+	Declare GetKBCodePage, "user32", GetKBCodePage () as Integer
+	Declare GetKeyboardLayout, "user32", GetKeyboardLayout (dwLayout as Integer) as Integer
+	Declare GetKeyboardLayoutList, "user32", GetKeyboardLayoutList (nBuff as Integer, lpList as Integer) as Integer
+	Declare GetKeyboardLayoutName, "user32", GetKeyboardLayoutNameA (pwszKLID as String) as Integer
+	Declare GetKeyboardType, "user32", GetKeyboardType (nTypeFlag as Integer) as Integer
+	Declare GetKeyNameText, "user32", GetKeyNameTextA (lParam as Integer, lpBuffer as String, nSize as Integer) as Integer
+	Declare GetKeyState, "user32", GetKeyState (nVirtKey as Integer) as Integer
+	Declare GetLastActivePopup, "user32", GetLastActivePopup (hwndOwnder as Integer) as Integer
+	Declare GetLastError, "kernel32", GetLastError () as Integer
+	Declare GetLengthSid, "advapi32.dll", GetLengthSid (pSid as Any) as Integer
+	Declare GetLocaleInfo, "kernel32", GetLocaleInfoA (Locale as Integer, LCType as Integer, lpLCData as String, cchData as Integer) as Integer
+	Declare GetLocalTime, "kernel32", GetLocalTime(lpSystemTime As SystemTime)
+	Declare GetLogicalDrives, "kernel32", GetLogicalDrives () as Integer
+	Declare GetLogicalDriveStrings, "kernel32", GetLogicalDriveStringsA (nBufferLength as Integer, lpBuffer as String) as Integer
+	Declare GetMailslotInfo, "kernel32", GetMailslotInfo (hMailslot as Integer, lpMaxMessageSize as Integer, lpNextSize as Integer, lpMessageCount as Integer, lpReadTimeout as Integer) as Integer
+	Declare GetMapMode, "gdi32", GetMapMode (hdc as Integer) as Integer
+	Declare GetMenu, "user32", GetMenu (hwnd as Integer) as Integer
+	Declare GetMenuCheckMarkDimensions, "user32", GetMenuCheckMarkDimensions () as Integer
+	Declare GetMenuContextHelpId, "user32", GetMenuContextHelpId (hMenu as Integer) as Integer
+	Declare GetMenuDefaultItem, "user32", GetMenuDefaultItem (hMenu as Integer, fByPos as Integer, gmdiFlags as Integer) as Integer
+	Declare GetMenuItemCount, "user32", GetMenuItemCount (hMenu as Integer) as Integer
+	Declare GetMenuItemID, "user32", GetMenuItemID (hMenu as Integer, nPos as Integer) as Integer
+	Declare GetMenuState, "user32", GetMenuState (hMenu as Integer, wID as Integer, wFlags as Integer) as Integer
+	Declare GetMenuString, "user32", GetMenuStringA (hMenu as Integer, wIDItem as Integer, lpString as String, nMaxCount as Integer, wFlag as Integer) as Integer
+	Declare GetMessageExtraInfo, "user32", GetMessageExtraInfo () as Integer
+	Declare GetMessagePos, "user32", GetMessagePos () as Integer
+	Declare GetMessageTime, "user32", GetMessageTime () as Integer
+	Declare GetMetaFile, "gdi32", GetMetaFileA (lpFileName as String) as Integer
+	Declare GetMetaFileBitsEx, "gdi32", GetMetaFileBitsEx (hMF as Integer, nSize as Integer, lpvData as Any) as Integer
+	Declare GetMetaRgn, "gdi32", GetMetaRgn (hdc as Integer, hRgn as Integer) as Integer
+	Declare GetMiterLimit, "gdi32", GetMiterLimit (hdc as Integer, peLimit as Double) as Integer
+	Declare GetModuleFileName, "kernel32", GetModuleFileNameA (hModule as Integer, lpFileName as String, nSize as Integer) as Integer
+	Declare GetModuleHandle, "kernel32", GetModuleHandleA (lpModuleName as String) as Integer
+	Declare GetNamedPipeHandleState, "kernel32", GetNamedPipeHandleStateA (hNamedPipe as Integer, lpState as Integer, lpCurInstances as Integer, lpMaxCollectionCount as Integer, lpCollectDataTimeout as Integer, lpUserName as String, nMaxUserNameSize as Integer) as Integer
+	Declare GetNamedPipeInfo, "kernel32", GetNamedPipeInfo (hNamedPipe as Integer, lpFlags as Integer, lpOutBufferSize as Integer, lpInBufferSize as Integer, lpMaxInstances as Integer) as Integer
+	Declare GetNearestColor, "gdi32", GetNearestColor (hdc as Integer, crColor as Integer) as Integer
+	Declare GetNearestPaletteIndex, "gdi32", GetNearestPaletteIndex (hPalette as Integer, crColor as Integer) as Integer
+	Declare GetNextDlgGroupItem, "user32", GetNextDlgGroupItem (hDlg as Integer, hCtl as Integer, bPrevious as Integer) as Integer
+	Declare GetNextDlgTabItem, "user32", GetNextDlgTabItem (hDlg as Integer, hCtl as Integer, bPrevious as Integer) as Integer
+	Declare GetNextWindow, "user32", GetNextWindow (hwnd as Integer, wFlag as Integer) as Integer
+	Declare GetNumberOfConsoleInputEvents, "kernel32", GetNumberOfConsoleInputEvents (hConsoleInput as Integer, lpNumberOfEvents as Integer) as Integer
+	Declare GetNumberOfConsoleMouseButtons, "kernel32", GetNumberOfConsoleMouseButtons (lpNumberOfMouseButtons as Integer) as Integer
+	Declare GetNumberOfEventLogRecords, "advapi32.dll", GetNumberOfEventLogRecords (hEventLog as Integer, NumberOfRecords as Integer) as Integer
+	Declare GetObject, "gdi32", GetObjectA (hObject as Integer, nCount as Integer, lpObject as Any) as Integer
+	Declare GetObjectType, "gdi32", GetObjectType (hgdiobj as Integer) as Integer
+	Declare GetOEMCP, "kernel32", GetOEMCP () as Integer
+	Declare GetOldestEventLogRecord, "advapi32.dll", GetOldestEventLogRecord (hEventLog as Integer, OldestRecord as Integer) as Integer
+	Declare GetOpenClipboardWindow, "user32", GetOpenClipboardWindow () as Integer
+	Declare GetParent, "user32", GetParent (hwnd as Integer) as Integer
+	Declare GetPixel, "gdi32", GetPixel (hdc as Integer, x as Integer, y as Integer) as Integer
+	Declare GetPixelFormat, "gdi32", GetPixelFormat (hDC as Integer) as Integer
+	Declare GetPolyFillMode, "gdi32", GetPolyFillMode (hdc as Integer) as Integer
+	Declare GetPrintProcessorDirectory, "winspool.drv", GetPrintProcessorDirectoryA (pName as String, pEnvironment as String, Level as Integer, pPrintProcessorInfo as String, cdBuf as Integer, pcbNeeded as Integer) as Integer
+	Declare GetPriorityClass, "kernel32", GetPriorityClass (hProcess as Integer) as Integer
+	Declare GetPriorityClipboardFormat, "user32", GetPriorityClipboardFormat (lpPriorityList as Integer, nCount as Integer) as Integer
+	Declare GetPrivateProfileInt, "kernel32", GetPrivateProfileIntA (lpApplicationName as String, lpKeyName as String, nDefault as Integer, lpFileName as String) as Integer
+	Declare GetPrivateProfileSection, "kernel32", GetPrivateProfileSectionA (lpAppName as String, lpReturnedString as String, nSize as Integer, lpFileName as String) as Integer
+	Declare GetPrivateProfileString, "kernel32", GetPrivateProfileStringA (lpApplicationName as String, lpKeyName as Any, lpDefault as String, lpReturnedString as String, nSize as Integer, lpFileName as String) as Integer
+	Declare GetProcAddress, "kernel32", GetProcAddress (hModule as Integer, lpProcName as String) as Integer
+	Declare GetProcessAffinityMask, "kernel32", GetProcessAffinityMask (hProcess as Integer, lpProcessAffinityMask as Integer, SystemAffinityMask as Integer) as Integer
+	Declare GetProcessHeap, "kernel32", GetProcessHeap () as Integer
+	Declare GetProcessHeaps, "kernel32", GetProcessHeaps (NumberOfHeaps as Integer, ProcessHeaps as Integer) as Integer
+	Declare GetProcessShutdownParameters, "kernel32", GetProcessShutdownParameters (lpdwLevel as Integer, lpdwFlags as Integer) as Integer
+	Declare GetProcessWindowStation, "user32", GetProcessWindowStation () as Integer
+	Declare GetProcessWorkingSetSize, "kernel32", GetProcessWorkingSetSize (hProcess as Integer, lpMinimumWorkingSetSize as Integer, lpMaximumWorkingSetSize as Integer) as Boolean
+	Declare GetProfileInt, "kernel32", GetProfileIntA (lpAppName as String, lpKeyName as String, nDefault as Integer) as Integer
+	Declare GetProfileSection, "kernel32", GetProfileSectionA (lpAppName as String, lpReturnedString as String, nSize as Integer) as Integer
+	Declare GetProfileString, "kernel32", GetProfileStringA (lpAppName as String, lpKeyName as String, lpDefault as String, lpReturnedString as String, nSize as Integer) as Integer
+	Declare GetProp, "user32", GetPropA (hwnd as Integer, lpString as String) as Integer
+	Declare GetQueuedCompletionStatus, "kernel32", GetQueuedCompletionStatus (CompletionPort as Integer, lpNumberOfBytesTransferred as Integer, lpCompletionKey as Integer, lpOverlapped as Integer, dwMilliseconds as Integer) as Boolean
+	Declare GetQueueStatus, "user32", GetQueueStatus (fuFlags as Integer) as Integer
+	Declare GetROP2, "gdi32", GetROP2 (hdc as Integer) as Integer
+	Declare GetScrollPos, "user32", GetScrollPos (hwnd as Integer, nBar as Integer) as Integer
+	Declare GetScrollRange, "user32", GetScrollRange (hwnd as Integer, nBar as Integer, lpMinPos as Integer, lpMaxPos as Integer) as Integer
+	Declare GetServiceDisplayName, "advapi32.dll", GetServiceDisplayNameA (hSCManager as Integer, lpServiceName as String, lpDisplayName as String, lpcchBuffer as Integer) as Integer
+	Declare GetServiceKeyName, "advapi32.dll", GetServiceKeyNameA (hSCManager as Integer, lpDisplayName as String, lpServiceName as String, lpcchBuffer as Integer) as Integer
+	Declare GetShortPathName, "kernel32", GetShortPathName (lpszLongPath as String, lpszShortPath as String, cchBuffer as Integer) as Integer
+	Declare GetSidSubAuthority, "advapi32.dll", GetSidSubAuthority (pSid as Any, nSubAuthority as Integer) as Integer
+	Declare GetStdHandle, "kernel32", GetStdHandle (nStdHandle as Integer) as Integer
+	Declare GetStockObject, "gdi32", GetStockObject (nIndex as Integer) as Integer
+	Declare GetStretchBltMode, "gdi32", GetStretchBltMode (hdc as Integer) as Integer
+	Declare GetStringTypeA, "kernel32", GetStringTypeA (lcid as Integer, dwInfoType as Integer, lpSrcStr as String, cchSrc as Integer, lpCharType as Integer) as Integer
+	Declare GetStringTypeEx, "kernel32", GetStringTypeExA (Locale as Integer, dwInfoType as Integer, lpSrcStr as String, cchSrc as Integer, lpCharType as Integer) as Boolean
+	Declare GetStringTypeW, "kernel32", GetStringTypeW (dwInfoType as Integer, lpSrcStr as String, cchSrc as Integer, lpCharType as Integer) as Boolean
+	Declare GetSubMenu, "user32", GetSubMenu (hMenu as Integer, nPos as Integer) as Integer
+	Declare GetSysColor, "user32", GetSysColor (nIndex as Integer) as Integer
+	Declare GetSysColorBrush, "user32", GetSysColorBrush (nIndex as Integer) as Integer
+	Declare GetSystemDefaultLangID, "kernel32", GetSystemDefaultLangID () as Integer
+	Declare GetSystemDefaultLCID, "kernel32", GetSystemDefaultLCID () as Integer
+	Declare GetSystemDirectory, "kernel32", GetSystemDirectoryA (lpBuffer as String, nSize as Integer) as Integer
+	Declare GetSystemMenu, "user32", GetSystemMenu (hwnd as Integer, bRevert as Integer) as Integer
+	Declare GetSystemMetrics, "user32", GetSystemMetrics (nIndex as Integer) as Integer
+	Declare GetSystemPaletteUse, "gdi32", GetSystemPaletteUse (hdc as Integer) as Integer
+	Declare GetSystemTimeAdjustment, "kernel32", GetSystemTimeAdjustment (lpTimeAdjustment as Integer, lpTimeIncrement as Integer, lpTimeAdjustmentDisabled as Boolean) as Boolean
+	Declare GetTabbedTextExtent, "user32", GetTabbedTextExtentA (hdc as Integer, lpString as String, nCount as Integer, nTabPositions as Integer, lpnTabStopPositions as Integer) as Integer
+	Declare GetTapeParameters, "kernel32", GetTapeParameters (hDevice as Integer, dwOperation as Integer, lpdwSize as Integer, lpTapeInformation as Any) as Integer
+	Declare GetTapePosition, "kernel32", GetTapePosition (hDevice as Integer, dwPositionType as Integer, lpdwPartition as Integer, lpdwOffsetLow as Integer, lpdwOffsetHigh as Integer) as Integer
+	Declare GetTapeStatus, "kernel32", GetTapeStatus (hDevice as Integer) as Integer
+	Declare GetTempFileName, "kernel32", GetTempFileNameA (lpszPath as String, lpPrefixString as String, wUnique as Integer, lpTempFileName as String) as Integer
+	Declare GetTempPath, "kernel32", GetTempPathA (nBufferLength as Integer, lpBuffer as String) as Integer
+	Declare GetTextAlign, "gdi32", GetTextAlign (hdc as Integer) as Integer
+	Declare GetTextCharacterExtra, "gdi32", GetTextCharacterExtraA (hdc as Integer) as Integer
+	Declare GetTextCharset, "gdi32", GetTextCharset (hdc as Integer) as Integer
+	Declare GetTextColor, "gdi32", GetTextColor (hdc as Integer) as Integer
+	Declare GetTextFace, "gdi32", GetTextFaceA (hdc as Integer, nCount as Integer, lpFacename as String) as Integer
+	Declare GetThreadDesktop, "user32", GetThreadDesktop (dwThread as Integer) as Integer
+	Declare GetThreadLocale, "KERNEL32", GetThreadLocale () as Integer
+	Declare GetThreadPriority, "kernel32", GetThreadPriority (hThread as Integer) as Integer
+	Declare GetTickCount, "kernel32", GetTickCount () as Integer
+	Declare GetTimeFormat, "kernel32", GetTimeFormatA(Locale As Integer, dwFlags As Integer, lpTime As SYSTEMTIME, lpFormat As String, ByRef lpTimeStr As String, cchTime As Integer) As Integer
+	Declare GetTokenInformation, "advapi32.dll", GetTokenInformation (TokenHandle as Integer, TokenInformationClass as Integer, TokenInformation as Any, TokenInformationLength as Integer, ReturnLength as Integer) as Integer
+	Declare GetTopWindow, "user32", GetTopWindow (hwnd as Integer) as Integer
+	Declare GetUpdateRgn, "user32", GetUpdateRgn (hwnd as Integer, hRgn as Integer, fErase as Integer) as Integer
+	Declare GetUserDefaultLangID, "kernel32", GetUserDefaultLangID () as Integer
+	Declare GetUserDefaultLCID, "kernel32", GetUserDefaultLCID () as Integer
+	Declare GetUserName, "advapi32.dll", GetUserNameA (lpBuffer as String, nSize as Integer) as Integer
+	Declare GetUserObjectInformation, "user32", GetUserObjectInformationA (hObj as Integer, nIndex as Integer, pvInfo as Any, nLength as Integer, lpnLengthNeeded as Integer) as Boolean
+	Declare GetVersion, "kernel32", GetVersion () as Integer
+	Declare GetVolumeInformation, "kernel32", GetVolumeInformationA (lpRootPathName as String, lpVolumeNameBuffer as String, nVolumeNameSize as Integer, lpVolumeSerialNumber as Integer, lpMaximumComponentLength as Integer, lpFileSystemFlags as Integer, lpFileSystemNameBuffer as String, nFileSystemNameSize as Integer) as Integer
+	Declare GetWindow, "user32", GetWindow (hwnd as Integer, wCmd as Integer) as Integer
+	Declare GetWindowContextHelpId, "user32", GetWindowContextHelpId (hWnd as Integer) as Integer
+	Declare GetWindowDC, "user32", GetWindowDC (hwnd as Integer) as Integer
+	Declare GetWindowLong, "user32", GetWindowLongA (hwnd as Integer, nIndex as Integer) as Integer
+	Declare GetWindowRect, "user32", GetWindowRect (hWnd As Integer, lpRect As Binary) As Integer
+	Declare GetWindowRect, "user32", GetWindowRect(WWnd As Handle, lpRect As Rect) As Integer
+	Declare GetWindowRgn, "user32", GetWindowRgn (hWnd as Integer, hRgn as Integer) as Integer
+	Declare GetWindowsDirectory, "kernel32", GetWindowsDirectoryA (lpBuffer as String, nSize as Integer) as Integer
+	Declare GetWindowText, "user32", GetWindowTextA (hwnd as Integer, lpString as String, cch as Integer) as Integer
+	Declare GetWindowTextLength, "user32", GetWindowTextLengthA (hwnd as Integer) as Integer
+	Declare GetWindowThreadProcessId, "user32", GetWindowThreadProcessId (hwnd as Integer, lpdwProcessId as Integer) as Integer
+	Declare GetWindowWord, "user32", GetWindowWord (hwnd as Integer, nIndex as Integer) as Integer
+	Declare GlobalAddAtom, "kernel32", GlobalAddAtomA (lpString as String) as Integer
+	Declare GlobalAlloc, "kernel32", GlobalAlloc (wFlags as Integer, dwBytes as Integer) as Integer
+	Declare GlobalCompact, "kernel32", GlobalCompact (dwMinFree as Integer) as Integer
+	Declare GlobalDeleteAtom, "kernel32", GlobalDeleteAtom (nAtom as Integer) as Integer
+	Declare GlobalFindAtom, "kernel32", GlobalFindAtomA (lpString as String) as Integer
+	Declare GlobalFix, "kernel32", GlobalFix (hMem as Integer)
+	Declare GlobalFlags, "kernel32", GlobalFlags (hMem as Integer) as Integer
+	Declare GlobalFree, "kernel32", GlobalFree (hMem as Integer) as Integer
+	Declare GlobalGetAtomName, "kernel32", GlobalGetAtomNameA (nAtom as Integer, lpBuffer as String, nSize as Integer) as Integer
+	Declare GlobalHandle, "kernel32", GlobalHandle (wMem as Any) as Integer
+	Declare GlobalLock, "kernel32", GlobalLock (hMem as Integer) as Integer
+	Declare GlobalReAlloc, "kernel32", GlobalReAlloc (hMem as Integer, dwBytes as Integer, wFlags as Integer) as Integer
+	Declare GlobalSize, "kernel32", GlobalSize (hMem as Integer) as Integer
+	Declare GlobalUnfix, "kernel32", GlobalUnfix (hMem as Integer)
+	Declare GlobalUnlock, "kernel32", GlobalUnlock (hMem as Integer) as Integer
+	Declare GlobalUnWire, "kernel32", GlobalUnWire (hMem as Integer) as Boolean
+	Declare GlobalWire, "kernel32", GlobalWire (hMem as Integer) as Integer
+	Declare GrayString, "user32", GrayStringA (hDC as Integer, hBrush as Integer, lpOutputFunc as Integer, lpData as Integer, nCount as Integer, X as Integer, Y as Integer, nWidth as Integer, nHeight as Integer) as Boolean
+	Declare HeapAlloc, "kernel32", HeapAlloc (hHeap as Integer, dwFlags as Integer, dwBytes as Integer) as Integer
+	Declare HeapCompact, "kernel32", HeapCompact (hHeap as Integer, dwFlags as Integer) as Integer
+	Declare HeapCreate, "kernel32", HeapCreate (flOptions as Integer, dwInitialSize as Integer, dwMaximumSize as Integer) as Integer
+	Declare HeapDestroy, "kernel32", HeapDestroy (hHeap as Integer) as Integer
+	Declare HeapFree, "kernel32", HeapFree (hHeap as Integer, dwFlags as Integer, lpMem as Any) as Integer
+	Declare HeapLock, "kernel32", HeapLock (hHeap as Integer) as Integer
+	Declare HeapReAlloc, "kernel32", HeapReAlloc (hHeap as Integer, dwFlags as Integer, lpMem as Any, dwBytes as Integer) as Integer
+	Declare HeapSize, "kernel32", HeapSize (hHeap as Integer, dwFlags as Integer, lpMem as Any) as Integer
+	Declare HeapUnlock, "kernel32", HeapUnlock (hHeap as Integer) as Integer
+	Declare HeapValidate, "kernel32", HeapValidate (hHeap as Integer, dwFlags as Integer, lpMem as Any) as Integer
+	Declare HideCaret, "user32", HideCaret (hwnd as Integer) as Integer
+	Declare HiliteMenuItem, "user32", HiliteMenuItem (hwnd as Integer, hMenu as Integer, wIDHiliteItem as Integer, wHilite as Integer) as Integer
+	Declare hread, "kernel32", _hread (hFile as Integer, lpBuffer as Any, lBytes as Integer) as Integer
+	Declare hwrite, "kernel32", _hwrite (hFile as Integer, lpBuffer as String, lBytes as Integer) as Integer
+	Declare ImmAssociateContext, "imm32.dll", ImmAssociateContext (hwnd as Integer, himc as Integer) as Integer
+	Declare ImmConfigureIME, "imm32.dll", ImmConfigureIME (hkl as Integer, hwnd as Integer, dw as Integer) as Integer
+	Declare ImmCreateContext, "imm32.dll", ImmCreateContext () as Integer
+	Declare ImmDestroyContext, "imm32.dll", ImmDestroyContext (himc as Integer) as Integer
+	Declare ImmEnumRegisterWord, "imm32.dll", ImmEnumRegisterWordA (hkl as Integer, RegisterWordEnumProc as Integer, lpszReading as String, dw as Integer, lpszRegister as String, lpv as Any) as Integer
+	Declare ImmEscape, "imm32.dll", ImmEscapeA (hkl as Integer, himc as Integer, un as Integer, lpv as Any) as Integer
+	Declare ImmGetCandidateListCount, "imm32.dll", ImmGetCandidateListCountA (himc as Integer, lpdwListCount as Integer) as Integer
+	Declare ImmGetCompositionString, "imm32.dll", ImmGetCompositionStringA (himc as Integer, dw as Integer, lpv as Any, dw2 as Integer) as Integer
+	Declare ImmGetContext, "imm32.dll", ImmGetContext (hwnd as Integer) as Integer
+	Declare ImmGetConversionStatus, "imm32.dll", ImmGetConversionStatus (himc as Integer, lpdw as Integer, lpdw2 as Integer) as Integer
+	Declare ImmGetDefaultIMEWnd, "imm32.dll", ImmGetDefaultIMEWnd (hwnd as Integer) as Integer
+	Declare ImmGetDescription, "imm32.dll", ImmGetDescriptionA (hkl as Integer, lpsz as String, uBufLen as Integer) as Integer
+	Declare ImmGetGuideLine, "imm32.dll",  ImmGetGuideLineA (himc as Integer, dwIndex as Integer, lpStr as String, dwBufLen as Integer) as Integer
+	Declare ImmGetIMEFileName, "imm32.dll", ImmGetIMEFileNameA (hkl as Integer, lpStr as String, uBufLen as Integer) as Integer
+	Declare ImmGetOpenStatus, "imm32.dll", ImmGetOpenStatus (himc as Integer) as Integer
+	Declare ImmGetProperty, "imm32.dll", ImmGetProperty (hkl as Integer, dw as Integer) as Integer
+	Declare ImmGetVirtualKey, "imm32.dll", ImmGetVirtualKey (hwnd as Integer) as Integer
+	Declare ImmInstallIME, "imm32.dll", ImmInstallIMEA (lpszIMEFileName as String, lpszLayoutText as String) as Integer
+	Declare ImmIsIME, "imm32.dll", ImmIsIME (hkl as Integer) as Integer
+	Declare ImmIsUIMessage, "imm32.dll", ImmIsUIMessageA (hwnd as Integer, un as Integer, wParam as Integer, lParam as Integer) as Integer
+	Declare ImmNotifyIME, "imm32.dll", ImmNotifyIME (himc as Integer, dwAction as Integer, dwIndex as Integer, dwValue as Integer) as Integer
+	Declare ImmRegisterWord, "imm32.dll", ImmRegisterWordA (hkl as Integer, lpszReading as String, dw as Integer, lpszRegister as String) as Integer
+	Declare ImmReleaseContext, "imm32.dll", ImmReleaseContext (hwnd as Integer, himc as Integer) as Integer
+	Declare ImmSetCompositionString, "imm32.dll", ImmSetCompositionStringA (himc as Integer, dwIndex as Integer, lpComp as Any, dw as Integer, lpRead as Any, dw2 as Integer) as Integer
+	Declare ImmSetConversionStatus, "imm32.dll", ImmSetConversionStatus (himc as Integer, dw1 as Integer, dw2 as Integer) as Integer
+	Declare ImmSetOpenStatus, "imm32.dll", ImmSetOpenStatus (himc as Integer, b as Integer) as Integer
+	Declare ImmSimulateHotKey, "imm32.dll", ImmSimulateHotKey (hwnd as Integer, dw as Integer) as Integer
+	Declare ImmUnregisterWord, "imm32.dll", ImmUnregisterWordA (hkl as Integer, lpszReading as String, dw as Integer, lpszUnregister as String) as Integer
+	Declare ImpersonateDdeClientWindow, "user32", ImpersonateDdeClientWindow (hWndClient as Integer, hWndServer as Integer) as Integer
+	Declare ImpersonateLoggedOnUser, "kernel32", ImpersonateLoggedOnUser (hToken as Integer) as Integer
+	Declare ImpersonateNamedPipeClient, "advapi32.dll", ImpersonateNamedPipeClient (hNamedPipe as Integer) as Integer
+	Declare ImpersonateSelf, "advapi32.dll", ImpersonateSelf (ImpersonationLevel as Integer) as Integer
+	Declare InitAtomTable, "kernel32", InitAtomTable (nSize as Integer) as Integer
+	Declare InitiateSystemShutdown, "advapi32.dll", InitiateSystemShutdownA (lpMachineName as String, lpMessage as String, dwTimeout as Integer, bForceAppsClosed as Integer, bRebootAfterShutdown as Integer) as Integer
+	Declare InSendMessage, "user32", InSendMessage () as Integer
+	Declare InsertMenu, "user32", InsertMenuA (hMenu as Integer, nPosition as Integer, wFlags as Integer, wIDNewItem as Integer, lpNewItem as String) as Integer
+	Declare InterlockedDecrement, "kernel32", InterlockedDecrement (lpAddend as Integer) as Integer
+	Declare InterlockedExchange, "kernel32", InterlockedExchange (Target as Integer, Value as Integer) as Integer
+	Declare InterlockedIncrement, "kernel32", InterlockedIncrement (lpAddend as Integer) as Integer
+	Declare IntersectClipRect, "gdi32", IntersectClipRect (hdc as Integer, X1 as Integer, Y1 as Integer, X2 as Integer, Y2 as Integer) as Integer
+	Declare InvalidateRgn, "user32", InvalidateRgn (hwnd as Integer, hRgn as Integer, bErase as Integer) as Integer
+	Declare InvertRgn, "gdi32", InvertRgn (hdc as Integer, hRgn as Integer) as Integer
+	Declare IsBadCodePtr, "kernel32", IsBadCodePtr (lpfn as Integer) as Boolean
+	Declare IsBadHugeReadPtr, "kernel32", IsBadHugeReadPtr (lp as Any, ucb as Integer) as Integer
+	Declare IsBadHugeWritePtr, "kernel32", IsBadHugeWritePtr (lp as Any, ucb as Integer) as Integer
+	Declare IsBadReadPtr, "kernel32", IsBadReadPtr (lp as Any, ucb as Integer) as Integer
+	Declare IsBadStringPtr, "kernel32", IsBadStringPtrA (lpsz as String, ucchMax as Integer) as Integer
+	Declare IsBadWritePtr, "kernel32", IsBadWritePtr (lp as Any, ucb as Integer) as Integer
+	Declare IsChild, "user32", IsChild (hWndParent as Integer, hwnd as Integer) as Integer
+	Declare IsClipboardFormatAvailable, "user32", IsClipboardFormatAvailable (wFormat as Integer) as Integer
+	Declare IsDlgButtonChecked, "user32", IsDlgButtonChecked (hDlg as Integer, nIDButton as Integer) as Integer
+	Declare IsIconic, "user32", IsIconic (hwnd as Integer) as Integer
+	Declare IsMenu, "user32", IsMenu (hMenu as Integer) as Integer
+	Declare IsTextUnicode, "advapi32", IsTextUnicode (lpBuffer as Any, cb as Integer, lpi as Integer) as Boolean
+	Declare IsValidCodePage, "kernel32", IsValidCodePage (CodePage as Integer) as Integer
+	Declare IsValidLocale, "KERNEL32", IsValidLocale (Locale as Integer, dwFlags as Integer) as Integer
+	Declare IsValidSid, "advapi32.dll", IsValidSid (pSid as Any) as Integer
+	Declare IsWindow, "user32", IsWindow (hwnd as Integer) as Integer
+	Declare IsWindowEnabled, "user32", IsWindowEnabled (hwnd as Integer) as Integer
+	Declare IsWindowUnicode, "user32", IsWindowUnicode (hwnd as Integer) as Integer
+	Declare IsWindowVisible, "user32", IsWindowVisible (hwnd as Integer) as Integer
+	Declare IsZoomed, "user32", IsZoomed (hwnd as Integer) as Integer
+	Declare joyGetNumDevs, "winmm.dll", joyGetNumDev () as Integer
+	Declare joyGetThreshold, "winmm.dll", joyGetThreshold (id as Integer, lpuThreshold as Integer) as Integer
+	Declare joyReleaseCapture, "winmm.dll", joyReleaseCapture (id as Integer) as Integer
+	Declare joySetCapture, "winmm.dll", joySetCapture (hwnd as Integer, uID as Integer, uPeriod as Integer, bChanged as Integer) as Integer
+	Declare joySetThreshold, "winmm.dll", joySetThreshold (id as Integer, uThreshold as Integer) as Integer
+	Declare KillTimer, "user32", KillTimer (hwnd as Integer, nIDEvent as Integer) as Integer
+	Declare lclose, "kernel32", _lclose (hFile as Integer) as Integer
+	Declare LCMapString, "kernel32", LCMapStringA (Locale as Integer, dwMapFlags as Integer, lpSrcStr as String, cchSrc as Integer, lpDestStr as String, cchDest as Integer) as Integer
+	Declare lcreat, "kernel32", _lcreat (lpPathName as String, iAttribute as Integer) as Integer
+	Declare LineDDA, "gdi32", LineDDA (n1 as Integer, n2 as Integer, n3 as Integer, n4 as Integer, lpLineDDAProc as Integer, lParam as Integer) as Boolean
+	Declare LineTo, "gdi32", LineTo (hdc as Integer, x as Integer, y as Integer) as Integer
+	Declare llseek, "kernel32", _llseek (hFile as Integer, lOffset as Integer, iOrigin as Integer) as Integer
+	Declare LoadAccelerators, "user32", LoadAcceleratorsA (hInstance as Integer, lpTableName as String) as Integer
+	Declare LoadBitmap, "user32", LoadBitmapA (hInstance as Integer, lpBitmapName as String) as Integer
+	Declare LoadCursor, "user32", LoadCursorA (hInstance as Integer, lpCursorName as String) as Integer
+	Declare LoadCursorFromFile, "user32", LoadCursorFromFileA (lpFileName as String) as Integer
+	Declare LoadIcon, "user32", LoadIconA (hInstance as Integer, lpIconName as String) as Integer
+	Declare LoadImage, "user32", LoadImageA (hInst as Integer, lpsz as String, un1 as Integer, n1 as Integer, n2 as Integer, un2 as Integer) as Integer
+	Declare LoadKeyboardLayout, "user32", LoadKeyboardLayoutA (pwszKLID as String, flags as Integer) as Integer
+	Declare LoadLibrary, "kernel32", LoadLibraryA (lpLibFileName as String) as Integer
+	Declare LoadLibraryEx, "kernel32", LoadLibraryExA (lpLibFileName as String, hFile as Integer, dwFlags as Integer) as Integer
+	Declare LoadMenu, "user32", LoadMenuA (hInstance as Integer, lpString as String) as Integer
+	Declare LoadMenuIndirect, "user32", LoadMenuIndirectA (lpMenuTemplate as Integer) as Integer
+	Declare LoadModule, "kernel32", LoadModule (lpModuleName as String, lpParameterBlock as Any) as Integer
+	Declare LoadResource, "kernel32", LoadResource (hInstance as Integer, hResInfo as Integer) as Integer
+	Declare LoadString, "user32", LoadStringA (hInstance as Integer, wID as Integer, lpBuffer as String, nBufferMax as Integer) as Integer
+	Declare LocalAlloc, "kernel32", LocalAlloc (wFlags as Integer, wBytes as Integer) as Integer
+	Declare LocalCompact, "kernel32", LocalCompact (uMinFree as Integer) as Integer
+	Declare LocalFlags, "kernel32", LocalFlags (hMem as Integer) as Integer
+	Declare LocalFree, "kernel32", LocalFree (hMem as Integer) as Integer
+	Declare LocalHandle, "kernel32", LocalHandle (wMem as Any) as Integer
+	Declare LocalLock, "kernel32", LocalLock (hMem as Integer) as Integer
+	Declare LocalReAlloc, "kernel32", LocalReAlloc (hMem as Integer, wBytes as Integer, wFlags as Integer) as Integer
+	Declare LocalShrink, "kernel32", LocalShrink (hMem as Integer, cbNewSize as Integer) as Integer
+	Declare LocalSize, "kernel32", LocalSize (hMem as Integer) as Integer
+	Declare LocalUnlock, "kernel32", LocalUnlock (hMem as Integer) as Integer
+	Declare LockFile, "kernel32", LockFile (hFile as Integer, dwFileOffsetLow as Integer, dwFileOffsetHigh as Integer, nNumberOfBytesToLockLow as Integer, nNumberOfBytesToLockHigh as Integer) as Integer
+	Declare LockResource, "kernel32", LockResource (hResData as Integer) as Integer
+	Declare LockServiceDatabase, "advapi32.dll", LockServiceDatabase (hSCManager as Integer) as Integer
+	Declare LockWindowUpdate, "user32", LockWindowUpdate (hwndLock as Integer) as Integer
+	Declare LogonUser, "kernel32",  LogonUserA (lpszUsername as String, lpszDomain as String, lpszPassword as String, dwLogonType as Integer, dwLogonProvider as Integer, phToken as Integer) as Integer
+	Declare LookupAccountName, "advapi32.dll", LookupAccountNameA (lpSystemName as String, lpAccountName as String, Sid as Integer, cbSid as Integer, ReferencedDomainName as String, cbReferencedDomainName as Integer, peUse as Integer) as Integer
+	Declare LookupAccountSid, "advapi32.dll", LookupAccountSidA (lpSystemName as String, Sid as Any, name as String, cbName as Integer, ReferencedDomainName as String, cbReferencedDomainName as Integer, peUse as Integer) as Integer
+	Declare LookupPrivilegeDisplayName, "advapi32.dll", LookupPrivilegeDisplayNameA (lpSystemName as String, lpName as String, lpDisplayName as String, cbDisplayName as Integer, lpLanguageID as Integer) as Integer
+	Declare lopen, "kernel32", _lopen (lpPathName as String, iReadWrite as Integer) as Integer
+	Declare lread, "kernel32", _lread (hFile as Integer, lpBuffer as Any, wBytes as Integer) as Integer
+	Declare lstrcat, "kernel32", lstrcatA (lpString1 as String, lpString2 as String) as Integer
+	Declare lstrcmp, "kernel32", lstrcmpA (lpString1 as String, lpString2 as String) as Integer
+	Declare lstrcmpi, "kernel32", lstrcmpiA (lpString1 as String, lpString2 as String) as Integer
+	Declare lstrcpy, "kernel32", lstrcpyA (lpString1 as String, lpString2 as String) as Integer
+	Declare lstrcpyn, "kernel32", lstrcpynA (lpString1 as String, lpString2 as String, iMaxLength as Integer) as Integer
+	Declare lstrlen, "kernel32", lstrlenA (lpString as String) as Integer
+	Declare lwrite, "kernel32", _lwrite (hFile as Integer, lpBuffer as String, wBytes as Integer) as Integer
+	Declare LZClose, "lz32.dll", LZClose (hfFile as Integer)
+	Declare LZCopy, "lz32.dll", LZCopy (hfSource as Integer, hfDest as Integer) as Integer
+	Declare LZDone, "lz32", LZDone ()
+	Declare LZInit, "lz32.dll", LZInit (hfSrc as Integer) as Integer
+	Declare LZRead, "lz32.dll", LZRead (hfFile as Integer, lpvBuf as String, cbread as Integer) as Integer
+	Declare LZSeek, "lz32.dll", LZSeek (hfFile as Integer, lOffset as Integer, nOrigin as Integer) as Integer
+	Declare LZStart, "lz32", LZStart () as Integer
+	Declare MapViewOfFile, "kernel32", MapViewOfFile (hFileMappingObject as Integer, dwDesiredAccess as Integer, dwFileOffsetHigh as Integer, dwFileOffsetLow as Integer, dwNumberOfBytesToMap as Integer) as Integer
+	Declare MapViewOfFile, "kernel32", MapViewOfFile (hFileMappingObject as Integer, dwDesiredAccess as Integer, dwFileOffsetHigh as Integer, dwFileOffsetLow as Integer, dwNumberOfBytesToMap as Integer) as Integer
+	Declare MapViewOfFileEx, "kernel32", MapViewOfFileEx (hFileMappingObject as Integer, dwDesiredAccess as Integer, dwFileOffsetHigh as Integer, dwFileOffsetLow as Integer, dwNumberOfBytesToMap as Integer, lpBaseAddress as Any) as Integer
+	Declare MapVirtualKey, "user32", MapVirtualKeyA (wCode as Integer, wMapType as Integer) as Integer
+	Declare MapVirtualKeyEx, "user32", MapVirtualKeyExA (uCode as Integer, uMapType as Integer, dwhkl as Integer) as Integer
+	Declare MapWindowPoints, "user32", MapWindowPoints (hwndFrom as Integer, hwndTo as Integer, lppt as Any, cPoints as Integer) as Integer
+	Declare MaskBlt, "gdi32", MaskBlt (hdcDest as Integer, nXDest as Integer, nYDest as Integer, nWidth as Integer, nHeight as Integer, hdcSrc as Integer, nXSrc as Integer, nYSrc as Integer, hbmMask as Integer, xMask as Integer, yMask as Integer, dwRop as Integer) as Integer
+	Declare mciExecute, "winmm.dll", mciExecute (lpstrCommand as String) as Integer
+	Declare mciGetCreatorTask, "winmm.dll", mciGetCreatorTask (wDeviceID as Integer) as Integer
+	Declare mciGetDeviceID, "winmm.dll", mciGetDeviceIDA (lpstrName as String) as Integer
+	Declare mciGetDeviceIDFromElementID, "winmm.dll", mciGetDeviceIDFromElementIDA (dwElementID as Integer, lpstrType as String) as Integer
+	Declare mciGetErrorString, "winmm.dll", mciGetErrorStringA (dwError as Integer, lpstrBuffer as String, uLength as Integer) as Integer
+	Declare mciGetYieldProc, "winmm", mciGetYieldProc (mciId as Integer, pdwYieldData as Integer) as Integer
+	Declare mciSendCommand, "winmm.dll", mciSendCommandA (wDeviceID as Integer, uMessage as Integer, dwParam1 as Integer, dwParam2 as Integer) as Integer
+	Declare mciSendString, "winmm.dll", mciSendStringA (lpstrCommand as String, lpstrReturnString as String, uReturnLength as Integer, hwndCallback as Integer) as Integer
+	Declare mciSetYieldProc, "winmm", mciSetYieldProc (mciId as Integer, fpYieldProc as Integer, dwYieldData as Integer) as Boolean
+	Declare MessageBeep, "user32", BeepA (wType as Integer) as Integer
+	Declare MessageBox, "user32", MessageBoxA (hwnd as Integer, lpText as String, lpCaption as String, wType as Integer) as Integer
+	Declare MessageBoxEx, "user32", MessageBoxExA (hwnd as Integer, lpText as String, lpCaption as String, uType as Integer, wLanguageId as Integer) as Integer
+	Declare midiConnect, "winmm.dll", midiConnect (hmi as Integer, hmo as Integer, pReserved as Any) as Integer
+	Declare midiDisconnect, "winmm.dll", midiDisconnect (hmi as Integer, hmo as Integer, pReserved as Any) as Integer
+	Declare midiInClose, "winmm.dll", midiInClose (hMidiIn as Integer) as Integer
+	Declare midiInGetErrorText, "winmm.dll", midiInGetErrorTextA (err as Integer, lpText as String, uSize as Integer) as Integer
+	Declare midiInGetID, "winmm.dll", midiInGetID (hMidiIn as Integer, lpuDeviceID as Integer) as Integer
+	Declare midiInGetNumDevs, "winmm.dll", midiInGetNumDevs () as Integer
+	Declare midiInMessage, "winmm.dll", midiInMessage (hMidiIn as Integer, msg as Integer, dw1 as Integer, dw2 as Integer) as Integer
+	Declare midiInOpen, "winmm.dll", midiInOpen (lphMidiIn as Integer, uDeviceID as Integer, dwCallback as Integer, dwInstance as Integer, dwFlags as Integer) as Integer
+	Declare midiInReset, "winmm.dll", midiInReset (hMidiIn as Integer) as Integer
+	Declare midiInStart, "winmm.dll", midiInStart (hMidiIn as Integer) as Integer
+	Declare midiInStop, "winmm.dll", midiInStop (hMidiIn as Integer) as Integer
+	Declare midiOutCacheDrumPatches, "winmm.dll", midiOutCacheDrumPatches (hMidiOut as Integer, uPatch as Integer, lpKeyArray as Integer, uFlags as Integer) as Integer
+	Declare midiOutCachePatches, "winmm.dll", midiOutCachePatches (hMidiOut as Integer, uBank as Integer, lpPatchArray as Integer, uFlags as Integer) as Integer
+	Declare midiOutClose, "winmm.dll", midiOutClose (hMidiOut as Integer) as Integer
+	Declare midiOutGetErrorText, "winmm.dll", midiOutGetErrorTextA (err as Integer, lpText as String, uSize as Integer) as Integer
+	Declare midiOutGetID, "winmm.dll", midiOutGetID (hMidiOut as Integer, lpuDeviceID as Integer) as Integer
+	Declare midiOutGetNumDevs, "winmm", midiOutGetNumDevs () as Integer
+	Declare midiOutGetVolume, "winmm.dll", midiOutGetVolume (uDeviceID as Integer, lpdwVolume as Integer) as Integer
+	Declare midiOutMessage, "winmm.dll", midiOutMessage (hMidiOut as Integer, msg as Integer, dw1 as Integer, dw2 as Integer) as Integer
+	Declare midiOutOpen, "winmm.dll", midiOutOpen (lphMidiOut as Integer, uDeviceID as Integer, dwCallback as Integer, dwInstance as Integer, dwFlags as Integer) as Integer
+	Declare midiOutReset, "winmm.dll", midiOutReset (hMidiOut as Integer) as Integer
+	Declare midiOutSetVolume, "winmm.dll", midiOutSetVolume (uDeviceID as Integer, dwVolume as Integer) as Integer
+	Declare midiOutShortMsg, "winmm.dll", midiOutShortMsg (hMidiOut as Integer, dwMsg as Integer) as Integer
+	Declare midiStreamClose, "winmm.dll", midiStreamClose (hms as Integer) as Integer
+	Declare midiStreamOpen, "winmm.dll", midiStreamOpen (phms as Integer, puDeviceID as Integer, cMidi as Integer, dwCallback as Integer, dwInstance as Integer, fdwOpen as Integer) as Integer
+	Declare midiStreamPause, "winmm.dll", midiStreamPause (hms as Integer) as Integer
+	Declare midiStreamRestart, "winmm.dll", midiStreamRestart (hms as Integer) as Integer
+	Declare midiStreamStop, "winmm.dll", midiStreamStop (hms as Integer) as Integer
+	Declare mixerClose, "winmm.dll", mixerClose (hmx as Integer) as Integer
+	Declare mixerGetID, "winmm.dll", mixerGetID (hmxobj as Integer, pumxID as Integer, fdwId as Integer) as Integer
+	Declare mixerGetNumDevs, "winmm.dll", mixerGetNumDevs () as Integer
+	Declare mixerMessage, "winmm.dll", mixerMessage (hmx as Integer, uMsg as Integer, dwParam1 as Integer, dwParam2 as Integer) as Integer
+	Declare mixerOpen, "winmm.dll", mixerOpen (phmx as Integer, uMxId as Integer, dwCallback as Integer, dwInstance as Integer, fdwOpen as Integer) as Integer
+	Declare mmioClose, "winmm.dll", mmioClose (hmmio as Integer, uFlags as Integer) as Integer
+	Declare mmioFlush, "winmm.dll", mmioFlush (hmmio as Integer, uFlags as Integer) as Integer
+	Declare mmioRead, "winmm.dll", mmioRead (hmmio as Integer, pch as String, cch as Integer) as Integer
+	Declare mmioSeek, "winmm.dll", mmioSeek (hmmio as Integer, lOffset as Integer, iOrigin as Integer) as Integer
+	Declare mmioSendMessage, "winmm.dll", mmioSendMessage (hmmio as Integer, uMsg as Integer, lParam1 as Integer, lParam2 as Integer) as Integer
+	Declare mmioSetBuffer, "winmm.dll", mmioSetBuffer (hmmio as Integer, pchBuffer as String, cchBuffer as Integer, uFlags as Integer) as Integer
+	Declare mmioStringToFOURCC, "winmm.dll", mmioStringToFOURCCA (sz as String, uFlags as Integer) as Integer
+	Declare mmioWrite, "winmm.dll", mmioWrite (hmmio as Integer, pch as String, cch as Integer) as Integer
+	Declare mmsystemGetVersion, "winmm.dll", mmsystemGetVersion () as Integer
+	Declare ModifyMenu, "user32", ModifyMenuA (hMenu as Integer, nPosition as Integer, wFlags as Integer, wIDNewItem as Integer, lpString as String) as Integer
+	Declare mouse_event, "user32", mouse_event (dwFlags as Integer, dx as Integer, dy as Integer, cButtons as Integer, dwExtraInfo as Integer)
+	Declare MoveFile, "kernel32", MoveFileA (lpExistingFileName as String, lpNewFileName as String) as Integer
+	Declare MoveFileEx, "kernel32", MoveFileExA (lpExistingFileName as String, lpNewFileName as String, dwFlags as Integer) as Integer
+	Declare MoveWindow, "user32", MoveWindow (hwnd as Integer, x as Integer, y as Integer, nWidth as Integer, nHeight as Integer, bRepaint as Integer) as Integer
+	Declare MsgWaitForMultipleObjects, "user32", MsgWaitForMultipleObjects (nCount as Integer, pHandles as Integer, fWaitAll as Integer, dwMilliseconds as Integer, dwWakeMask as Integer) as Integer
+	Declare MulDiv, "kernel32", MulDiv (nNumber as Integer, nNumerator as Integer, nDenominator as Integer) as Integer
+	Declare MultiByteToWideChar, "kernel32", MultiByteToWideChar (CodePage as Integer, dwFlags as Integer, lpMultiByteStr as String, cchMultiByte as Integer, lpWideCharStr as String, cchWideChar as Integer) as Integer
+	Declare NotifyBootConfigStatus, "advapi32.dll", NotifyBootConfigStatus (BootAcceptable as Integer) as Integer
+	Declare NotifyChangeEventLog, "advapi32", NotifyChangeEventLog (hEventLog as Integer, hEvent as Integer) as Boolean
+	Declare ObjectCloseAuditAlarm, "advapi32.dll", ObjectCloseAuditAlarmA (SubsystemName as String, HandleId as Any, GenerateOnClose as Integer) as Integer
+	Declare OemKeyScan, "user32", OemKeyScan (wOemChar as Integer) as Integer
+	Declare OemToChar, "user32", OemToCharA (lpszSrc as String, lpszDst as String) as Integer
+	Declare OemToCharBuff, "user32", OemToCharBuffA (lpszSrc as String, lpszDst as String, cchDstLength as Integer) as Integer
+	Declare OffsetClipRgn, "gdi32", OffsetClipRgn (hdc as Integer, x as Integer, y as Integer) as Integer
+	Declare OffsetRgn, "gdi32", OffsetRgn (hRgn as Integer, x as Integer, y as Integer) as Integer
+	Declare OpenBackupEventLog, "advapi32.dll", OpenBackupEventLogA (lpUNCServerName as String, lpFileName as String) as Integer
+	Declare OpenClipboard, "user32", OpenClipboard (hwnd as Integer) as Integer
+	Declare OpenDesktop, "user32", OpenDesktopA (lpszDesktop as String, dwFlags as Integer, fInherit as Boolean, dwDesiredAccess as Integer) as Integer
+	Declare OpenDriver, "winmm.dll", OpenDriver (szDriverName as String, szSectionName as String, lParam2 as Integer) as Integer
+	Declare OpenEvent, "kernel32", OpenEventA (dwDesiredAccess as Integer, bInheritHandle as Integer, lpName as String) as Integer
+	Declare OpenEventLog, "advapi32.dll", OpenEventLog (lpUNCServerName as String, lpSourceName as String) as Integer
+	Declare OpenFileMapping, "kernel32", OpenFileMappingA (dwDesiredAccess as Integer, bInheritHandle as Integer, lpName as String) as Integer
+	Declare OpenIcon, "user32", OpenIcon (hwnd as Integer) as Integer
+	Declare OpenInputDesktop, "user32", OpenInputDesktop (dwFlags as Integer, fInherit as Boolean, dwDesiredAccess as Integer) as Integer
+	Declare OpenMutex, "kernel32", OpenMutexA (dwDesiredAccess as Integer, bInheritHandle as Integer, lpName as String) as Integer
+	Declare OpenProcess, "kernel32", OpenProcess (dwDesiredAccess as Integer, bInheritHandle as Integer, dwProcessId as Integer) as Integer
+	Declare OpenProcessToken, "advapi32.dll", OpenProcessToken (ProcessHandle as Integer, DesiredAccess as Integer, TokenHandle as Integer) as Integer
+	Declare OpenSCManager, "advapi32.dll", OpenSCManagerA (lpMachineName as String, lpDatabaseName as String, dwDesiredAccess as Integer) as Integer
+	Declare OpenSemaphore, "kernel32", OpenSemaphoreA (dwDesiredAccess as Integer, bInheritHandle as Integer, lpName as String) as Integer
+	Declare OpenService, "advapi32.dll", OpenServiceA (hSCManager as Integer, lpServiceName as String, dwDesiredAccess as Integer) as Integer
+	Declare OpenThreadToken, "advapi32.dll", OpenThreadToken (ThreadHandle as Integer, DesiredAccess as Integer, OpenAsSelf as Integer, TokenHandle as Integer) as Integer
+	Declare OpenWindowStation, "user32", OpenWindowStationA (lpszWinSta as String, fInherit as Boolean, dwDesiredAccess as Integer) as Integer
+	Declare OutputDebugStr, "winmm.dll", OutputDebugStr (lpszOutputString as String)
+	Declare OutputDebugString, "kernel32", OutputDebugStringA (lpOutputString as String)
+	Declare PackDDElParam, "user32", PackDDElParam (msg as Integer, uiLo as Integer, uiHi as Integer) as Integer
+	Declare PaintDesktop, "user32", PaintDesktop (hdc as Integer) as Boolean
+	Declare PaintRgn, "gdi32", PaintRgn (hdc as Integer, hRgn as Integer) as Integer
+	Declare PatBlt, "gdi32", PatBlt (hdc as Integer, x as Integer, y as Integer, nWidth as Integer, nHeight as Integer, dwRop as Integer) as Integer
+	Declare PathToRegion, "gdi32", PathToRegion (hdc as Integer) as Integer
+	Declare PeekNamedPipe, "kernel32", PeekNamedPipe (hNamedPipe as Integer, lpBuffer as Any, nBufferSize as Integer, lpBytesRead as Integer, lpTotalBytesAvail as Integer, lpBytesLeftThisMessage as Integer) as Integer
+	Declare Pie, "gdi32", Pie (hdc as Integer, X1 as Integer, Y1 as Integer, X2 as Integer, Y2 as Integer, X3 as Integer, Y3 as Integer, X4 as Integer, Y4 as Integer) as Integer
+	Declare PlayMetaFile, "gdi32", PlayMetaFile (hdc as Integer, hMF as Integer) as Integer
+	Declare PlaySound, "winmm.dll", PlaySoundA (lpszName as String, hModule as Integer, dwFlags as Integer) as Integer
+	Declare PostMessage, "user32", PostMessageA (hwnd as Integer, wMsg as Integer, wParam as Integer, lParam as Integer) as Integer
+	Declare PostQuitMessage, "user32", PostQuitMessage (nExitCode as Integer)
+	Declare PostThreadMessage, "user32", PostThreadMessageA (idThread as Integer, msg as Integer, wParam as Integer, lParam as Integer) as Integer
+	Declare PrepareTape, "kernel32", PrepareTape (hDevice as Integer, dwOperation as Integer, bimmediate as Integer) as Integer
+	Declare PrinterMessageBox, "winspool.drv", PrinterMessageBoxA (hPrinter as Integer, error as Integer, hwnd as Integer, pText as String, pCaption as String, dwType as Integer) as Integer
+	Declare PrinterProperties, "winspool.drv", PrinterProperties (hwnd as Integer, hPrinter as Integer) as Integer
+	Declare PtInRegion, "gdi32", PtInRegion (hRgn as Integer, x as Integer, y as Integer) as Integer
+	Declare PtVisible, "gdi32", PtVisible (hdc as Integer, x as Integer, y as Integer) as Integer
+	Declare PulseEvent, "kernel32", PulseEvent (hEvent as Integer) as Integer
+	Declare PurgeComm, "kernel32", PurgeComm (hFile as Integer, dwFlags as Integer) as Integer
+	Declare QueryDosDevice, "kernel32", QueryDosDeviceA (lpDeviceName as String, lpTargetPath as String, ucchMax as Integer) as Integer
+	Declare QueryServiceObjectSecurity, "advapi32.dll", QueryServiceObjectSecurity (hService as Integer, dwSecurityInformation as Integer, lpSecurityDescriptor as Any, cbBufSize as Integer, pcbBytesNeeded as Integer) as Integer
+	Declare RaiseException, "kernel32", RaiseException (dwExceptionCode as Integer, dwExceptionFlags as Integer, nNumberOfArguments as Integer, lpArguments as Integer)
+	Declare ReadConsole, "kernel32", ReadConsoleA (hConsoleInput as Integer, lpBuffer as Any, nNumberOfCharsToRead as Integer, lpNumberOfCharsRead as Integer, lpReserved as Any) as Integer
+	Declare ReadPrinter, "winspool.drv", ReadPrinter (hPrinter as Integer, pBuf as Any, cdBuf as Integer, pNoBytesRead as Integer) as Integer
+	Declare ReadProcessMemory, "kernel32", ReadProcessMemory (hProcess as Integer, lpBaseAddress as Any, lpBuffer as Any, nSize as Integer, lpNumberOfBytesWritten as Integer) as Integer
+	Declare RealizePalette, "gdi32", RealizePalette (hdc as Integer) as Integer
+	Declare Rectangle, "gdi32", Rectangle (hdc as Integer, X1 as Integer, Y1 as Integer, X2 as Integer, Y2 as Integer) as Integer
+	Declare RegCloseKey, "advapi32", RegCloseKey (HKey As Integer) As Integer
+	Declare RegCloseKey, "advapi32.dll", RegCloseKey (hKey as Integer) as Integer
+	Declare RegConnectRegistry, "advapi32.dll", RegConnectRegistryA (lpMachineName as String, hKey as Integer, phkResult as Integer) as Integer
+	Declare RegCreateKey, "advapi32.dll", RegCreateKeyA (hKey as Integer, lpSubKey as String, phkResult as Integer) as Integer
+	Declare RegDeleteKey, "advapi32.dll", RegDeleteKeyA (hKey as Integer, lpSubKey as String) as Integer
+	Declare RegDeleteValue, "advapi32.dll", RegDeleteValueA (hKey as Integer, lpValueName as String) as Integer
+	Declare RegEnumKey, "advapi32.dll", RegEnumKeyA (hKey as Integer, dwIndex as Integer, lpName as String, cbName as Integer) as Integer
+	Declare RegFlushKey, "advapi32.dll", RegFlushKey (hKey as Integer) as Integer
+	Declare RegisterClipboardFormat, "user32", RegisterClipboardFormatA (lpString as String) as Integer
+	Declare RegisterEventSource, "advapi32.dll", RegisterEventSourceA (lpUNCServerName as String, lpSourceName as String) as Integer
+	Declare RegisterHotKey, "user32", RegisterHotKey (hwnd as Integer, id as Integer, fsModifiers as Integer, vk as Integer) as Integer
+	Declare RegisterServiceCtrlHandler, "advapi32.dll", RegisterServiceCtrlHandlerA (lpServiceName as String, lpHandlerProc as Integer) as Integer
+	Declare RegisterWindowMessage, "user32", RegisterWindowMessageA (lpString as String) as Integer
+	Declare RegLoadKey, "advapi32.dll", RegLoadKeyA (hKey as Integer, lpSubKey as String, lpFile as String) as Integer
+	Declare RegNotifyChangeKeyValue, "advapi32.dll", RegNotifyChangeKeyValue (hKey as Integer, bWatchSubtree as Integer, dwNotifyFilter as Integer, hEvent as Integer, fAsynchronus as Integer) as Integer
+	Declare RegOpenKey, "advapi32.dll", RegOpenKeyA (hKey as Integer, lpSubKey as String, phkResult as Integer) as Integer
+	Declare RegOpenKeyEx, "advapi32.dll", RegOpenKeyExA (hKey as Integer, lpSubKey as String, ulOptions as Integer, samDesired as Integer, phkResult as Integer) as Integer
+	Declare RegOpenKeyExA, "advapi32", RegOpenKeyExA (HKey As Integer, lpSubKey As String, ulOptions As Integer, samDesired As Integer,phkResult As Integer) As Integer
+	Declare RegQueryValue, "advapi32.dll", RegQueryValueA (hKey as Integer, lpSubKey as String, lpValue as String, lpcbValue as Integer) as Integer
+	Declare RegQueryValueEx, "advapi32.dll", RegQueryValueExA (hKey as Integer, lpValueName as String, lpReserved as Integer, lpType as Integer, lpData as Any, lpcbData as Integer) as Integer         ' Note that If you Declare the lpData parameter as String, you must pass it By Value.
+	Declare RegQueryValueExA, "advapi32", RegQueryValueExA (HKey As Integer, lpValueName As String, lpReserved As Integer,lpType As Integer, lpData As String,lpcbData As Integer) As Integer
+	Declare RegReplaceKey, "advapi32.dll", RegReplaceKeyA (hKey as Integer, lpSubKey as String, lpNewFile as String, lpOldFile as String) as Integer
+	Declare RegRestoreKey, "advapi32.dll", RegRestoreKeyA (hKey as Integer, lpFile as String, dwFlags as Integer) as Integer
+	Declare RegSetValue, "advapi32.dll", RegSetValueA (hKey as Integer, lpSubKey as String, dwType as Integer, lpData as String, cbData as Integer) as Integer
+	Declare RegSetValueEx, "advapi32.dll", RegSetValueExA (hKey as Integer, lpValueName as String, Reserved as Integer, dwType as Integer, lpData as Any, cbData as Integer) as Integer         ' Note that If you Declare the lpData parameter as String, you must pass it By Value.
+	Declare RegUnLoadKey, "advapi32.dll", RegUnLoadKeyA (hKey as Integer, lpSubKey as String) as Integer
+	Declare ReleaseCapture, "user32", ReleaseCapture () as Integer
+	Declare ReleaseDC, "user32", ReleaseDC (hwnd as Integer, hdc as Integer) as Integer
+	Declare ReleaseMutex, "kernel32", ReleaseMutex (hMutex as Integer) as Integer
+	Declare ReleaseSemaphore, "kernel32", ReleaseSemaphore (hSemaphore as Integer, lReleaseCount as Integer, lpPreviousCount as Integer) as Integer
+	Declare RemoveDirectory, "Kernel32.Dll", RemoveDirectoryA(sPathName as String) as Boolean
+	Declare RemoveFontResource, "gdi32", RemoveFontResourceA (lpFileName as String) as Integer
+	Declare RemoveMenu, "user32", RemoveMenu (hMenu as Integer, nPosition as Integer, wFlags as Integer) as Integer
+	Declare RemoveProp, "user32", RemovePropA (hwnd as Integer, lpString as String) as Integer
+	Declare ReplyMessage, "user32", ReplyMessage (lReply as Integer) as Integer
+	Declare ReportEvent, "advapi32.dll", ReportEventA (hEventLog as Integer, wType as Integer, wCategory as Integer, dwEventID as Integer, lpUserSid as Any, wNumStrings as Integer, dwDataSize as Integer, lpStrings as Integer, lpRawData as Any) as Integer
+	Declare ResetEvent, "kernel32", ResetEvent (hEvent as Integer) as Integer
+	Declare ResizePalette, "gdi32", ResizePalette (hPalette as Integer, nNumEntries as Integer) as Integer
+	Declare RestoreDC, "gdi32", RestoreDC (hdc as Integer, nSavedDC as Integer) as Integer
+	Declare ResumeThread, "kernel32", ResumeThread (hThread as Integer) as Integer
+	Declare ReuseDDElParam, "user32", ReuseDDElParam (lParam as Integer, msgIn as Integer, msgOut as Integer, uiLo as Integer, uiHi as Integer) as Integer
+	Declare RevertToSelf, "advapi32.dll", RevertToSelf () as Integer
+	Declare RoundRect, "gdi32", RoundRect (hdc as Integer, X1 as Integer, Y1 as Integer, X2 as Integer, Y2 as Integer, X3 as Integer, Y3 as Integer) as Integer
+	Declare SaveDC, "gdi32", SaveDC (hdc as Integer) as Integer
+	Declare ScheduleJob, "winspool.drv", ScheduleJob (hPrinter as Integer, JobId as Integer) as Integer
+	Declare SearchPath, "kernel32", SearchPathA (lpPath as String, lpFileName as String, lpExtension as String, nBufferLength as Integer, lpBuffer as String, lpFilePart as String) as Integer
+	Declare SelectClipPath, "gdi32", SelectClipPath (hdc as Integer, iMode as Integer) as Integer
+	Declare SelectClipRgn, "gdi32", SelectClipRgn (hdc as Integer, hRgn as Integer) as Integer
+	Declare SelectObject, "user32", SelectObject (hdc as Integer, hObject as Integer) as Integer
+	Declare SelectPalette, "gdi32", SelectPalette (hdc as Integer, hPalette as Integer, bForceBackground as Integer) as Integer
+	Declare SendDlgItemMessage, "user32", SendDlgItemMessageA (hDlg as Integer, nIDDlgItem as Integer, wMsg as Integer, wParam as Integer, lParam as Integer) as Integer
+	Declare SendDriverMessage, "winmm.dll", SendDriverMessage (hDriver as Integer, message as Integer, lParam1 as Integer, lParam2 as Integer) as Integer
+	Declare SendMessage, "user32", SendMessageA (hwnd as Integer, wMsg as Integer, wParam as Integer, lParam as Integer) as Integer
+	Declare SendMessageCallback, "user32", SendMessageCallbackA (hwnd as Integer, msg as Integer, wParam as Integer, lParam as Integer, lpResultCallBack as Integer, dwData as Integer) as Integer
+	Declare SendMessageTimeout, "user32", SendMessageTimeoutA (hwnd as Integer, msg as Integer, wParam as Integer, lParam as Integer, fuFlags as Integer, uTimeout as Integer, lpdwResult as Integer) as Integer
+	Declare SendNotifyMessage, "user32", SendNotifyMessageA (hwnd as Integer, msg as Integer, wParam as Integer, lParam as Integer) as Integer
+	Declare SetAbortProc, "gdi32", SetAbortProc (hDC as Integer, lpAbortProc as Integer) as Integer
+	Declare SetActiveWindow, "user32", SetActiveWindow (hwnd as Integer) as Integer
+	Declare SetArcDirection, "gdi32", SetArcDirection (hdc as Integer, ArcDirection as Integer) as Integer
+	Declare SetBitmapBits, "gdi32", SetBitmapBits (hBitmap as Integer, dwCount as Integer, lpBits as Any) as Integer
+	Declare SetBkColor, "gdi32", SetBkColor (hdc as Integer, crColor as Integer) as Integer
+	Declare SetBkMode, "gdi32", SetBkMode (hdc as Integer, nBkMode as Integer) as Integer
+	Declare SetCapture, "user32", SetCapture (hwnd as Integer) as Integer
+	Declare SetCaretBlinkTime, "user32", SetCaretBlinkTime (wMSeconds as Integer) as Integer
+	Declare SetCaretPos, "user32", SetCaretPos (x as Integer, y as Integer) as Integer
+	Declare SetClassLong, "user32", SetClassLongA (hwnd as Integer, nIndex as Integer, dwNewLong as Integer) as Integer
+	Declare SetClassWord, "user32", SetClassWord (hwnd as Integer, nIndex as Integer, wNewWord as Integer) as Integer
+	Declare SetClipboardData, "user32", SetClipboardDataA (wFormat as Integer, hMem as Integer) as Integer
+	Declare SetClipboardViewer, "user32", SetClipboardViewer (hwnd as Integer) as Integer
+	Declare SetColorSpace, "gdi32", SetColorSpace (hdc as Integer, hcolorspace as Integer) as Integer
+	Declare SetCommBreak, "kernel32", SetCommBreak (nCid as Integer) as Integer
+	Declare SetCommMask, "kernel32", SetCommMask (hFile as Integer, dwEvtMask as Integer) as Integer
+	Declare SetComputerName, "kernel32", SetComputerNameA (lpComputerName as String) as Integer
+	Declare SetConsoleActiveScreenBuffer, "kernel32", SetConsoleActiveScreenBuffer (hConsoleOutput as Integer) as Integer
+	Declare SetConsoleCP, "kernel32", SetConsoleCP (wCodePageID as Integer) as Integer
+	Declare SetConsoleCtrlHandler, "kernel32", SetConsoleCtrlHandler (HandlerRoutine as Integer, Add as Integer) as Integer
+	Declare SetConsoleMode, "kernel32", SetConsoleMode (hConsoleHandle as Integer, dwMode as Integer) as Integer
+	Declare SetConsoleOutputCP, "kernel32", SetConsoleOutputCP (wCodePageID as Integer) as Integer
+	Declare SetConsoleTextAttribute, "kernel32", SetConsoleTextAttribute (hConsoleOutput as Integer, wAttributes as Integer) as Integer
+	Declare SetConsoleTitle, "kernel32", SetConsoleTitleA (lpConsoleTitle as String) as Integer
+	Declare SetCurrentDirectory, "kernel32", SetCurrentDirectoryA (lpPathName as String) as Integer
+	Declare SetCursor, "user32", SetCursor (hCursor as Integer) as Integer
+	Declare SetCursorPos, "user32", SetCursorPos (x as Integer, y as Integer) as Integer
+	Declare SetCursorPos, "user32", SetCursorPos(x As Integer, y As Integer) As Integer
+	Declare SetCursorPos, "user32", SetCursorPos(x As Integer, y As Integer) As Integer
+	Declare SetDebugErrorLevel, "user32", SetDebugErrorLevel (dwLevel as Integer)
+	Declare SetDeviceGammaRamp, "gdi32", SetDeviceGammaRamp (hdc as Integer, lpv as Any) as Integer
+	Declare SetDlgItemInt, "user32", SetDlgItemInt (hDlg as Integer, nIDDlgItem as Integer, wValue as Integer, bSigned as Integer) as Integer
+	Declare SetDlgItemText, "user32", SetDlgItemTextA (hDlg as Integer, nIDDlgItem as Integer, lpString as String) as Integer
+	Declare SetDoubleClickTime, "user32", SetDoubleClickTime (wCount as Integer) as Integer
+	Declare SetEndOfFile, "kernel32", SetEndOfFile (hFile as Integer) as Integer
+	Declare SetEnvironmentVariable, "kernel32", SetEnvironmentVariableA (lpName as String, lpValue as String) as Integer
+	Declare SetErrorMode, "kernel32", SetErrorMode (wMode as Integer) as Integer
+	Declare SetEvent, "kernel32", SetEvent (hEvent as Integer) as Integer
+	Declare SetFileApisToANSI, "kernel32", SetFileApisToANSI ()
+	Declare SetFileApisToOEM, "kernel32", SetFileApisToOEM ()
+	Declare SetFileAttributes, "kernel32", SetFileAttributesA (lpFileName as String, dwFileAttributes as Integer) as Integer
+	Declare SetFilePointer, "kernel32", SetFilePointer (hFile as Integer, lDistanceToMove as Integer, lpDistanceToMoveHigh as Integer, dwMoveMethod as Integer) as Integer
+	Declare SetFileTime, "Kernel32.Dll", SetFileTimeA(hFile as Handle, CreationTime as Any, LastAccessTime as Any, LastWriteTime as Any) as Boolean
+	Declare SetFocus, "user32", SetFocus (hwnd as Integer) as Integer
+	Declare SetForegroundWindow, "user32", SetForegroundWindow (hwnd as Integer) as Integer
+	Declare SetGraphicsMode, "gdi32", SetGraphicsMode (hdc as Integer, iMode as Integer) as Integer
+	Declare SetHandleCount, "kernel32", SetHandleCount (wNumber as Integer) as Integer
+	Declare SetHandleInformation, "kernel32", SetHandleInformation (hObject as Integer, dwMask as Integer, dwFlags as Integer) as Boolean
+	Declare SetICMMode, "gdi32", SetICMMode (hdc as Integer, n as Integer) as Integer
+	Declare SetICMProfile, "gdi32", SetICMProfileA (hdc as Integer, lpStr as String) as Integer
+	Declare SetLastError, "kernel32", SetLastError (dwErrCode as Integer)
+	Declare SetLastErrorEx, "user32", SetLastErrorEx (dwErrCode as Integer, dwType as Integer)
+	Declare SetLocaleInfo, "kernel32", SetLocaleInfoA (Locale as Integer, LCType as Integer, lpLCData as String) as Boolean
+	Declare SetMailslotInfo, "kernel32", SetMailslotInfo (hMailslot as Integer, lReadTimeout as Integer) as Integer
+	Declare SetMapMode, "gdi32", SetMapMode (hdc as Integer, nMapMode as Integer) as Integer
+	Declare SetMapperFlags, "gdi32", SetMapperFlags (hdc as Integer, dwFlag as Integer) as Integer
+	Declare SetMenu, "user32", SetMenu (hwnd as Integer, hMenu as Integer) as Integer
+	Declare SetMenuContextHelpId, "user32", SetMenuContextHelpId (hMenu as Integer, dw as Integer) as Boolean
+	Declare SetMenuDefaultItem, "user32", SetMenuDefaultItem (hMenu as Integer, uItem as Integer, fByPos as Integer) as Boolean
+	Declare SetMenuItemBitmaps, "user32", SetMenuItemBitmaps (hMenu as Integer, nPosition as Integer, wFlags as Integer, hBitmapUnchecked as Integer, hBitmapChecked as Integer) as Integer
+	Declare SetMessageExtraInfo, "user32", SetMessageExtraInfo (lParam as Integer) as Integer
+	Declare SetMessageQueue, "user32", SetMessageQueue (cMessagesMax as Integer) as Boolean
+	Declare SetMetaRgn, "gdi32", SetMetaRgn (hdc as Integer) as Integer
+	Declare SetMiterLimit, "gdi32", SetMiterLimit (hdc as Integer, eNewLimit as Double, peOldLimit as Double) as Integer
+	Declare SetNamedPipeHandleState, "kernel32", SetNamedPipeHandleState (hNamedPipe as Integer, lpMode as Integer, lpMaxCollectionCount as Integer, lpCollectDataTimeout as Integer) as Integer
+	Declare SetParent, "user32", SetParent (hWndChild as Integer, hWndNewParent as Integer) as Integer
+	Declare SetPixel, "gdi32", SetPixel (hdc as Integer, x as Integer, y as Integer, crColor as Integer) as Integer
+	Declare SetPixelV, "gdi32", SetPixelV (hdc as Integer, x as Integer, y as Integer, crColor as Integer) as Integer
+	Declare SetPolyFillMode, "gdi32", SetPolyFillMode (hdc as Integer, nPolyFillMode as Integer) as Integer
+	Declare SetPriorityClass, "kernel32", SetPriorityClass (hProcess as Integer, dwPriorityClass as Integer) as Integer
+	Declare SetProcessShutdownParameters, "kernel32", SetProcessShutdownParameters (dwLevel as Integer, dwFlags as Integer) as Integer
+	Declare SetProcessWindowStation, "user32", SetProcessWindowStation (hWinSta as Integer) as Boolean
+	Declare SetProcessWorkingSetSize, "kernel32", SetProcessWorkingSetSize (hProcess as Integer, dwMinimumWorkingSetSize as Integer, dwMaximumWorkingSetSize as Integer) as Boolean
+	Declare SetProp, "user32", SetPropA (hwnd as Integer, lpString as String, hData as Integer) as Integer
+	Declare SetRectRgn, "gdi32", SetRectRgn (hRgn as Integer, X1 as Integer, Y1 as Integer, X2 as Integer, Y2 as Integer) as Integer
+	Declare SetROP2, "gdi32", SetROP2 (hdc as Integer, nDrawMode as Integer) as Integer
+	Declare SetScrollPos, "user32", SetScrollPos (hwnd as Integer, nBar as Integer, nPos as Integer, bRedraw as Integer) as Integer
+	Declare SetScrollRange, "user32", SetScrollRange (hwnd as Integer, nBar as Integer, nMinPos as Integer, nMaxPos as Integer, bRedraw as Integer) as Integer
+	Declare SetServiceBits, "advapi32", SetServiceBits (hServiceStatus as Integer, dwServiceBits as Integer, bSetBitsOn as Boolean, bUpdateImmediately as Boolean) as Boolean
+	Declare SetServiceObjectSecurity, "advapi32.dll", SetServiceObjectSecurity (hService as Integer, dwSecurityInformation as Integer, lpSecurityDescriptor as Any) as Integer
+	Declare SetStdHandle, "kernel32", SetStdHandle (nStdHandle as Integer, nHandle as Integer) as Integer
+	Declare SetStretchBltMode, "gdi32", SetStretchBltMode (hdc as Integer, nStretchMode as Integer) as Integer
+	Declare SetSysColors, "user32", SetSysColors (nChanges as Integer, lpSysColor as Integer, lpColorValues as Integer) as Integer
+	Declare SetSystemCursor, "user32", SetSystemCursor (hcur as Integer, id as Integer) as Boolean
+	Declare SetSystemPaletteUse, "gdi32", SetSystemPaletteUse (hdc as Integer, wUsage as Integer) as Integer
+	Declare SetSystemPowerState, "kernel32", SetSystemPowerState (fSuspend as Integer, fForce as Integer) as Integer
+	Declare SetSystemTimeAdjustment, "kernel32", SetSystemTimeAdjustment (dwTimeAdjustment as Integer, bTimeAdjustmentDisabled as Boolean) as Boolean
+	Declare SetTapePosition, "kernel32", SetTapePosition (hDevice as Integer, dwPositionMethod as Integer, dwPartition as Integer, dwOffsetLow as Integer, dwOffsetHigh as Integer, bimmediate as Integer) as Integer
+	Declare SetTextAlign, "gdi32", SetTextAlign (hdc as Integer, wFlags as Integer) as Integer
+	Declare SetTextCharacterExtra, "gdi32", SetTextCharacterExtraA (hdc as Integer, nCharExtra as Integer) as Integer
+	Declare SetTextColor, "gdi32", SetTextColor (hdc as Integer, crColor as Integer) as Integer
+	Declare SetTextJustification, "gdi32", SetTextJustification (hdc as Integer, nBreakExtra as Integer, nBreakCount as Integer) as Integer
+	Declare SetThreadAffinityMask, "kernel32", SetThreadAffinityMask (hThread as Integer, dwThreadAffinityMask as Integer) as Integer
+	Declare SetThreadDesktop, "user32", SetThreadDesktop (hDesktop as Integer) as Boolean
+	Declare SetThreadLocale, "kernel32", SetThreadLocale (Locale as Integer) as Integer
+	Declare SetThreadPriority, "kernel32", SetThreadPriority (hThread as Integer, nPriority as Integer) as Integer
+	Declare SetThreadToken, "advapi32", SetThreadToken (Thread as Integer, Token as Integer) as Boolean
+	Declare SetTokenInformation, "advapi32.dll", SetTokenInformation (TokenHandle as Integer, TokenInformationClass as Integer, TokenInformation as Any, TokenInformationLength as Integer) as Integer
+	Declare SetUnhandledExceptionFilter, "kernel32", SetUnhandledExceptionFilter (lpTopLevelExceptionFilter as Integer) as Integer
+	Declare SetupComm, "kernel32", SetupComm (hFile as Integer, dwInQueue as Integer, dwOutQueue as Integer) as Integer
+	Declare SetUserObjectInformation, "user32", SetUserObjectInformationA (hObj as Integer, nIndex as Integer, pvInfo as Any, nLength as Integer) as Boolean
+	Declare SetVolumeLabel, "kernel32", SetVolumeLabelA (lpRootPathName as String, lpVolumeName as String) as Integer
+	Declare SetWindowContextHelpId, "user32", SetWindowContextHelpId (hWnd as Integer, dw as Integer) as Boolean
+	Declare SetWindowLong, "user32", SetWindowLongA (hwnd as Integer, nIndex as Integer, dwNewLong as Integer) as Integer
+	Declare SetWindowPos, "user32", SetWindowPos (hwnd as Integer, hWndInsertAfter as Integer, x as Integer, y as Integer, cx as Integer, cy as Integer, wFlags as Integer) as Integer
+	Declare SetWindowRgn, "user32", SetWindowRgn (hWnd as Integer, hRgn as Integer, bRedraw as Boolean) as Integer
+	Declare SetWindowsHook, "user32", SetWindowsHookA (nFilterType as Integer, pfnFilterProc as Integer) as Integer
+	Declare SetWindowsHookEx, "user32", SetWindowsHookExA (idHook as Integer, lpfn as Integer, hmod as Integer, dwThreadId as Integer) as Integer
+	Declare SetWindowText, "user32", SetWindowTextA (hwnd as Integer, lpString as String) as Integer
+	Declare SetWindowWord, "user32", SetWindowWord (hwnd as Integer, nIndex as Integer, wNewWord as Integer) as Integer
+	Declare ShellAbout, "shell32.dll", ShellAboutA (hwnd as Integer, szApp as String, szOtherStuff as String, hIcon as Integer) as Integer
+	Declare ShellExecute, "shell32.dll", ShellExecuteA (hwnd as Integer, lpOperation as String, lpFile as String, lpParameters as String, lpDirectory as String, nShowCmd as Integer) as Integer
+	Declare SHFormatDrive, "Shell32", SHFormatDrive (hwndOwner As Integer, iDrive As Integer, iCapacity As Integer, iFormatType As Integer) As Integer
+	Declare SHFreeNameMappings, "shell32.dll", SHFreeNameMappings (hNameMappings as Integer)
+	Declare SHGetNewLinkInfo, "shell32.dll", SHGetNewLinkInfoA (pszLinkto as String, pszDir as String, pszName as String, pfMustCopy as Integer, uFlags as Integer) as Integer
+	Declare ShowCaret, "user32", ShowCaret (hwnd as Integer) as Integer
+	Declare ShowCursor, "user32", ShowCursor (bShow as Integer) as Integer
+	Declare ShowOwnedPopups, "user32", ShowOwnedPopups (hwnd as Integer, fShow as Integer) as Integer
+	Declare ShowScrollBar, "user32", ShowScrollBar (hwnd as Integer, wBar as Integer, bShow as Integer) as Integer
+	Declare ShowWindow, "user32", ShowWindow (hwnd as Integer, nCmdShow as Integer) as Integer
+	Declare ShowWindow, "user32", ShowWindow(hWnd As Integer, nCmdShow As Integer) As Integer
+	Declare ShowWindowAsync, "user32", ShowWindowAsync (hWnd as Integer, nCmdShow as Integer) as Boolean
+	Declare SHRestartSystem, "Shell32", SHRestartSystem(hOwner As Integer, sPrompt As String, uFlags As Integer) As Integer
+	Declare SHRunDialog, "Shell32", SHRunDialog(hOwner As Integer, hIcon As Integer, sDir As Integer, szTitle As String, szPrompt As String, uFlags As Integer) As Integer
+	Declare SHShutDownDialog, "Shell32", SHShutDownDialog(YourGuess As Integer) As Integer
+	Declare SizeofResource, "kernel32", SizeofResource (hInstance as Integer, hResInfo as Integer) as Integer
+	Declare Sleep, "kernel32", Sleep (dwMilliseconds as Integer)
+	Declare SleepEx, "kernel32", SleepEx (dwMilliseconds as Integer, bAlertable as Integer) as Integer
+	Declare sndPlaySound, "winmm.dll", sndPlaySoundA (lpszSoundName as String, uFlags as Integer) as Integer
+	Declare StartPage, "gdi32", StartPage (hdc as Integer) as Integer
+	Declare StartPagePrinter, "winspool.drv", StartPagePrinter (hPrinter as Integer) as Integer
+	Declare StartService, "advapi32.dll", StartServiceA (hService as Integer, dwNumServiceArgs as Integer, lpServiceArgVectors as Integer) as Integer
+	Declare StretchBlt, "gdi32", StretchBlt (hdc as Integer, x as Integer, y as Integer, nWidth as Integer, nHeight as Integer, hSrcDC as Integer, xSrc as Integer, ySrc as Integer, nSrcWidth as Integer, nSrcHeight as Integer, dwRop as Integer) as Integer
+	Declare StrokeAndFillPath, "gdi32", StrokeAndFillPath (hdc as Integer) as Integer
+	Declare StrokePath, "gdi32", StrokePath (hdc as Integer) as Integer
+	Declare SuspendThread, "kernel32", SuspendThread (hThread as Integer) as Integer
+	Declare SwapBuffers, "gdi32", SwapBuffers (hDC as Integer) as Boolean
+	Declare SwapMouseButton, "user32", SwapMouseButton (bSwap as Integer) as Integer
+	Declare SwitchDesktop, "user32", SwitchDesktop (hDesktop as Integer) as Boolean
+	Declare SystemParametersInfo, "user32", SystemParametersInfoA (uAction as Integer, uParam as Integer, lpvParam as Any, fuWinIni as Integer) as Integer
+	Declare TabbedTextOut, "user32", TabbedTextOutA (hdc as Integer, x as Integer, y as Integer, lpString as String, nCount as Integer, nTabPositions as Integer, lpnTabStopPositions as Integer, nTabOrigin as Integer) as Integer
+	Declare TerminateProcess, "kernel32", TerminateProcess (hProcess as Integer, uExitCode as Integer) as Integer
+	Declare TerminateThread, "kernel32", TerminateThread (hThread as Integer, dwExitCode as Integer) as Integer
+	Declare TextOut, "gdi32", TextOutA (hdc as Integer, x as Integer, y as Integer, lpString as String, nCount as Integer) as Integer
+	Declare timeBeginPeriod, "winmm.dll", timeBeginPeriod (uPeriod as Integer) as Integer
+	Declare timeEndPeriod, "winmm.dll", timeEndPeriod (uPeriod as Integer) as Integer
+	Declare timeGetTime, "winmm.dll", timeGetTime () as Integer
+	Declare timeKillEvent, "winmm.dll", timeKillEvent (uID as Integer) as Integer
+	Declare TlsAlloc, "kernel32", TlsAlloc () as Integer
+	Declare TlsFree, "kernel32", TlsFree (dwTlsIndex as Integer) as Integer
+	Declare TlsGetValue, "kernel32", TlsGetValue (dwTlsIndex as Integer) as Integer
+	Declare TlsSetValue, "kernel32", TlsSetValue (dwTlsIndex as Integer, lpTlsValue as Any) as Integer
+	Declare UnhookWindowsHook, "user32", UnhookWindowsHook (nCode as Integer, pfnFilterProc as Integer) as Boolean
+	Declare UnhookWindowsHookEx, "user32", UnhookWindowsHookEx (hHook as Integer) as Integer
+	Declare UnloadKeyboardLayout, "user32", UnloadKeyboardLayout (HKL as Integer) as Integer
+	Declare UnlockFile, "kernel32", UnlockFile (hFile as Integer, dwFileOffsetLow as Integer, dwFileOffsetHigh as Integer, nNumberOfBytesToUnlockLow as Integer, nNumberOfBytesToUnlockHigh as Integer) as Integer
+	Declare UnlockServiceDatabase, "advapi32.dll", UnlockServiceDatabase (ScLock as Any) as Integer
+	Declare UnmapViewOfFile, "kernel32", UnmapViewOfFile (lpBaseAddress as Any) as Integer
+	Declare UnpackDDElParam, "user32", UnpackDDElParam (msg as Integer, lParam as Integer, puiLo as Integer, puiHi as Integer) as Integer
+	Declare UnrealizeObject, "gdi32", UnrealizeObject (hObject as Integer) as Integer
+	Declare UnregisterClass, "user32", UnregisterClassA (lpClassName as String, hInstance as Integer) as Integer
+	Declare UpdateColors, "gdi32", UpdateColors (hdc as Integer) as Integer
+	Declare UpdateResource, "kernel32", UpdateResourceA (hUpdate as Integer, lpType as String, lpName as String, wLanguage as Integer, lpData as Any, cbData as Integer) as Integer
+	Declare UpdateWindow, "user32", UpdateWindow (hwnd as Integer) as Integer
+	Declare ValidateRgn, "user32", ValidateRgn (hwnd as Integer, hRgn as Integer) as Integer
+	Declare VerFindFile, "version.dll", VerFindFileA (uFlags as Integer, szFileName as String, szWinDir as String, szAppDir as String, szCurDir as String, lpuCurDirLen as Integer, szDestDir as String, lpuDestDirLen as Integer) as Integer
+	Declare VerInstallFile, "version.dll",  VerInstallFileA (uFlags as Integer, szSrcFileName as String, szDestFileName as String, szSrcDir as String, szDestDir as String, szCurDir as String, szTmpFile as String, lpuTmpFileLen as Integer) as Integer
+	Declare VerLanguageName, "kernel32", VerLanguageNameA (wLang as Integer, szLang as String, nSize as Integer) as Integer
+	Declare VerQueryValue, "version.dll", VerQueryValue (pBlock as Any, lpSubBlock as String, lplpBuffer as Integer, puLen as Integer) as Integer
+	Declare VirtualAlloc, "kernel32", VirtualAlloc (lpAddress as Any, dwSize as Integer, flAllocationType as Integer, flProtect as Integer) as Integer
+	Declare VirtualFree, "kernel32", VirtualFree (lpAddress as Any, dwSize as Integer, dwFreeType as Integer) as Integer
+	Declare VirtualLock, "kernel32", VirtualLock (lpAddress as Any, dwSize as Integer) as Integer
+	Declare VirtualProtect, "kernel32", VirtualProtect (lpAddress as Any, dwSize as Integer, flNewProtect as Integer, lpflOldProtect as Integer) as Integer
+	Declare VirtualProtectEx, "kernel32", VirtualProtectEx (hProcess as Integer, lpAddress as Any, dwSize as Integer, flNewProtect as Integer, lpflOldProtect as Integer) as Integer
+	Declare VirtualUnlock, "kernel32", VirtualUnlock (lpAddress as Any, dwSize as Integer) as Integer
+	Declare WaitForInputIdle, "user32", WaitForInputIdle (hProcess as Integer, dwMilliseconds as Integer) as Integer
+	Declare WaitForMultipleObjects, "kernel32", WaitForMultipleObjects (nCount as Integer, lpHandles as Integer, bWaitAll as Integer, dwMilliseconds as Integer) as Integer
+	Declare WaitForMultipleObjectsEx, "kernel32", WaitForMultipleObjectsEx (nCount as Integer, lpHandles as Integer, bWaitAll as Integer, dwMilliseconds as Integer, bAlertable as Integer) as Integer
+	Declare WaitForPrinterChange, "winspool.drv", WaitForPrinterChange (hPrinter as Integer, flags as Integer) as Integer
+	Declare WaitForSingleObject, "kernel32", WaitForSingleObject (hHandle as Integer, dwMilliseconds as Integer) as Integer
+	Declare WaitForSingleObjectEx, "kernel32", WaitForSingleObjectEx (hHandle as Integer, dwMilliseconds as Integer, bAlertable as Integer) as Integer
+	Declare WaitMessage, "user32", WaitMessage () as Integer
+	Declare WaitNamedPipe, "kernel32", WaitNamedPipeA (lpNamedPipeName as String, nTimeOut as Integer) as Integer
+	Declare waveInClose, "winmm.dll", waveInClose (hWaveIn as Integer) as Integer
+	Declare waveInGetErrorText, "winmm.dll", waveInGetErrorTextA (err as Integer, lpText as String, uSize as Integer) as Integer
+	Declare waveInGetID, "winmm.dll", waveInGetID (hWaveIn as Integer, lpuDeviceID as Integer) as Integer
+	Declare waveInGetNumDevs, "winmm.dll", waveInGetNumDevs () as Integer
+	Declare waveInMessage, "winmm.dll", waveInMessage (hWaveIn as Integer, msg as Integer, dw1 as Integer, dw2 as Integer) as Integer
+	Declare waveInReset, "winmm.dll", waveInReset (hWaveIn as Integer) as Integer
+	Declare waveInStart, "winmm.dll", waveInStart (hWaveIn as Integer) as Integer
+	Declare waveInStop, "winmm.dll", waveInStop (hWaveIn as Integer) as Integer
+	Declare waveOutBreakLoop, "winmm.dll", waveOutBreakLoop (hWaveOut as Integer) as Integer
+	Declare waveOutClose, "winmm.dll", waveOutClose (hWaveOut as Integer) as Integer
+	Declare waveOutGetErrorText, "winmm.dll", waveOutGetErrorTextA (err as Integer, lpText as String, uSize as Integer) as Integer
+	Declare waveOutGetID, "winmm.dll", waveOutGetID (hWaveOut as Integer, lpuDeviceID as Integer) as Integer
+	Declare waveOutGetNumDevs, "winmm.dll", waveOutGetNumDevs () as Integer
+	Declare waveOutGetPitch, "winmm.dll", waveOutGetPitch (hWaveOut as Integer, lpdwPitch as Integer) as Integer
+	Declare waveOutGetPlaybackRate, "winmm.dll", waveOutGetPlaybackRate (hWaveOut as Integer, lpdwRate as Integer) as Integer
+	Declare waveOutGetVolume, "winmm.dll", waveOutGetVolume (uDeviceID as Integer, lpdwVolume as Integer) as Integer
+	Declare waveOutMessage, "winmm.dll", waveOutMessage (hWaveOut as Integer, msg as Integer, dw1 as Integer, dw2 as Integer) as Integer
+	Declare waveOutPause, "winmm.dll", waveOutPause (hWaveOut as Integer) as Integer
+	Declare waveOutReset, "winmm.dll", waveOutReset (hWaveOut as Integer) as Integer
+	Declare waveOutRestart, "winmm.dll", waveOutRestart (hWaveOut as Integer) as Integer
+	Declare waveOutSetPitch, "winmm.dll", waveOutSetPitch (hWaveOut as Integer, dwPitch as Integer) as Integer
+	Declare waveOutSetPlaybackRate, "winmm.dll", waveOutSetPlaybackRate (hWaveOut as Integer, dwRate as Integer) as Integer
+	Declare waveOutSetVolume, "winmm.dll", waveOutSetVolume (uDeviceID as Integer, dwVolume as Integer) as Integer
+	Declare WideCharToMultiByte, "kernel32", WideCharToMultiByte (CodePage as Integer, dwFlags as Integer, lpWideCharStr as String, cchWideChar as Integer, lpMultiByteStr as String, cchMultiByte as Integer, lpDefaultChar as String, lpUsedDefaultChar as Integer) as Integer
+	Declare WidenPath, "gdi32", WidenPath (hdc as Integer) as Integer
+	Declare WindowFromDC, "user32", WindowFromDC (hdc as Integer) as Integer
+	Declare WindowFromPoint, "user32", WindowFromPoint (xPoint as Integer, yPoint as Integer) as Integer
+	Declare WinExec, "kernel32", WinExec (lpCmdLine as String, nCmdShow as Integer) as Integer
+	Declare WinExecError, "shell32.dll", WinExecErrorA (hwnd as Integer, error as Integer, lpstrFileName as String, lpstrTitle as String)
+	Declare WinHelp, "user32", WinHelpA (hwnd as Integer, lpHelpFile as String, wCommand as Integer, dwData as Integer) as Integer
+	Declare WNetAddConnection, "mpr.dll", WNetAddConnectionA (lpszNetPath as String, lpszPassword as String, lpszLocalName as String) as Integer
+	Declare WNetCancelConnection, "mpr.dll", WNetCancelConnectionA (lpszName as String, bForce as Integer) as Integer
+	Declare WNetCancelConnection2, "mpr.dll", WNetCancelConnection2A (lpName as String, dwFlags as Integer, fForce as Integer) as Integer
+	Declare WNetCloseEnum, "mpr.dll", WNetCloseEnum (hEnum as Integer) as Integer
+	Declare WNetConnectionDialog, "mpr.dll", WNetConnectionDialog (hwnd as Integer, dwType as Integer) as Integer
+	Declare WNetDisconnectDialog, "mpr.dll", WNetDisconnectDialog (hwnd as Integer, dwType as Integer) as Integer
+	Declare WNetEnumResource, "mpr.dll", WNetEnumResourceA (hEnum as Integer, lpcCount as Integer, lpBuffer as Any, lpBufferSize as Integer) as Integer
+	Declare WNetGetConnection, "mpr.dll", WNetGetConnectionA (lpszLocalName as String, lpszRemoteName as String, cbRemoteName as Integer) as Integer
+	Declare WNetGetLastError, "mpr.dll", WNetGetLastErrorA (lpError as Integer, lpErrorBuf as String, nErrorBufSize as Integer, lpNameBuf as String, nNameBufSize as Integer) as Integer
+	Declare WNetGetUniversalName, "mpr", WNetGetUniversalNameA (lpLocalPath as String, dwInfoLevel as Integer, lpBuffer as Any, lpBufferSize as Integer) as Integer
+	Declare WNetGetUser, "mpr", WNetGetUserA (lpName as String, lpUserName as String, lpnLength as Integer) as Integer
+	Declare WNetGetUser, "mpr.dll", WNetGetUserA (lpName as String, lpUserName as String, lpnLength as Integer) as Integer
+	Declare WriteConsole, "kernel32", WriteConsoleA (hConsoleOutput as Integer, lpBuffer as Any, nNumberOfCharsToWrite as Integer, lpNumberOfCharsWritten as Integer, lpReserved as Any) as Integer
+	Declare WritePrinter, "winspool.drv", WritePrinter (hPrinter as Integer, pBuf as Any, cdBuf as Integer, pcWritten as Integer) as Integer
+	Declare WritePrivateProfileSection, "kernel32", WritePrivateProfileSectionA (lpAppName as String, lpString as String, lpFileName as String) as Integer
+	Declare WritePrivateProfileString, "kernel32", WritePrivateProfileStringA (lpApplicationName as String, lpKeyName as Any, lpString as Any, lpFileName as String) as Integer
+	Declare WriteProcessMemory, "kernel32", WriteProcessMemory (hProcess as Integer, lpBaseAddress as Any, lpBuffer as Any, nSize as Integer, lpNumberOfBytesWritten as Integer) as Integer
+	Declare WriteProfileSection, "kernel32", WriteProfileSectionA (lpAppName as String, lpString as String) as Integer
+	Declare WriteProfileString, "kernel32", WriteProfileStringA (lpszSection as String, lpszKeyName as String, lpszString as String) as Integer
+	Declare WriteTapemark, "kernel32", WriteTapemark (hDevice as Integer, dwTapemarkType as Integer, dwTapemarkCount as Integer, bimmediate as Integer) as Integer
+%>

@@ -1,0 +1,24 @@
+<%
+	'-----------------------------------------------------------------------------------------------------------------
+	
+	TestStrings("Hello Cruel World")
+	
+	'-----------------------------------------------------------------------------------------------------------------
+	
+	Function TestStrings(sData as String)
+		Print("sData: '", sData, "'")
+		Print("Len: '", Len(sData) , "'")
+		Print("Left: '", Left(sData, 7), "'")
+		Print("Right: '", Right(sData, 7), "'")
+		Print("UCase: '", UCase(sData), "'")
+		Print("LCase: '", LCase(sData), "'")
+		Print("Mid: '", Mid(sData, 6, 5), "'")
+		
+		For(iPos = 0 To Len(sData))
+			Print("Character: '", Mid(sData, iPos, 1), "'")
+		Next
+	
+	End Function
+	
+	'-----------------------------------------------------------------------------------------------------------------
+%>

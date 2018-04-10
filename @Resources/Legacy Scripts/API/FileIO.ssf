@@ -1,0 +1,345 @@
+<%
+	'***************************************************************************************************************
+	'File Access Rights
+	'***************************************************************************************************************
+	'FILE_ADD_FILE               For a directory, the right to create a file in the directory.
+	'FILE_ADD_SUBDIRECTORY       For a directory, the right to create a subdirectory.
+	'FILE_ALL_ACCESS             All possible access rights for a file.
+	'FILE_APPEND_DATA            For a file object, the right to append data to the file.
+	'                                For a directory object, the right to create a subdirectory.
+	'FILE_CREATE_PIPE_INSTANCE   For a named pipe, the right to create a pipe.
+	'FILE_DELETE_CHILD           For a directory, the right to delete a directory and all the
+	'                                files it contains, including read-only files.
+	'FILE_EXECUTE                For a native code file, the right to execute the file.
+	'                                This access right given to scripts may cause the script
+	'                                to be executable, depending on the script interpreter.
+	'FILE_LIST_DIRECTORY         For a directory, the right to list the contents of the directory.
+	'FILE_READ_ATTRIBUTES        The right to read file attributes.
+	'FILE_READ_DATA              For a file object, the right to read the corresponding file data.
+	'                                For a directory object, the right to read the corresponding directory data.
+	'FILE_READ_EA                The right to read extended file attributes.
+	'FILE_TRAVERSE               For a directory, the right to traverse the directory.
+	'                                By default, users are assigned the BYPASS_TRAVERSE_CHECKING privilege,
+	'                                which ignores the FILE_TRAVERSE access right. See the remarks later
+	'                                in this section for more information.
+	'FILE_WRITE_ATTRIBUTES       The right to write file attributes.
+	'FILE_WRITE_DATA             For a file object, the right to write data to the file.
+	'                                For a directory object, the right to create a file in the directory.
+	'FILE_WRITE_EA               The right to write extended file attributes.
+	'STANDARD_RIGHTS_READ        Includes READ_CONTROL, which is the right to read the information in the
+	'                                file or directory object's security descriptor. This does not include
+	'                                the information in the SACL.
+	'STANDARD_RIGHTS_WRITE       Includes WRITE_CONTROL, which is the right to write to the directory
+	'                                object's security descriptor. This does not include
+	'                                the information in the SACL.
+	'SYNCHRONIZE The right       to specify a file handle in one of the wait functions.
+	'                                However, for asynchronous file I/O operations, you should wait
+	'                                on the event handle in an OVERLAPPED structure rather than using
+	'                                the file handle for synchronization.
+	'***************************************************************************************************************
+	
+	'---------------------------------------------------------------------------------------------------------------
+	
+	'***************************************************************************************************************
+	'The following are the generic access rights for files and directories.
+	'***************************************************************************************************************
+	Define ReadAccess      0x80000000
+	'ReadAccess Grants the following file access rights:
+	'    FILE_READ_ATTRIBUTES
+	'    FILE_READ_DATA
+	'    FILE_READ_EA
+	'    STANDARD_RIGHTS_READ
+	'    SYNCHRONIZE
+	'
+	Define WriteAccess     0x40000000
+	'WriteAccess Grants the following file access rights:
+	'    FILE_APPEND_DATA
+	'    FILE_WRITE_ATTRIBUTES
+	'    FILE_WRITE_DATA
+	'    FILE_WRITE_EA
+	'    STANDARD_RIGHTS_WRITE
+	'    SYNCHRONIZE
+	'
+	Define ExecuteAccess   0x20000000
+	'ExecuteAccess Grants the following file access rights:
+	'   FILE_READ_ATTRIBUTES
+	'   STANDARD_RIGHTS_EXECUTE
+	'   SYNCHRONIZE
+	'
+	Define AllAccess       0x10000000
+	'ExecuteAccess Grants the following file access rights:
+	'   All access rights
+	'***************************************************************************************************************
+	
+	'---------------------------------------------------------------------------------------------------------------
+	
+	'***************************************************************************************************************
+	'Action to take on files that exist, and which action to take when files do not exist.
+	'***************************************************************************************************************
+	Define CreateNew           1
+	'Creates a new file. If the file exists, the function overwrites the file,
+	'   clears the existing attributes, combines the specified file attributes
+	'   and flags with FILE_ATTRIBUTE_ARCHIVE, but does not set the security
+	'   descriptor specified by the SECURITY_ATTRIBUTES structure.
+	'
+	Define CreateAlways        2
+	'Creates a new file. The function fails if the specified file already exists.
+	'
+	Define OpenExisting        3
+	'Opens the file, if it exists. If the file does not exist, the function
+	'   creates the file as if dwCreationDisposition were CREATE_NEW.
+	'
+	Define OpenAlways          4
+	'Opens the file. The function fails if the file does not exist.
+	'
+	Define TruncateExisting    5
+	'Opens the file and truncates it so that its size is zero bytes.
+	'   The calling process must open the file with the GENERIC_WRITE
+	'   access right. The function fails if the file does not exist.
+	'***************************************************************************************************************
+	
+	'---------------------------------------------------------------------------------------------------------------
+	
+	'***************************************************************************************************************
+	'Sharing mode of the object. You cannot request a sharing mode that conflicts with
+	'    the access mode specified in a previous open request whose handle is still open.
+	'    If this parameter is zero and CreateFile succeeds, the object cannot be shared
+	'    and cannot be opened again until the handle is closed.
+	'
+	'To enable other processes to share the object while your process has it open,
+	'   use a combination of one or more of the following values to specify the type
+	'   of access they can request when they open the object. These sharing options
+	'   remain in effect until you close the handle to the object.
+	'***************************************************************************************************************
+	'
+	'Enables subsequent open operations on the object to request read access.
+	'   Otherwise, other processes cannot open the object if they request read access.
+	'   If the object has already been opened with read access,
+	'   the sharing mode must include this flag.
+	Define FILE_SHARE_READ                 0x00000001
+	'
+	'Enables subsequent open operations on the object to request write access.
+	'   Otherwise, other processes cannot open the object if they request write access.
+	'   If the object has already been opened with write access,
+	'   the sharing mode must include this flag.
+	Define FILE_SHARE_WRITE                0x00000002
+	'
+	'Enables subsequent open operations on the object to request delete access.
+	'   Otherwise, other processes cannot open the object if they request delete access.
+	'   If the object has already been opened with delete access,
+	'   the sharing mode must include this flag.
+	'   Windows Me/98/95: This flag is not supported.
+	Define FILE_SHARE_DELETE               0x00000004
+	'
+	'***************************************************************************************************************
+	
+	'---------------------------------------------------------------------------------------------------------------
+	
+	'***************************************************************************************************************
+	'The following file attributes and flags are used only for file objects,
+	'    not other types of objects created by CreateFile.
+	'
+	'When CreateFile opens an existing file, it combines the file flags with existing
+	'    file attributes, and ignores any supplied file attributes.
+	'
+	'This parameter can include any combination of the file attributes
+	'    (noting that all other file attributes override FILE_ATTRIBUTE_NORMAL).
+	'***************************************************************************************************************
+	'
+	'The file should be archived. Applications use this attribute to
+	'   mark files for backup or removal.
+	Define FILE_ATTRIBUTE_ARCHIVE              0x00000020
+	'
+	'The file or directory is encrypted. For a file, this means that all data in
+	'   the file is encrypted. For a directory, this means that encryption is the
+	'   default for newly created files and subdirectories.
+	'   This flag has no effect if FILE_ATTRIBUTE_SYSTEM is also specified.
+	Define FILE_ATTRIBUTE_ENCRYPTED            0x00004000
+	'
+	'The file is hidden. It is not to be included in an ordinary directory listing.
+	Define FILE_ATTRIBUTE_HIDDEN               0x00000002
+	'
+	'The file has no other attributes set. This attribute is valid only if used alone.
+	Define FILE_ATTRIBUTE_NORMAL               0x00000080
+	'
+	'The file will not be indexed by the content indexing service.
+	Define FILE_ATTRIBUTE_NOT_CONTENT_INDEXED  0x00002000
+	'
+	'The data of the file is not immediately available.
+	'   This attribute indicates that the file data has been physically moved
+	'   to offline storage. This attribute is used by Remote Storage,
+	'   the hierarchical storage management software.
+	'   Applications should not arbitrarily change this attribute.
+	Define FILE_ATTRIBUTE_OFFLINE              0x00001000
+	'
+	'The file is read only. Applications can read the file
+	'   but cannot write to it or delete it.
+	Define FILE_ATTRIBUTE_READONLY             0x00000001
+	'
+	'The file is part of or is used exclusively by the operating system.
+	Define FILE_ATTRIBUTE_SYSTEM               0x00000004
+	'
+	'The file is being used for temporary storage. File systems avoid
+	'   writing data back to mass storage if sufficient cache memory
+	'   is available, because often the application deletes the
+	'   temporary file shortly after the handle is closed.
+	'   In that case, the system can entirely avoid writing the data.
+	'   Otherwise, the data will be written after the handle is closed.
+	Define FILE_ATTRIBUTE_TEMPORARY            0x00000100
+	Define FILE_ATTRIBUTE_DIRECTORY            0x00000010
+	Define FILE_ATTRIBUTE_DEVICE               0x00000040
+	Define FILE_ATTRIBUTE_SPARSE_FILE          0x00000200
+	Define FILE_ATTRIBUTE_REPARSE_POINT        0x00000400
+	Define FILE_ATTRIBUTE_COMPRESSED           0x00000800
+	'
+	'***************************************************************************************************************
+	
+	'---------------------------------------------------------------------------------------------------------------
+	
+	'***************************************************************************************************************
+	'The attributes parameter can also include any combination of the following flags.
+	'***************************************************************************************************************
+	'Indicates that the file is being opened or created for a backup or restore operation.
+	'    The system ensures that the calling process overrides file security checks,
+	'    provided it has the SE_BACKUP_NAME and SE_RESTORE_NAME privileges.
+	'    For more information, see Changing Privileges in a Token.
+	'
+	'You can also set this flag to obtain a handle to a directory.
+	'    Where indicated, a directory handle can be passed to some
+	'    functions in place of a file handle.
+	'
+	'Windows Me/98/95:  This flag is not supported.
+	Define FILE_FLAG_BACKUP_SEMANTICS      0x02000000
+	'
+	'Indicates that the operating system is to delete the file immediately after all
+	'   of its handles have been closed, not just the handle for which you specified
+	'   FILE_FLAG_DELETE_ON_CLOSE.
+	'
+	'If there are existing open handles to the file, the call fails unless they were
+	'   all opened with the FILE_SHARE_DELETE share mode.
+	'
+	'Subsequent open requests for the file will fail, unless they specify the FILE_SHARE_DELETE share mode.
+	Define FILE_FLAG_DELETE_ON_CLOSE       0x04000000
+	'
+	'Instructs the system to open the file with no system caching.
+	'   This flag has no effect on hard disk caching. When combined with FILE_FLAG_OVERLAPPED,
+	'   the flag gives maximum asynchronous performance, because the I/O does not rely on the
+	'   synchronous operations of the memory manager. However, some I/O operations will take longer,
+	'   because data is not being held in the cache. Also, the file metadata may still be cached.
+	'   To flush the metadata to disk, use the FlushFileBuffers function.
+	'
+	'An application must meet certain requirements when working with files opened with no buffering:
+	'    File access must begin at byte offsets within the file that are integer
+	'       multiples of the volume's sector size.
+	'    File access must be for numbers of bytes that are integer multiples of the
+	'       volume's sector size. For example, if the sector size is 512 bytes, an
+	'       application can request reads and writes of 512, 1024, or 2048 bytes,
+	'       but not of 335, 981, or 7171 bytes.
+	'    Buffer addresses for read and write operations should be sector aligned
+	'       (aligned on addresses in memory that are integer multiples of the volume's
+	'       sector size). Depending on the disk, this requirement may not be enforced.
+	'    One way to align buffers on integer multiples of the volume sector size is
+	'       to use VirtualAlloc to allocate the buffers. It allocates memory that
+	'       is aligned on addresses that are integer multiples of the operating
+	'       system's memory page size. Because both memory page and volume sector
+	'       sizes are powers of 2, this memory is also aligned on addresses that
+	'       are integer multiples of a volume's sector size.
+	'       An application can determine a volume's sector size by calling the
+	'       GetDiskFreeSpace function.
+	Define FILE_FLAG_NO_BUFFERING          0x20000000
+	'Indicates that the file data is requested, but it should continue to reside in
+	'   remote storage. It should not be transported back to local storage.
+	'   This flag is intended for use by remote storage systems.
+	Define FILE_FLAG_OPEN_NO_RECALL        0x00100000
+	'Specifying this flag inhibits the reparse behavior of NTFS reparse points.
+	'   When the file is opened, a file handle is returned, whether the filter
+	'   that controls the reparse point is operational or not.
+	'   This flag cannot be used with the CREATE_ALWAYS flag.
+	Define FILE_FLAG_OPEN_REPARSE_POINT    0x00200000
+	'Instructs the system to initialize the object, so that operations that take
+	'   a significant amount of time to process return ERROR_IO_PENDING.
+	'   When the operation is finished, the specified event is set to the signaled state.
+	'
+	'When you specify FILE_FLAG_OVERLAPPED, the file read and write functions must
+	'   specify an OVERLAPPED structure. That is, when FILE_FLAG_OVERLAPPED is specified,
+	'   an application must perform overlapped reading and writing.
+	'
+	'When FILE_FLAG_OVERLAPPED is specified, the system does not maintain the file pointer.
+	'   The file position must be passed as part of the lpOverlapped parameter
+	'   (pointing to an OVERLAPPED structure) to the file read and write functions.
+	'
+	'This flag also enables more than one operation to be performed simultaneously
+	'   with the handle (a simultaneous read and write operation, for example).
+	Define FILE_FLAG_OVERLAPPED            0x40000000
+	'Indicates that the file is to be accessed according to POSIX rules.
+	'   This includes allowing multiple files with names, differing only in case,
+	'   for file systems that support such naming. Use care when using this option
+	'   because files created with this flag may not be accessible by
+	'   applications written for MS-DOS or 16-bit Windows.
+	Define FILE_FLAG_POSIX_SEMANTICS       0x01000000
+	'Indicates that the file is accessed randomly. The system can use
+	'   this as a hint to optimize file caching.
+	Define FILE_FLAG_RANDOM_ACCESS         0x10000000
+	'Indicates that the file is to be accessed sequentially from beginning to end.
+	'   The system can use this as a hint to optimize file caching.
+	'   If an application moves the file pointer for random access,
+	'   optimum caching may not occur' however, correct operation is still guaranteed.
+	'
+	'Specifying this flag can increase performance for applications that read large
+	'   files using sequential access. Performance gains can be even more noticeable
+	'   for applications that read large files mostly sequentially,
+	'   but occasionally skip over small ranges of bytes.
+	Define FILE_FLAG_SEQUENTIAL_SCAN       0x08000000
+	'Instructs the system to write through any intermediate cache and go directly to disk.
+	'
+	'If FILE_FLAG_NO_BUFFERING is not also specified, so that system caching is in effect,
+	'   then the data is written to the system cache, but is flushed to disk without delay.
+	'
+	'If FILE_FLAG_NO_BUFFERING is also specified, so that system caching is not in effect,
+	'   then the data is immediately flushed to disk without going through the system cache.
+	'	The operating system also requests a write-through the hard disk cache to persistent media.
+	'	However, not all hardware supports this write-through capability.
+	Define FILE_FLAG_WRITE_THROUGH         0x80000000
+	'
+	Define FILE_FLAG_FIRST_PIPE_INSTANCE   0x00080000
+	'***************************************************************************************************************
+	
+	'---------------------------------------------------------------------------------------------------------------
+	
+	'***************************************************************************************************************
+	'If the CreateFile function opens the client side of a named pipe,
+	'    the dwFlagsAndAttributes parameter can also contain Security
+	'    Quality of Service information. For more information,
+	'    see Impersonation Levels.
+	'
+	'When the calling application specifies the SECURITY_SQOS_PRESENT flag,
+	'    the dwFlagsAndAttributes parameter can contain one or more of the following values.
+	'***************************************************************************************************************
+	'
+	'Impersonate the client at the Anonymous impersonation level.
+	Define SECURITY_ANONYMOUS          ( SecurityAnonymous      << 16 )
+	'
+	'The security tracking mode is dynamic. If this flag is not specified,
+	'   the security tracking mode is static.
+	Define SECURITY_CONTEXT_TRACKING  0x00040000
+	'
+	'Impersonate the client at the Delegation impersonation level.
+	Define SECURITY_DELEGATION         ( SecurityDelegation     << 16 )
+	'
+	'Only the enabled aspects of the client's security context are available to
+	'   the server. If you do not specify this flag, all aspects of the client's
+	'   security context are available.
+	'This allows the client to limit the groups and privileges that a server
+	'   can use while impersonating the client.
+	Define SECURITY_EFFECTIVE_ONLY    0x00080000
+	'
+	'Impersonate the client at the Identification impersonation level.
+	Define SECURITY_IDENTIFICATION     ( SecurityIdentification << 16 )
+	'
+	'Impersonate the client at the Impersonation impersonation level.
+	Define SECURITY_IMPERSONATION      ( SecurityImpersonation  << 16 )
+	'
+	Define SECURITY_SQOS_PRESENT      0x00100000
+	Define SECURITY_VALID_SQOS_FLAGS  0x001F0000
+	'***************************************************************************************************************
+%>

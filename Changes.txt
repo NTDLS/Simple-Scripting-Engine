@@ -1,0 +1,258 @@
+1.0.0.0
+Initial public release.
+
+1.0.0.1 - 1.0.2.6
+Complete re-write - versioning information is not applicable.
+
+1.0.2.7
+Added (manual) auto-update utility.
+New and improved IDE.
+Major update, major rewrite of all key components. 
+
+1.0.2.8
+Fixed problems with built-in Env. Code. classes.
+
+1.0.2.9
+Standardized error messages.
+Began implementation of Try/Catch handlers.
+Added file I/O routines.
+Added soft exception handling.
+
+1.0.3.0
+Included file I/O and Error Handing examples.
+Improved error handing functionality, added new functions to allow access to soft errors.
+Resolved major problem which caused the IDE to crash on 64bit systems.
+
+1.0.3.1
+Added try/catch error handling.
+
+1.0.3.2
+Added ability to parse C/C++ #define preprocessors. Other preprocessors, such as #if #elif and #else have NOT been implemented. 
+Added many new functions (Checksum, SHA1, URLEncode, URLDecode, etc, etc.)
+     
+1.0.3.3
+Added code scope validation. This ensures that all code blocks exit with the same scope in which they were introduced. This functionality can be disabled by passing the /NoValidate parameter to the scripting engine. 
+
+1.0.3.4
+Added FOR loop functionality (in addition to the pre-existing WHILE loop). 
+
+1.0.3.5, 1.0.3.6
+Added "snippets" tool functionality. Accessible from the Snippets tool bar icon.
+Added IDE break-points. Support break, step-into, step-over and step-out.
+Added support for watchs (evaluation of variable values at runtime).
+Remove ActiveX and external API call support. This is not a permanant removal but is intended to enable us to refocus on core functionality of the engine. 
+
+1.0.3.7
+Added “script library” to the IDE interface under the help menu.
+Added real-time expression watch. Variables and expressions can be evaluated without break points.
+Added ability to evaluate variables and expressions through the IDE. This can be done in several ways - some update when break points are hit, while others are real-time. 
+Reworked many language namespaces – the documentation is now out-of-date.
+Added tons of new debugging functionality to the engine. Such as Debug.Break() and Debug.Evaluate().
+Added ability to add and remove break-points while running.
+
+1.0.3.8
+Added new error handing functions to allow to ignore non-critical errors.
+Completed first pass at documentation.
+Split from the original path of creating a drop in replacement for classic ASP.
+
+1.0.3.9
+Added all user variables to the drop-down list on the watch editor
+Resolved IDE exceptions that were thrown while dragging and dropping text
+Added exception handling to the watches within the engine
+Added local variable watch tab to the IDE
+
+1.0.4.0
+Restored engine support for windows 2000. The IDE will not run on windows 2000 or below.
+Changed the behavior of code stepping. The operation is now more intuitive.
+
+1.0.4.1, 1.0.4.2, 1.0.4.3
+Added lots of new string functions and properties.
+Fully implemented socket support.
+Added supplemental looping keywords: Break and Continue
+Enhanced try/catch ability to catch errors that occur during declarations and logic parsing.
+Fixed issue with IF->ELSE IF->ELSE->END IF logic not being followed correctly.
+Implemented ability to pass complex types to script functions.
+Implemented inline iterators.
+Resolved problem parsing simple expressions with right hand negative values. Example: (5<-10).
+
+1.0.4.4, 1.0.4.5, 1.0.4.6
+Implemented nested properties.
+Resolved issues with selecting error from grid when debugging unsaved code.
+Resolved several socket functionlity quirks.
+Added literial string properties.
+
+1.0.4.7, 1.0.4.8
+Renamed SendA and RecvA to TrySend and TryRecv to better reflect their functionality.
+Implemented numeric properties
+Added additional string properties.
+
+1.0.4.9
+Major refinements/fixes to auto-completion.
+Added auto-completion to the immediate window with runtime debug support.
+Refined on-the-fly-watch from the context menu.
+Reworked internal procedure order by namespace for performance.
+Added additional numeric and string properties.
+Started on second part of documentation (non-code related).
+Added find-text-at-cursor to find/replace dialogs.
+Reworked find/replace methodology.
+Lots of new file manipulation functionality.
+
+1.0.5.0
+Added code export functionality to the IDE.
+Reworked all documentation examples.
+Fixed URLEncode and URLDecode routines.
+Fixed issue which caused caller variables to be available to a called function.
+Significant improvements in variable access speeds.
+
+1.0.5.1
+Implemented FOR loop stepping.
+Implemented FOR loop auto decrementing.
+Added HTML code export functionality to IDE
+
+1.0.5.2
+Added new Help file viewer.
+Further tweaked auto-completion.
+Fixed bug which caused the IDE to sometimes crash when editing files.
+Added help file index.
+
+1.0.5.3
+Reduced IDE resource requirements.
+Integrated the documentation system.
+ 
+1.0.5.4
+Merged components memory pools for faster memory allocation.
+Context sensitive help fixups.
+Removed thread isolation from memory allocations for better performance.
+
+1.0.5.5
+Added additional string functions.
+Implemented string / character indexing.
+Revised documentation.
+Replaced Len functiontion with Length for the sake of code completion.
+
+1.0.5.6
+Renamed Val function to ToInteger, added ToDouble function.
+Changed String.ToDouble and String.ToInteger properties to parse formatted numbers.
+
+1.0.5.7
+Added new Functions.IsDefined, Variables IsDefined, Define and Undefine functions.
+Segmented IDE auto-completion words into namespaces, added images.
+Fixed IDE auto-complete bug which sometime caused the list to be filled with garbage.
+
+1.0.5.8
+Resolved IDE error when opening help after all tabs are closed.
+Added validation of basic function return types.
+Implemented the ability to pass complex values out of functions via its parameters.
+All complex types are now passed by reference - by value is not an option.
+Internal feature: Added variable index to variable array list.
+Implemented variable dependency chaining to allow multi-level pass through.
+
+1.0.5.9
+Implemented new SQL connection transaction functionality.
+Made RecordSet optional to support "execute non-query" functionality.
+Fixed bug which caused engine to crash on RecordSet execptions (as opposed to connection exceptions).
+Added many new files to the IDEs built in library.
+Changed File.Open default creation dispositions to create a safer and cleaner environment.
+Changed the type of several Socket and SQL output values.
+Added new Numeric.ToString functionality to complement FormatNumeric.
+Resolved problems with Web.URLDecode when not passing a specified length.
+Added additional type checking when passing complex objects to functions.
+Corrected issues with Socket.Server which could cause data loss on disconnection.
+Corrected IDEs handing of Current Words when searching and opening documentation.
+
+1.0.6.0
+IDE: Added copy, paste, breakpoint and watch functionality to the context menu.
+IDE: Added options item to file menu for IDE customizations.
+Engine: Resolved potential mathematical flaw which could cause engine crash.
+Removed legacy "NoConsole" engine switch.
+
+1.0.6.1
+Fixed locking caused when script functions (with return values used in logic) throw exceptions.
+Fixed major bug which would cause text data to be written out of order on exception.
+Added ContentType pre-processor for web use.
+Implemented nested properies when working with mathematical expressions and logic.
+Added new Env namespace functionality: Get, Set, Count, Name, Index and Value.
+Added additional type checking for numeric parameters.
+
+1.0.6.2
+Refined detection of mathematical expressions.
+Added constants for bitwise [And] and [Or]: [bAND] and [bOR] respectively.
+Implemented ability to attach to scripts that are launched with the /debug parameter.
+Corrected return data-types on several system calls.
+Began on first version of context sensitive code documentation.
+
+1.0.6.3
+Resolved issue which would cause pre-processor errors not to be sent to IDE.
+Re-Implemented first functional external API functionality (Not yet released).
+IDE: Resolved crashing when auto-complete function documentation is unavailable.
+IDE: Resolved accidental feature removal: Immediate.
+Resolved issue which caused stdout to be written to the IDE out of order.
+Began first draft of custom types, complex types and strict types (for external API use).
+IDE: Resolved issue finding next occurrence on same line.
+IDE: Added ability to set default run file when multiple files are open in the IDE.
+IDE: Added file list tab which allows the user to view and easily open files loaded by the main script.
+IDE: Changed "Local Variables" tab to only show local variables as opposed to all vars in higher scope.
+Altered [For] loop scope to that it nolonger increases and drops the scope by two - now functions like [While].
+Implemented concept of "Major Scopes" for locals debugging.
+Optimized variable value allocations.
+Optimized array allocations (Functions, Variables and Code Lines).
+
+1.0.6.4
+Corrected syntax highlighter scopes. keywords are nolonger highlighted out of scope.
+The current path is set to the path of the first script. This eases relative include file logic.
+Removed the OS namespace, merged most of the functionality into the Sys namespace.
+Added Process namespace to ease the task of retrieving scripting engine instance process information.
+Removed redundant functionality 'StrCmp', 'StrCmpI', 'StrEql', 'StrElqI', 'InStr', 'InStrI'.
+Removed 'ReplaceI' and 'String.ReplaceI'. Replaced with parametrized versions.
+Fixed IDE "save as" tab naming functionality.
+Fixed non-recoverable IDE error when attempting to save read-only files.
+Resolved functionality conflicts in library code and fixed "'For' terminator not found error".
+Corrected reversed 'CaseSensitivity' parameter of 'IndexOf' function.
+Replaced form and query variable parsing methods. Added new 'Query' namespace.
+Replaced entire CGI parsing library with custom functionality. Stability was in question.
+Implemented bitwise NOT and corrected order of operation of logical NOT.
+
+1.0.6.5
+Resolved issue which caused execution to continue after unhanded throw.
+Implemented one-per-file namespaces.
+Introduced standard abstraction library.
+Added Form and Query Value.Define function.
+
+1.0.6.9
+Implemented the return complex types (SQL.Recordset, Socket Client/Server etc.) from function calls.
+Resolved issues with FOR NEXT with custom stepping.
+Resolved bug where pre-validation exceptions were not reporting file names which crashed the IDE.
+Replaced AutoComplete method with pre-compiled json, removed real-time CHM decompilation.
+Remastered documentation, indexing now makes sense.
+Implemented the return complex types (SQL.Recordset, Socket Client/Server etc.) from function calls.
+Implemented [+=] for appending strings and error checking for non-numeric types on [--], [++] and [-=].
+Fully implemented list/vector type.
+Fixed multi-level namespace support.
+Added DECLARE procedures to contained namespaces.
+Fixed major issue which caused instant crash on some systems. Caused by improper command-line parsing.
+Resolved issue where some early error detection would not report file and line of exceptions.
+Resolved issues with passing SocketClient by reference.
+Resolved issue with IDE auto-completion on multiple monitor systems when the IDE is off of the primary screen.
+Resolved issues with strict types data lengths.
+Resolved issue setting strict type boolean - caused memory violation.
+Added native support for Base64 encoding and decoding.
+Added new EventLoggin namespace for writing WinAPI EventLogs.
+Added native XML Writer support.
+Added native XML Reader support.
+Centralized the memory pool. All objects now share the same pool, including intrinsic methods such as CSocketServer().
+
+1.0.7.0
+Implemented string interpolation.
+Implemented escape character ignore for literal strings.
+Converted XML classes to case-insensitive.
+Added additional math functions.
+Reworked auto-unsigned math operations.
+Added quick watch.
+
+?.?.?.?
+Added arrays for builtin basic types.
+Added support for byte native arrays
+Added support for raw memory pointers.
+Resolved BREAK bug for while loops.
+Added support for passing type names to functions.
+Added support for type casting.

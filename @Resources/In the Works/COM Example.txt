@@ -1,0 +1,77 @@
+	/*
+	if(!SUCCEEDED(CoInitialize(NULL)))
+	{
+		return Engine.Error->Hard("Failed to initialize COM");
+	}
+	*/
+
+	/*//COM Example, completely working:
+	HRESULT hResult;
+
+	CLSID ClassID;
+	IClassFactory *pClf;
+	void *pVdb;
+
+    if(!(hResult = SUCCEEDED(CoInitialize(NULL))))
+	{
+		return 1;
+	}
+
+	if(SUCCEEDED(hResult = CLSIDFromProgID(OLESTR("Scripting.FileSystemObject"), &ClassID)))
+	{
+		IDispatch *pDispatch;
+
+		if(SUCCEEDED(hResult = CoCreateInstance(ClassID, NULL, CLSCTX_INPROC_SERVER, IID_IDispatch, (void **)&pDispatch)))
+		{
+			OLECHAR *sMember = L"FileExists";
+
+			DISPID idFileExists;
+
+			if(SUCCEEDED(hResult = pDispatch->GetIDsOfNames(IID_NULL, &sMember, 1, LOCALE_SYSTEM_DEFAULT, &idFileExists)))
+			{
+				unsigned int puArgErr = 0;
+
+				VARIANT VarResult;
+				EXCEPINFO pExcepInfo;
+
+				VariantInit(&VarResult);
+				VariantInit(&VarResult);
+
+				DISPPARAMS pParams;
+				memset(&pParams, 0, sizeof(DISPPARAMS));
+				pParams.cArgs = 1;
+
+				VARIANT Arguments[1];
+				VariantInit(&Arguments[0]);
+
+				pParams.rgvarg = Arguments;
+				pParams.cNamedArgs = 0;
+				pParams.rgvarg[0].vt = VT_BSTR;
+				pParams.rgvarg[0].bstrVal = SysAllocString(L"C:\\Test.txt");
+
+				hResult = pDispatch->Invoke(
+					idFileExists,
+					IID_NULL,
+					LOCALE_SYSTEM_DEFAULT,
+					DISPATCH_METHOD,
+					&pParams,
+					&VarResult,
+					&pExcepInfo,
+					&puArgErr
+				);
+
+				SysFreeString(pParams.rgvarg[0].bstrVal);
+
+				printf("File Exists? %d\n", abs(VarResult.boolVal));
+			}
+
+			pDispatch->Release();
+		}
+	}
+
+	CoUninitialize();
+
+	return 0;
+	*/
+
+	//CoUninitialize();

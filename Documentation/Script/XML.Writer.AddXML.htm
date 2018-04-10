@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>XML :: Writer :: AddXML</title>
+</head>
+
+<body Background="/Images/BGCode.gif">
+<font size="5">XML :: Writer :: AddXML</font><br />
+<hr /><br /><br />
+
+<b>Description:</b>
+<blockquote>
+<!-- ##BEGIN_DESCRIPTION## -->
+Adds another XML writer's contents to the XML writer.
+<!-- ##END_DESCRIPTION## -->
+</blockquote>
+
+<b>Syntax:</b>
+<blockquote>
+<font color="0000EE">XML.Writer.AddXML</font>(<font color="#000088">XMLWriter</font> as <font color="MediumVioletRed">XML.Writer</font>)</blockquote>
+
+<b>Parameters:</b>
+<blockquote>
+<ul><li><font color="#000088">XMLWriter</font> as <font color="MediumVioletRed">XML.Writer</font><ul><li>
+The XML writer to read XML text from for appending to the XML writer.
+</ul></ul>
+</blockquote>
+
+<b>Example:</b>
+<blockquote>
+<table  ><tr><td nowrap><div style=""><div style="display:none;" id="closed635947707099243306_1"><img src="/images/Code/PlusNoLines.gif" align=top onclick="open635947707099243306_1.style.display='block'; closed635947707099243306_1.style.display='none'; "><b><span style="color:#00008b;background-color:#c0c0c0;">&lt;%...%&gt;</span></b></div><div style="display:block;" id="open635947707099243306_1"><img src="/images/Code/minusNoTopLine.gif" align=top onclick="open635947707099243306_1.style.display='none'; closed635947707099243306_1.style.display='block'; "><span style="color:#000000;background-color:#ffff00;">&lt;%</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><b><span style="color:#0000ff">var</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">people</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">as</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#c71585">XML.Writer</span></b><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">people</span><span style="color:#ff0000">.</span><span style="color:#0000ff">SetName</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">People</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<div style="display:none;" id="closed635947707099243306_6"><img src="/images/Code/plus.gif" align=top onclick="open635947707099243306_6.style.display='block'; closed635947707099243306_6.style.display='none'; "><b><span style="color:#00008b;background-color:#c0c0c0;">For&nbsp;(i&nbsp;as&nbsp;Numeric&nbsp;=&nbsp;0&nbsp;to&nbsp;10)&nbsp;...</span></b></div><div style="display:block;" id="open635947707099243306_6"><img src="/images/Code/minus.gif" align=top onclick="open635947707099243306_6.style.display='none'; closed635947707099243306_6.style.display='block'; "><b><span style="color:#0000ff">for</span></b><span style="color:#ff0000">(</span><span style="color:#000000">i</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">as</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#c71585">Numeric</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">=</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#008080">0</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">to</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#008080">10</span></b><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000"></span><span style="color:#000000">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">var</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">person</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">as</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#c71585">XML.Writer</span></b><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000"></span><span style="color:#000000">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#000000"></span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000"></span><span style="color:#000000">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#000000">person</span><span style="color:#ff0000">.</span><span style="color:#0000ff">SetName</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Person</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000"></span><span style="color:#000000">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#000000">person</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Add</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Id</span><span style="color:#ff0000">"</span><span style="color:#000000">,</span><span style="color:#000000">&nbsp;</span><span style="color:#000000">i</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000"></span><span style="color:#000000">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#000000">person</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Add</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">FirstName</span><span style="color:#ff0000">"</span><span style="color:#000000">,</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">"</span><span style="color:#ff0000">Steve_</span><span style="color:#ff0000">"</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000">i</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000"></span><span style="color:#000000">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#000000">person</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Add</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">LastName</span><span style="color:#ff0000">"</span><span style="color:#000000">,</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">"</span><span style="color:#ff0000">Jobs_</span><span style="color:#ff0000">"</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000">i</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000"></span><span style="color:#000000">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#000000">people</span><span style="color:#ff0000">.</span><span style="color:#0000ff">AddXml</span><span style="color:#ff0000">(</span><span style="color:#000000">@person</span><span style="color:#ff0000">)</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#000000"></span><br>
+<img src="/images/Code/L.gif"  align=top><b><span style="color:#0000ff">Next</span></b></div>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000"></span><span style="color:#000000">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#000000"></span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Length:</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000"></span><span style="color:#ff0000">"</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000">people</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Length</span><span style="color:#ff0000">(</span><span style="color:#ff0000">)</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">"</span><span style="color:#ff0000">,</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">Text:</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">[</span><span style="color:#ff0000">"</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000">people</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Text</span><span style="color:#ff0000">(</span><span style="color:#ff0000">)</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">"</span><span style="color:#ff0000">]</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/L.gif"  align=top><span style="color:#000000;background-color:#ffff00;">%&gt;</span></div>
+<img src="/images/Code/clear.gif"  align=top><br>
+</div></td></tr></table>
+</blockquote>
+
+</body>
+</html>

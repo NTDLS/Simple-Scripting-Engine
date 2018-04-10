@@ -1,0 +1,17 @@
+[OPTIONS]
+Auto Index=Yes
+Compatibility=1.1 or later
+Compiled file=Help.chm
+Contents file=Table of Contents.hhc
+Default Font=Arial,8,0
+Default topic=/Other/Home.Htm
+Display compile progress=No
+Enhanced decompilation=Yes
+Full-text search=Yes
+Index file=Index.hhk
+Language=0x409 English (United States)
+Title=Simple Scripting Engine
+
+
+[INFOTYPES]
+

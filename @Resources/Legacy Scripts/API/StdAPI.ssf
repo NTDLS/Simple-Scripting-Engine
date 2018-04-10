@@ -1,0 +1,29 @@
+<%
+	Include("BigAPI.scs")
+	
+	Function GetTime(sFormat as String) as String
+		
+		Dim MyST as SystemTime
+		Dim sString as String = Space(100)
+		
+		GetLocalTime(MySt)
+		
+		GetTimeFormat(LOCALE_SYSTEM_DEFAULT, NULL, MySt, sFormat, @sString, Len(sString)))
+		
+		Return Trim(sString)
+		
+	End Function
+	
+	Function GetDate(sFormat as String) as String
+		
+		Dim MyST as SystemTime
+		Dim sString as String = Space(100)
+		
+		GetLocalTime(MySt)
+		
+		GetDateFormat(LOCALE_SYSTEM_DEFAULT, NULL, MySt, sFormat, @sString,Len(sString))
+		
+		Return Trim(sString)
+		
+	End Function
+%>

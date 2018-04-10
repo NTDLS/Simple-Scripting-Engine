@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Language Name="SimpleScript" Startblock="Text">
+    <!-- ################################################################################################## -->
+
+    <FileTypes>
+        <FileType Extension=".ss" Name="Simple Script File"/>
+    </FileTypes>
+
+    <!-- ################################################################################################## -->
+
+    <Block Name="Code Block" Style="" PatternStyle="" EscapeChar="" IsMultiline="true" TerminateChildren="true">
+        <Scope Start="&lt;%" End="%&gt;" Style="Code Block Style" Text="&lt;%...%&gt;" CauseIndent="false" />
+		
+        <Includes>
+            <Include Name="SSE Core" />
+        </Includes>
+
+        <ChildBlocks>
+            <Child Name="Singleline Comment" />
+            <Child Name="Strings" />
+            <Child Name="Parens" />
+            <Child Name="Child Blocks" />
+        </ChildBlocks>
+	</Block>
+	
+    <!-- ################################################################################################## -->
+	
+    <Block Name="Child Blocks" Style="" PatternStyle="" EscapeChar="" IsMultiline="true">
+        <Scope Start="((?i)(\bFunction\b))" End="((?i)(End)(\s)+(Function))" StartIsComplex="true" EndIsComplex="true" EndIsSeparator="true" Style="Reserved Style" Text="Function *** ..." CauseIndent="true" />
+        <Scope Start="((?i)(\bWhile\b))" End="WEnd" StartIsComplex="true" EndIsComplex="false" Style="Reserved Style" Text="While *** ..." CauseIndent="true" />
+        <Scope Start="((?i)(\bFor\b))" End="Next" StartIsComplex="true" EndIsComplex="false" Style="Reserved Style" Text="For *** ..." CauseIndent="true" />
+        <Scope Start="((?i)(?&lt;!Else\s)\bif\b)" End="((?i)(End)(\s)+(If))" StartIsComplex="true" EndIsComplex="true" Style="Reserved Style" Text="If *** ..." CauseIndent="true" />
+        <Scope Start="((?i)(\bTry\b))" End="((?i)(End)(\s)+(Try))" StartIsComplex="true" EndIsComplex="true" Style="Reserved Style" Text="Try *** ..." CauseIndent="true" />
+
+        <Includes>
+            <Include Name="SSE Core" />
+        </Includes>
+
+        <ChildBlocks>
+            <Child Name="Singleline Comment" />
+            <Child Name="Strings" />
+            <Child Name="Parens" />
+            <Child Name="Child Blocks" />
+        </ChildBlocks>
+	</Block>	
+	
+    <!-- ################################################################################################## -->
+	
+    <Include Name="SSE Core">
+		<Bracket Start="(" End=")" IsMultiline="true" Style="Operators Style" />
+		<Bracket Start="{" End="}" IsMultiline="true" Style="Operators Style" />
+		<Bracket Start="[" End="]" IsMultiline="true" Style="Operators Style" />
+
+        <Keywords>
+            <PatternGroup Name="Reserved" Style="Reserved Style" NormalizeCase="false">
+                <Patterns>
+                    Declare Lib Alias Type ByVal ByRef StrictType
+                    to Step When as Return Continue Break For Next Try
+                    var not or and bOR bAND bNOT xor mod Catch Else If Function End While WEnd
+                </Patterns>
+            </PatternGroup>
+
+            <PatternGroup Name="Keywords" Style="Keywords Style" NormalizeCase="false">
+                <Patterns>
+					Convert.StringFromPointer Convert.LengthFromPointer Print Print Prints Prints BinPrint BinPrint Cls Return Return Exit DataLen DataLen Space Space IIF Env.CommandLine.Get Env CommandLine Get Env.CommandLine.Count CommandLine Count Env.Get Env.Set Set Env.Index Index Env.Name Name Env.Value Value Env.Count Count Process.ModuleName Process ModuleName Process.PageFaultCount Process PageFaultCount Process.PagefileUsage Process PagefileUsage Process.PeakPagefileUsage Process PeakPagefileUsage Process.PeakWorkingSetSize Process PeakWorkingSetSize Process.WorkingSetSize Process WorkingSetSize Process.Id Process Id Process.Username Process Username Sys.TickCount Sys TickCount Sys.MachineName MachineName Sys.OSVersion OSVersion Sys.Memory.Load Memory Load Sys.Memory.TotalPhysical Memory TotalPhysical Sys.Memory.AvailablePhysical Memory AvailablePhysical Sys.Memory.TotalPageFile Memory TotalPageFile Sys.Memory.AvailablePageFile Memory AvailablePageFile Sys.Memory.TotalVirtual Memory TotalVirtual Sys.Memory.AvailableVirtual Memory AvailableVirtual Numeric.Equals Equals Equals Numeric.GreaterThan GreaterThan GreaterThan Numeric.LessThan LessThan LessThan Numeric.NotEquals NotEquals NotEquals Numeric.Length Length Length Numeric.ToInteger ToInteger ToInteger Numeric.ToDouble ToDouble ToDouble Numeric.ToString ToString ToString List.Add Add List.Count Count Count List.Allocated Allocated Allocated List.Clear Clear Clear List.Compact Compact Compact List.Contains Contains Contains List.DeleteOne DeleteOne DeleteOne List.DeleteAll DeleteAll DeleteAll List.DeleteAt DeleteAt DeleteAt List.IndexOf IndexOf IndexOf FormatNumeric FormatNumeric FormatSize FormatSize ToInteger ToInteger ToDouble ToDouble Trim Replace Replace String.Trim String.Replace Replace Replace String.IndexOf IndexOf IndexOf IndexOf IndexOf Length Length SubString SubString ToUpper ToUpper ToLower ToLower String.Equals Equals Equals String.GreaterThan GreaterThan GreaterThan String.LessThan LessThan LessThan String.NotEquals NotEquals NotEquals String.ToUpper ToUpper ToUpper String.ToLower ToLower ToLower String.SubString SubString SubString ASCII ASCII Char Reverse Reverse String.Reverse Reverse Reverse String.Append Append Append Base64Encode Base64Encode Base64Decode Base64Decode Sleep Sleep Pause Pause Date.Now Now Time.Now Math.Pow Pow Math.Round Round Math.SmartRound SmartRound Math.ParseDoubleExpression ParseDoubleExpression Math.ParseIntegerExpression ParseIntegerExpression Math.DebugMode DebugMode Math.Abs Abs Math.Random Random Math.SetRandom SetRandom Error.Throw Error Throw Error.UnWind Error UnWind Error.Count Error Count Error.Clear Error Clear Error.Text Error Text Error.File Error Error.Line Error Line Exception.GetText GetText GetText Exception.GetLine GetLine GetLine Exception.GetFile GetFile GetFile Exception.SetText SetText SetText File.Drive Drive Drive File.Path Path File.Name File.NameOnly NameOnly NameOnly File.Extension Extension Extension File.Exists Exists Exists File.CanRead CanRead CanRead File.CanWrite CanWrite CanWrite File.CanReadWrite CanReadWrite CanReadWrite File.Open Open File.Close Close Close File.Handle Handle Handle File.Read Read File.Write Write Write File.Seek Seek File.Seek.FromBeginning Seek.FromBeginning Seek.FromBeginning FromBeginning File.Seek.FromEnd Seek.FromEnd Seek.FromEnd FromEnd File.Delete Delete Delete File.Size Size Web.InitializeCGI Web InitializeCGI Web.URLEncode URLEncode Web.URLDecode URLDecode Code.Scope Scope Code.Scope.Enter Scope Enter Code.Scope.Exit Scope Code.Line Code.File Code.Namespace Namespace String.ToDouble ToDouble ToDouble String.ToInteger ToInteger ToInteger String.Length Length Length String.Free Free Code.Variables.Free Variables Code.Variables.IsDefined Variables IsDefined Code.Functions.IsDefined Functions IsDefined Code.Functions.Call Functions Call Code.Variables.Undefine Variables Undefine Code.Variables.Define Variables Define Code.Inject Inject Code.Append Append Debug.IsAttached Debug IsAttached Debug.Evaluate Debug Evaluate Debug.Break Debug Break SQL.Connection.Connect Connect SQL Connect Connection Connect SQL.Connection.Transaction.Begin Transaction.Begin Transaction.Begin Connection Transaction.Begin Transaction Begin SQL.Connection.Transaction.Commit Transaction.Commit Transaction.Commit Connection Transaction.Commit Transaction Commit SQL.Connection.Transaction.Rollback Transaction.Rollback Transaction.Rollback Connection Transaction.Rollback Transaction Rollback SQL.Connection.Transaction.Depth Transaction.Depth Transaction.Depth Connection Transaction.Depth Transaction Depth SQL.Connection.Value Value Value Connection Value SQL.Connection.Execute Execute Execute Connection Execute SQL.RecordSet.Value Value Value RecordSet Value SQL.RecordSet.Columns.Name Columns.Name Columns.Name RecordSet Columns.Name Columns SQL.RecordSet.Columns.Index Columns.Index Columns.Index RecordSet Columns.Index Columns Index SQL.RecordSet.Columns.Count Columns.Count Columns.Count RecordSet Columns.Count Columns Count SQL.RecordSet.Fetch Fetch Fetch RecordSet Fetch SQL.RecordSet.Close Close Close RecordSet Close SQL.Connection.Close Close Close Connection Close Form.Value.Count Value Count Form.Value.IsDefined Value IsDefined Form.Value.Define Value Define Form.Value.ByIndex Value ByIndex Form.Value.Index Value Index Form.Value.ByName Value ByName Form.Value.Name Value Query.Value.Count Query Value Count Query.Value.IsDefined Query Value IsDefined Query.Value.Define Query Value Define Query.Value.ByIndex Query Value ByIndex Query.Value.Index Query Value Index Query.Value.ByName Query Value ByName Query.Value.Name Query Value SHA1 Checksum Checksum Settings.ThrowSoftExceptions Settings ThrowSoftExceptions XML.Writer.Save Save XML XML.Writer.Text XML.Writer.Length Length Length Writer Length XML.Writer.Add XML.Writer.AddXML AddXML AddXML Writer AddXML XML.Writer.SetName SetName SetName Writer SetName XML.Reader.Open XML.Reader.ProgressiveScan ProgressiveScan ProgressiveScan Reader ProgressiveScan XML.Reader.Close Close Close Reader Close XML.Reader.ToString ToString ToString Reader ToString XML.Reader.ToInteger ToInteger ToInteger Reader ToInteger XML.Reader.ToDouble ToDouble ToDouble Reader ToDouble XML.Reader.ToReader ToReader ToReader Reader ToReader XML.Reader.Text XML.Reader.Length Length Length Reader Length XML.Reader.ToFile ToFile ToFile Reader ToFile XML.Reader.ScanPosition ScanPosition ScanPosition Reader ScanPosition XML.Reader.Parse Parse Parse Reader Parse XML.Reader.AttributeLength AttributeLength AttributeLength Reader AttributeLength Socket.Server.Start Start Socket Start Server Start Socket.Server.Stop Stop Socket Socket.Server.Connect Connect Socket Connect Server Connect Socket.Server.Connections Connections Socket Connections Server Connections Socket.Server.Connection Connection Socket Connection Server Connection Socket.Client.WasConnect WasConnect Socket WasConnect Client WasConnect Socket.Client.IsDisconnectSet IsDisconnectSet Socket IsDisconnectSet Client IsDisconnectSet Socket.Client.PeerAddress PeerAddress Socket PeerAddress Client PeerAddress Socket.Client.PeerID PeerID Socket PeerID Client PeerID Socket.Client.PeerPort PeerPort Socket PeerPort Client PeerPort Socket.Client.IsConnected IsConnected Socket IsConnected Client IsConnected Socket.Client.IsSendPending IsSendPending Socket IsSendPending Client IsSendPending Socket.Client.IsRecvPending IsRecvPending Socket IsRecvPending Client IsRecvPending Socket.Client.Recv Recv Socket Socket.Client.Disconnect Disconnect Socket Disconnect Client Disconnect Socket.Client.Send Send Socket Socket.Client.TryRecv TryRecv Socket TryRecv Client TryRecv Socket.Client.TrySend TrySend Socket TrySend Client TrySend GenerateDocumentation GenerateDocumentation Debug.Dump.Memory Debug Dump Memory Debug.Dump.Vars Debug Vars Debug.Dump.Procs Debug Procs Debug.Dump.Scripts Debug Scripts Debug.Dump.Lines Debug Lines GUID Bytes.Allocate Allocate Bytes.Initialize Initialize Cast Bytes.Free Offset
+				</Patterns>
+            </PatternGroup>
+
+            <PatternGroup Name="Types" Style="Types Style" NormalizeCase="false">
+                <Patterns>
+					Bytes String Numeric SQL.Connection SQL.RecordSet File List Generic XML.Reader XML.Writer Socket.Server Socket.Client Exception 
+                    StdCall CDecl FastCall
+                    StrictType.Short StrictType.Boolean StrictType.Integer
+                    StrictType.Int16 StrictType.Int32 StrictType.Int64
+                    StrictType.uInt16 StrictType.uInt32 StrictType.uInt64
+                    StrictType.Long StrictType.Int StrictType.Handle
+                    StrictType.Float StrictType.Int StrictType.Float
+                    StrictType.Double StrictType.String StrictType.Char StrictType.WChar
+                    StrictType.Byte
+                </Patterns>
+            </PatternGroup>
+
+            <PatternGroup Name="Constants" Style="Constants Style" NormalizeCase="false">
+                <Patterns>
+                    Tab CrLf Cr Lf True False NULL
+                    FileAccess FileAccess.Read FileAccess.Write FileAccess.ReadWrite
+					CreationDisposition CreationDisposition.CreateNew CreationDisposition.AlwaysCreate
+					CreationDisposition.OpenExisting CreationDisposition.AlwaysOpen CreationDisposition.Truncate
+					Limits
+					Limits.uInt32 Limits.Int32.Min Limits.Int32.Max
+					Limits.uInt32 Limits.uInt32.Min Limits.uInt32.Max
+					Limits.Int16 Limits.Int16.Min Limits.Int16.Max
+					Limits.uInt16 Limits.uInt16.Min Limits.uInt16.Max
+					Limits.File Limits.File.PathLength
+                </Patterns>
+            </PatternGroup>
+            <PatternGroup Name="System" Style="System Style" NormalizeCase="false">
+                <Patterns>
+                    Code Code.File Code.Inject Code.Line Code.Append Code.Namespace
+                    Code.Scope Code.Scope.Enter Code.Scope.Exit
+                    Code.Variables Code.Variables.IsDefined Code.Variables.Define Code.Variables.Undefine
+                    Code.Functions Code.Functions.IsDefined
+                    Engine Engine.Name Engine.Version Engine.Build
+                    Settings Settings.ThrowSoftExceptions
+                    Debug Debug.Break Debug.Evaluate Debug.IsAttached
+                </Patterns>
+            </PatternGroup>
+
+            <PatternGroup Name="Numbers" Style="Numbers Style">
+                <Pattern Text="(&amp;h[0-9,a-f,A-F]+)" IsComplex="true" />
+                <Pattern Text="(&amp;H[0-9,a-f,A-F]+)" IsComplex="true" />
+                <Pattern Text="([0-9]+)" IsComplex="true" />
+            </PatternGroup>
+
+            <PatternGroup Name="PreProcessors" Style="PreProcessors Style">
+                <Patterns>
+                    #debug
+                    #define
+                    #undef
+                    #Include
+                    #ContentType
+					#Namespace
+                </Patterns>
+            </PatternGroup>
+        </Keywords>
+
+        <!-- Operators that can exist inside this block -->
+        <Operators>
+            <PatternGroup name="Operators" Style="Operators Style">
+                <Pattern Text="." />
+                <Pattern Text="!" />
+                <Pattern Text=":" />
+                <Pattern Text="^" />
+                <Pattern Text="*" />
+                <Pattern Text="/" />
+                <Pattern Text="+" />
+                <Pattern Text="-" />
+                <Pattern Text="=" />
+                <Pattern Text=";" />
+                <Pattern Text="|" />
+                <Pattern Text="&gt;" />
+                <Pattern Text="&lt;" />
+            </PatternGroup>
+        </Operators>
+
+         <!-- Blocks that can exist inside this block -->
+        <ChildBlocks>
+            <Child Name="Singleline Comment" />
+            <Child Name="Strings" />
+            <Child Name="Parens" />
+            <Child Name="Child Blocks" />
+        </ChildBlocks>		
+    </Include>	
+
+    <!-- ################################################################################################## -->
+
+    <Block Name="Singleline Comment" Style="Comments Style" PatternStyle="" EscapeChar="" IsMultiline="false">
+        <Scope Start=";" End="" Style="Comments Style" Text="" />
+	</Block>
+
+    <!-- ################################################################################################## -->
+
+    <Block Name="Text" Style="Text Style" PatternStyle="Keywords Style" EscapeChar="" IsMultiline="true">
+         <!-- Blocks that can exist inside this block -->
+        <ChildBlocks>
+            <Child Name="Code Block" />
+            <Child Name="Singleline Comment" />
+			<Child Name="PHP" />
+			<Child Name="HTML Comment" />
+			<Child Name="HTML gnu" />
+			<Child Name="HTML StyleMain" />
+			<Child Name="HTML Tag" />
+        </ChildBlocks>
+    </Block>
+
+    <!-- ################################################################################################## -->
+    <Block Name="Strings" Style="Strings Style" PatternStyle="" IsMultiline="false">
+        <Scope Start="&quot;" End="&quot;"  Style="Strings Style"  Text="" EscapeChar="\" />
+        <Operators>
+            <PatternGroup name="URLs" Style="URLs Style" >
+                <Pattern Text="http://([\w-]+\.)+[\w-]+(/[\w- ./?%&amp;=]*)?" IsComplex="true" />
+            </PatternGroup>
+        </Operators>
+    </Block>
+
+    <!-- ################################################################################################## -->
+	<Block Name="HTML StyleMain" Style="HTML Style" IsMultiline="true" TerminateChildren="true">
+		<Scope Start="&lt;Style&gt;" End="&lt;/Style&gt;" Style="HTML Style Pattern" Text="&lt;Style&gt;" />
+		<ChildBlocks>
+			<Child Name="HTML Style Comment" />
+			<Child Name="HTML Style" />
+		</ChildBlocks>
+	</Block>
+    <!-- ################################################################################################## -->
+	<Block Name="HTML Style" Style="HTML Style Attrib" IsMultiline="true" TerminateChildren="true">
+		<Scope Start="{" End="}" Style="HTML Style" Text="{...}" />
+		<ChildBlocks>
+			<Child Name="HTML Style Comment" />
+			<Child Name="HTML Style Value" />
+		</ChildBlocks>
+	</Block>
+    <!-- ################################################################################################## -->
+	<Block Name="HTML Style Value" Style="HTML Style Value" IsMultiline="true">
+		<Scope Start=":" End=";" Style="HTML Style Value" Text=":...;" />
+		<ChildBlocks>
+			<Child Name="HTML Style Comment" />
+		</ChildBlocks>
+	</Block>
+    <!-- ################################################################################################## -->
+	<Block Name="HTML Style Comment" Style="HTML Comment" IsMultiline="true">
+		<Scope Start="/*" End="*/" Style="HTML Comment" Text="/*...*/" />
+	</Block>
+    <!-- ################################################################################################## -->
+	<!-- this block is the HTML tags in HTML comments-->
+	<Block Name="HTML Tag" Style="HTML Tag" EscapeChar="" IsMultiline="true">
+		<Scope Start="&lt;" End="&gt;" Style="HTML Tag Pattern" Text="&lt;...&gt;" />
+		<Operators>
+			<PatternGroup Name="HTML Attrib" Style="HTML Attrib">
+				<!-- operator is the attributes that can exist within HTML tags-->
+				<Pattern Text="(\s[a-zA-Z:]+)" IsComplex="true" />
+			</PatternGroup>
+		</Operators>
+		<ChildBlocks>
+			<Child Name="HTML String" />
+		</ChildBlocks>
+	</Block>
+    <!-- ################################################################################################## -->
+	<Block Name="HTML String" Style="HTML String" EscapeChar="" IsMultiline="false">
+		<Scope Start="&quot;" End="&quot;" Style="HTML String Pattern" Text="" />
+	</Block>
+    <!-- ################################################################################################## -->
+	<Block Name="HTML Comment" Style="HTML Comment" EscapeChar="" IsMultiline="true">
+		<Scope Start="&lt;!--" End="--&gt;" Style="HTML Comment" Text="&lt;!--...--&gt;" />
+	</Block>
+    <!-- ################################################################################################## -->
+	<Block Name="HTML gnu" Style="HTML gnu" EscapeChar="" IsMultiline="true">
+		<Scope Start="&lt;!" End="&gt;" Style="HTML Tag Pattern" Text="&lt;!...&gt;" />
+	</Block>
+    <!-- ################################################################################################## -->
+	<Block Name="Script String" Style="Script String" EscapeChar="" IsMultiline="false">
+		<Scope Start="'" End="'" Style="Script String" Text="" />
+	</Block>
+    <!-- ################################################################################################## -->
+	<Block Name="Script String2" Style="Script String" EscapeChar="" IsMultiline="false">
+		<Scope Start="&quot;" End="&quot;" Style="Script String" Text="" />
+	</Block>
+    <!-- ################################################################################################## -->
+	<Block Name="Script MultiComment" Style="Script Comment" EscapeChar="" IsMultiline="true">
+		<Scope Start="/*" End="*/" Style="Script Comment" Text="/*...*/" />
+	</Block>
+
+    <!-- ################################################################################################## -->
+	<Style Name="HTML Tag" ForeColor="DarkRed" BackColor="" Bold="false" Italic="false" Underline="false" />
+	<Style Name="HTML Tag Pattern" ForeColor="Blue" BackColor="" Bold="false" Italic="false" Underline="false" />
+	<Style Name="HTML String Pattern" ForeColor="blue" BackColor="" Bold="false" Italic="false" Underline="false" />
+	<Style Name="HTML String" ForeColor="blue" BackColor="" Bold="false" Italic="false" Underline="false" />
+	<Style Name="HTML Attrib" ForeColor="red" BackColor="" Bold="false" Italic="false" Underline="false" />
+	<Style Name="HTML Comment" ForeColor="green" BackColor="" Bold="false" Italic="false" Underline="false" />
+	<Style Name="HTML gnu" ForeColor="magenta" BackColor="" Bold="false" Italic="false" Underline="false" />
+	<Style Name="HTML Style" ForeColor="DarkRed" BackColor="" Bold="false" Italic="false" Underline="false" />
+	<Style Name="HTML Style Pattern" ForeColor="black" BackColor="yellow" Bold="false" Italic="false" Underline="false" />
+	<Style Name="HTML Style Attrib" ForeColor="Red" BackColor="" Bold="false" Italic="false" Underline="false" />
+	<Style Name="HTML Style Value" ForeColor="Blue" BackColor="" Bold="false" Italic="false" Underline="false" />
+	<Style Name="HTML Chars" ForeColor="red" BackColor="" Bold="true" Italic="false" Underline="false" />
+	<Style Name="Script Operators" ForeColor="red" BackColor="" Bold="false" Italic="false" Underline="false" />
+	<Style Name="Script Comment" ForeColor="green" BackColor="" Bold="false" Italic="false" Underline="false" />
+	<Style Name="Script String" ForeColor="Teal" BackColor="" Bold="true" Italic="false" Underline="false" />
+
+    <!-- ################################################################################################## -->
+
+	<Style Name="PreProcessors Style" ForeColor="blue" BackColor="" Bold="false" Italic="false" Underline="false" />
+    <Style Name="Text Style" ForeColor="" BackColor="" Bold="false" Italic="false" Underline="false" />
+    <Style Name="Code Block Style" ForeColor="Black" BackColor="Yellow" Bold="false" Italic="false" Underline="false" />
+    <Style Name="Types Style" ForeColor="MediumVioletRed" BackColor="" Bold="true" Italic="false" Underline="false" />
+    <Style Name="Reserved Style" ForeColor="Blue" BackColor="" Bold="true" Italic="false" Underline="false" />
+    <Style Name="Constants Style" ForeColor="Magenta" BackColor="" Bold="true" Italic="false" Underline="false" />
+    <Style Name="System Style" ForeColor="Magenta" BackColor="" Bold="false" Italic="false" Underline="false" />
+    <Style Name="Code Pattern Style" ForeColor="" BackColor="" Bold="true" Italic="false" Underline="false" />
+    <Style Name="Comments Style" ForeColor="green" BackColor="" Bold="false" Italic="true" Underline="false" />
+    <Style Name="Strings Style" ForeColor="Red" BackColor="" Bold="false" Italic="false" Underline="false" />
+    <Style Name="Numbers Style" ForeColor="Teal" BackColor="" Bold="true" Italic="false" Underline="false" />
+    <Style Name="Operators Style" ForeColor="Red" BackColor="" Bold="false" Italic="false" Underline="false" />
+    <Style Name="Keywords Style" ForeColor="Blue" BackColor="" Bold="false" Italic="false" Underline="false" />
+    <Style Name="URLs Style" ForeColor="Blue" BackColor="" Bold="false" Italic="false" Underline="true" />
+	<Style Name="HTML Comments Style" ForeColor="green" BackColor="" Bold="false" Italic="false" Underline="false" />
+	<Style Name="HTML Chars Style" ForeColor="red" BackColor="" Bold="true" Italic="false" Underline="false" />
+
+</Language>

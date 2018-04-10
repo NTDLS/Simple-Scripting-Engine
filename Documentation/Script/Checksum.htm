@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Checksum</title>
+<meta name="MS-HKWD" content="Checksum">
+<meta name="MS-HKWD" content="Hashing">
+</head>
+
+<body Background="/Images/BGCode.gif">
+<font size="5">Checksum</font><br />
+<hr /><br /><br />
+
+<b>Description:</b>
+<blockquote>
+<!-- ##BEGIN_DESCRIPTION## -->
+Generates a standard CRC32 checksum for the given input text data.
+<!-- ##END_DESCRIPTION## -->
+</blockquote>
+
+<b>Syntax:</b>
+<blockquote>
+<font color="0000EE">Checksum</font>(<font color="#000088">Text</font> as <font color="MediumVioletRed">String</font>, <font color="#000088">Length</font> as <font color="MediumVioletRed">Numeric</font> = <font color="Blue">-1</font>) as <font color="MediumVioletRed">Numeric</font> </blockquote>
+
+<b>Parameters:</b>
+<blockquote>
+<ul><li><font color="#000088">Text</font> as <font color="MediumVioletRed">String</font><ul><li>
+Input text.
+</ul><li><font color="#000088">Length</font> as <font color="MediumVioletRed">Numeric</font><ul><li>
+Input text length.
+</ul></ul>
+</blockquote>
+
+<b>Remarks:</b>
+<blockquote>
+The checksum function generates a CRC32 compatible with that of PKZip, WinZip and Ethernet using the 0x04C11DB7 polynomial
+</blockquote>
+
+<b>Example:</b>
+<table  ><tr><td nowrap><div style=""><div style="display:none;" id="closed634287954671467718_1"><img src="/images/Code/PlusNoLines.gif" align=top onclick="open634287954671467718_1.style.display='block'; closed634287954671467718_1.style.display='none'; "><b><span style="color:#00008b;background-color:#c0c0c0;">&lt;%...%&gt;</span></b></div><div style="display:block;" id="open634287954671467718_1"><img src="/images/Code/minusNoTopLine.gif" align=top onclick="open634287954671467718_1.style.display='none'; closed634287954671467718_1.style.display='block'; "><span style="color:#000000;background-color:#ffff00;">&lt;%</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#0000ff">Checksum</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">This</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">is</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">a</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">test</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><span style="color:#ff0000">)</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/L.gif"  align=top><span style="color:#000000;background-color:#ffff00;">%&gt;</span></div>
+</div></td></tr></table>
+
+</body>
+</html>

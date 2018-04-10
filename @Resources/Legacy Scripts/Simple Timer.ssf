@@ -1,0 +1,74 @@
+<%
+	Dim lTC as Integer = (GetTickCount() / 1000)
+	Dim lSeconds as Integer = (lTC % 60)
+	Dim lMinutes as Integer = (lTC / 60 % 60)
+	Dim lHours as Integer = (lTC / 3600 % 24)
+	Dim lDays as Integer = (lTC / 3600 / 24)
+	Dim sString as String
+	Dim sPadded as String
+	
+	Print("Your computer uptime is written to the console title of this application.")
+	
+	ShowConsoleCursor(False)
+	
+	While(True)
+		lSeconds++
+		
+		If(lSeconds = 60)
+			lSeconds = 0
+			lMinutes++
+		End If
+		
+		If(lMinutes = 60)
+			lMinutes = 0
+			lHours++
+		End If
+		
+		If(lHours = 24)
+			lHours = 0
+			lDays++
+		End If
+		
+		sPadded = PadInt(lDays)
+		sString = "", sPadded, " day"
+		If((lDays > 1) OR (lDays = 0))
+			sString = sString, "s"
+		End If
+		
+		sPadded = PadInt(lHours)
+		sString = sString, ", ", sPadded, " hour"
+		If((lHours > 1) OR (lHours = 0))
+			sString = sString, "s"
+		End If
+		
+		sPadded = PadInt(lMinutes)
+		sString = sString, ", ", sPadded, " minute"
+		If((lMinutes > 1) OR (lMinutes = 0))
+			sString = sString, "s"
+		End If
+		
+		sPadded = PadInt(lSeconds)
+		sString = sString, ", ", sPadded, " second"
+		If((lSeconds > 1) OR (lSeconds = 0))
+			sString = sString, "s"
+		End If
+		
+		SetConsoleTitle(sString)
+		
+		Sleep(1000)
+	WEnd
+	
+	Function PadInt(iInt as Integer) as String
+		
+		Dim sPad as String
+		
+		If(iInt < 10)
+			sPad = "0"
+		End If
+		
+		sPad = sPad, iInt
+		
+		Return(sPad)
+	
+	End Function
+%>

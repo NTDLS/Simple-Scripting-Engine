@@ -1,0 +1,95 @@
+<%
+	Const HKEY_CLASSES_ROOT			0x80000000
+	Const HKEY_CURRENT_USER			0x80000001
+	Const HKEY_LOCAL_MACHINE		0x80000002
+	Const HKEY_USERS				0x80000003
+	Const HKEY_PERFORMANCE_DATA		0x80000004
+	Const HKEY_PERFORMANCE_TEXT		0x80000050
+	Const HKEY_PERFORMANCE_NLSTEXT	0x80000060
+	Const HKEY_CURRENT_CONFIG		0x80000005
+	Const HKEY_DYN_DATA				0x80000006
+	
+	Const HKLM						HKEY_LOCAL_MACHINE
+	Const HKCC						HKEY_CURRENT_CONFIG
+	Const HKCR						HKEY_CLASSES_ROOT
+	Const HKCU						HKEY_CURRENT_USER
+	Const HKDD						HKEY_DYN_DATA
+	Const HKPD						HKEY_PERFORMANCE_DATA
+	Const HKPNT						HKEY_PERFORMANCE_NLSTEXT
+	Const HKPT						HKEY_PERFORMANCE_TEXT
+	Const HKU						HKEY_USERS
+
+	Function GetRegBool(hKey as Handle, sKey as String, sValue as String) as Boolean
+		
+		Dim bReturnValue as Boolean = ""
+		Registry.GetBoolean(hKey, sKey, sValue, @bReturnValue)
+		return(bReturnValue)
+		
+	End Function
+	
+	Function GetRegDWORD(hKey as Handle, sKey as String, sValue as String) as Integer
+		
+		Dim iReturnValue as integer = -1
+		Registry.GetDWORD(hKey, sKey, sValue, @iReturnValue)
+		return(iReturnValue)
+		
+	End Function
+	
+	Function GetRegBinary(hKey as Handle, sKey as String, sValue as String) as String
+		
+		Dim sReturnValue as String = ""
+		Registry.GetBinary(hKey, sKey, sValue, @sReturnValue)
+		return(sReturnValue)
+		
+	End Function
+	
+	Function GetRegString(hKey as Handle, sKey as String, sValue as String) as String
+		
+		Dim sReturnValue as String = ""
+		Registry.GetString(hKey, sKey, sValue, @sReturnValue)
+		return(sReturnValue)
+		
+	End Function
+
+	Function DeleteRegValue(hKey as Handle, sKey as String, sValue as String) as String
+		
+		return(Registry.DeleteValue(hKey, sKey, sValue))
+		
+	End Function
+
+	Function SetRegBinary(hKey as Handle, sKey as String, sValue as String, sData as String, iSz as Integer) as String
+		
+		return(Registry.SetBinary(hKey, sKey, sValue, sData, iSz))
+		
+	End Function
+
+	Function SetRegString(hKey as Handle, sKey as String, sValue as String, sData as String) as String
+		
+		return(Registry.SetString(hKey, sKey, sValue, sData))
+		
+	End Function
+
+	Function SetRegDWORD(hKey as Handle, sKey as String, sValue as sTring, iValue as Integer) as String
+		
+		return(Registry.SetDWORD(hKey, sKey, sValue, iValue))
+		
+	End Function
+
+	Function SetRegBool(hKey as Handle, sKey as String, sValue as sTring, bValue as Boolean) as String
+		
+		return(Registry.SetBoolean(hKey, sKey, sValue, bValue))
+		
+	End Function
+%>
+
+'<% 'Test Code!
+'	Print("SetRegBinary: ", SetRegBinary(HKLM, "Software\\Software Key", "MyBinVal", "aaa", 3))
+'	Print("SetRegString: ", SetRegString(HKLM, "Software\\Software Key", "MyStrVal", "bbb"))
+'	Print("SetRegDWORD: ", SetRegDWORD(HKLM, "Software\\Software Key", "MyDWORD", 136165))
+'	Print("SetRegBool: ", SetRegBool(HKLM, "Software\\Software Key", "MyBool", 5))
+'	Print("DeleteRegValue:", DeleteRegValue(HKLM, "Software\\Software Key", "MyVal"))
+'	Print("GetRegBinary: ", GetRegBinary(HKLM, "SOFTWARE\\Software Key", "MyBinVal"))
+'	Print("GetRegString: ", GetRegString(HKLM, "SOFTWARE\\Software Key", "MyStrVal"))
+'	Print("GetRegDWORD: ", GetRegDWORD(HKLM, "SOFTWARE\\Software Key", "MyDWORDVal"))
+'	Print("GetRegBool: ", GetRegBool(HKLM, "SOFTWARE\\Software Key", "MyBoolVal"))
+'%>

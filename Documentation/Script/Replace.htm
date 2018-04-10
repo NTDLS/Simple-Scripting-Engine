@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Replace</title>
+<meta name="MS-HKWD" content="Substitution">
+<meta name="MS-HKWD" content="Replace">
+<meta name="MS-HKWD" content="String Manipulation">
+<meta name="MS-HKWD" content="String Searching">
+<meta name="MS-HKWD" content="Strings">
+</head>
+
+<body Background="/Images/BGCode.gif">
+<font size="5">Replace</font><br />
+<hr /><br /><br />
+
+<b>Description:</b>
+<blockquote>
+<!-- ##BEGIN_DESCRIPTION## -->
+The Replace function replaces a specified part of a string with another string.
+<!-- ##END_DESCRIPTION## -->
+</blockquote>
+
+<b>Syntax:</b>
+<blockquote>
+<font color="0000EE">Replace</font>(<font color="#000088">OriginalString</font> as <font color="MediumVioletRed">String</font>, <font color="#000088">StringToReplace</font> as <font color="MediumVioletRed">String</font>, <font color="#000088">With</font> as <font color="MediumVioletRed">String</font>, <font color="#000088">CaseSensitive</font> as <font color="MediumVioletRed">Numeric</font> = <font color="Blue">1</font>) as <font color="MediumVioletRed">String</font> </blockquote>
+
+<b>Parameters:</b>
+<blockquote>
+<ul><li><font color="#000088">OriginalString</font> as <font color="MediumVioletRed">String</font><ul><li>
+The string to be searched
+</ul><li><font color="#000088">StringToReplace</font> as <font color="MediumVioletRed">String</font><ul><li>
+The part of the string that will be replaced
+</ul><li><font color="#000088">With</font> as <font color="MediumVioletRed">String</font><ul><li>
+The replacement substring
+</ul><li><font color="#000088">CaseSensitive</font> as <font color="MediumVioletRed">Numeric</font><ul><li>
+Denotes whether the search will be case sensitive. The default is True.
+</ul></ul>
+</blockquote>
+
+<b>Example:</b>
+<table  ><tr><td nowrap><div style=""><div style="display:none;" id="closed634288006855737201_1"><img src="/images/Code/PlusNoLines.gif" align=top onclick="open634288006855737201_1.style.display='block'; closed634288006855737201_1.style.display='none'; "><b><span style="color:#00008b;background-color:#c0c0c0;">&lt;%...%&gt;</span></b></div><div style="display:block;" id="open634288006855737201_1"><img src="/images/Code/minusNoTopLine.gif" align=top onclick="open634288006855737201_1.style.display='none'; closed634288006855737201_1.style.display='block'; "><span style="color:#000000;background-color:#ffff00;">&lt;%</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><b><span style="color:#0000ff">var</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">Text</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">as</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#c71585">String</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">=</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">"</span><span style="color:#ff0000">Hello</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">cruel,</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">CRUEL</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">World</span><span style="color:#ff0000">"</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#0000ff">Replace</span><span style="color:#ff0000">(</span><span style="color:#000000">Text,</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">"</span><span style="color:#ff0000">cruel</span><span style="color:#ff0000">"</span><span style="color:#000000">,</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">"</span><span style="color:#ff0000">lovely</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/L.gif"  align=top><span style="color:#000000;background-color:#ffff00;">%&gt;</span></div>
+</div></td></tr></table>
+
+</body>
+</html>

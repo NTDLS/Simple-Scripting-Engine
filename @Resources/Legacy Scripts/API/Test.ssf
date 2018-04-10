@@ -1,0 +1,15 @@
+<%@Include("StdAPI.scs")%>
+
+<%
+	'print("LANG_SYSTEM_DEFAULT: ", LANG_SYSTEM_DEFAULT)
+	'print("LANG_USER_DEFAULT: ", LANG_USER_DEFAULT)
+	'print("LOCALE_SYSTEM_DEFAULT: ", LOCALE_SYSTEM_DEFAULT)
+	'print("LOCALE_USER_DEFAULT: ", LOCALE_USER_DEFAULT)
+	'print("LOCALE_NEUTRAL: ", LOCALE_NEUTRAL)
+	'print("LOCALE_INVARIANT: ", LOCALE_INVARIANT)
+	
+	Print("", GetTime("hh:mm:ss"))
+	
+%>
+
+<%End(0)%>

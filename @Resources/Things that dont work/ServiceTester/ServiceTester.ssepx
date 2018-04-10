@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="us-ascii"?><Project><node Name="ServiceTester" Type="Project"><node Name="Helpers" Type="Folder"><node Name="WindowsServices.ss" Type="CodeFileDefault" /></node><node Name="Entry.ss" Type="CodeFile" /></node></Project>

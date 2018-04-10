@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>Loop Optimization</title>
+<meta name="MS-HKWD" content="Loop Optimization">
+</head>
+
+<body Background="/Images/BGCode.gif">
+<font size="5">Loop Optimization</font><br />
+<hr /><br /><br />
+
+<h3>Try not to re-declare variables.</h3>
+<blockquote>
+Variable declaration is expensive and destruction of those variables is nearly as intensive. Since variables are destroyed once they fall out of scope, you should attempt to declare heavily used variables in a scope where they can be reused without being constantly re-declared. An example of this would be when looping or repeatedly calling a function that declares several variables.
+
+<br /><br /><a href="Loop Optimization - Redeclare.htm">Example Code</a>
+</blockquote>
+
+<h3>Save values that are expensive to acquire.</h3>
+<blockquote>
+Lengths of string can change and various properties or functions can have their return value modified by code within your loop. Therefore, it is required that the engine reevaluate loop conditions on completion of each iteration. If you know that your loop condition will not change, then you should save values which are expensive to acquire in variables - you can then use these variables in your loop condition. While this is not a requirement, it can greatly improve performance in key areas of your code.
+
+<br /><br /><a href="Loop Optimization - Save Values.htm">Example Code</a>
+</blockquote>
+
+
+</body>
+</html>

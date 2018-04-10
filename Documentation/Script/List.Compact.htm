@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>List :: Compact</title>
+</head>
+
+<body Background="/images/Code/BGCode.gif">
+<font size="5">List :: Compact</font><br />
+<hr /><br /><br />
+
+<b>Description:</b>
+<blockquote>
+<!-- ##BEGIN_DESCRIPTION## -->
+For performance purposes, list slots are allocated ahead of time. As the list fills up, new slots are allocated at 10% of the size of the total list.
+This function will remove that empty space affectively removing any overhead.
+
+This can be especially useful if a has had lots of items removed from it but is anticipated to stay in scope for a long time.
+<!-- ##END_DESCRIPTION## -->
+</blockquote>
+
+<b>Syntax:</b>
+<blockquote>
+<font color="0000EE">List.Compact</font>()</blockquote>
+
+<b>Parameters:</b>
+<blockquote>
+<ul></ul>
+</blockquote>
+
+<b>Example:</b>
+<blockquote>
+<table  ><tr><td nowrap><div style=""><div style="display:none;" id="closed635920323057816518_1"><img src="/images/Code/PlusNoLines.gif" align=top onclick="open635920323057816518_1.style.display='block'; closed635920323057816518_1.style.display='none'; "><b><span style="color:#00008b;background-color:#c0c0c0;">&lt;%...%&gt;</span></b></div><div style="display:block;" id="open635920323057816518_1"><img src="/images/Code/minusNoTopLine.gif" align=top onclick="open635920323057816518_1.style.display='none'; closed635920323057816518_1.style.display='block'; "><span style="color:#000000;background-color:#ffff00;">&lt;%</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><b><span style="color:#0000ff">var</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">listItems</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">as</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#0000ff">List</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Adding</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">Items.</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Add</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Hello</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Add</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Cruel</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Add</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">World</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Allocated</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">before</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">compact:</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000"></span><span style="color:#ff0000">"</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#000000">Allocated</span><span style="color:#ff0000">(</span><span style="color:#ff0000">)</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#000000">Compact</span><span style="color:#ff0000">(</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#0000ff">Print</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">Allocated</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">after</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000">compact:</span><span style="color:#ff0000">&nbsp;</span><span style="color:#ff0000"></span><span style="color:#ff0000">"</span><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">&amp;</span><span style="color:#000000">&nbsp;</span><span style="color:#000000">listItems</span><span style="color:#ff0000">.</span><span style="color:#000000">Allocated</span><span style="color:#ff0000">(</span><span style="color:#ff0000">)</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/L.gif"  align=top><span style="color:#000000;background-color:#ffff00;">%&gt;</span></div>
+<img src="/images/Code/clear.gif"  align=top><br>
+</div></td></tr></table>
+</blockquote>
+
+</body>
+</html>

@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{197b2e92-ee2a-4889-b0f4-7ec59ef569ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\CEngine">
+      <UniqueIdentifier>{909e7f83-4640-40fa-8af6-a3c040c744cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{6c0bc78f-7fae-41a3-9304-b731c8d602c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Dialogs">
+      <UniqueIdentifier>{f085443f-e51e-4331-9e82-03433cb003d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries">
+      <UniqueIdentifier>{0e32c65f-e78f-4f7d-aa61-87755d85120e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries\CStringBuilder">
+      <UniqueIdentifier>{3b277d30-307d-4490-822e-06be6fcbd458}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries\CMathParser">
+      <UniqueIdentifier>{fed5d52a-4e3e-418d-8dba-cd6125b19606}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries\NSWFL">
+      <UniqueIdentifier>{e060bf91-372a-4841-853b-15ff340f7d3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries\CMemPool">
+      <UniqueIdentifier>{a62a7086-2abb-4e1d-867b-973e60988cec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries\CSQLBinding">
+      <UniqueIdentifier>{b8c19cf2-23ea-4232-98b8-cf37c64e1e38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries\URLEncoding">
+      <UniqueIdentifier>{82ceff81-c562-4c03-9abc-001390fb77b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries\CSHA1">
+      <UniqueIdentifier>{aac4f0b2-06ad-4105-ad95-c31af72cd07b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries\CCRC32">
+      <UniqueIdentifier>{1587a8ee-352c-4e16-a733-a83c83cfed65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries\CStack">
+      <UniqueIdentifier>{104809b4-d4cc-4c99-aa58-f32694f95630}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries\CCmdLine">
+      <UniqueIdentifier>{95a881cc-5c86-428b-b7da-9443cca9465f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries\CSocketServer">
+      <UniqueIdentifier>{3ea3a2dc-1c5d-43dc-ab5a-eb33a98beaa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries\Debug">
+      <UniqueIdentifier>{8459e667-0fbe-44d6-aa21-e93974cb7692}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries\InsecureInterface">
+      <UniqueIdentifier>{6cc9a90a-76ac-4dde-9b89-d794e9b95960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries\Base64">
+      <UniqueIdentifier>{3750d7bd-358c-4e98-a1ec-5dc733fa9196}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries\CXML">
+      <UniqueIdentifier>{f00f1073-be59-4ac6-acd8-bfbdc20aafbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes &amp; Libraries\CBinaryVector">
+      <UniqueIdentifier>{2eca2795-614e-45e0-8ace-f155138b7187}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Entry.Cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CEngine\CDebug.Cpp">
+      <Filter>Source\CEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CEngine\CEngine.Cpp">
+      <Filter>Source\CEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CEngine\CException.Cpp">
+      <Filter>Source\CEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CEngine\CLines.Cpp">
+      <Filter>Source\CEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CEngine\CParams.Cpp">
+      <Filter>Source\CEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CEngine\CProcs.Cpp">
+      <Filter>Source\CEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CEngine\CReqParams.Cpp">
+      <Filter>Source\CEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CEngine\CScripts.Cpp">
+      <Filter>Source\CEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CEngine\CState.Cpp">
+      <Filter>Source\CEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CEngine\CVars.Cpp">
+      <Filter>Source\CEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CStringBuilder\CStringBuilder.Cpp">
+      <Filter>Classes &amp; Libraries\CStringBuilder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CMathParser\CMathParser.cpp">
+      <Filter>Classes &amp; Libraries\CMathParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\NSWFL\NSWFL_Conversion.Cpp">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\NSWFL\NSWFL_DateTime.Cpp">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\NSWFL\NSWFL_File.Cpp">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\NSWFL\NSWFL_KeyGeneration.Cpp">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\NSWFL\NSWFL_ListBox.Cpp">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\NSWFL\NSWFL_ListView.Cpp">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\NSWFL\NSWFL_Math.Cpp">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\NSWFL\NSWFL_Memory.Cpp">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\NSWFL\NSWFL_Menu.Cpp">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\NSWFL\NSWFL_Registry.Cpp">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\NSWFL\NSWFL_String.Cpp">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\NSWFL\NSWFL_System.Cpp">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\NSWFL\NSWFL_Types.Cpp">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\NSWFL\NSWFL_Windows.Cpp">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CMemPool\CMemPool.Cpp">
+      <Filter>Classes &amp; Libraries\CMemPool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSQLBinding\cBoundRecordSet.cpp">
+      <Filter>Classes &amp; Libraries\CSQLBinding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSQLBinding\cRecordSet.cpp">
+      <Filter>Classes &amp; Libraries\CSQLBinding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSQLBinding\cSQL.cpp">
+      <Filter>Classes &amp; Libraries\CSQLBinding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSQLBinding\CSQLEncapsulation.cpp">
+      <Filter>Classes &amp; Libraries\CSQLBinding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSQLBinding\CSQLValue.cpp">
+      <Filter>Classes &amp; Libraries\CSQLBinding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\URLEncoding\URLEncoding.Cpp">
+      <Filter>Classes &amp; Libraries\URLEncoding</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSHA1\CSHA1.cpp">
+      <Filter>Classes &amp; Libraries\CSHA1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CCRC32\CCRC32.Cpp">
+      <Filter>Classes &amp; Libraries\CCRC32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CStack\CStack.cpp">
+      <Filter>Classes &amp; Libraries\CStack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CCmdLine\CCmdLine.Cpp">
+      <Filter>Classes &amp; Libraries\CCmdLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\NetLogoDlg.Cpp">
+      <Filter>Resources\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_Accept.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_ClassProperties.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_ClientProperties.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_ClientThread.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_Command.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_Connect.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_Events.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_Initialize.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_Internal.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_Locks.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_Memory.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_Packetize.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_PumpThread.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_Receive.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_Send.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_StartStop.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_Utilities.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CSocketServer\CSocketServer_WSAInterface.Cpp">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CEngine\Helpers.Cpp">
+      <Filter>Source\CEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CEngine\CScriptTypes.Cpp">
+      <Filter>Source\CEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\Debug\Debug.Cpp">
+      <Filter>Classes &amp; Libraries\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\InsecureInterface\ISecInt.Cpp">
+      <Filter>Classes &amp; Libraries\InsecureInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\Base64\Base64.cpp">
+      <Filter>Classes &amp; Libraries\Base64</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CXML\CXMLReader.Cpp">
+      <Filter>Classes &amp; Libraries\CXML</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\%40Libraries\CXML\CXMLWriter.Cpp">
+      <Filter>Classes &amp; Libraries\CXML</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Entry.H">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CEngine\CDebug.H">
+      <Filter>Source\CEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CEngine\CEngine.H">
+      <Filter>Source\CEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CEngine\CException.H">
+      <Filter>Source\CEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CEngine\CLines.H">
+      <Filter>Source\CEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CEngine\CParams.H">
+      <Filter>Source\CEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CEngine\CProcs.H">
+      <Filter>Source\CEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CEngine\CReqParams.H">
+      <Filter>Source\CEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CEngine\CScripts.H">
+      <Filter>Source\CEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CEngine\CState.H">
+      <Filter>Source\CEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CEngine\CVars.H">
+      <Filter>Source\CEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CStringBuilder\CStringBuilder.H">
+      <Filter>Classes &amp; Libraries\CStringBuilder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CMathParser\CMathParser.h">
+      <Filter>Classes &amp; Libraries\CMathParser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\NSWFL\NSWFL.h">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\NSWFL\NSWFL_Conversion.H">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\NSWFL\NSWFL_DateTime.H">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\NSWFL\NSWFL_File.H">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\NSWFL\NSWFL_KeyGeneration.H">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\NSWFL\NSWFL_ListBox.H">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\NSWFL\NSWFL_ListView.H">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\NSWFL\NSWFL_Math.H">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\NSWFL\NSWFL_Memory.H">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\NSWFL\NSWFL_Menu.H">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\NSWFL\NSWFL_Registry.H">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\NSWFL\NSWFL_String.H">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\NSWFL\NSWFL_System.H">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\NSWFL\NSWFL_Types.H">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\NSWFL\NSWFL_Windows.H">
+      <Filter>Classes &amp; Libraries\NSWFL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CMemPool\CMemPool.H">
+      <Filter>Classes &amp; Libraries\CMemPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CSQLBinding\cBoundRecordSet.h">
+      <Filter>Classes &amp; Libraries\CSQLBinding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CSQLBinding\cRecordSet.h">
+      <Filter>Classes &amp; Libraries\CSQLBinding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CSQLBinding\CSQL.h">
+      <Filter>Classes &amp; Libraries\CSQLBinding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CSQLBinding\CSQLEncapsulation.H">
+      <Filter>Classes &amp; Libraries\CSQLBinding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CSQLBinding\CSQLValue.h">
+      <Filter>Classes &amp; Libraries\CSQLBinding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\URLEncoding\URLEncoding.H">
+      <Filter>Classes &amp; Libraries\URLEncoding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CSHA1\CSHA1.h">
+      <Filter>Classes &amp; Libraries\CSHA1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CCRC32\CCRC32.H">
+      <Filter>Classes &amp; Libraries\CCRC32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CStack\CStack.H">
+      <Filter>Classes &amp; Libraries\CStack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CCmdLine\CCmdLine.H">
+      <Filter>Classes &amp; Libraries\CCmdLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\resource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\NetLogoDlg.H">
+      <Filter>Resources\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CSocketServer\CSocketServer.H">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CEngine\Helpers.H">
+      <Filter>Source\CEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CEngine\CScriptTypes.H">
+      <Filter>Source\CEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\Debug\Debug.H">
+      <Filter>Classes &amp; Libraries\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\InsecureInterface\ISecInt.H">
+      <Filter>Classes &amp; Libraries\InsecureInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CEngine\Inlines.H">
+      <Filter>Source\CEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\Base64\Base64.h">
+      <Filter>Classes &amp; Libraries\Base64</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CXML\CXML.H">
+      <Filter>Classes &amp; Libraries\CXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CXML\CXMLReader.H">
+      <Filter>Classes &amp; Libraries\CXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CXML\CXMLWriter.H">
+      <Filter>Classes &amp; Libraries\CXML</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\%40Libraries\CVectors\CBinaryVector.H">
+      <Filter>Classes &amp; Libraries\CBinaryVector</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HandCur.cur">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="Resources\SSE.ico">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\..\..\%40Libraries\CSocketServer\Event Handlers.txt">
+      <Filter>Classes &amp; Libraries\CSocketServer</Filter>
+    </None>
+    <None Include="Resources\SSEProject.ico">
+      <Filter>Resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources\SSE.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
