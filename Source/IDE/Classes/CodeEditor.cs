@@ -40,23 +40,22 @@ namespace SSIDE.Classes
 
         public void SetSyntaxHighlighter(string highlighterName)
         {
-            string syntaxtFileName = global.GetRegistryString("", "Path") + "\\IDE\\Highlighters\\" + highlighterName + ".syn";
-
-            AllowAutoComplete = (highlighterName.ToLower() == "sse");
-
             try
             {
+                string syntaxtFileName = global.GetRegistryString("", "Path") + "\\IDE\\Highlighters\\" + highlighterName + ".syn";
+
+                AllowAutoComplete = (highlighterName.ToLower() == "sse");
                 this.Document.SyntaxFile = syntaxtFileName;
             }
             catch (Exception ex)
             {
                 if (ex.GetType() == typeof(System.IO.DirectoryNotFoundException))
                 {
-                    MessageBox.Show("The syntax file path could not be found. Highlighting will not be available.\r\n\"" + syntaxtFileName + "\"");
+                    MessageBox.Show("The syntax file path could not be found. Highlighting will not be available.");
                 }
                 else
                 {
-                    throw ex;
+                    //throw ex;
                 }
             }
         }

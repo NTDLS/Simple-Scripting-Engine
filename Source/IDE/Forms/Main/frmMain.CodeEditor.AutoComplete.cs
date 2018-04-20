@@ -56,7 +56,7 @@ namespace SSIDE.Forms
 
                 return string.Join("\r\n\r\n", tipTexts.OrderBy(o => o).ToArray());
             }
-            catch(Exception ex)
+            catch//(Exception ex)
             {
             }
 

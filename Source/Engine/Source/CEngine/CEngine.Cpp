@@ -10,16 +10,12 @@
 #include <Limits.H>
 
 #include "CEngine.H"
-#include "../../../../../@Libraries/NSWFL/NSWFL.H"
-#include "../../../../../@Libraries/CStringBuilder/CStringBuilder.H"
-#include "../../../../../@Libraries/CMathParser/CMathParser.H"
-#include "../../../../../@Libraries/CStack/CStack.H"
-#include "../../../../../@Libraries/URLEncoding/URLEncoding.H"
-#include "../../../../../@Libraries/CVectors/CBinaryVector.H"
+#include "../../../../NSWFL/NSWFL.h"
+#include "../../../../CMathParser/CMathParser.H"
+#include "../../../../CSQLBinding/CSQLEncapsulation.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
-#include "../../../../../@Libraries/CMemPool/CMemPool.H"
-CMemPool *pMem = new CMemPool; //pMem must be defined and initalized elsewhere.
+NSWFL::Memory::MemoryPool *pMem = new NSWFL::Memory::MemoryPool; //pMem must be defined and initalized elsewhere.
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,6 +24,7 @@ using namespace NSWFL::String;
 using namespace NSWFL::Conversion;
 using namespace NSWFL::File;
 using namespace NSWFL::Registry;
+using namespace NSWFL::Collections;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -91,7 +88,7 @@ bool CEngine::IsIdentifierChar(const char cChar)
 
 int CEngine::ParseMathI(const char *sText, int iLength)
 {
-	CStringBuilder Result;
+	StringBuilder Result;
 	int iRPos = 0;
 	if (this->ParseMath(sText, iLength, &iRPos, &Result) == ERROR_OK)
 	{
@@ -104,7 +101,7 @@ int CEngine::ParseMathI(const char *sText, int iLength)
 
 double CEngine::ParseMathD(const char *sText, int iLength)
 {
-	CStringBuilder Result;
+	StringBuilder Result;
 	int iRPos = 0;
 	if (this->ParseMath(sText, iLength, &iRPos, &Result) == ERROR_OK)
 	{
@@ -115,15 +112,15 @@ double CEngine::ParseMathD(const char *sText, int iLength)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ErrorLevel CEngine::ParseMath(const char *sText, int iLength, int *piRPos, CStringBuilder *pResult)
+ErrorLevel CEngine::ParseMath(const char *sText, int iLength, int *piRPos, StringBuilder *pResult)
 {
-	CStringBuilder Builder;
+	StringBuilder Builder;
 	return this->ParseMath(sText, iLength, piRPos, &Builder, pResult);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ErrorLevel CEngine::ParseMath(const char *sText, int iLength, int *piRPos, CStringBuilder *pBuilder, CStringBuilder *pResult)
+ErrorLevel CEngine::ParseMath(const char *sText, int iLength, int *piRPos, StringBuilder *pBuilder, StringBuilder *pResult)
 {
 	char sTok[MAX_TOKEN_SIZE];
 	char sNSBuf[MAX_TOKEN_SIZE];
@@ -267,7 +264,7 @@ ErrorLevel CEngine::ParseMath(const char *sText, int iLength, int *piRPos, CStri
 
 							if (bReplaceValue)
 							{
-								CStringBuilder prePropBuilder;
+								StringBuilder prePropBuilder;
 								int prePropRPos = 0;
 
 								ParseMath(pBuilder->Buffer, pBuilder->Length, &prePropRPos, &prePropBuilder, pResult);
@@ -280,7 +277,7 @@ ErrorLevel CEngine::ParseMath(const char *sText, int iLength, int *piRPos, CStri
 								this->Vars->Set(iVarIndex, pBuilder->Buffer + iLastOperatorPosition, pBuilder->Length - iLastOperatorPosition);
 							}
 
-							CStringBuilder Property("Numeric");
+							StringBuilder Property("Numeric");
 
 							if (TokenWithDot(sText, iLength, sTok, sizeof(sTok), &iRPos) > 0)
 							{
@@ -430,7 +427,7 @@ ErrorLevel CEngine::ParseMath(const char *sText, int iLength, int *piRPos, CStri
 		//----------------------------------------------------------------------------------------------------------------------
 		else if (sText[iRPos] == '\"')
 		{
-			CStringBuilder *pString = EvaluateString(sText, iLength, &iRPos);
+			StringBuilder *pString = EvaluateString(sText, iLength, &iRPos);
 			if (this->Error->HardCount())
 			{
 				return this->Error->HardCount();
@@ -525,7 +522,7 @@ ErrorLevel CEngine::ParseMath(const char *sText, int iLength, int *piRPos, CStri
 				{
 					int iProcIndex = 0;
 					//Parse and handle properties/namespaces (there are three places where this is done).
-					CStringBuilder Property;
+					StringBuilder Property;
 
 					if (pVar->Type == VAR_TYPE_GENERIC)
 					{
@@ -890,14 +887,14 @@ ErrorLevel CEngine::ParseMath(const char *sText, int iLength, int *piRPos, CStri
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-CStringBuilder *CEngine::EvaluateString(const char *sText, int iLength, int *piRPos)
+StringBuilder *CEngine::EvaluateString(const char *sText, int iLength, int *piRPos)
 {
 	char sTok[MAX_TOKEN_SIZE];
 	int iTokSz = 0;
 
 	int iRPos = (int)*piRPos;
 
-	CStringBuilder *pParam = new CStringBuilder();
+	StringBuilder *pParam = new StringBuilder();
 
 	bool noEscaping = false;
 	bool interpolation = false;
@@ -977,7 +974,7 @@ CStringBuilder *CEngine::EvaluateString(const char *sText, int iLength, int *piR
 			{
 				int iPreviousSoftErrors = this->Error->SoftCount();
 
-				CStringBuilder result;
+				StringBuilder result;
 
 				iRPos = iStartPos;
 				pParam->Clear();
@@ -999,7 +996,7 @@ CStringBuilder *CEngine::EvaluateString(const char *sText, int iLength, int *piR
 			//*******************************************************************
 			else if (sText[iRPos] == '.')
 			{
-				CStringBuilder Property;
+				StringBuilder Property;
 				CParams Return(this);
 
 				int iVarIndex = INVALID_INDEX;
@@ -1111,8 +1108,8 @@ ErrorLevel CEngine::Evaluate(const char *sText, int iLength, CParams **returnVal
 	char sNSBuf[MAX_TOKEN_SIZE];
 	int iTokSz = 0;
 
-	CStringBuilder currentParam; //This will contain the actual text of the current parameter.
-	CStringBuilder finalParam;
+	StringBuilder currentParam; //This will contain the actual text of the current parameter.
+	StringBuilder finalParam;
 
 	bool bPreIncrement = false;
 	bool bPreDecrement = false;
@@ -1171,7 +1168,7 @@ ErrorLevel CEngine::Evaluate(const char *sText, int iLength, CParams **returnVal
 				return this->Error->Hard("Failed to parse inline increment or decrement");
 			}
 
-			CStringBuilder *pString = EvaluateString(sText, iLength, &iRPos);
+			StringBuilder *pString = EvaluateString(sText, iLength, &iRPos);
 			if (this->Error->HardCount())
 			{
 				return this->Error->HardCount();
@@ -1206,7 +1203,7 @@ ErrorLevel CEngine::Evaluate(const char *sText, int iLength, CParams **returnVal
 				int iPreviousSoftErrors = this->Error->SoftCount();
 
 				//Parse math.
-				CStringBuilder Param;
+				StringBuilder Param;
 				if ((result = ParseMath(sText, iLength, &iRPos, &currentParam, &Param)) != ERROR_OK)
 				{
 					delete (*returnValues); (*returnValues) = NULL;
@@ -1227,7 +1224,7 @@ ErrorLevel CEngine::Evaluate(const char *sText, int iLength, CParams **returnVal
 		else if (this->IsIdentifierChar(sText[iRPos]) && !this->IsNumeric(sText[iRPos]))
 		{
 			//Parse variables.
-			CStringBuilder Param;
+			StringBuilder Param;
 			int iStartPos = iRPos;
 
 			//Parse function calls and variable names.
@@ -1262,7 +1259,7 @@ ErrorLevel CEngine::Evaluate(const char *sText, int iLength, CParams **returnVal
 				currentParam.Clear();
 
 				//Parse math.
-				CStringBuilder Param;
+				StringBuilder Param;
 				if ((result = ParseMath(sText, iLength, &iRPos, &Param, &currentParam)) != ERROR_OK)
 				{
 					delete (*returnValues); (*returnValues) = NULL;
@@ -1393,7 +1390,7 @@ ErrorLevel CEngine::Evaluate(const char *sText, int iLength, CParams **returnVal
 									return result;
 								}
 
-								CBinaryVector* pVect = ((CBinaryVector*)pVar->Value);
+								VectorBinary* pVect = ((VectorBinary*)pVar->Value);
 
 								int iPreviousSoftErrors = this->Error->SoftCount();
 
@@ -1410,7 +1407,7 @@ ErrorLevel CEngine::Evaluate(const char *sText, int iLength, CParams **returnVal
 									return this->Error->Hard("Index is out of bounds (%d of %d)", iIndex, pVect->Count() - 1);
 								}
 
-								auto pVecVal = pVect->at(iIndex);
+								auto pVecVal = pVect->GetValueAtIndex(iIndex);
 
 								this->Vars->AddUnique(VAR_TYPE_STRING, &iVarIndex); //Create temp variable.
 								this->Vars->Set(iVarIndex, pVecVal->Value, pVecVal->Length); //Set temp variable.
@@ -1470,7 +1467,7 @@ ErrorLevel CEngine::Evaluate(const char *sText, int iLength, CParams **returnVal
 						if ((sText + iRPos)[0] == '.')
 						{
 							//Parse and handle properties/namespaces (there are three places where this is done).
-							CStringBuilder Property;
+							StringBuilder Property;
 
 							//If adding other generic types, search for this:
 							if (pVar->Type == VAR_TYPE_GENERIC)
@@ -1794,7 +1791,7 @@ ErrorLevel CEngine::Evaluate(const char *sText, int iLength, CParams **returnVal
 
 						if (sText[iRPos] == '.')
 						{
-							CStringBuilder Property;
+							StringBuilder Property;
 
 							while (sText[iRPos] == '.')
 							{
@@ -2936,7 +2933,7 @@ ErrorLevel CEngine::SkipToCatchBlock(void)
 								memcpy_s(pExVar->Value, pExVar->Length, pException, pExVar->Length);
 
 								int iMsgLength = (int)strlen(pException->Message);
-								((EXCEPTIONITEM *)pExVar->Value)->Message = (char *) pMem->StrDup(pException->Message);
+								((EXCEPTIONITEM *)pExVar->Value)->Message = (char *) pMem->CloneString(pException->Message);
 							}
 							else {
 								return this->Error->HardCount();
@@ -3065,7 +3062,7 @@ ErrorLevel CEngine::ParsePreprocessor(LINEITEM *pLine)
 					if (pParam->Collection.Count == 1)
 					{
 						strcpy_s(sNamespace, sizeof(sNamespace), pParam->ToString(0));
-						pScript->Namespace = pMem->StrDup(pParam->ToString(0));
+						pScript->Namespace = pMem->CloneString(pParam->ToString(0));
 					}
 					delete pParam;
 				}
@@ -3343,7 +3340,7 @@ ErrorLevel CEngine::ExecuteLineOfCode(LINEITEM *pLine, CParams *pReturn)
 	else if ((iIndex = this->Vars->GetIndex(sTok)) != INVALID_INDEX)
 	{
 		int iParentVariableNameEndPos = 0;
-		CStringBuilder MemberName;
+		StringBuilder MemberName;
 
 		if (pLine->Text[iRPos] == '.')
 		{
@@ -3366,7 +3363,7 @@ ErrorLevel CEngine::ExecuteLineOfCode(LINEITEM *pLine, CParams *pReturn)
 			}
 
 			//Parse and handle properties/namespaces (there are three places where this is done).
-			CStringBuilder Property;
+			StringBuilder Property;
 
 			int iVarIndex = INVALID_INDEX;
 			int iProcIndex = INVALID_INDEX;
@@ -3833,7 +3830,7 @@ fopen_s(&this->EngineDebugFile, ENGINE_DEBUG_FILE_NAME, "wb");
 		return;
 	}
 
-	this->CommandLine = new CStack(BEHAVIOR_FILO);
+	this->CommandLine = new Stack(BEHAVIOR_FILO);
 
 	this->InitializeCGIEnvironment();
 
@@ -3952,12 +3949,12 @@ ErrorLevel CEngine::ValidateCode(int iLOCStart, int LOCEnd)
 		int Scope;
 	} CHECKSTACKITEM, *LPCHECKSTACKITEM;
 
-	CStack Stack(BEHAVIOR_FILO);
+	Stack stack(BEHAVIOR_FILO);
 
 	CHECKSTACKITEM CTI;
 	memset(&CTI, 0, sizeof(CTI));
 
-	CStack debugLineNumbers(BEHAVIOR_FILO);
+	Stack debugLineNumbers(BEHAVIOR_FILO);
 
 	int iStartingLine = this->State->LineIndex;
 
@@ -3982,13 +3979,13 @@ ErrorLevel CEngine::ValidateCode(int iLOCStart, int LOCEnd)
 				debugLineNumbers.Push(this->State->LineIndex);
 				CTI.Type = CHECK_TYPE_IF;
 				CTI.Scope = iScope;
-				Stack.Push(&CTI, sizeof(CTI));
+				stack.Push(&CTI, sizeof(CTI));
 
 				iScope++;
 			}
 			else if (_StrEqlI(pLine->Text, "Else"))
 			{
-				if (Stack.Peek(&CTI))
+				if (stack.Peek(&CTI))
 				{
 					if (CTI.Scope != iScope - 1 || CTI.Type != CHECK_TYPE_IF)
 					{
@@ -4002,7 +3999,7 @@ ErrorLevel CEngine::ValidateCode(int iLOCStart, int LOCEnd)
 			{
 				iScope--;
 
-				if (Stack.Pop(&CTI))
+				if (stack.Pop(&CTI))
 				{
 					if (CTI.Scope != iScope || CTI.Type != CHECK_TYPE_IF)
 					{
@@ -4018,7 +4015,7 @@ ErrorLevel CEngine::ValidateCode(int iLOCStart, int LOCEnd)
 				debugLineNumbers.Push(this->State->LineIndex);
 				CTI.Type = CHECK_TYPE_WHILE;
 				CTI.Scope = iScope;
-				Stack.Push(&CTI, sizeof(CTI));
+				stack.Push(&CTI, sizeof(CTI));
 
 				iScope++;
 			}
@@ -4026,7 +4023,7 @@ ErrorLevel CEngine::ValidateCode(int iLOCStart, int LOCEnd)
 			{
 				iScope--;
 
-				if (Stack.Pop(&CTI))
+				if (stack.Pop(&CTI))
 				{
 					if (CTI.Scope != iScope || CTI.Type != CHECK_TYPE_WHILE)
 					{
@@ -4042,13 +4039,13 @@ ErrorLevel CEngine::ValidateCode(int iLOCStart, int LOCEnd)
 				debugLineNumbers.Push(this->State->LineIndex);
 				CTI.Type = CHECK_TYPE_TRY;
 				CTI.Scope = iScope;
-				Stack.Push(&CTI, sizeof(CTI));
+				stack.Push(&CTI, sizeof(CTI));
 
 				iScope++;
 			}
 			else if (_StrEqlI(pLine->Text, "Catch"))
 			{
-				if (Stack.Peek(&CTI))
+				if (stack.Peek(&CTI))
 				{
 					if (CTI.Scope != iScope - 1 || CTI.Type != CHECK_TYPE_TRY)
 					{
@@ -4062,7 +4059,7 @@ ErrorLevel CEngine::ValidateCode(int iLOCStart, int LOCEnd)
 			{
 				iScope--;
 
-				if (Stack.Pop(&CTI))
+				if (stack.Pop(&CTI))
 				{
 					if (CTI.Scope != iScope || CTI.Type != CHECK_TYPE_TRY)
 					{
@@ -4078,7 +4075,7 @@ ErrorLevel CEngine::ValidateCode(int iLOCStart, int LOCEnd)
 				debugLineNumbers.Push(this->State->LineIndex);
 				CTI.Type = CHECK_TYPE_FUNCTION;
 				CTI.Scope = iScope;
-				Stack.Push(&CTI, sizeof(CTI));
+				stack.Push(&CTI, sizeof(CTI));
 
 				iScope++;
 			}
@@ -4086,7 +4083,7 @@ ErrorLevel CEngine::ValidateCode(int iLOCStart, int LOCEnd)
 			{
 				iScope--;
 
-				if (Stack.Pop(&CTI))
+				if (stack.Pop(&CTI))
 				{
 					if (CTI.Scope != iScope || CTI.Type != CHECK_TYPE_FUNCTION)
 					{
@@ -4102,7 +4099,7 @@ ErrorLevel CEngine::ValidateCode(int iLOCStart, int LOCEnd)
 				debugLineNumbers.Push(this->State->LineIndex);
 				CTI.Type = CHECK_TYPE_FOR;
 				CTI.Scope = iScope;
-				Stack.Push(&CTI, sizeof(CTI));
+				stack.Push(&CTI, sizeof(CTI));
 
 				iScope++;
 			}
@@ -4110,7 +4107,7 @@ ErrorLevel CEngine::ValidateCode(int iLOCStart, int LOCEnd)
 			{
 				iScope--;
 
-				if (Stack.Pop(&CTI))
+				if (stack.Pop(&CTI))
 				{
 					if (CTI.Scope != iScope || CTI.Type != CHECK_TYPE_FOR)
 					{

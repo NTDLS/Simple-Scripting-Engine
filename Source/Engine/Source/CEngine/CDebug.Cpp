@@ -8,7 +8,7 @@
 #include <Process.H>
 #include <fcntl.h>
 #include "IO.H"
-#include "../../../../../@Libraries/NSWFL/NSWFL.H"
+#include "../../../../NSWFL/NSWFL.H"
 
 #include "CEngine.H"
 #include "CDebug.H"
@@ -248,7 +248,7 @@ ErrorLevel CDebug::DebugThreadProc(void)
 				{
 					this->WritePipe("::BeginListVariables~");
 
-					CStringBuilder string;
+					StringBuilder string;
 
 					for (int iVar = pEngine->Vars->_EndOfBuiltInIndex; iVar < pEngine->Vars->Count(); iVar++)
 					{

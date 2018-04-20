@@ -148,7 +148,7 @@ namespace SSIDE.Classes
             {
                 File.Create(fileName).Dispose();
             }
-            catch (Exception ex)
+            catch// (Exception ex)
             {
 
             }

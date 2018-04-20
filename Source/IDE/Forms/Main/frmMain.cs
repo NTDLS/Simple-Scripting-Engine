@@ -67,7 +67,7 @@ namespace SSIDE.Forms
         private IDEOptions _IDEOptions = new IDEOptions();
         private frmWatchExpression _WatchForm = new frmWatchExpression();
         HtmlHelpViewer.Viewer _HelpViewer = null;
-        HtmlHelpViewer.Viewer _ContextHelp = null;
+        //HtmlHelpViewer.Viewer _ContextHelp = null;
 
         #endregion
 

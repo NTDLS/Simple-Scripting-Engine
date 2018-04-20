@@ -1,0 +1,18 @@
+[submodule "SyntaxBox"]
+	path = SyntaxBox
+	url = https://github.com/NTDLS/SyntaxBox
+[submodule "Html-Help-Decompiler"]
+	path = Html-Help-Decompiler
+	url = https://github.com/NTDLS/Html-Help-Decompiler
+[submodule "NSWFL"]
+	path = NSWFL
+	url = https://github.com/NTDLS/NSWFL
+[submodule "CSQLBinding"]
+	path = CSQLBinding
+	url = https://github.com/NTDLS/CSQLBinding
+[submodule "CSocketServer"]
+	path = CSocketServer
+	url = https://github.com/NTDLS/CSocketServer
+[submodule "CMathParser"]
+	path = CMathParser
+	url = https://github.com/NTDLS/CMathParser

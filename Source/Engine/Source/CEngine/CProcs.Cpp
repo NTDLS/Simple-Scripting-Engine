@@ -13,14 +13,8 @@
 #include <Process.h>
 #include <Psapi.H>
 
-#include "../../../../../@Libraries/NSWFL/NSWFL.H"
-#include "../../../../../@Libraries/URLEncoding/URLEncoding.H"
-#include "../../../../../@Libraries/CSHA1/CSHA1.H"
-#include "../../../../../@Libraries/CCRC32/CCRC32.H"
-#include "../../../../../@Libraries/CVectors/CBinaryVector.H"
-#include "../../../../../@Libraries/Base64/Base64.H"
-#include "../../../../../@Libraries/CXML/CXML.H"
-#include "../../../../../@Libraries/CMathParser/CMathParser.H"
+#include "../../../../NSWFL/NSWFL.h"
+#include "../../../../CMathParser/CMathParser.H"
 
 #include "CEngine.H"
 #include "CProcs.H"
@@ -34,6 +28,9 @@ using namespace NSWFL::Conversion;
 using namespace NSWFL::System;
 using namespace NSWFL::File;
 using namespace NSWFL::Math;
+using namespace NSWFL::Hashing;
+using namespace NSWFL::Collections;
+using namespace NSWFL::XML;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -66,7 +63,7 @@ ErrorLevel CProcs::Add(const char *sName, int iType, int iReturnType, CReqParams
 	memset(pItem, 0, sizeof(PROCITEM));
 	pItem->Type = iType;
 	pItem->ReturnType = iReturnType;
-	pItem->Name = (char *) pMem->StrDup(sName);
+	pItem->Name = (char *) pMem->CloneString(sName);
 
 #ifdef EXTERNAL_PROCEDURE_CALL_IMPLEMENTATION
 	pItem->Library = NULL;
@@ -351,8 +348,8 @@ ErrorLevel CProcs::AddExternal(LINEITEM *pLine)
 	}
 
 	PROCITEM *pProc = this->GetPointer(sProcName);
-	pProc->Library = (char *) pMem->StrDup(sLibrary);
-	pProc->Alias = (char *) pMem->StrDup(sAlias);
+	pProc->Library = (char *) pMem->CloneString(sLibrary);
+	pProc->Alias = (char *) pMem->CloneString(sAlias);
 	pProc->LineBegin = pLine->LineIndex;
 	pProc->CallingConvention = TranslateCallingConvention(sCall);
 	pProc->AssessedReturnType = iStrictReturnType;
@@ -1704,7 +1701,7 @@ ErrorLevel CProcs::GenerateDocumentation(const char *sOutputPath)
 	const char *identifierColor = "0000EE";
 	const char *typeColor = "MediumVioletRed";
 
-	CStack indexAdded;
+	Stack indexAdded;
 
 	for (int iProc = 0; iProc < this->Collection.Count; iProc++)
 	{
@@ -1744,7 +1741,7 @@ ErrorLevel CProcs::GenerateDocumentation(const char *sOutputPath)
 			fprintf(hFile, "<font color=\"%s\">%s</font>", identifierColor, this->Collection.Items[iProc].Name);
 			fprintf(hFile, "(");
 
-			CStringBuilder html;
+			StringBuilder html;
 
 			if (this->Collection.Items[iProc].ReqParams)
 			{
@@ -1869,7 +1866,7 @@ ErrorLevel CProcs::GenerateDocumentation(const char *sOutputPath)
 				{
 					iRPos++;
 
-					_CSTACKITEM *stackItem;
+					_STACKITEM *stackItem;
 
 					bool bAlreadyUsed = false;
 
@@ -1915,7 +1912,7 @@ ErrorLevel CProcs::GenerateDocumentation(const char *sOutputPath)
 	//---------------------------------------------------------------------------------------------------------------------------------------------------
 
 	{ //Write types file.
-		CStack addedKeywords;
+		Stack addedKeywords;
 		FILE *hFile = NULL;
 
 		char sFileName[MAX_PATH];
@@ -1936,7 +1933,7 @@ ErrorLevel CProcs::GenerateDocumentation(const char *sOutputPath)
 	}
 
 	{ //Write keyword file.
-		CBinaryVector addedKeywords;
+		VectorBinary addedKeywords;
 		FILE *hFile = NULL;
 
 		char sFileName[MAX_PATH];
@@ -2584,7 +2581,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 			//-----------------------------------------------------------------------------------------------------------------
 			if (_StrEqlI(pProc->Name, "List.Add"))
 			{
-				CBinaryVector *pVector = ((CBinaryVector *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
+				VectorBinary *pVector = ((VectorBinary *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
 				PARAMITEM *pValue = pParams->GetPointer(1);
 				pVector->Add(pValue->Value, pValue->Length);
 				return ERROR_OK;
@@ -2592,63 +2589,63 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "List.Count"))
 			{
-				CBinaryVector *pVector = ((CBinaryVector *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
+				VectorBinary *pVector = ((VectorBinary *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
 				return pReturn->Add(pVector->Count());
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "List.Allocated"))
 			{
-				CBinaryVector *pVector = ((CBinaryVector *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
+				VectorBinary *pVector = ((VectorBinary *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
 				return pReturn->Add(pVector->Allocated());
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "List.Clear"))
 			{
-				CBinaryVector *pVector = ((CBinaryVector *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
+				VectorBinary *pVector = ((VectorBinary *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
 				pVector->Clear();
 				return ERROR_OK;
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "List.Compact"))
 			{
-				CBinaryVector *pVector = ((CBinaryVector *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
+				VectorBinary *pVector = ((VectorBinary *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
 				pVector->Compact();
 				return ERROR_OK;
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "List.Contains"))
 			{
-				CBinaryVector *pVector = ((CBinaryVector *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
+				VectorBinary *pVector = ((VectorBinary *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
 				PARAMITEM *pValue = pParams->GetPointer(1);
 				return pReturn->Add(pVector->Contiains(pValue->Value));
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "List.DeleteOne"))
 			{
-				CBinaryVector *pVector = ((CBinaryVector *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
+				VectorBinary *pVector = ((VectorBinary *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
 				PARAMITEM *pValue = pParams->GetPointer(1);
-				return pReturn->Add(pVector->DeleteOne(pValue->Value));
+				return pReturn->Add(pVector->DeleteFirstValue(pValue->Value));
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "List.DeleteAll"))
 			{
-				CBinaryVector *pVector = ((CBinaryVector *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
+				VectorBinary *pVector = ((VectorBinary *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
 				PARAMITEM *pValue = pParams->GetPointer(1);
-				return pReturn->Add(pVector->DeleteAll(pValue->Value));
+				return pReturn->Add(pVector->DeleteAllValues(pValue->Value));
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "List.DeleteAt"))
 			{
-				CBinaryVector *pVector = ((CBinaryVector *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
+				VectorBinary *pVector = ((VectorBinary *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
 				int vectorIndex = pParams->ToInt(1);
-				return pReturn->Add(pVector->DeleteAt(vectorIndex));
+				return pReturn->Add(pVector->DeleteAtIndex(vectorIndex));
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "List.IndexOf"))
 			{
-				CBinaryVector *pVector = ((CBinaryVector *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
+				VectorBinary *pVector = ((VectorBinary *)((VARIABLEITEM *)pParams->ToVarIndexPointer(0))->Value);
 				PARAMITEM *pValue = pParams->GetPointer(1);
-				return pReturn->Add(pVector->IndexOf(pValue->Value));
+				return pReturn->Add(pVector->IndexOfValue(pValue->Value));
 			}
 		}
 		//*********************************************************************************************************************
@@ -2758,7 +2755,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "String.Trim"))
 			{
-				CStringBuilder builder(pBaseVar->Value, pBaseVar->Length);
+				StringBuilder builder(pBaseVar->Value, pBaseVar->Length);
 
 				int iLength = pParams->ToInt(1);
 				if (iLength < 0)
@@ -2924,7 +2921,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				PARAMITEM *pToReplace = pParams->GetPointer(1);
 				PARAMITEM *pReplaceWith = pParams->GetPointer(2);
 
-				CStringBuilder str(pString->Value, pString->Length);
+				StringBuilder str(pString->Value, pString->Length);
 
 				str.Replace(pToReplace->Value, pToReplace->Length, pReplaceWith->Value, pReplaceWith->Length, pParams->ToBool(3));
 
@@ -3340,7 +3337,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 			{
 				int iIndex = pParams->ToInt(1);
 
-				_CSTACKITEM *pItem = pEngine->CommandLine->Peek(iIndex);
+				_STACKITEM *pItem = pEngine->CommandLine->Peek(iIndex);
 
 				if (pItem) {
 					return pReturn->Add((const char *)pItem->Value, pItem->Size);
@@ -3935,7 +3932,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 						pMem->Free(pExcept->Message);
 					}
 
-					pExcept->Message = pMem->StrDupn(paramItem->Value, paramItem->Length);
+					pExcept->Message = pMem->CloneStringN(paramItem->Value, paramItem->Length);
 
 					pVar->Value = (char *)pExcept;
 					return this->Error->HardCount();
@@ -4980,7 +4977,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				int iVarIndex = pParams->ToVarIndex(0);
 				char *sFileName = pParams->ToString(1);
 
-				CXMLReader *pPointer = (CXMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLReader *pPointer = (XMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 				if(pPointer->FromFile(sFileName) == false)
 				{
 					return this->Error->Soft("Failed to open the XML file [%s]", sFileName);
@@ -4997,7 +4994,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 
 				int iVarIndex = pParams->ToVarIndex(0);
 
-				CXMLReader *pPointer = (CXMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLReader *pPointer = (XMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 				pPointer->Destroy();
 
 				return this->Error->HardCount();
@@ -5012,7 +5009,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				int iVarIndex = pParams->ToVarIndex(0);
 				char *sXML = pParams->ToString(1);
 
-				CXMLReader *pPointer = (CXMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLReader *pPointer = (XMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 
 				return pReturn->Add(pPointer->Initialize(sXML));
 			}
@@ -5026,7 +5023,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				int iVarIndex = pParams->ToVarIndex(0);
 				int iNewPosition = pParams->ToInt(1);
 
-				CXMLReader *pPointer = (CXMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLReader *pPointer = (XMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 
 				if(iNewPosition >= 0)
 				{
@@ -5042,7 +5039,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				ErrorLevel Result = ERROR_OK;
 				CEngine *pEngine((CEngine *)this->pEngine);
 				int iVarIndex = pParams->ToVarIndex(0);
-				CXMLReader *pPointer = (CXMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLReader *pPointer = (XMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 				return pReturn->Add(pPointer->Length());
 			}
 			//-----------------------------------------------------------------------------------------------------------------
@@ -5051,7 +5048,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				ErrorLevel Result = ERROR_OK;
 				CEngine *pEngine((CEngine *)this->pEngine);
 				int iVarIndex = pParams->ToVarIndex(0);
-				CXMLReader *pPointer = (CXMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLReader *pPointer = (XMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 				return pReturn->Add(pPointer->Text());
 			}
 			//-----------------------------------------------------------------------------------------------------------------
@@ -5061,7 +5058,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				CEngine *pEngine((CEngine *)this->pEngine);
 				int iVarIndex = pParams->ToVarIndex(0);
 				char *sFileName = pParams->ToString(1);
-				CXMLReader *pPointer = (CXMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLReader *pPointer = (XMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 				return pReturn->Add(pPointer->ToFile(sFileName));
 			}
 			//-----------------------------------------------------------------------------------------------------------------
@@ -5074,9 +5071,9 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				int iVarIndex = pParams->ToVarIndex(0);
 				char *sTag = pParams->ToString(1);
 				VARIABLEITEM *xmlReaderVariable = (VARIABLEITEM *)pParams->ToVarIndexPointer(2);
-				CXMLReader *xmlReader = ((CXMLReader *)xmlReaderVariable->Value);
-				CStringBuilder resultingString;
-				CXMLReader *pPointer = (CXMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLReader *xmlReader = ((XMLReader *)xmlReaderVariable->Value);
+				StringBuilder resultingString;
+				XMLReader *pPointer = (XMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 				return pReturn->Add(pPointer->ToReader(sTag, xmlReader));
 			}
 			//-----------------------------------------------------------------------------------------------------------------
@@ -5090,7 +5087,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				char *sTag = pParams->ToString(1);
 				int iDefault = pParams->ToInt(2);
 
-				CXMLReader *pPointer = (CXMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLReader *pPointer = (XMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 				return pReturn->Add(pPointer->ToInteger(sTag, iDefault));
 			}
 			//-----------------------------------------------------------------------------------------------------------------
@@ -5104,7 +5101,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				char *sTag = pParams->ToString(1);
 				double dDefault = pParams->ToDouble(2);
 
-				CXMLReader *pPointer = (CXMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLReader *pPointer = (XMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 				return pReturn->Add(pPointer->ToDouble(sTag, dDefault));
 			}
 			//-----------------------------------------------------------------------------------------------------------------
@@ -5118,9 +5115,9 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				char *sTag = pParams->ToString(1);
 				char *sDefault = pParams->ToString(2);
 
-				CStringBuilder resultingString;
+				StringBuilder resultingString;
 
-				CXMLReader *pPointer = (CXMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLReader *pPointer = (XMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 				pPointer->ToString(sTag, &resultingString, sDefault);
 
 				ErrorLevel result = pReturn->Add(resultingString.Buffer, resultingString.Length);
@@ -5139,7 +5136,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				int iVarIndex = pParams->ToVarIndex(0);
 				char *sTag = pParams->ToString(1);
 
-				CXMLReader *pPointer = (CXMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLReader *pPointer = (XMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 
 				return pReturn->Add(pPointer->AttributeLength(sTag));
 			}
@@ -5153,7 +5150,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				int iVarIndex = pParams->ToVarIndex(0);
 				bool bEnable = pParams->ToBool(1);
 
-				CXMLReader *pPointer = (CXMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLReader *pPointer = (XMLReader *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 				pPointer->ProgressiveScan(bEnable);
 				return this->Error->HardCount();
 			}
@@ -5168,7 +5165,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				int iVarIndex = pParams->ToVarIndex(0);
 				char *sName = pParams->ToString(1);
 
-				CXMLWriter *pPointer = (CXMLWriter *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLWriter *pPointer = (XMLWriter *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 				if(pPointer->ChangeName(sName) == false)
 				{
 					return this->Error->Soft("Failed to add XML attribute [%s]", sName);
@@ -5185,7 +5182,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 
 				int iVarIndex = pParams->ToVarIndex(0);
 
-				CXMLWriter *pPointer = (CXMLWriter *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLWriter *pPointer = (XMLWriter *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 
 				ErrorLevel result = pReturn->Add(pPointer->Length());
 
@@ -5200,7 +5197,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 
 				int iVarIndex = pParams->ToVarIndex(0);
 
-				CXMLWriter *pPointer = (CXMLWriter *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLWriter *pPointer = (XMLWriter *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 
 				int iOutSize = 0;
 				char *sText = pPointer->Text(&iOutSize);
@@ -5221,8 +5218,8 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				int iVarIndex = pParams->ToVarIndex(0);
 				VARIABLEITEM *pVar = (VARIABLEITEM * )pParams->ToVarIndexPointer(1);
 
-				CXMLWriter *pAddPointer = (CXMLWriter *) pVar->Value;
-				CXMLWriter *pPointer = (CXMLWriter *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLWriter *pAddPointer = (XMLWriter *) pVar->Value;
+				XMLWriter *pPointer = (XMLWriter *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 
 				if(pPointer->Add(pAddPointer) == false)
 				{
@@ -5242,7 +5239,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				char *sName = pParams->ToString(1);
 				char *sValue = pParams->ToString(2);
 
-				CXMLWriter *pPointer = (CXMLWriter *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLWriter *pPointer = (XMLWriter *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 				if(pPointer->Add(sName, sValue) == false)
 				{
 					return this->Error->Soft("Failed to add XML attribute [%s]", sName);
@@ -5260,7 +5257,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				int iVarIndex = pParams->ToVarIndex(0);
 				char *sFileName = pParams->ToString(1);
 
-				CXMLWriter *pPointer = (CXMLWriter *)pEngine->Vars->GetPointer(iVarIndex)->Value;
+				XMLWriter *pPointer = (XMLWriter *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 				if(pPointer->ToFile(sFileName) == false)
 				{
 					return this->Error->Soft("Failed to save XML file [%s]", sFileName);
@@ -5648,7 +5645,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "Trim"))
 			{
-				CStringBuilder builder(pParams->First()->Value, pParams->First()->Length);
+				StringBuilder builder(pParams->First()->Value, pParams->First()->Length);
 
 				int iLength = pParams->ToInt(1);
 				if (iLength < 0)
@@ -5851,7 +5848,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 					iLength = (int)strlen(sString);
 				}
 
-				CCRC32 crc32;
+				CRC32 crc32;
 				return pReturn->Add((unsigned int)crc32.FullCRC((const unsigned char *)sString, iLength));
 			}
 			//-----------------------------------------------------------------------------------------------------------------
@@ -5887,7 +5884,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				PARAMITEM *pToReplace = pParams->GetPointer(1);
 				PARAMITEM *pReplaceWith = pParams->GetPointer(2);
 
-				CStringBuilder str(pString->Value, pString->Length);
+				StringBuilder str(pString->Value, pString->Length);
 
 				str.Replace(pToReplace->Value, pToReplace->Length, pReplaceWith->Value, pReplaceWith->Length, pParams->ToBool(3));
 

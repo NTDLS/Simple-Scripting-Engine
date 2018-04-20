@@ -97,9 +97,6 @@
             this.libraryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Help_Menu = new System.Windows.Forms.ToolStripMenuItem();
             this.Contents_Menu = new System.Windows.Forms.ToolStripMenuItem();
-            this.ToolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.checkForUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.About_Menu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.cmdNewFile = new System.Windows.Forms.ToolStripButton();
@@ -595,7 +592,7 @@
             this.Run_Menu.Name = "Run_Menu";
             this.Run_Menu.ShortcutKeyDisplayString = "";
             this.Run_Menu.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.Run_Menu.Size = new System.Drawing.Size(190, 22);
+            this.Run_Menu.Size = new System.Drawing.Size(189, 22);
             this.Run_Menu.Text = "Run";
             this.Run_Menu.Click += new System.EventHandler(this.Run_Menu_Click);
             // 
@@ -604,9 +601,9 @@
             this.Pause_Menu.Image = global::SSIDE.Properties.Resources.ToolPause;
             this.Pause_Menu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Pause_Menu.Name = "Pause_Menu";
-            this.Pause_Menu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-                        | System.Windows.Forms.Keys.P)));
-            this.Pause_Menu.Size = new System.Drawing.Size(190, 22);
+            this.Pause_Menu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.P)));
+            this.Pause_Menu.Size = new System.Drawing.Size(189, 22);
             this.Pause_Menu.Text = "Pause";
             this.Pause_Menu.Click += new System.EventHandler(this.Pause_Menu_Click);
             // 
@@ -616,16 +613,16 @@
             this.Stop_Menu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Stop_Menu.Name = "Stop_Menu";
             this.Stop_Menu.ShortcutKeyDisplayString = "";
-            this.Stop_Menu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
-                        | System.Windows.Forms.Keys.X)));
-            this.Stop_Menu.Size = new System.Drawing.Size(190, 22);
+            this.Stop_Menu.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.X)));
+            this.Stop_Menu.Size = new System.Drawing.Size(189, 22);
             this.Stop_Menu.Text = "Stop";
             this.Stop_Menu.Click += new System.EventHandler(this.Stop_Menu_Click);
             // 
             // ToolStripSeparator16
             // 
             this.ToolStripSeparator16.Name = "ToolStripSeparator16";
-            this.ToolStripSeparator16.Size = new System.Drawing.Size(187, 6);
+            this.ToolStripSeparator16.Size = new System.Drawing.Size(186, 6);
             // 
             // StepInto_Menu
             // 
@@ -633,7 +630,7 @@
             this.StepInto_Menu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.StepInto_Menu.Name = "StepInto_Menu";
             this.StepInto_Menu.ShortcutKeys = System.Windows.Forms.Keys.F11;
-            this.StepInto_Menu.Size = new System.Drawing.Size(190, 22);
+            this.StepInto_Menu.Size = new System.Drawing.Size(189, 22);
             this.StepInto_Menu.Text = "Step Into";
             this.StepInto_Menu.Click += new System.EventHandler(this.StepInto_Menu_Click);
             // 
@@ -643,7 +640,7 @@
             this.StepOver_Menu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.StepOver_Menu.Name = "StepOver_Menu";
             this.StepOver_Menu.ShortcutKeys = System.Windows.Forms.Keys.F10;
-            this.StepOver_Menu.Size = new System.Drawing.Size(190, 22);
+            this.StepOver_Menu.Size = new System.Drawing.Size(189, 22);
             this.StepOver_Menu.Text = "Step Over";
             this.StepOver_Menu.Click += new System.EventHandler(this.StepOver_Menu_Click);
             // 
@@ -653,21 +650,21 @@
             this.StepOut_Menu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.StepOut_Menu.Name = "StepOut_Menu";
             this.StepOut_Menu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F11)));
-            this.StepOut_Menu.Size = new System.Drawing.Size(190, 22);
+            this.StepOut_Menu.Size = new System.Drawing.Size(189, 22);
             this.StepOut_Menu.Text = "Step Out";
             this.StepOut_Menu.Click += new System.EventHandler(this.StepOut_Menu_Click);
             // 
             // ToolStripSeparator19
             // 
             this.ToolStripSeparator19.Name = "ToolStripSeparator19";
-            this.ToolStripSeparator19.Size = new System.Drawing.Size(187, 6);
+            this.ToolStripSeparator19.Size = new System.Drawing.Size(186, 6);
             // 
             // ClearAllBreakPoints_Menu
             // 
             this.ClearAllBreakPoints_Menu.Image = global::SSIDE.Properties.Resources.ToolClearBreakpoints;
             this.ClearAllBreakPoints_Menu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ClearAllBreakPoints_Menu.Name = "ClearAllBreakPoints_Menu";
-            this.ClearAllBreakPoints_Menu.Size = new System.Drawing.Size(190, 22);
+            this.ClearAllBreakPoints_Menu.Size = new System.Drawing.Size(189, 22);
             this.ClearAllBreakPoints_Menu.Text = "Clear all Breakpoints";
             this.ClearAllBreakPoints_Menu.Click += new System.EventHandler(this.ClearAllBreakPoints_Menu_Click);
             // 
@@ -677,7 +674,7 @@
             this.ToggleBreakpoint_Menu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ToggleBreakpoint_Menu.Name = "ToggleBreakpoint_Menu";
             this.ToggleBreakpoint_Menu.ShortcutKeys = System.Windows.Forms.Keys.F9;
-            this.ToggleBreakpoint_Menu.Size = new System.Drawing.Size(190, 22);
+            this.ToggleBreakpoint_Menu.Size = new System.Drawing.Size(189, 22);
             this.ToggleBreakpoint_Menu.Text = "Toggle Breakpoint";
             this.ToggleBreakpoint_Menu.Click += new System.EventHandler(this.ToggleBreakpoint_Menu_Click);
             // 
@@ -686,7 +683,7 @@
             this.attachToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.noProcessesFoundToolStripMenuItem});
             this.attachToolStripMenuItem.Name = "attachToolStripMenuItem";
-            this.attachToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.attachToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.attachToolStripMenuItem.Text = "Attach";
             this.attachToolStripMenuItem.DropDownOpening += new System.EventHandler(this.attachToolStripMenuItem_DropDownOpening);
             // 
@@ -715,7 +712,7 @@
             this.IncreaseIndent_Menu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.IncreaseIndent_Menu.Name = "IncreaseIndent_Menu";
             this.IncreaseIndent_Menu.ShortcutKeyDisplayString = "Tab";
-            this.IncreaseIndent_Menu.Size = new System.Drawing.Size(217, 22);
+            this.IncreaseIndent_Menu.Size = new System.Drawing.Size(216, 22);
             this.IncreaseIndent_Menu.Text = "Increase Indent";
             this.IncreaseIndent_Menu.Click += new System.EventHandler(this.IncreaseIndent_Menu_Click);
             // 
@@ -725,21 +722,21 @@
             this.DecreaseIndent_Menu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.DecreaseIndent_Menu.Name = "DecreaseIndent_Menu";
             this.DecreaseIndent_Menu.ShortcutKeyDisplayString = "Shift+Tab";
-            this.DecreaseIndent_Menu.Size = new System.Drawing.Size(217, 22);
+            this.DecreaseIndent_Menu.Size = new System.Drawing.Size(216, 22);
             this.DecreaseIndent_Menu.Text = "Decrease Indent";
             this.DecreaseIndent_Menu.Click += new System.EventHandler(this.DecreaseIndent_Menu_Click);
             // 
             // ToolStripSeparator10
             // 
             this.ToolStripSeparator10.Name = "ToolStripSeparator10";
-            this.ToolStripSeparator10.Size = new System.Drawing.Size(214, 6);
+            this.ToolStripSeparator10.Size = new System.Drawing.Size(213, 6);
             // 
             // CommentSelection_Menu
             // 
             this.CommentSelection_Menu.Image = global::SSIDE.Properties.Resources.ToolCommentLines;
             this.CommentSelection_Menu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.CommentSelection_Menu.Name = "CommentSelection_Menu";
-            this.CommentSelection_Menu.Size = new System.Drawing.Size(217, 22);
+            this.CommentSelection_Menu.Size = new System.Drawing.Size(216, 22);
             this.CommentSelection_Menu.Text = "Comment Selection";
             this.CommentSelection_Menu.Click += new System.EventHandler(this.CommentSelection_Menu_Click);
             // 
@@ -748,7 +745,7 @@
             this.UncommentSelection_Menu.Image = global::SSIDE.Properties.Resources.ToolUnCommentLines;
             this.UncommentSelection_Menu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.UncommentSelection_Menu.Name = "UncommentSelection_Menu";
-            this.UncommentSelection_Menu.Size = new System.Drawing.Size(217, 22);
+            this.UncommentSelection_Menu.Size = new System.Drawing.Size(216, 22);
             this.UncommentSelection_Menu.Text = "Uncomment Selection";
             this.UncommentSelection_Menu.Click += new System.EventHandler(this.UncommentSelection_Menu_Click);
             // 
@@ -793,9 +790,6 @@
             // 
             this.Help_Menu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Contents_Menu,
-            this.ToolStripSeparator13,
-            this.checkForUpdateToolStripMenuItem,
-            this.toolStripMenuItem1,
             this.About_Menu});
             this.Help_Menu.Name = "Help_Menu";
             this.Help_Menu.Size = new System.Drawing.Size(44, 20);
@@ -807,31 +801,14 @@
             this.Contents_Menu.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Contents_Menu.Name = "Contents_Menu";
             this.Contents_Menu.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.Contents_Menu.Size = new System.Drawing.Size(166, 22);
+            this.Contents_Menu.Size = new System.Drawing.Size(152, 22);
             this.Contents_Menu.Text = "Contents";
             this.Contents_Menu.Click += new System.EventHandler(this.Contents_Menu_Click);
-            // 
-            // ToolStripSeparator13
-            // 
-            this.ToolStripSeparator13.Name = "ToolStripSeparator13";
-            this.ToolStripSeparator13.Size = new System.Drawing.Size(163, 6);
-            // 
-            // checkForUpdateToolStripMenuItem
-            // 
-            this.checkForUpdateToolStripMenuItem.Name = "checkForUpdateToolStripMenuItem";
-            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.checkForUpdateToolStripMenuItem.Text = "Check for Update";
-            this.checkForUpdateToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdateToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(163, 6);
             // 
             // About_Menu
             // 
             this.About_Menu.Name = "About_Menu";
-            this.About_Menu.Size = new System.Drawing.Size(166, 22);
+            this.About_Menu.Size = new System.Drawing.Size(152, 22);
             this.About_Menu.Text = "About";
             this.About_Menu.Click += new System.EventHandler(this.About_Menu_Click);
             // 
@@ -1600,7 +1577,6 @@
         internal System.Windows.Forms.ToolStripMenuItem UncommentSelection_Menu;
         internal System.Windows.Forms.ToolStripMenuItem Help_Menu;
         internal System.Windows.Forms.ToolStripMenuItem Contents_Menu;
-        internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator13;
         internal System.Windows.Forms.ToolStripMenuItem About_Menu;
         internal System.Windows.Forms.ToolStrip toolStrip;
         internal System.Windows.Forms.ToolStripButton cmdNewFile;
@@ -1654,8 +1630,6 @@
         private System.Windows.Forms.ToolStripMenuItem codeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem examplesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem snippetsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem checkForUpdateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private NTDLS.Windows.Forms.CodeEditorControl _ImmediateText;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;

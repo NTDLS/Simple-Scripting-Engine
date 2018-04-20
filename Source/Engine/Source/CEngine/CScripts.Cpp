@@ -9,7 +9,7 @@
 #include "CEngine.H"
 #include "CScripts.H"
 
-#include "../../../../../@Libraries/NSWFL/NSWFL.H"
+#include "../../../../NSWFL/NSWFL.h"
 
 using namespace NSWFL::String;
 using namespace NSWFL::File;
@@ -58,7 +58,7 @@ ErrorLevel CScripts::Add(const char *sFileName)
 
 	if (sFullFilepath)
 	{
-		pItem->FileName = (char *) pMem->StrDup(sFullFilepath);
+		pItem->FileName = (char *) pMem->CloneString(sFullFilepath);
 		Result = ((CEngine *)this->pEngine)->Lines->LoadFromScript(this->Collection.Count - 1);
 
 		if (this->Collection.Count == 1)

@@ -9,7 +9,7 @@
 #include "CEngine.H"
 #include "CReqParams.H"
 
-#include "../../../../../@Libraries/NSWFL/NSWFL.H"
+#include "../../../../NSWFL/NSWFL.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -79,7 +79,7 @@ ErrorLevel CReqParams::Add(const char *sName, int iType, int iStrictType, bool b
 	pItem->Type = iType;
 	pItem->StrictType = iStrictType;
 	pItem->ByReference = bByReference;
-	pItem->Name = (char *)pMem->StrDup(sName);
+	pItem->Name = (char *)pMem->CloneString(sName);
 
 	pItem->IsArray = isArray;
 	pItem->IsOptional = false;
@@ -135,7 +135,7 @@ ErrorLevel CReqParams::AddOptional(const char *sName, int iType, int iStrictType
 	pItem->Type = iType;
 	pItem->StrictType = iStrictType;
 	pItem->ByReference = bByReference;
-	pItem->Name = (char *)pMem->StrDup(sName);
+	pItem->Name = (char *)pMem->CloneString(sName);
 
 	pItem->IsOptional = true;
 	pItem->Default.Length = iDefaultLength;

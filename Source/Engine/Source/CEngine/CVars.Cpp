@@ -6,12 +6,9 @@
 #include <Stdio.H>
 #include <Stdlib.H>
 
-#include "../../../../../@Libraries/NSWFL/NSWFL.H"
-#include "../../../../../@Libraries/CMathParser/CMathParser.H"
-#include "../../../../../@Libraries/CVectors/CBinaryVector.H"
-
-#include "../../../../../@Libraries/CXML/CXML.H"
-
+#include "../../../../NSWFL/NSWFL.h"
+#include "../../../../CMathParser/CMathParser.H"
+#include "../../../../CSQLBinding/CSQLEncapsulation.H"
 
 #include "../Entry.H"
 
@@ -23,6 +20,8 @@
 
 using namespace NSWFL::String;
 using namespace NSWFL::Conversion;
+using namespace NSWFL::Collections;
+using namespace NSWFL::XML;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -120,9 +119,9 @@ bool CVars::FriendlyValue(VARIABLEITEM *pVar, char *sOutput, int iMaxSz)
 	{
 		if (pVar->Type == VAR_TYPE_LIST && pVar->Length > 0)
 		{
-			CBinaryVector* pVect = ((CBinaryVector*)pVar->Value);
+			VectorBinary* pVect = ((VectorBinary*)pVar->Value);
 
-			CStringBuilder string;
+			StringBuilder string;
 
 			string.AppendF("<Count: %d, Allocated: %d>", pVect->Count(), pVect->Allocated());
 
@@ -136,7 +135,7 @@ bool CVars::FriendlyValue(VARIABLEITEM *pVar, char *sOutput, int iMaxSz)
 		{
 			CSQL *pSQL = (CSQL *)pVar->Value;
 
-			CStringBuilder string;
+			StringBuilder string;
 
 			string.AppendF("<Connected: %s, String: %s>", pSQL->IsConnected() ? "Yes" : "No", pSQL->ConnectionString());
 
@@ -557,7 +556,7 @@ ErrorLevel CVars::Free(VARIABLEITEM *pItem, bool bValueOnly)
 			{
 				if (pItem->Value != NULL)
 				{
-					delete (CBinaryVector *)pItem->Value;
+					delete (VectorBinary *)pItem->Value;
 				}
 
 				pItem->Value = NULL;
@@ -1594,10 +1593,10 @@ ErrorLevel CVars::Add(const char *sName, int iType, ARRAYDEFINITION *arrayDefini
 		strcpy_s(sNSName, sizeof(sNSName), ((CEngine*)this->pEngine)->State->Namespace());
 		strcat_s(sNSName, sizeof(sNSName), ".");
 		strcat_s(sNSName, sizeof(sNSName), sName);
-		pItem->Name = (char *)pMem->StrDup(sNSName);
+		pItem->Name = (char *)pMem->CloneString(sNSName);
 	}
 	else {
-		pItem->Name = (char *)pMem->StrDup(sName);
+		pItem->Name = (char *)pMem->CloneString(sName);
 	}
 
 	if (!pItem->Name)
@@ -1656,8 +1655,8 @@ ErrorLevel CVars::Add(const char *sName, int iType, ARRAYDEFINITION *arrayDefini
 		}
 		else if (iType == VAR_TYPE_LIST)
 		{
-			pItem->Length = sizeof(CBinaryVector);
-			pItem->Value = (char *) new CBinaryVector();
+			pItem->Length = sizeof(VectorBinary);
+			pItem->Value = (char *) new VectorBinary();
 			memset(pItem->Value, 0, pItem->Length);
 		}
 		else if (iType == VAR_TYPE_SOCKETSERVER)
@@ -1677,20 +1676,20 @@ ErrorLevel CVars::Add(const char *sName, int iType, ARRAYDEFINITION *arrayDefini
 		}
 		else if (iType == VAR_TYPE_XMLREADER)
 		{
-			pItem->Length = sizeof(CXMLReader);
-			pItem->Value = (char *) new CXMLReader;
+			pItem->Length = sizeof(XMLReader);
+			pItem->Value = (char *) new XMLReader;
 			memset(pItem->Value, 0, pItem->Length);
 
-			((CXMLReader *)pItem->Value)->pUserData = this->pEngine;
+			((XMLReader *)pItem->Value)->pUserData = this->pEngine;
 		}
 		else if (iType == VAR_TYPE_XMLWRITER)
 		{
-			pItem->Length = sizeof(CXMLWriter);
-			pItem->Value = (char *) new CXMLWriter;
+			pItem->Length = sizeof(XMLWriter);
+			pItem->Value = (char *) new XMLWriter;
 			memset(pItem->Value, 0, pItem->Length);
 
-			((CXMLWriter *)pItem->Value)->pUserData = this->pEngine;
-			((CXMLWriter *)pItem->Value)->Initialize();
+			((XMLWriter *)pItem->Value)->pUserData = this->pEngine;
+			((XMLWriter *)pItem->Value)->Initialize();
 		}
 #ifdef COM_PROCEDURE_CALL_IMPLEMENTATION
 		else if (iType == VAR_TYPE_COM_OBJECT)

@@ -29,7 +29,7 @@ namespace SSIDE.Forms
 
         public void QuickWatchInfo(String sName, String sType, String sValue)
         {
-            using (QuickWatch quickWatch = new QuickWatch())
+            using (frmQuickWatch quickWatch = new frmQuickWatch())
             {
                 quickWatch.PropertyName = sName;
                 quickWatch.PropertyType = sType;

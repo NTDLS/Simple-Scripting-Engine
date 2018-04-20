@@ -12,8 +12,7 @@
 #include "CEngine/CEngine.H"
 #include "../Dialogs/NetLogoDlg.H"
 #include "../Resources/Resource.H"
-#include "../../../../@Libraries/CCmdLine/CCmdLine.H"
-#include "../../../../@Libraries/NSWFL/NSWFL.H"
+#include "../../../NSWFL/NSWFL.h"
 
 #include "Entry.H"
 
@@ -21,6 +20,7 @@
 
 using namespace NSWFL::File;
 using namespace NSWFL::String;
+using namespace NSWFL::CommandLine;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -34,7 +34,7 @@ HINSTANCE ghAppInstance;
 int __cdecl main(void)
 {
 	ghAppInstance = GetModuleHandle(NULL);
-	CCmdLine CmdLine;
+	CommandLineParser CmdLine;
 
 	int iResult = 0;
 	int iNonHandledParamCount = 0;

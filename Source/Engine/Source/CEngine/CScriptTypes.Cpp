@@ -6,8 +6,8 @@
 #include <Stdio.H>
 #include <Stdlib.H>
 
-#include "../../../../../@Libraries/NSWFL/NSWFL.H"
-#include "../../../../../@Libraries/CMathParser/CMathParser.H"
+#include "../../../../NSWFL/NSWFL.h"
+#include "../../../../CMathParser/CMathParser.H"
 
 #include "../Entry.H"
 
@@ -76,7 +76,7 @@ TYPEITEM *CScriptTypes::Add(const char *sName)
 	TYPEITEM *pType = this->GetFreePointer();
 	if (pType)
 	{
-		pType->Name = pMem->StrDup(sName);
+		pType->Name = pMem->CloneString(sName);
 		pType->Index = this->Collection.Count - 1;
 	}
 
@@ -207,7 +207,7 @@ ErrorLevel CScriptTypes::AddStrictType()
 			pType->Members.Items = (TYPEMEMBERITEM *) pMem->ReAllocate(pType->Members.Items, sizeof(TYPEMEMBERITEM), pType->Members.Count + 1);
 
 			TYPEMEMBERITEM *pTypeMember = &pType->Members.Items[pType->Members.Count++];
-			pTypeMember->Name = pMem->StrDup(sMemberName);
+			pTypeMember->Name = pMem->CloneString(sMemberName);
 			pTypeMember->Type = iLooseType;
 			pTypeMember->SizeInBytes = iSizeInBytes;
 			pTypeMember->ByteOffset = pType->Members.SizeInBytes;

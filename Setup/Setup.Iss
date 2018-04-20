@@ -22,7 +22,6 @@
 [Components]
  Name: "SSE";        Description: "Scripting Engine";             Types: Full Compact Custom; Flags: Fixed;
  Name: "SSIDE";      Description: "Development Environment";      Types: Full Custom; MinVersion: 0.0,5.1;
- Name: "AutoUpdate"; Description: "Auto-Update Utility";          Types: Full Custom;
  Name: "Examples";   Description: "Example Scripts";              Types: Full Custom;
  Name: "Library";    Description: "Standard Abstraction Library"; Types: Full Compact Custom;
  Name: "Snippets";   Description: "Snippets";                     Types: Full Custom;
@@ -36,22 +35,18 @@
  Source: "..\Scripts\Examples\*.*";                        DestDir: "{app}\IDE\Examples\";        Flags: IgnoreVersion recursesubdirs; Components: Examples;
  Source: "..\Scripts\Snippets\*.*";                        DestDir: "{app}\IDE\Snippets";         Flags: IgnoreVersion recursesubdirs; Components: Snippets;
  Source: "..\Scripts\Library\*.*";                         DestDir: "{app}\Library";              Flags: IgnoreVersion recursesubdirs; Components: Library;
- Source: "AutoUpdate.xml";                                 DestDir: "{app}";                      Flags: IgnoreVersion;                Components: AutoUpdate;
  Source: "Libraries\EventMsg.dll";                         DestDir: "{app}";                      Flags: IgnoreVersion;                Components: SSE;
  Source: "..\Source\Engine\Release\Win32\SSE.exe";         DestDir: "{app}";                      Flags: IgnoreVersion;                Components: SSE;
  Source: "..\Source\IDE\bin\Release\SSIDE.exe";            DestDir: "{app}\IDE";                  Flags: IgnoreVersion;                Components: SSIDE;
  Source: "..\Source\IDE\bin\Release\*.dll";                DestDir: "{app}\IDE";                  Flags: IgnoreVersion;                Components: SSIDE;
  Source: "HTML Code Images\*.*";                           DestDir: "{app}\IDE\HTML Code Images"; Flags: IgnoreVersion;                Components: SSIDE;
  Source: "..\Source\IDE\Highlighters\*.*";                 DestDir: "{app}\IDE\Highlighters";     Flags: IgnoreVersion;                Components: SSIDE;
- Source: "..\..\@AutoUpdate\Win32\Release\AutoUpdate.Exe"; DestDir: "{app}";                      Flags: RestartReplace;               Components: AutoUpdate;
  Source: "..\Documentation\Help.chm";                      DestDir: "{app}\Help";                 Flags: IgnoreVersion;                Components: SSIDE;
  Source: "..\Documentation\AutoComplete.json";             DestDir: "{app}\Help";                 Flags: IgnoreVersion;                Components: SSIDE;
 
 [Icons]
  Name: "{group}\Simple Script IDE";          Filename: "{app}\IDE\SSIDE.exe";            Components: SSIDE;
  Name: "{group}\Simple Script Help";         Filename: "{app}\Help\Help.chm";            Components: SSIDE;
- Name: "{group}\Uninstall Simple Script";    Filename: "{uninstallexe}";
- Name: "{group}\Update Simple Script";       Filename: "{app}\AutoUpdate.Exe";           Components: AutoUpdate;
  Name: "{commondesktop}\Simple Script IDE";  Filename: "{app}\IDE\SSIDE.exe";            Components: SSIDE; Tasks: DesktopIcon\Common;
  Name: "{userdesktop}\Simple Script IDE";    Filename: "{app}\IDE\SSIDE.exe";            Components: SSIDE; Tasks: DesktopIcon\User;
 

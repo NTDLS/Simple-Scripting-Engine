@@ -6,11 +6,15 @@
 #include <Stdio.H>
 #include <Stdlib.H>
 
-#include "../../../../../@Libraries/NSWFL/NSWFL.H"
+#include "../../../../NSWFL/NSWFL.h"
 
 #include "CEngine.H"
 #include "CState.H"
 #include "CScripts.H"
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+using namespace NSWFL::Collections;
 
 //#define _DEBUG_SCOPE 1
 
@@ -20,8 +24,8 @@ CState::CState(void *lpEngine)
 {
 	this->pEngine = lpEngine;
 	this->Error = ((CEngine *)lpEngine)->Error;
-	this->TryScopes = new CStack(BEHAVIOR_FILO);
-	this->MajorScopes = new CStack(BEHAVIOR_FILO);
+	this->TryScopes = new Stack(BEHAVIOR_FILO);
+	this->MajorScopes = new Stack(BEHAVIOR_FILO);
 
 	this->LastMajorScope = 0;
 	this->SoftErrorCountAtLastCatch = 0;

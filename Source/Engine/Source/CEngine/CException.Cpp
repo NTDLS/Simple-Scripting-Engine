@@ -9,7 +9,7 @@
 #include "CException.H"
 #include "CEngine.H"
 
-#include "../../../../../@Libraries/CStringBuilder/CStringBuilder.H"
+#include "../../../../NSWFL/NSWFL.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -238,7 +238,7 @@ int CException::AddBase(int iErrorType, const char *sText)
 	if (this->Collection.Items)
 	{
 		EXCEPTIONITEM *Item = &this->Collection.Items[this->Collection.Count++];
-		Item->Message = (char *) pMem->StrDup(sText);
+		Item->Message = (char *) pMem->CloneString(sText);
 		Item->LineIndex = ((CEngine *)this->pEngine)->State->LineIndex;
 		Item->Type = iErrorType;
 
@@ -277,7 +277,7 @@ int CException::AddBase(int iErrorType, int iLineIndex, const char *sText)
 	if (this->Collection.Items)
 	{
 		EXCEPTIONITEM *Item = &this->Collection.Items[this->Collection.Count++];
-		Item->Message = (char *) pMem->StrDup(sText);
+		Item->Message = (char *) pMem->CloneString(sText);
 		Item->LineIndex = iLineIndex;
 		Item->Type = iErrorType;
 

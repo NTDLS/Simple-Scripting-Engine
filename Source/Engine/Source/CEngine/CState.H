@@ -3,12 +3,10 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include <Windows.h>
-
-#include "../../../../../@Libraries/CMemPool/CMemPool.H"
-#include "../../../../../@Libraries/CStack/CStack.H"
-
 #include "CException.H"
 #include "CLines.H"
+
+#include "../../../../NSWFL/NSWFL.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -56,8 +54,8 @@ private:
 	int DropScopeEx(void);
 	int Scope;
 
-	CStack *TryScopes;
-	CStack *MajorScopes;
+	NSWFL::Collections::Stack *TryScopes;
+	NSWFL::Collections::Stack *MajorScopes;
 
 	void *pEngine; //Pointer to the Engine Class.
 };

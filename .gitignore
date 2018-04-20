@@ -8,3 +8,8 @@
 *.pdb
 *.exe
 *.ilk
+*.res
+*.dll
+Source/IDE/bin/
+Source/IDE/obj/
+Source/packages/

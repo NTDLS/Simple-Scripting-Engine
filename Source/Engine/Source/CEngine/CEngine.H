@@ -2,9 +2,6 @@
 #define _CEngine_H_
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "../../../../../@Libraries/CMemPool/CMemPool.H"
-#include "../../../../../@Libraries/CStringBuilder/CStringBuilder.H"
-
 #include "CException.H"
 #include "CVars.H"
 #include "CScripts.H"
@@ -15,6 +12,7 @@
 #include "CDebug.H"
 #include "CScriptTypes.H"
 #include "Inlines.H"
+#include "../../../../NSWFL/NSWFL.h"
 
 int SQLErrorHandler(void *pCaller, const char *sSource, const char *sErrorMsg, const int iErrorNumber);
 
@@ -44,7 +42,7 @@ int SQLErrorHandler(void *pCaller, const char *sSource, const char *sErrorMsg, c
 class CEngine {
 
 public:
-	CStack *CommandLine;
+	NSWFL::Collections::Stack *CommandLine;
 	CException *Error;
 	CScripts *Scripts;
 	CVars *Vars;
@@ -63,8 +61,8 @@ public:
 	ErrorLevel GetParenIndexPositions(const char *sText, int iLength, int *piRPos, int *piBegPos, int *piEndPos);
 	ErrorLevel GetSquareBracketIndexPositions(const char *sText, int iLength, int *piRPos, int *piBegPos, int *piEndPos);
 
-	ErrorLevel ParseMath(const char *sText, int iLength, int *piRPos, CStringBuilder *pBuilder, CStringBuilder *pResult);
-	ErrorLevel ParseMath(const char *sText, int iLength, int *piRPos, CStringBuilder *pResult);
+	ErrorLevel ParseMath(const char *sText, int iLength, int *piRPos, NSWFL::String::StringBuilder *pBuilder, NSWFL::String::StringBuilder *pResult);
+	ErrorLevel ParseMath(const char *sText, int iLength, int *piRPos, NSWFL::String::StringBuilder *pResult);
 	double ParseMathD(const char *sText, int iLength);
 	int ParseMathI(const char *sText, int iLength);
 
@@ -120,7 +118,7 @@ private:
 	bool IsMathChar(const char cChar);
 	bool IsIdentifierChar(const char cChar);
 	bool IsNumeric(char cIn);
-	CStringBuilder *EvaluateString(const char *sText, int iLength, int *piRPos);
+	NSWFL::String::StringBuilder *EvaluateString(const char *sText, int iLength, int *piRPos);
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -9,7 +9,7 @@
 #include "CEngine.H"
 #include "CLines.H"
 
-#include "../../../../../@Libraries/NSWFL/NSWFL.H"
+#include "../../../../NSWFL/NSWFL.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -236,7 +236,7 @@ ErrorLevel CLines::LoadFromScriptEx(int iScriptIndex)
 
 	if (iActualLines)
 	{
-		CStringBuilder Line;
+		StringBuilder Line;
 		int iStartingLine = 0;
 
 		int iCodeBlockLevel = 0;

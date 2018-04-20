@@ -6,7 +6,7 @@
 #include <StdIO.H>
 
 #include "../Source/Entry.H"
-#include "../../../../@Libraries/NSWFL/NSWFL.H"
+#include "../../../NSWFL/NSWFL.h"
 #include "../Resources/Resource.H"
 
 #include "NetLogoDlg.H"
