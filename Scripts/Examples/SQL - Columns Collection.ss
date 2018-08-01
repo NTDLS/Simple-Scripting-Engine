@@ -1,35 +1,35 @@
 <%
 
-var sqlConn as SQL.Connection
-var recordSet as SQL.RecordSet
+var sqlConnection as SQL.Connection
+var sqlRcord as SQL.RecordSet
 
-sqlConn.Connect(".")
+sqlConnection.Connect("DRIVER={ODBC Driver 11 for SQL Server};DATABASE=master;SERVER=(local);Trusted_Connection=yes;")
 
-sqlConn.Execute("SELECT TOP 10 id, name, xtype FROM sysobjects", @recordSet)
+sqlConnection.Execute("SELECT TOP 10 id, name, xtype FROM sysobjects", @sqlRcord)
 
-print("Index of Name A: " recordSet.Columns.Index("name"))
-print("Name of Index 0: " recordSet.Columns.Name(2))
+print("Index of Name A: " sqlRcord.Columns.Index("name"))
+print("Name of Index 0: " sqlRcord.Columns.Name(2))
 
 Print("")
 
 ;All Columns:
-For(i as Numeric to recordSet.Columns.Count())
-	Prints(recordSet.Columns.Name(i) & "\t")
+For(i as Numeric to sqlRcord.Columns.Count())
+	Prints(sqlRcord.Columns.Name(i) & "\t")
 Next
 
 Print("")
 
 ;All Rows:
-While(recordSet.Fetch())
+While(sqlRcord.Fetch())
 	var sRow as String
 
-	For(i as Numeric to recordSet.Columns.Count())
-		sRow.Append(recordSet.Value(i) & "\t")
+	For(i as Numeric to sqlRcord.Columns.Count())
+		sRow.Append(sqlRcord.Value(i) & "\t")
 	Next
 	Print(sRow)
 WEnd
 
-recordSet.Close();
-sqlConn.Close();
+sqlRcord.Close();
+sqlConnection.Close();
 
 %>

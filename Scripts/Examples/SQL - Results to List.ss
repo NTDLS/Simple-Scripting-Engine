@@ -16,19 +16,19 @@ Next
 Function GetSQLValues(serverName as String, databaseName as String, text as String) as List
 
 	var values as List
-	var sqlConn as SQL.Connection
-	var recordSet as SQL.RecordSet
+	var sqlConnection as SQL.Connection
+	var sqlRecord as SQL.RecordSet
 
-	sqlConn.Connect(serverName, databaseName)
+	sqlConnection.Connect("DRIVER={ODBC Driver 11 for SQL Server};DATABASE=" & databaseName & ";SERVER=(local);Trusted_Connection=yes;")
 	
-	sqlConn.Execute(text, @recordSet)
+	sqlConnection.Execute(text, @sqlRecord)
 	
-	While(recordSet.Fetch())		
-		values.Add(recordSet.Value(0))
+	While(sqlRecord.Fetch())		
+		values.Add(sqlRecord.Value(0))
 	WEnd
 
-	recordSet.Close()
-	sqlConn.Close()
+	sqlRecord.Close()
+	sqlConnection.Close()
 
 	Return(values)
 	

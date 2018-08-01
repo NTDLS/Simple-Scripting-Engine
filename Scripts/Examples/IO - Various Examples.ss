@@ -9,8 +9,8 @@ var txtFile as File ;Declare the file object.
 
 ;Create a file:
 If(txtFile.Open("C:\\Test.txt", FileAccess.Write))
-	var BytesWritten as Numeric = txtFile.Write("This is the contents of the file!")
-	Print("Write: " & BytesWritten & " bytes.")
+	var bytesWritten as Numeric = txtFile.Write("This is the contents of the file!")
+	Print("Write: " & bytesWritten & " bytes.")
 	Print("File size is " & FormatSize(txtFile.Size(), 2))
 	txtFile.Close()
 	

@@ -1,6 +1,6 @@
 var sqlConn as SQL.Connection
 
-sqlConn.Connect("(local)")
+sqlConn.Connect("DRIVER={ODBC Driver 11 for SQL Server};DATABASE=master;SERVER=(local);Trusted_Connection=yes;")
 
 Print(sqlConn.Value("SELECT GetDate()"))
 

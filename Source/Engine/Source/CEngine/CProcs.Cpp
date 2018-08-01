@@ -1320,10 +1320,7 @@ CProcs::CProcs(void *lpEngine)
 	//-----( SQL Server )-----------------------------------------------------------
 	pReqParams = new CReqParams(this->pEngine);
 	pReqParams->Add(PARENT_INDEX_VAR_NAME, VAR_TYPE_NUMERIC); //Variable index.
-	pReqParams->Add("ServerName", VAR_TYPE_STRING);
-	pReqParams->AddOptional("DefaultDatabase", VAR_TYPE_STRING, "master");
-	pReqParams->AddOptional("UserName", VAR_TYPE_STRING, (const char *)NULL);
-	pReqParams->AddOptional("Password", VAR_TYPE_STRING, (const char *)NULL);
+	pReqParams->Add("ConnectionString", VAR_TYPE_STRING);
 	this->AddSystem("SQL.Connection.Connect", VAR_TYPE_INVALID, pReqParams);
 	delete pReqParams;
 	//------------------------------------------------
@@ -4334,7 +4331,8 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 					return pReturn->Add(false);
 				}
 				else {
-					pEngine->Vars->Set(iVarIndex, (char *)&hFile, sizeof(HANDLE));
+
+					pEngine->Vars->Set(iVarIndex, hFile);
 					return pReturn->Add(true);
 				}
 				return pReturn->Add(false);
@@ -4345,16 +4343,13 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 			{
 				bool bResult = false;
 				int iVarIndex = pParams->ToVarIndex(0);
-				VARIABLEITEM *pVar = pEngine->Vars->GetPointer(iVarIndex);
 
-				HANDLE hFile = NULL;
-				if (!pVar->Length || !(*(HANDLE *)pVar->Value))
+				HANDLE hFile = pEngine->Vars->GetHandle(iVarIndex);
+
+				if (hFile == NULL || hFile == INVALID_HANDLE_VALUE)
 				{
 					this->Error->Soft("Invalid file handle");
 					return pReturn->Add(false);
-				}
-				else {
-					hFile = (*(HANDLE *)pVar->Value);
 				}
 
 				if (!(bResult = (CloseHandle(hFile) > 0)))
@@ -4377,30 +4372,27 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 			//Opens a new file for read or write access.
 			else if (_StrEqlI(pProc->Name, "File.Handle"))
 			{
-				VARIABLEITEM *pVar = pEngine->Vars->GetPointer(pParams->ToVarIndex(0));
+				HANDLE hFile = pEngine->Vars->GetHandle(pParams->ToVarIndex(0));
 
-				if (!pVar->Length || !(*(HANDLE *)pVar->Value))
+				if (hFile == NULL || hFile == INVALID_HANDLE_VALUE)
 				{
 					this->Error->Soft("Invalid file handle");
 					return pReturn->Add(0);
 				}
 
-				return pReturn->Add((unsigned int)(*(HANDLE *)pVar->Value));
+				return pReturn->Add((unsigned int)hFile);
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			//Reads from an open file.
 			else if (_StrEqlI(pProc->Name, "File.Read"))
 			{
-				VARIABLEITEM *pVar = pEngine->Vars->GetPointer(pParams->ToVarIndex(0));
+				int iVarIndex = pParams->ToVarIndex(0);
+				HANDLE hFile = pEngine->Vars->GetHandle(iVarIndex);
 
-				HANDLE hFile = NULL;
-				if (!pVar->Length || !(*(HANDLE *)pVar->Value))
+				if (hFile == NULL || hFile == INVALID_HANDLE_VALUE)
 				{
 					this->Error->Soft("Invalid file handle");
 					return pReturn->Add(0);
-				}
-				else {
-					hFile = (*(HANDLE *)pVar->Value);
 				}
 
 				DWORD dwBytesRead = 0;
@@ -4436,16 +4428,13 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 			//Writes from an open file.
 			else if (_StrEqlI(pProc->Name, "File.Write"))
 			{
-				VARIABLEITEM *pVar = pEngine->Vars->GetPointer(pParams->ToVarIndex(0));
+				int iVarIndex = pParams->ToVarIndex(0);
+				HANDLE hFile = pEngine->Vars->GetHandle(iVarIndex);
 
-				HANDLE hFile = NULL;
-				if (!pVar->Length || !(*(HANDLE *)pVar->Value))
+				if (hFile == NULL || hFile == INVALID_HANDLE_VALUE)
 				{
 					this->Error->Soft("Invalid file handle");
 					return pReturn->Add(0);
-				}
-				else {
-					hFile = (*(HANDLE *)pVar->Value);
 				}
 
 				DWORD dwBytesWritten = 0;
@@ -4473,16 +4462,13 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 			//Sets the file pointer position from the current file position.
 			else if (_StrEqlI(pProc->Name, "File.Seek"))
 			{
-				VARIABLEITEM *pVar = pEngine->Vars->GetPointer(pParams->ToVarIndex(0));
+				int iVarIndex = pParams->ToVarIndex(0);
+				HANDLE hFile = pEngine->Vars->GetHandle(iVarIndex);
 
-				HANDLE hFile = NULL;
-				if (!pVar->Length || !(*(HANDLE *)pVar->Value))
+				if (hFile == NULL || hFile == INVALID_HANDLE_VALUE)
 				{
 					this->Error->Soft("Invalid file handle");
 					return pReturn->Add(0);
-				}
-				else {
-					hFile = (*(HANDLE *)pVar->Value);
 				}
 
 				return pReturn->Add((int)FileSeek(hFile, pParams->ToInt(1), FILE_CURRENT));
@@ -4491,16 +4477,13 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 			//Sets the file pointer position from the beginning of the file.
 			else if (_StrEqlI(pProc->Name, "File.Seek.FromBeginning"))
 			{
-				VARIABLEITEM *pVar = pEngine->Vars->GetPointer(pParams->ToVarIndex(0));
+				int iVarIndex = pParams->ToVarIndex(0);
+				HANDLE hFile = pEngine->Vars->GetHandle(iVarIndex);
 
-				HANDLE hFile = NULL;
-				if (!pVar->Length || !(*(HANDLE *)pVar->Value))
+				if (hFile == NULL || hFile == INVALID_HANDLE_VALUE)
 				{
 					this->Error->Soft("Invalid file handle");
 					return pReturn->Add(0);
-				}
-				else {
-					hFile = (*(HANDLE *)pVar->Value);
 				}
 
 				return pReturn->Add((int)FileSeek(hFile, pParams->ToInt(1), FILE_BEGIN));
@@ -4509,16 +4492,13 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 			//Sets the file pointer position from the end of the file.
 			else if (_StrEqlI(pProc->Name, "File.Seek.FromEnd"))
 			{
-				VARIABLEITEM *pVar = pEngine->Vars->GetPointer(pParams->ToVarIndex(0));
+				int iVarIndex = pParams->ToVarIndex(0);
+				HANDLE hFile = pEngine->Vars->GetHandle(iVarIndex);
 
-				HANDLE hFile = NULL;
-				if (!pVar->Length || !(*(HANDLE *)pVar->Value))
+				if (hFile == NULL || hFile == INVALID_HANDLE_VALUE)
 				{
 					this->Error->Soft("Invalid file handle");
 					return pReturn->Add(0);
-				}
-				else {
-					hFile = (*(HANDLE *)pVar->Value);
 				}
 
 				return pReturn->Add((int)FileSeek(hFile, pParams->ToInt(1), FILE_END));
@@ -4615,23 +4595,11 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				CEngine *pEngine((CEngine *)this->pEngine);
 
 				int iVarIndex = pParams->ToVarIndex(0);
-				char *sServer = pParams->Collection.Items[1].Value;
-				char *sDatabase = pParams->Collection.Items[2].Value;
-				char *sUserName = pParams->Collection.Items[3].Value;
-				char *sPassword = pParams->Collection.Items[4].Value;
-
+				char *sConnectionString = pParams->Collection.Items[1].Value;
 				CSQL *pSQL = (CSQL *)pEngine->Vars->GetPointer(iVarIndex)->Value;
 
-				bool bResult = false;
-
-				if (!sUserName || !sUserName)
-				{
-					bResult = pSQL->Connect(sServer, sDatabase, SQLErrorHandler);
-				}
-				else {
-					bResult = pSQL->Connect(sServer, sDatabase, sUserName, sPassword, SQLErrorHandler);
-				}
-
+				bool bResult = pSQL->Connect(sConnectionString, SQLErrorHandler);
+			
 				if (!bResult || !pSQL->IsConnected())
 				{
 					return this->Error->Inform("Failed to connect to the SQL Server.");
@@ -6207,8 +6175,9 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 
 					pEngine->Vars->AddNewStrongReference(pReqParam->Name, pParams->ToVarIndex(iParam));
 				}
-				else {
-					if (pEngine->Vars->AddAndSet(pReqParam->Name, pReqParam->Type, pParam->Value, pParam->Length) != ERROR_OK)
+				else
+				{
+					if (pEngine->Vars->AddVariableParameterReference(pReqParam, pParam) != ERROR_OK)
 					{
 						pEngine->State->SetLineIndex(iReturnLineIndex);
 						return this->Error->HardCount();
@@ -6549,707 +6518,707 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #ifdef EXTERNAL_PROCEDURE_CALL_IMPLEMENTATION
-ErrorLevel CProcs::CallExternalProc(PROCITEM *pProc, CParams *pParams, void **pvParams, void **pReturnValue)
-{
-	CEngine *pEngine = ((CEngine *)this->pEngine);
-	ErrorLevel Result = ERROR_OK;
-	HINSTANCE hLibrary = NULL;
-
-	if ((hLibrary = LoadLibrary((LPCTSTR)pProc->Library)) == NULL)
+	ErrorLevel CProcs::CallExternalProc(PROCITEM *pProc, CParams *pParams, void **pvParams, void **pReturnValue)
 	{
-		return this->Error->Soft("Could not load external API library");
-	}
+		CEngine *pEngine = ((CEngine *)this->pEngine);
+		ErrorLevel Result = ERROR_OK;
+		HINSTANCE hLibrary = NULL;
 
-	if (pProc->CallingConvention == EXTERNAL_TYPE_STDCALL)
-	{
-		if (pParams->Collection.Count == 0)
+		if ((hLibrary = LoadLibrary((LPCTSTR)pProc->Library)) == NULL)
 		{
-			StdProc0 Proc;
-			if ((Proc = (StdProc0)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc();
+			return this->Error->Soft("Could not load external API library");
 		}
-		else if (pParams->Collection.Count == 1)
-		{
-			StdProc1 Proc;
-			if ((Proc = (StdProc1)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0]);
-		}
-		else if (pParams->Collection.Count == 2)
-		{
-			StdProc2 Proc;
-			if ((Proc = (StdProc2)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1]);
-		}
-		else if (pParams->Collection.Count == 3)
-		{
-			StdProc3 Proc;
-			if ((Proc = (StdProc3)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2]);
-		}
-		else if (pParams->Collection.Count == 4)
-		{
-			StdProc4 Proc;
-			if ((Proc = (StdProc4)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3]);
-		}
-		else if (pParams->Collection.Count == 5)
-		{
-			StdProc5 Proc;
-			if ((Proc = (StdProc5)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4]);
-		}
-		else if (pParams->Collection.Count == 6)
-		{
-			StdProc6 Proc;
-			if ((Proc = (StdProc6)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5]);
-		}
-		else if (pParams->Collection.Count == 7)
-		{
-			//"C:\\Test.txt", FileAccess.Write, 0, NULL, CREATE_ALWAYS, 0, NULL
 
-			StdProc7 Proc;
-			if ((Proc = (StdProc7)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6]);
-		}
-		else if (pParams->Collection.Count == 8)
-		{
-			StdProc8 Proc;
-			if ((Proc = (StdProc8)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7]);
-		}
-		else if (pParams->Collection.Count == 9)
-		{
-			StdProc9 Proc;
-			if ((Proc = (StdProc9)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8]);
-		}
-		else if (pParams->Collection.Count == 10)
-		{
-			StdProc10 Proc;
-			if ((Proc = (StdProc10)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9]);
-		}
-		else if (pParams->Collection.Count == 11)
-		{
-			StdProc11 Proc;
-			if ((Proc = (StdProc11)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10]);
-		}
-		else if (pParams->Collection.Count == 12)
-		{
-			StdProc12 Proc;
-			if ((Proc = (StdProc12)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11]);
-		}
-		else if (pParams->Collection.Count == 13)
-		{
-			StdProc13 Proc;
-			if ((Proc = (StdProc13)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12]);
-		}
-		else if (pParams->Collection.Count == 14)
-		{
-			StdProc14 Proc;
-			if ((Proc = (StdProc14)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13]);
-		}
-		else if (pParams->Collection.Count == 15)
-		{
-			StdProc15 Proc;
-			if ((Proc = (StdProc15)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14]);
-		}
-		else if (pParams->Collection.Count == 16)
-		{
-			StdProc16 Proc;
-			if ((Proc = (StdProc16)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15]);
-		}
-		else if (pParams->Collection.Count == 17)
-		{
-			StdProc17 Proc;
-			if ((Proc = (StdProc17)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16]);
-		}
-		else if (pParams->Collection.Count == 18)
-		{
-			StdProc18 Proc;
-			if ((Proc = (StdProc18)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17]);
-		}
-		else if (pParams->Collection.Count == 19)
-		{
-			StdProc19 Proc;
-			if ((Proc = (StdProc19)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18]);
-		}
-		else if (pParams->Collection.Count == 20)
-		{
-			StdProc20 Proc;
-			if ((Proc = (StdProc20)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19]);
-		}
-		else if (pParams->Collection.Count == 21)
-		{
-			StdProc21 Proc;
-			if ((Proc = (StdProc21)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19], pvParams[20]);
-		}
-		else if (pParams->Collection.Count == 22)
-		{
-			StdProc22 Proc;
-			if ((Proc = (StdProc22)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19], pvParams[20], pvParams[21]);
-		}
-		else if (pParams->Collection.Count == 23)
-		{
-			StdProc23 Proc;
-			if ((Proc = (StdProc23)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19], pvParams[20], pvParams[21], pvParams[22]);
-		}
-		else if (pParams->Collection.Count == 24)
-		{
-			StdProc24 Proc;
-			if ((Proc = (StdProc24)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19], pvParams[20], pvParams[21], pvParams[22], pvParams[23]);
-		}
-		else if (pParams->Collection.Count == 25)
-		{
-			StdProc25 Proc;
-			if ((Proc = (StdProc25)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19], pvParams[20], pvParams[21], pvParams[22], pvParams[23], pvParams[24]);
-		}
-		else {
-			Result = this->Error->Soft(">25 parameters not Implemented");
-		}
-	}
-	//----------------------------------------------------------------------------------------------------------------
-	else if (pProc->CallingConvention == EXTERNAL_TYPE_CDECL)
-	{
-		if (pParams->Collection.Count == 0)
-		{
-			CdeclProc0 Proc;
-			if ((Proc = (CdeclProc0)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc();
-		}
-		else if (pParams->Collection.Count == 1)
-		{
-			CdeclProc1 Proc;
-			if ((Proc = (CdeclProc1)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0]);
-		}
-		else if (pParams->Collection.Count == 2)
-		{
-			CdeclProc2 Proc;
-			if ((Proc = (CdeclProc2)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1]);
-		}
-		else if (pParams->Collection.Count == 3)
-		{
-			CdeclProc3 Proc;
-			if ((Proc = (CdeclProc3)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2]);
-		}
-		else if (pParams->Collection.Count == 4)
-		{
-			CdeclProc4 Proc;
-			if ((Proc = (CdeclProc4)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3]);
-		}
-		else if (pParams->Collection.Count == 5)
-		{
-			CdeclProc5 Proc;
-			if ((Proc = (CdeclProc5)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4]);
-		}
-		else if (pParams->Collection.Count == 6)
-		{
-			CdeclProc6 Proc;
-			if ((Proc = (CdeclProc6)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5]);
-		}
-		else if (pParams->Collection.Count == 7)
-		{
-			CdeclProc7 Proc;
-			if ((Proc = (CdeclProc7)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6]);
-		}
-		else if (pParams->Collection.Count == 8)
-		{
-			CdeclProc8 Proc;
-			if ((Proc = (CdeclProc8)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7]);
-		}
-		else if (pParams->Collection.Count == 9)
-		{
-			CdeclProc9 Proc;
-			if ((Proc = (CdeclProc9)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8]);
-		}
-		else if (pParams->Collection.Count == 10)
-		{
-			CdeclProc10 Proc;
-			if ((Proc = (CdeclProc10)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9]);
-		}
-		else if (pParams->Collection.Count == 11)
-		{
-			CdeclProc11 Proc;
-			if ((Proc = (CdeclProc11)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10]);
-		}
-		else if (pParams->Collection.Count == 12)
-		{
-			CdeclProc12 Proc;
-			if ((Proc = (CdeclProc12)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11]);
-		}
-		else if (pParams->Collection.Count == 13)
-		{
-			CdeclProc13 Proc;
-			if ((Proc = (CdeclProc13)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12]);
-		}
-		else if (pParams->Collection.Count == 14)
-		{
-			CdeclProc14 Proc;
-			if ((Proc = (CdeclProc14)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13]);
-		}
-		else if (pParams->Collection.Count == 15)
-		{
-			CdeclProc15 Proc;
-			if ((Proc = (CdeclProc15)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14]);
-		}
-		else if (pParams->Collection.Count == 16)
-		{
-			CdeclProc16 Proc;
-			if ((Proc = (CdeclProc16)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15]);
-		}
-		else if (pParams->Collection.Count == 17)
-		{
-			CdeclProc17 Proc;
-			if ((Proc = (CdeclProc17)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16]);
-		}
-		else if (pParams->Collection.Count == 18)
-		{
-			CdeclProc18 Proc;
-			if ((Proc = (CdeclProc18)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17]);
-		}
-		else if (pParams->Collection.Count == 19)
-		{
-			CdeclProc19 Proc;
-			if ((Proc = (CdeclProc19)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18]);
-		}
-		else if (pParams->Collection.Count == 20)
-		{
-			CdeclProc20 Proc;
-			if ((Proc = (CdeclProc20)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19]);
-		}
-		else if (pParams->Collection.Count == 21)
-		{
-			CdeclProc21 Proc;
-			if ((Proc = (CdeclProc21)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19], pvParams[20]);
-		}
-		else if (pParams->Collection.Count == 22)
-		{
-			CdeclProc22 Proc;
-			if ((Proc = (CdeclProc22)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19], pvParams[20], pvParams[21]);
-		}
-		else if (pParams->Collection.Count == 23)
-		{
-			CdeclProc23 Proc;
-			if ((Proc = (CdeclProc23)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19], pvParams[20], pvParams[21], pvParams[22]);
-		}
-		else if (pParams->Collection.Count == 24)
-		{
-			CdeclProc24 Proc;
-			if ((Proc = (CdeclProc24)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19], pvParams[20], pvParams[21], pvParams[22], pvParams[23]);
-		}
-		else if (pParams->Collection.Count == 25)
-		{
-			CdeclProc25 Proc;
-			if ((Proc = (CdeclProc25)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19], pvParams[20], pvParams[21], pvParams[22], pvParams[23], pvParams[24]);
-		}
-		else {
-			Result = this->Error->Hard(">25 parameters not Implemented");
-		}
-	}
-	//----------------------------------------------------------------------------------------------------------------
-	else if (pProc->CallingConvention == EXTERNAL_TYPE_FASTCALL)
-	{
-		if (pParams->Collection.Count == 0)
-		{
-			FastProc0 Proc;
-			if ((Proc = (FastProc0)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc();
-		}
-		else if (pParams->Collection.Count == 1)
-		{
-			FastProc1 Proc;
-			if ((Proc = (FastProc1)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0]);
-		}
-		else if (pParams->Collection.Count == 2)
-		{
-			FastProc2 Proc;
-			if ((Proc = (FastProc2)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1]);
-		}
-		else if (pParams->Collection.Count == 3)
-		{
-			FastProc3 Proc;
-			if ((Proc = (FastProc3)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2]);
-		}
-		else if (pParams->Collection.Count == 4)
-		{
-			FastProc4 Proc;
-			if ((Proc = (FastProc4)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3]);
-		}
-		else if (pParams->Collection.Count == 5)
-		{
-			FastProc5 Proc;
-			if ((Proc = (FastProc5)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4]);
-		}
-		else if (pParams->Collection.Count == 6)
-		{
-			FastProc6 Proc;
-			if ((Proc = (FastProc6)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5]);
-		}
-		else if (pParams->Collection.Count == 7)
-		{
-			FastProc7 Proc;
-			if ((Proc = (FastProc7)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6]);
-		}
-		else if (pParams->Collection.Count == 8)
-		{
-			FastProc8 Proc;
-			if ((Proc = (FastProc8)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7]);
-		}
-		else if (pParams->Collection.Count == 9)
-		{
-			FastProc9 Proc;
-			if ((Proc = (FastProc9)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8]);
-		}
-		else if (pParams->Collection.Count == 10)
-		{
-			FastProc10 Proc;
-			if ((Proc = (FastProc10)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9]);
-		}
-		else if (pParams->Collection.Count == 11)
-		{
-			FastProc11 Proc;
-			if ((Proc = (FastProc11)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10]);
-		}
-		else if (pParams->Collection.Count == 12)
-		{
-			FastProc12 Proc;
-			if ((Proc = (FastProc12)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11]);
-		}
-		else if (pParams->Collection.Count == 13)
-		{
-			FastProc13 Proc;
-			if ((Proc = (FastProc13)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12]);
-		}
-		else if (pParams->Collection.Count == 14)
-		{
-			FastProc14 Proc;
-			if ((Proc = (FastProc14)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13]);
-		}
-		else if (pParams->Collection.Count == 15)
-		{
-			FastProc15 Proc;
-			if ((Proc = (FastProc15)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14]);
-		}
-		else if (pParams->Collection.Count == 16)
-		{
-			FastProc16 Proc;
-			if ((Proc = (FastProc16)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15]);
-		}
-		else if (pParams->Collection.Count == 17)
-		{
-			FastProc17 Proc;
-			if ((Proc = (FastProc17)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16]);
-		}
-		else if (pParams->Collection.Count == 18)
-		{
-			FastProc18 Proc;
-			if ((Proc = (FastProc18)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17]);
-		}
-		else if (pParams->Collection.Count == 19)
-		{
-			FastProc19 Proc;
-			if ((Proc = (FastProc19)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18]);
-		}
-		else if (pParams->Collection.Count == 20)
-		{
-			FastProc20 Proc;
-			if ((Proc = (FastProc20)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19]);
-		}
-		else if (pParams->Collection.Count == 21)
-		{
-			FastProc21 Proc;
-			if ((Proc = (FastProc21)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19], pvParams[20]);
-		}
-		else if (pParams->Collection.Count == 22)
-		{
-			FastProc22 Proc;
-			if ((Proc = (FastProc22)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19], pvParams[20], pvParams[21]);
-		}
-		else if (pParams->Collection.Count == 23)
-		{
-			FastProc23 Proc;
-			if ((Proc = (FastProc23)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19], pvParams[20], pvParams[21], pvParams[22]);
-		}
-		else if (pParams->Collection.Count == 24)
-		{
-			FastProc24 Proc;
-			if ((Proc = (FastProc24)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19], pvParams[20], pvParams[21], pvParams[22], pvParams[23]);
-		}
-		else if (pParams->Collection.Count == 25)
-		{
-			FastProc25 Proc;
-			if ((Proc = (FastProc25)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
-				Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
-			else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
-				pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
-				pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
-				pvParams[19], pvParams[20], pvParams[21], pvParams[22], pvParams[23], pvParams[24]);
-		}
-		else {
-			Result = this->Error->Hard(">25 parameters not Implemented");
-		}
-	}
+		if (pProc->CallingConvention == EXTERNAL_TYPE_STDCALL)
+		{
+			if (pParams->Collection.Count == 0)
+			{
+				StdProc0 Proc;
+				if ((Proc = (StdProc0)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc();
+			}
+			else if (pParams->Collection.Count == 1)
+			{
+				StdProc1 Proc;
+				if ((Proc = (StdProc1)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0]);
+			}
+			else if (pParams->Collection.Count == 2)
+			{
+				StdProc2 Proc;
+				if ((Proc = (StdProc2)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1]);
+			}
+			else if (pParams->Collection.Count == 3)
+			{
+				StdProc3 Proc;
+				if ((Proc = (StdProc3)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2]);
+			}
+			else if (pParams->Collection.Count == 4)
+			{
+				StdProc4 Proc;
+				if ((Proc = (StdProc4)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3]);
+			}
+			else if (pParams->Collection.Count == 5)
+			{
+				StdProc5 Proc;
+				if ((Proc = (StdProc5)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4]);
+			}
+			else if (pParams->Collection.Count == 6)
+			{
+				StdProc6 Proc;
+				if ((Proc = (StdProc6)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5]);
+			}
+			else if (pParams->Collection.Count == 7)
+			{
+				//"C:\\Test.txt", FileAccess.Write, 0, NULL, CREATE_ALWAYS, 0, NULL
 
-	FreeLibrary(hLibrary);
+				StdProc7 Proc;
+				if ((Proc = (StdProc7)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6]);
+			}
+			else if (pParams->Collection.Count == 8)
+			{
+				StdProc8 Proc;
+				if ((Proc = (StdProc8)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7]);
+			}
+			else if (pParams->Collection.Count == 9)
+			{
+				StdProc9 Proc;
+				if ((Proc = (StdProc9)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8]);
+			}
+			else if (pParams->Collection.Count == 10)
+			{
+				StdProc10 Proc;
+				if ((Proc = (StdProc10)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9]);
+			}
+			else if (pParams->Collection.Count == 11)
+			{
+				StdProc11 Proc;
+				if ((Proc = (StdProc11)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10]);
+			}
+			else if (pParams->Collection.Count == 12)
+			{
+				StdProc12 Proc;
+				if ((Proc = (StdProc12)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11]);
+			}
+			else if (pParams->Collection.Count == 13)
+			{
+				StdProc13 Proc;
+				if ((Proc = (StdProc13)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12]);
+			}
+			else if (pParams->Collection.Count == 14)
+			{
+				StdProc14 Proc;
+				if ((Proc = (StdProc14)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13]);
+			}
+			else if (pParams->Collection.Count == 15)
+			{
+				StdProc15 Proc;
+				if ((Proc = (StdProc15)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14]);
+			}
+			else if (pParams->Collection.Count == 16)
+			{
+				StdProc16 Proc;
+				if ((Proc = (StdProc16)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15]);
+			}
+			else if (pParams->Collection.Count == 17)
+			{
+				StdProc17 Proc;
+				if ((Proc = (StdProc17)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16]);
+			}
+			else if (pParams->Collection.Count == 18)
+			{
+				StdProc18 Proc;
+				if ((Proc = (StdProc18)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17]);
+			}
+			else if (pParams->Collection.Count == 19)
+			{
+				StdProc19 Proc;
+				if ((Proc = (StdProc19)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18]);
+			}
+			else if (pParams->Collection.Count == 20)
+			{
+				StdProc20 Proc;
+				if ((Proc = (StdProc20)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19]);
+			}
+			else if (pParams->Collection.Count == 21)
+			{
+				StdProc21 Proc;
+				if ((Proc = (StdProc21)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19], pvParams[20]);
+			}
+			else if (pParams->Collection.Count == 22)
+			{
+				StdProc22 Proc;
+				if ((Proc = (StdProc22)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19], pvParams[20], pvParams[21]);
+			}
+			else if (pParams->Collection.Count == 23)
+			{
+				StdProc23 Proc;
+				if ((Proc = (StdProc23)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19], pvParams[20], pvParams[21], pvParams[22]);
+			}
+			else if (pParams->Collection.Count == 24)
+			{
+				StdProc24 Proc;
+				if ((Proc = (StdProc24)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19], pvParams[20], pvParams[21], pvParams[22], pvParams[23]);
+			}
+			else if (pParams->Collection.Count == 25)
+			{
+				StdProc25 Proc;
+				if ((Proc = (StdProc25)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19], pvParams[20], pvParams[21], pvParams[22], pvParams[23], pvParams[24]);
+			}
+			else {
+				Result = this->Error->Soft(">25 parameters not Implemented");
+			}
+		}
+		//----------------------------------------------------------------------------------------------------------------
+		else if (pProc->CallingConvention == EXTERNAL_TYPE_CDECL)
+		{
+			if (pParams->Collection.Count == 0)
+			{
+				CdeclProc0 Proc;
+				if ((Proc = (CdeclProc0)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc();
+			}
+			else if (pParams->Collection.Count == 1)
+			{
+				CdeclProc1 Proc;
+				if ((Proc = (CdeclProc1)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0]);
+			}
+			else if (pParams->Collection.Count == 2)
+			{
+				CdeclProc2 Proc;
+				if ((Proc = (CdeclProc2)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1]);
+			}
+			else if (pParams->Collection.Count == 3)
+			{
+				CdeclProc3 Proc;
+				if ((Proc = (CdeclProc3)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2]);
+			}
+			else if (pParams->Collection.Count == 4)
+			{
+				CdeclProc4 Proc;
+				if ((Proc = (CdeclProc4)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3]);
+			}
+			else if (pParams->Collection.Count == 5)
+			{
+				CdeclProc5 Proc;
+				if ((Proc = (CdeclProc5)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4]);
+			}
+			else if (pParams->Collection.Count == 6)
+			{
+				CdeclProc6 Proc;
+				if ((Proc = (CdeclProc6)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5]);
+			}
+			else if (pParams->Collection.Count == 7)
+			{
+				CdeclProc7 Proc;
+				if ((Proc = (CdeclProc7)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6]);
+			}
+			else if (pParams->Collection.Count == 8)
+			{
+				CdeclProc8 Proc;
+				if ((Proc = (CdeclProc8)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7]);
+			}
+			else if (pParams->Collection.Count == 9)
+			{
+				CdeclProc9 Proc;
+				if ((Proc = (CdeclProc9)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8]);
+			}
+			else if (pParams->Collection.Count == 10)
+			{
+				CdeclProc10 Proc;
+				if ((Proc = (CdeclProc10)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9]);
+			}
+			else if (pParams->Collection.Count == 11)
+			{
+				CdeclProc11 Proc;
+				if ((Proc = (CdeclProc11)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10]);
+			}
+			else if (pParams->Collection.Count == 12)
+			{
+				CdeclProc12 Proc;
+				if ((Proc = (CdeclProc12)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11]);
+			}
+			else if (pParams->Collection.Count == 13)
+			{
+				CdeclProc13 Proc;
+				if ((Proc = (CdeclProc13)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12]);
+			}
+			else if (pParams->Collection.Count == 14)
+			{
+				CdeclProc14 Proc;
+				if ((Proc = (CdeclProc14)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13]);
+			}
+			else if (pParams->Collection.Count == 15)
+			{
+				CdeclProc15 Proc;
+				if ((Proc = (CdeclProc15)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14]);
+			}
+			else if (pParams->Collection.Count == 16)
+			{
+				CdeclProc16 Proc;
+				if ((Proc = (CdeclProc16)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15]);
+			}
+			else if (pParams->Collection.Count == 17)
+			{
+				CdeclProc17 Proc;
+				if ((Proc = (CdeclProc17)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16]);
+			}
+			else if (pParams->Collection.Count == 18)
+			{
+				CdeclProc18 Proc;
+				if ((Proc = (CdeclProc18)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17]);
+			}
+			else if (pParams->Collection.Count == 19)
+			{
+				CdeclProc19 Proc;
+				if ((Proc = (CdeclProc19)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18]);
+			}
+			else if (pParams->Collection.Count == 20)
+			{
+				CdeclProc20 Proc;
+				if ((Proc = (CdeclProc20)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19]);
+			}
+			else if (pParams->Collection.Count == 21)
+			{
+				CdeclProc21 Proc;
+				if ((Proc = (CdeclProc21)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19], pvParams[20]);
+			}
+			else if (pParams->Collection.Count == 22)
+			{
+				CdeclProc22 Proc;
+				if ((Proc = (CdeclProc22)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19], pvParams[20], pvParams[21]);
+			}
+			else if (pParams->Collection.Count == 23)
+			{
+				CdeclProc23 Proc;
+				if ((Proc = (CdeclProc23)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19], pvParams[20], pvParams[21], pvParams[22]);
+			}
+			else if (pParams->Collection.Count == 24)
+			{
+				CdeclProc24 Proc;
+				if ((Proc = (CdeclProc24)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19], pvParams[20], pvParams[21], pvParams[22], pvParams[23]);
+			}
+			else if (pParams->Collection.Count == 25)
+			{
+				CdeclProc25 Proc;
+				if ((Proc = (CdeclProc25)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19], pvParams[20], pvParams[21], pvParams[22], pvParams[23], pvParams[24]);
+			}
+			else {
+				Result = this->Error->Hard(">25 parameters not Implemented");
+			}
+		}
+		//----------------------------------------------------------------------------------------------------------------
+		else if (pProc->CallingConvention == EXTERNAL_TYPE_FASTCALL)
+		{
+			if (pParams->Collection.Count == 0)
+			{
+				FastProc0 Proc;
+				if ((Proc = (FastProc0)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc();
+			}
+			else if (pParams->Collection.Count == 1)
+			{
+				FastProc1 Proc;
+				if ((Proc = (FastProc1)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0]);
+			}
+			else if (pParams->Collection.Count == 2)
+			{
+				FastProc2 Proc;
+				if ((Proc = (FastProc2)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1]);
+			}
+			else if (pParams->Collection.Count == 3)
+			{
+				FastProc3 Proc;
+				if ((Proc = (FastProc3)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2]);
+			}
+			else if (pParams->Collection.Count == 4)
+			{
+				FastProc4 Proc;
+				if ((Proc = (FastProc4)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3]);
+			}
+			else if (pParams->Collection.Count == 5)
+			{
+				FastProc5 Proc;
+				if ((Proc = (FastProc5)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4]);
+			}
+			else if (pParams->Collection.Count == 6)
+			{
+				FastProc6 Proc;
+				if ((Proc = (FastProc6)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5]);
+			}
+			else if (pParams->Collection.Count == 7)
+			{
+				FastProc7 Proc;
+				if ((Proc = (FastProc7)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6]);
+			}
+			else if (pParams->Collection.Count == 8)
+			{
+				FastProc8 Proc;
+				if ((Proc = (FastProc8)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7]);
+			}
+			else if (pParams->Collection.Count == 9)
+			{
+				FastProc9 Proc;
+				if ((Proc = (FastProc9)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8]);
+			}
+			else if (pParams->Collection.Count == 10)
+			{
+				FastProc10 Proc;
+				if ((Proc = (FastProc10)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9]);
+			}
+			else if (pParams->Collection.Count == 11)
+			{
+				FastProc11 Proc;
+				if ((Proc = (FastProc11)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10]);
+			}
+			else if (pParams->Collection.Count == 12)
+			{
+				FastProc12 Proc;
+				if ((Proc = (FastProc12)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11]);
+			}
+			else if (pParams->Collection.Count == 13)
+			{
+				FastProc13 Proc;
+				if ((Proc = (FastProc13)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12]);
+			}
+			else if (pParams->Collection.Count == 14)
+			{
+				FastProc14 Proc;
+				if ((Proc = (FastProc14)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13]);
+			}
+			else if (pParams->Collection.Count == 15)
+			{
+				FastProc15 Proc;
+				if ((Proc = (FastProc15)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14]);
+			}
+			else if (pParams->Collection.Count == 16)
+			{
+				FastProc16 Proc;
+				if ((Proc = (FastProc16)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15]);
+			}
+			else if (pParams->Collection.Count == 17)
+			{
+				FastProc17 Proc;
+				if ((Proc = (FastProc17)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16]);
+			}
+			else if (pParams->Collection.Count == 18)
+			{
+				FastProc18 Proc;
+				if ((Proc = (FastProc18)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17]);
+			}
+			else if (pParams->Collection.Count == 19)
+			{
+				FastProc19 Proc;
+				if ((Proc = (FastProc19)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18]);
+			}
+			else if (pParams->Collection.Count == 20)
+			{
+				FastProc20 Proc;
+				if ((Proc = (FastProc20)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19]);
+			}
+			else if (pParams->Collection.Count == 21)
+			{
+				FastProc21 Proc;
+				if ((Proc = (FastProc21)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19], pvParams[20]);
+			}
+			else if (pParams->Collection.Count == 22)
+			{
+				FastProc22 Proc;
+				if ((Proc = (FastProc22)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19], pvParams[20], pvParams[21]);
+			}
+			else if (pParams->Collection.Count == 23)
+			{
+				FastProc23 Proc;
+				if ((Proc = (FastProc23)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19], pvParams[20], pvParams[21], pvParams[22]);
+			}
+			else if (pParams->Collection.Count == 24)
+			{
+				FastProc24 Proc;
+				if ((Proc = (FastProc24)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19], pvParams[20], pvParams[21], pvParams[22], pvParams[23]);
+			}
+			else if (pParams->Collection.Count == 25)
+			{
+				FastProc25 Proc;
+				if ((Proc = (FastProc25)GetProcAddress(hLibrary, pProc->Alias)) == NULL)
+					Result = this->Error->Soft("Failed to locate %s in %s", pProc->Alias, pProc->Name);
+				else *pReturnValue = (void *)Proc(pvParams[0], pvParams[1], pvParams[2], pvParams[3], pvParams[4],
+					pvParams[5], pvParams[6], pvParams[7], pvParams[8], pvParams[9], pvParams[10], pvParams[11],
+					pvParams[12], pvParams[13], pvParams[14], pvParams[15], pvParams[16], pvParams[17], pvParams[18],
+					pvParams[19], pvParams[20], pvParams[21], pvParams[22], pvParams[23], pvParams[24]);
+			}
+			else {
+				Result = this->Error->Hard(">25 parameters not Implemented");
+			}
+		}
 
-	return Result;
-}
+		FreeLibrary(hLibrary);
+
+		return Result;
+	}
 #endif
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

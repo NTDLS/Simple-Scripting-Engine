@@ -1,19 +1,19 @@
 <%
 
-var sqlConn as SQL.Connection
-var recordSet as SQL.RecordSet
+var sqlConnection as SQL.Connection
+var sqlRecord as SQL.RecordSet
 
-sqlConn.Connect(".")
+sqlConnection.Connect("DRIVER={ODBC Driver 11 for SQL Server};DATABASE=master;SERVER=(local);Trusted_Connection=yes;")
 
-sqlConn.Execute("SELECT * FROM sys.objects WHERE type = 'u'", @recordSet)
+sqlConnection.Execute("SELECT * FROM sys.objects WHERE type = 'u'", @sqlRecord)
 
-While(recordSet.Fetch())
-	Print("(" & FormatNumeric(recordSet.Value("object_id")) _
-		& ") - [" & recordSet.Value("name") & "]" _
-		& " was created on \"" & recordSet.Value("create_date") & "\"")
+While(sqlRecord.Fetch())
+	Print("(" & FormatNumeric(sqlRecord.Value("object_id")) _
+		& ") - [" & sqlRecord.Value("name") & "]" _
+		& " was created on \"" & sqlRecord.Value("create_date") & "\"")
 WEnd
 
-recordSet.Close()
-sqlConn.Close()
+sqlRecord.Close()
+sqlConnection.Close()
 
 %>

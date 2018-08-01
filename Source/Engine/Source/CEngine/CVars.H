@@ -8,6 +8,7 @@
 #include "CException.H"
 #include "CLines.H"
 #include "CParams.H"
+#include "CReqParams.H"
 #include "CState.H"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,6 +60,8 @@ typedef struct tag_Variable_Item {
 	int Length;
 	int Alloc; //Number of bytes actually allocated.
 
+	bool IsVariableIndex; //Is a variable that contains the index of another variable
+
 	ARRAYDEFINITION ArrayDefinition;
 
 	int Index;
@@ -108,6 +111,7 @@ public:
 
 	ErrorLevel Set(int iIndex, char cValue);
 	ErrorLevel Set(int iIndex, int iValue);
+	ErrorLevel Set(int iIndex, HANDLE hFile);
 	ErrorLevel Set(VARIABLEITEM *pItem, int iValue);
 	ErrorLevel Set(int iIndex, unsigned int iValue);
 	ErrorLevel Set(int iIndex, CParams *pParams);
@@ -118,6 +122,7 @@ public:
 	ErrorLevel Set(VARIABLEITEM *pItem, const char *sValue);
 	ErrorLevel Set(int iIndex, const char *sValue, int iLength);
 	ErrorLevel Set(VARIABLEITEM *pItem, const char *sValue, int iLength);
+	ErrorLevel Set(VARIABLEITEM *pItem, const void *pValue, int iLength);
 	ErrorLevel Set(VARIABLEITEM *pItem, const char *sMemberName, CParams *pParams);
 	ErrorLevel Set(VARIABLEITEM *pItem, const char *sMemberName, int iArrayIndex, CParams *pParams);
 	ErrorLevel Set(int iIndex, const char *sMemberName, CParams *pParams);
@@ -130,6 +135,9 @@ public:
 	ErrorLevel AddAndSet(const char *sName, const char *sValue);
 	ErrorLevel AddAndSet(const char *sName, int iType, const char *sValue, int iLength);
 	ErrorLevel AddAndSet(const char *sName, int iType, const char *sValue, int iLength, int iScope);
+
+	ErrorLevel AddVariableParameterReference(REQPARAMITEM *requiredParam, PARAMITEM *param);
+	ErrorLevel AddVariableReference(REQPARAMITEM *requiredParam, int iReferencedVarIndex);
 
 	ErrorLevel CheckVariableName(const char *sVarName, int iLength);
 	bool FriendlyValue(VARIABLEITEM *pVar, char *sOutput, int iMaxSz);
@@ -163,6 +171,7 @@ public:
 	VarIndex GetIndex(const char *sName);
 	VARIABLEITEM *GetPointer(const char *sName);
 	VARIABLEITEM *GetPointer(int iIndex);
+	HANDLE CVars::GetHandle(int iIndex);
 
 	bool IsDefined(int iIndex);
 	bool IsDefined(const char *sName);

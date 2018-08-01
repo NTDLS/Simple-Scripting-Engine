@@ -7,23 +7,23 @@
 #define _SERVER_NAME "www.NetworkDLS.com"
 #define _SERVER_PORT 80
 
-var gServer as Socket.Server
-var gClient as Socket.Client
+var socketServer as Socket.Server
+var socketClient as Socket.Client
 
-MakeRequest(gServer, gClient)
+MakeRequest(socketServer, socketClient)
 
-gServer.Stop()
+socketServer.Stop()
 
-Function DoConnect(server as Socket.Server, client as Socket.Client)
+Function DoConnect(socketServer as Socket.Server, socketClient as Socket.Client)
 
-	server.Start()
-	server.Connect(_SERVER_NAME, _SERVER_PORT, client)
+	socketServer.Start()
+	socketServer.Connect(_SERVER_NAME, _SERVER_PORT, socketClient)
 	
 End Function
 
-Function MakeRequest(server as Socket.Server, client as Socket.Client)
+Function MakeRequest(socketServer as Socket.Server, socketClient as Socket.Client)
 
-	DoConnect(server, client)
+	DoConnect(socketServer, socketClient)
 
 	var sHeader as String = _
 		"GET / HTTP/1.1" & CrLf & _
@@ -31,16 +31,16 @@ Function MakeRequest(server as Socket.Server, client as Socket.Client)
 		"Host: " & _SERVER_NAME & CrLf & _
 		CrLf
 	
-	If(client.Send(sHeader))
-		While(client.IsConnected() OR client.IsRecvPending())
-			var ReceivedText as String = client.Recv()
+	If(socketClient.Send(sHeader))
+		While(socketClient.IsConnected() OR socketClient.IsRecvPending())
+			var ReceivedText as String = socketClient.Recv()
 			If(ReceivedText.Length() > 0)
 				Print(ReceivedText)
 			End If
 		WEnd
 	End If
 	
-	client.Disconnect()
+	socketClient.Disconnect()
 
 End Function
 

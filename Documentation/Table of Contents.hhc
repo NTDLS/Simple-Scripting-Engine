@@ -1203,6 +1203,14 @@
 				<param name="Name" value="Loop Optimization">
 				<param name="Local" value="Optimization\Loop Optimization.htm">
 				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="String Interpolation">
+				<param name="Local" value="Optimization\String Interpolation.htm">
+				</OBJECT>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="String Literals">
+				<param name="Local" value="Optimization\String Literals.htm">
+				</OBJECT>
 		</UL>
 	</UL>
 </UL>

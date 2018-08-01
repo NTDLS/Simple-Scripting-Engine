@@ -576,6 +576,7 @@ int CParams::ToObjectIndex(int iIndex, int *iMemberIndex)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
 	Returns: Numeric index of root-variable.
+	Each time a script proc is called, a variable is declared that containns the index of the variable being passed in - the top level variable is the root.
 */
 int CParams::ToVarIndex(int iIndex)
 {
@@ -587,28 +588,15 @@ int CParams::ToVarIndex(int iIndex)
 		bool bParsingForRoot = false;
 
 		do {
-			/*
-			if(iVarIndex == 58)
-			{
-				printf("dbg");
-			}
-			*/
 			pVar = ((CEngine*)this->pEngine)->Vars->GetPointer(iVarIndex);
-			/*
-			if(pVar == NULL)
-			{
-				printf("dbg");
-			}
-			*/
 			pType = ((CEngine*)this->pEngine)->Types->GetPointer(pVar->Type);
 
 			bParsingForRoot = false;
-			if (pType->IsComplex && pVar->Length > 0 && pVar->Value[0] == '@')
+			if (pType->IsComplex && pVar->IsVariableIndex && pVar->Length > 0 && pVar->Value[0] == '@')
 			{
 				iVarIndex = atol(pVar->Value + 1);
 				bParsingForRoot = true;
 			}
-
 		} while (bParsingForRoot);
 
 		return iVarIndex;

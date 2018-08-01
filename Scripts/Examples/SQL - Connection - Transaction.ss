@@ -1,30 +1,30 @@
 <%
 
-var sqlConn as SQL.Connection
+var sqlConnection as SQL.Connection
 
-sqlConn.Connect(".") ;SQL.Connect(Server, [Database], [Username], [Password])
+sqlConnection.Connect("DRIVER={ODBC Driver 11 for SQL Server};DATABASE=master;SERVER=(local);Trusted_Connection=yes;")
 
 ;Begin a new transation.
-sqlConn.Transaction.Begin()
+sqlConnection.Transaction.Begin()
 
 For(i as Numeric = 0 to 100)
 	
 	Try
-		sqlConn.Execute("INSERT INTO Words(Word) VALUES ('" & i & "')")
+		sqlConnection.Execute("INSERT INTO Words(Word) VALUES ('" & i & "')")
 	Catch(ex)
 		Print("Error: " & ex.GetText())
 	
 		;An error occured, rollback the transaction and exit.
-		sqlConn.Transaction.Rollback()
+		sqlConnection.Transaction.Rollback()
 		Break
 	End Try
 Next
 
 ;If we are still in a transaction, commit it.
-If(sqlConn.Transaction.Depth() > 0)
-	sqlConn.Transaction.Commit()
+If(sqlConnection.Transaction.Depth() > 0)
+	sqlConnection.Transaction.Commit()
 End If
 
-sqlConn.Close()
+sqlConnection.Close()
 
 %>

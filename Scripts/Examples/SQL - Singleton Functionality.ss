@@ -1,17 +1,17 @@
 <%
 
-var sqlConn as SQL.Connection
+var sqlConnection as SQL.Connection
 
-sqlConn.Connect(".") ;SQL.Connect(Server, [Database], [Username], [Password])
+sqlConnection.Connect("DRIVER={ODBC Driver 11 for SQL Server};DATABASE=master;SERVER=(local);Trusted_Connection=yes;")
 
-For(iItt as Numeric to 10)
-	Print(sqlConn.Value("SELECT GetDate()"))
-	Print(sqlConn.Value("SELECT NewID()"))
-	Print(FormatNumeric(sqlConn.Value("SELECT CheckSum(NewID())") / 6767.6767, 5))
-	Print(sqlConn.Value("SELECT Convert(VarChar, GetDate(), 101)"))
+For(i as Numeric to 10)
+	Print(sqlConnection.Value("SELECT GetDate()"))
+	Print(sqlConnection.Value("SELECT NewID()"))
+	Print(FormatNumeric(sqlConnection.Value("SELECT CheckSum(NewID())") / 6767.6767, 5))
+	Print(sqlConnection.Value("SELECT Convert(VarChar, GetDate(), 101)"))
 Next
 
-sqlConn.Close()
+sqlConnection.Close()
 
 %>
 

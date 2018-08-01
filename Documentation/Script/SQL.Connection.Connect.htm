@@ -18,18 +18,12 @@ Connects to an instance of SQL Server.
 
 <b>Syntax:</b>
 <blockquote>
-<font color="0000EE">SQL.Connection.Connect</font>(<font color="#000088">ServerName</font> as <font color="MediumVioletRed">String</font>, <font color="#000088">DefaultDatabase</font> as <font color="MediumVioletRed">String</font> = <font color="Red">"master"</font>, <font color="#000088">UserName</font> as <font color="MediumVioletRed">String</font> = NULL, <font color="#000088">Password</font> as <font color="MediumVioletRed">String</font> = NULL) as <font color="MediumVioletRed">Numeric</font> </blockquote>
+<font color="0000EE">SQL.Connection.Connect</font>(<font color="#000088">ConnectionString</font> as <font color="MediumVioletRed">String</font>) as <font color="MediumVioletRed">Numeric</font> </blockquote>
 
 <b>Parameters:</b>
 <blockquote>
-<ul><li><font color="#000088">ServerName</font> as <font color="MediumVioletRed">String</font><ul><li>
-Name of the SQL Server to connect to
-</ul><li><font color="#000088">DefaultDatabase</font> as <font color="MediumVioletRed">String</font><ul><li>
-Optional database name to connect to
-</ul><li><font color="#000088">UserName</font> as <font color="MediumVioletRed">String</font><ul><li>
-Optional username to use for authentication, trusted authorization will be used if a username is not specified
-</ul><li><font color="#000088">Password</font> as <font color="MediumVioletRed">String</font><ul><li>
-Optional password to use for authentication
+<ul><li><font color="#000088">ConnectionString</font> as <font color="MediumVioletRed">String</font><ul><li>
+The ODBC connection string that defines the parameters of the connection.
 </ul></ul>
 </blockquote>
 
@@ -38,7 +32,7 @@ Optional password to use for authentication
 <img src="/images/Code/I.gif"  align=top><br>
 <img src="/images/Code/I.gif"  align=top><b><span style="color:#0000ff">var</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000">sqlConn</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#0000ff">as</span></b><span style="color:#000000"></span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><b><span style="color:#c71585">SQL.Connection</span></b><br>
 <img src="/images/Code/I.gif"  align=top><br>
-<img src="/images/Code/I.gif"  align=top><span style="color:#000000">sqlConn</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Connect</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">(local)</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#000000">sqlConn</span><span style="color:#ff0000">.</span><span style="color:#0000ff">Connect</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">DRIVER={ODBC Driver 11 for SQL Server};DATABASE=master;SERVER=(local);Trusted_Connection=yes;</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
 <img src="/images/Code/I.gif"  align=top><br>
 <img src="/images/Code/I.gif"  align=top><i><span style="color:#008000">;</span></i><i><span style="color:#008000">...</span></i><br>
 <img src="/images/Code/I.gif"  align=top><br>

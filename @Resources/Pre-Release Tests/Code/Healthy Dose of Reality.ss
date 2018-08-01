@@ -184,7 +184,7 @@ TestSpeed(1000)
 	<% ;---(SQL Singleton Functionality)-------------------------------
 	Try
 		var sqlConnection as SQL.Connection
-		sqlConnection.Connect("(local)") ;SQL.Connect(Server, [Database], [Username], [Password])
+		sqlConnection.Connect("DRIVER={ODBC Driver 11 for SQL Server};DATABASE=master;SERVER=(local);Trusted_Connection=yes;")
 	
 		For(iItt as Numeric = 0 to 10)
 			Print(sqlConnection.Value("SELECT GetDate()"))
@@ -203,7 +203,7 @@ TestSpeed(1000)
 	<% ;---(Test SQL General Functionality)-------------------------------
 	Try
 		var sqlConnection as SQL.Connection
-		sqlConnection.Connect("(Local)")
+		sqlConnection.Connect("DRIVER={ODBC Driver 11 for SQL Server};SERVER=(local);Trusted_Connection=yes;")
 		var recordSet as SQL.RecordSet
 		
 		sqlConnection.Execute("SELECT * FROM sys.objects WHERE type <> 'u' order by create_date desc ", @recordSet)

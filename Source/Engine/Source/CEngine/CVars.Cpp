@@ -338,6 +338,23 @@ VARIABLEITEM *CVars::GetPointer(int iIndex)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+HANDLE CVars::GetHandle(int iIndex)
+{
+	if (this->IsDefined(iIndex))
+	{
+		if (this->Collection.Items[iIndex].Value == NULL || this->Collection.Items[iIndex].Length != sizeof(INT_PTR))
+		{
+			return INVALID_HANDLE_VALUE;
+		}
+
+		return *(HANDLE*) this->Collection.Items[iIndex].Value;
+	}
+
+	return INVALID_HANDLE_VALUE;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 VARIABLEITEM *CVars::GetPointer(const char *sName)
 {
 	if (((CEngine*)this->pEngine)->State->Namespace())
@@ -788,6 +805,35 @@ ErrorLevel CVars::Set(int iIndex, const char *sValue, int iLength)
 	return this->Set(&this->Collection.Items[iIndex], sValue, iLength);
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ErrorLevel CVars::Set(VARIABLEITEM *pItem, const void *pValue, int iLength)
+{
+	if (((CEngine*)this->pEngine)->Types->IsReadOnly(pItem->Type))
+	{
+		return this->Error->Hard("Variable is readonly");
+	}
+	if (!pItem)
+	{
+		return this->Error->Hard("Undefined variable");
+	}
+
+	if (pItem->Alloc < iLength)
+	{
+		pItem->Alloc = iLength;
+
+		if (!(pItem->Value = (char *)pMem->ReAllocate(pItem->Value, 1, pItem->Alloc)))
+		{
+			return this->Error->Hard("Memory allocation error");
+		}
+	}
+
+	pItem->Length = iLength;
+	memcpy_s(pItem->Value, pItem->Alloc, pValue, iLength);
+
+	return this->Error->HardCount();
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ErrorLevel CVars::Set(VARIABLEITEM *pItem, const char *sValue, int iLength)
@@ -912,6 +958,20 @@ ErrorLevel CVars::Set(VARIABLEITEM *pItem, int iValue)
 	else {
 		return this->Error->Hard("Numeric conversion error");
 	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ErrorLevel CVars::Set(int iIndex, HANDLE hFile)
+{
+	//int iFileHandle = (int)hFile;
+
+	if (((CEngine*)this->pEngine)->Types->IsReadOnly(this->GetPointer(iIndex)->Type))
+	{
+		return this->Error->Hard("Variable is readonly");
+	}
+
+	return this->Set(&this->Collection.Items[iIndex], (void *)&hFile, sizeof(HANDLE));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1424,6 +1484,51 @@ ErrorLevel CVars::AddAndSet(const char *sName, int iType, const char *sValue, in
 	this->Collection.Items[iIndex].Scope = iScope;
 
 	return this->Set(iIndex, sValue, iLength);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+	Adds a new variable containing the index of a parent variable.
+*/
+ErrorLevel CVars::AddVariableParameterReference(REQPARAMITEM *requiredParam, PARAMITEM *param)
+{
+	if (((CEngine*)this->pEngine)->Types->IsReadOnly(requiredParam->Type))
+	{
+		return this->Error->Hard("Variable is readonly");
+	}
+	int iIndex = INVALID_INDEX;
+	if (this->Add(requiredParam->Name, requiredParam->Type, &iIndex) != ERROR_OK)
+	{
+		return this->Error->HardCount();
+	}
+
+	this->Collection.Items[iIndex].IsVariableIndex = true;
+
+	return this->Set(iIndex, param->Value, param->Length);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+Adds a new variable containing the index of a parent variable.
+*/
+ErrorLevel CVars::AddVariableReference(REQPARAMITEM *requiredParam, int iReferencedVarIndex)
+{
+	if (((CEngine*)this->pEngine)->Types->IsReadOnly(requiredParam->Type))
+	{
+		return this->Error->Hard("Variable is readonly");
+	}
+	int iIndex = INVALID_INDEX;
+	if (this->Add(requiredParam->Name, requiredParam->Type, &iIndex) != ERROR_OK)
+	{
+		return this->Error->HardCount();
+	}
+
+	this->Collection.Items[iIndex].IsVariableIndex = true;
+
+	char sIndex[32];
+	int iLength = sprintf_s(sIndex, sizeof(sIndex), "@%d", iReferencedVarIndex);
+
+	return this->Set(iIndex, sIndex, iLength);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
