@@ -5592,6 +5592,16 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 							{
 								int iComplexVarIndex = pParams->ToVarIndex(0);
 								VARIABLEITEM *pComplexVar = pEngine->Vars->GetPointer(iComplexVarIndex);
+
+								if (pReturn->Type != pComplexVar->Type)
+								{
+									TYPEITEM *expectedType = pEngine->Types->GetPointer(pReturn->Type);
+									TYPEITEM *foundType = pEngine->Types->GetPointer(pComplexVar->Type);
+
+									return this->Error->Hard("Incorrect return type. Found [%s], expected [%s].", foundType->Name, expectedType->Name);
+								}
+
+
 								//We want to make sure this variable doesnt get freed when it drops scope so that we can copy the pointers.
 								pComplexVar->Reserved = true;
 							}
