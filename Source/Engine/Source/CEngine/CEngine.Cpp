@@ -3643,11 +3643,39 @@ ErrorLevel CEngine::ExecuteLineOfCode(LINEITEM *pLine, CParams *pReturn)
 		}
 
 		PROCITEM *pProc = this->Procs->GetPointer(iIndex);
-		CParams Return(this, pProc->ReturnType);
+		CParams lpReturn(this, pProc->ReturnType);
 		//We only enforce conversion with script procedures.
-		Return.EnforceTypes = (pProc->Type == PROC_TYPE_SCRIPT);
+		lpReturn.EnforceTypes = (pProc->Type == PROC_TYPE_SCRIPT);
 
-		return this->Procs->ExecuteByEval(pLine->Text, pLine->Length, NULL, &Return);
+		ErrorLevel result = this->Procs->ExecuteByEval(pLine->Text, pLine->Length, NULL, &lpReturn);
+
+
+		//Borrowed from ErrorLevel CVars::Set(VARIABLEITEM *pItem, const char *sMemberName, int iArrayIndex, CParams *pParams):
+		//Functions that return complex types will have the return variable "reserved", but if we are here, that means that the user
+		//	isn't using the return variable - so its going to be leaked if we dont clean it up.
+		if (lpReturn.Collection.Count > 0)
+		{
+			TYPEITEM *pDestinationType = this->Types->GetPointer(lpReturn.Type);
+			if (pDestinationType->IsComplex)
+			{
+				if (lpReturn.First()->Value[0] == '@')
+				{
+					int iSourceVarIndex = lpReturn.ToVarIndex(0);
+
+					VARIABLEITEM *pSourceVar = this->Vars->GetPointer(iSourceVarIndex);
+
+					if (pSourceVar->Reserved)
+					{
+						//Now that we have assumed the pointers of the variable, allow it to be freed.
+						pSourceVar->Reserved = false;
+						this->Vars->Free(pSourceVar);
+					}
+				}
+			}
+		}
+
+		return result;
+
 	}
 
 	return this->Error->Hard("[%s] is undefined", sTok);

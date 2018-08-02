@@ -3750,7 +3750,13 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				for(int i = 0; i < pEngine->Vars->Count(); i++)
 				{
 					VARIABLEITEM *pVar = pEngine->Vars->GetPointer(i);
-					printf("[%d]: Scope: %d, Type: %d, Reserved: %d, Length: %d, Child: %d, Parent: %d, Name: [%s]\n",
+					if (pVar == NULL)
+					{
+						printf("[%d]: NULL\r\n", i);
+					}
+					else
+					{
+						printf("[%d]: Scope: %d, Type: %d, Reserved: %d, Length: %d, Child: %d, Parent: %d, Name: [%s]\n",
 							pVar->Index,
 							pVar->Scope,
 							pVar->Type,
@@ -3759,6 +3765,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 							pVar->ChildVariableIndex,
 							pVar->ParentVariableIndex,
 							pVar->Name);
+					}
 				}
 
 				return this->Error->HardCount();
@@ -5600,7 +5607,6 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 
 									return this->Error->Hard("Incorrect return type. Found [%s], expected [%s].", foundType->Name, expectedType->Name);
 								}
-
 
 								//We want to make sure this variable doesnt get freed when it drops scope so that we can copy the pointers.
 								pComplexVar->Reserved = true;
