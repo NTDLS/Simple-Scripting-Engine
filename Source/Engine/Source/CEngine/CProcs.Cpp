@@ -4059,9 +4059,9 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				{
 					int iLength = CleanWhiteSpaces(*sLines);
 
-					if (pEngine->Lines->Add(*sLines, iLength,
+					if (pEngine->Lines->Add("", 0, *sLines, iLength,
 						pEngine->Lines->GetPointer(iLineIndex)->ScriptIndex,
-						pEngine->Lines->GetPointer(iLineIndex)->FileLine - 1, 1, false) != ERROR_OK)
+						pEngine->Lines->GetPointer(iLineIndex)->FileLine - 1, 1, false, false) != ERROR_OK)
 					{
 						break;
 					}

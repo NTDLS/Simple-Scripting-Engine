@@ -29,13 +29,13 @@ CLines::CLines(void *lpEngine)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ErrorLevel CLines::Add(const char *sLine, int iLength, int iScriptIndex, int iLine, int iCodeBlockLevel, bool bIsInline)
+ErrorLevel CLines::Add(const char *sPreservedWhitespace, int iPreservedWhitespaceLen, const char *sLine, int iLength, int iScriptIndex, int iLine, int iCodeBlockLevel, bool bIsInline, bool bAppendLewLine)
 {
 	int iOldLine = ((CEngine *)this->pEngine)->State->LineIndex;
 
 	((CEngine *)this->pEngine)->State->LineIndex = this->Collection.Count;
 
-	ErrorLevel result = AddBase(sLine, iLength, iScriptIndex, iLine, iCodeBlockLevel, bIsInline);
+	ErrorLevel result = AddBase(sPreservedWhitespace, iPreservedWhitespaceLen, sLine, iLength, iScriptIndex, iLine, iCodeBlockLevel, bIsInline, bAppendLewLine);
 
 	((CEngine *)this->pEngine)->State->LineIndex = iOldLine;
 
@@ -44,7 +44,7 @@ ErrorLevel CLines::Add(const char *sLine, int iLength, int iScriptIndex, int iLi
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-ErrorLevel CLines::AddBase(const char *sLine, int iLength, int iScriptIndex, int iLine, int iCodeBlockLevel, bool bIsInline)
+ErrorLevel CLines::AddBase(const char *sPreservedWhitespace, int iPreservedWhitespaceLen, const char *sLine, int iLength, int iScriptIndex, int iLine, int iCodeBlockLevel, bool bIsInline, bool bAppendLewLine)
 {
 	char sTok[MAX_TOKEN_SIZE];
 	int iTokSz = 0;
@@ -71,25 +71,29 @@ ErrorLevel CLines::AddBase(const char *sLine, int iLength, int iScriptIndex, int
 		int iOriginalLength = iLength;
 		bool bInQuotes = false;
 
-		//Search for end of line comments.
-		for (int iIndex = 0; iIndex < iLength; iIndex++)
+		if (iCodeBlockLevel > 0)
 		{
-			if (sLine[iIndex] == '\\')
+			//Search for end of line comments.
+			for (int iIndex = 0; iIndex < iLength; iIndex++)
 			{
-				continue; //No need to parse escape sequences, we are only looking for comments.
-			}
-			else if (sLine[iIndex] == '\"') {
-				bInQuotes = !bInQuotes;
-			}
-			else if (sLine[iIndex] == ';' && !bInQuotes) //End of line comment.
-			{
-				iLength = iIndex;
-				iOriginalLength = iIndex;
-				while (IsWhiteSpace(sLine[iLength - 1]))
+				if (sLine[iIndex] == '\\')
 				{
-					iLength--;
+					continue; //No need to parse escape sequences, we are only looking for comments.
 				}
-				break;
+				else if (sLine[iIndex] == '\"')
+				{
+					bInQuotes = !bInQuotes;
+				}
+				else if (sLine[iIndex] == ';' && !bInQuotes) //End of line comment.
+				{
+					iLength = iIndex;
+					iOriginalLength = iIndex;
+					while (IsWhiteSpace(sLine[iLength - 1]))
+					{
+						iLength--;
+					}
+					break;
+				}
 			}
 		}
 
@@ -108,25 +112,75 @@ ErrorLevel CLines::AddBase(const char *sLine, int iLength, int iScriptIndex, int
 			pLine->LineIndex = this->Collection.Count++;
 			pLine->CodeBlockLevel = iCodeBlockLevel;
 			pLine->IsInline = bIsInline;
-			if ((pLine->Text = (char *) pMem->Allocate(sizeof(char), iLength + 1)))
+
+			if (bInlinePrint)
 			{
+				if (bAppendLewLine && sLine[iLength - 1] != '\n')
+				{
+					pLine->Length += 7; //For the  " & "CRLF""
+				}
+				pLine->Length += iPreservedWhitespaceLen + 5;
+			}
+			else
+			{
+				if (bAppendLewLine && sLine[iLength - 1] != '\n')
+				{
+					pLine->Length += 2; //For the CRLF
+				}
+				if (iCodeBlockLevel == 0)
+				{
+					pLine->Length += iPreservedWhitespaceLen;
+				}
+			}
+
+			if ((pLine->Text = (char *) pMem->Allocate(sizeof(char), pLine->Length + 1)))
+			{
+				if (iCodeBlockLevel == 0 && bInlinePrint == false)
+				{
+					strncpy_s(pLine->Text, pLine->Length + 1, sPreservedWhitespace, iPreservedWhitespaceLen);
+				}
+
 				if (bInlinePrint)
 				{
-					strcpy_s(pLine->Text, iLength + 1, "Prints(");
+					strcpy_s(pLine->Text, pLine->Length + 1, "Prints(");
 					if ((iOriginalLength - 1) == 0)
 					{
 						return this->Error->Soft("Nothing to print");
 					}
-					strncat_s(pLine->Text, iLength + 1, sLine + 1, iOriginalLength - 1);
-					strcat_s(pLine->Text, iLength + 1, ")");
+
+					strcat_s(pLine->Text, pLine->Length + 1, "\"");
+					strcat_s(pLine->Text, pLine->Length + 1, sPreservedWhitespace);
+					strcat_s(pLine->Text, pLine->Length + 1, "\" & ");
+
+					strncat_s(pLine->Text, pLine->Length + 1, sLine + 1, iOriginalLength - 1);
+
+					if (bAppendLewLine)
+					{
+						strcat_s(pLine->Text, pLine->Length + 1, " & CRLF");
+					}
+
+					strcat_s(pLine->Text, pLine->Length + 1, ")");
 				}
-				else {
-					memcpy_s(pLine->Text, iLength + 1, sLine, iLength);
+				else
+				{
+					strncat_s(pLine->Text, pLine->Length + 1, sLine, iLength);
+					if (bAppendLewLine)
+					{
+						strcat_s(pLine->Text, pLine->Length + 1, "\r\n");
+					}
 				}
 			}
 			else {
 				return this->Error->Hard("Memory allocation error");
 			}
+
+			/*
+			if (pLine->Length != strlen(pLine->Text))
+			{
+				printf("%d / %d\n", pLine->Length, strlen(pLine->Text));
+			}
+			pLine->Length = strlen(pLine->Text);
+			*/
 
 			if (iCodeBlockLevel > 0)
 			{
@@ -200,6 +254,7 @@ ErrorLevel CLines::LoadFromScriptEx(int iScriptIndex)
 	}
 	fclose(hFile);
 
+	char **sPreservedWhitespace = NULL;
 	char **sLines = NULL;
 	int iLines = 0;
 	int iActualLines = 0;
@@ -209,13 +264,23 @@ ErrorLevel CLines::LoadFromScriptEx(int iScriptIndex)
 		pMem->Free(sBuffer);
 		return this->Error->Hard("File contains data but no lines");
 	}
+	sPreservedWhitespace = (char**)pMem->Allocate(sizeof(char*), iLines);
 	pMem->Free(sBuffer);
 
-	int *iLengths = (int *) pMem->Allocate(sizeof(int), iLines);
+	int *iLengths = (int *)pMem->Allocate(sizeof(int), iLines);
+	int *iPreservedWhitespaceLen = (int *)pMem->Allocate(sizeof(int), iLines);
 
 	//Calculate lengths, clean whitespaces and determine how many non-blank lines we have.
 	for (int iLine = 0; iLine < iLines; iLine++)
 	{
+		while (IsWhiteSpace(sLines[iLine][iPreservedWhitespaceLen[iLine]]))
+		{
+			iPreservedWhitespaceLen[iLine]++;
+		}
+
+		sPreservedWhitespace[iLine] = (char*)pMem->Allocate(sizeof(char), iPreservedWhitespaceLen[iLine] + 1);
+		strncpy_s(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine] + 1, sLines[iLine], iPreservedWhitespaceLen[iLine]);
+
 		iLengths[iLine] = CleanWhiteSpaces(sLines[iLine]);
 
 		if (sLines[iLine][0] == ';')
@@ -287,8 +352,10 @@ ErrorLevel CLines::LoadFromScriptEx(int iScriptIndex)
 					if (iCodeBlockLevel < 0 || iCodeBlockLevel > 1)
 					{
 						pMem->Free(iLengths);
+						pMem->Free(iPreservedWhitespaceLen);
 						FreeArray(sLines, iLines);
-						this->Add(Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false); //Just add for debugging purposes.
+						FreeArray(sPreservedWhitespace, iLines);
+						this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false); //Just add for debugging purposes.
 						return this->Error->Hard("Code block nesting error, nesting is not allowed");
 					}
 					continue;
@@ -299,9 +366,10 @@ ErrorLevel CLines::LoadFromScriptEx(int iScriptIndex)
 					if (iCodeBlockLevel < 0 || iCodeBlockLevel > 1)
 					{
 						pMem->Free(iLengths);
+						pMem->Free(iPreservedWhitespaceLen);
 						FreeArray(sLines, iLines);
-
-						this->Add(Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false); //Just add for debugging purposes.
+						FreeArray(sPreservedWhitespace, iLines);
+						this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false); //Just add for debugging purposes.
 						return this->Error->Hard(pEngine->State->LineIndex, "Code block nesting error, nesting is not allowed");
 					}
 					continue;
@@ -312,11 +380,13 @@ ErrorLevel CLines::LoadFromScriptEx(int iScriptIndex)
 
 				if (iCodeTagIn >= 0 && iCodeTagOut >= 0)
 				{
-					if (!this->SplitComplexInlines(Line.Buffer, Line.Length, iScriptIndex, iStartingLine, &iCodeBlockLevel))
+					if (!this->SplitComplexInlines(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, &iCodeBlockLevel))
 					{
 						pMem->Free(iLengths);
+						pMem->Free(iPreservedWhitespaceLen);
 						FreeArray(sLines, iLines);
-						this->Add(Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false); //Just add for debugging purposes.
+						FreeArray(sPreservedWhitespace, iLines);
+						this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false); //Just add for debugging purposes.
 						return this->Error->Hard("Failed to parse complex inline code blocks");
 					}
 				}
@@ -329,14 +399,16 @@ ErrorLevel CLines::LoadFromScriptEx(int iScriptIndex)
 
 					while ((iStart = InStr("<%", 2, Line.Buffer, Line.Length, iEnd)) >= 0)
 					{
-						this->Add(Line.Buffer + iLastEnd, iStart - iLastEnd, iScriptIndex, iStartingLine, iCodeBlockLevel, true);
+						this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer + iLastEnd, iStart - iLastEnd, iScriptIndex, iStartingLine, iCodeBlockLevel, true, false);
 
 						iCodeBlockLevel++;
 						if (iCodeBlockLevel < 0 || iCodeBlockLevel > 1)
 						{
 							pMem->Free(iLengths);
+							pMem->Free(iPreservedWhitespaceLen);
 							FreeArray(sLines, iLines);
-						this->Add(Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false); //Just add for debugging purposes.
+							FreeArray(sPreservedWhitespace, iLines);
+							this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false); //Just add for debugging purposes.
 							return this->Error->Hard("Code block nesting error, nesting is not allowed");
 						}
 
@@ -345,14 +417,16 @@ ErrorLevel CLines::LoadFromScriptEx(int iScriptIndex)
 
 						if (((iEnd = InStr("%>", 2, Line.Buffer, Line.Length, iStart))) >= 0)
 						{
-							this->Add(Line.Buffer + iStart, iEnd - iStart, iScriptIndex, iStartingLine, iCodeBlockLevel, true);
+							this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer + iStart, iEnd - iStart, iScriptIndex, iStartingLine, iCodeBlockLevel, true, false);
 
 							iCodeBlockLevel--;
 							if (iCodeBlockLevel < 0 || iCodeBlockLevel > 1)
 							{
 								pMem->Free(iLengths);
+								pMem->Free(iPreservedWhitespaceLen);
 								FreeArray(sLines, iLines);
-								this->Add(Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false); //Just add for debugging purposes.
+								FreeArray(sPreservedWhitespace, iLines);
+								this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false); //Just add for debugging purposes.
 								return this->Error->Hard("Code block nesting error, nesting is not allowed");
 							}
 							iEnd += 2; //Skip "%>".
@@ -364,7 +438,7 @@ ErrorLevel CLines::LoadFromScriptEx(int iScriptIndex)
 						iLastEnd = iEnd;
 					}
 
-					this->Add(Line.Buffer + iLastEnd, Line.Length - iLastEnd, iScriptIndex, iStartingLine, iCodeBlockLevel, false);
+					this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer + iLastEnd, Line.Length - iLastEnd, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false);
 				}
 				else if (iCodeTagOut >= 0)
 				{
@@ -372,20 +446,22 @@ ErrorLevel CLines::LoadFromScriptEx(int iScriptIndex)
 
 					iIndex = InStr("%>", 2, Line.Buffer, Line.Length, 0);
 
-					this->Add(Line.Buffer, iIndex, iScriptIndex, iStartingLine, iCodeBlockLevel, false);
+					this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, iIndex, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false);
 
 					iCodeBlockLevel--;
 					if (iCodeBlockLevel < 0 || iCodeBlockLevel > 1)
 					{
 						pMem->Free(iLengths);
+						pMem->Free(iPreservedWhitespaceLen);
 						FreeArray(sLines, iLines);
-						this->Add(Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false); //Just add for debugging purposes.
+						FreeArray(sPreservedWhitespace, iLines);
+						this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false); //Just add for debugging purposes.
 						return this->Error->Hard("Code block nesting error, nesting is not allowed");
 					}
 
 					iIndex += 2; //Skip "%>".
 
-					if (this->Add(Line.Buffer + iIndex, Line.Length - iIndex, iScriptIndex, iStartingLine, iCodeBlockLevel, false) != ERROR_OK)
+					if (this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer + iIndex, Line.Length - iIndex, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false) != ERROR_OK)
 					{
 						((CEngine *)this->pEngine)->State->LineIndex = 0;
 						break;
@@ -393,10 +469,22 @@ ErrorLevel CLines::LoadFromScriptEx(int iScriptIndex)
 					((CEngine *)this->pEngine)->State->LineIndex = 0;
 				}
 				else {
-					if (this->Add(Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false) != ERROR_OK)
+
+					if (iCodeBlockLevel == 0)
 					{
-						((CEngine *)this->pEngine)->State->LineIndex = 0;
-						break;
+						if (this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false) != ERROR_OK)
+						{
+							((CEngine *)this->pEngine)->State->LineIndex = 0;
+							break;
+						}
+					}
+					else
+					{
+						if (this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false) != ERROR_OK)
+						{
+							((CEngine *)this->pEngine)->State->LineIndex = 0;
+							break;
+						}
 					}
 					((CEngine *)this->pEngine)->State->LineIndex = 0;
 				}
@@ -404,7 +492,9 @@ ErrorLevel CLines::LoadFromScriptEx(int iScriptIndex)
 				if (iCodeBlockLevel < 0 || iCodeBlockLevel > 1)
 				{
 					pMem->Free(iLengths);
+					pMem->Free(iPreservedWhitespaceLen);
 					FreeArray(sLines, iLines);
+					FreeArray(sPreservedWhitespace, iLines);
 					return this->Error->Hard("Code block nesting error, nesting is not allowed");
 				}
 			}
@@ -413,15 +503,24 @@ ErrorLevel CLines::LoadFromScriptEx(int iScriptIndex)
 	}
 
 	pMem->Free(iLengths);
+	pMem->Free(iPreservedWhitespaceLen);
 	FreeArray(sLines, iLines);
+	FreeArray(sPreservedWhitespace, iLines);
 
 	return this->Error->HardCount();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool CLines::SplitComplexInlines(const char *sLine, int iLength, int iScriptIndex, int iStartingLine, int *piCodeBlockLevel)
+bool CLines::SplitComplexInlines(const char *sPreservedWhitespace, int iPreservedWhitespaceLen, const char *sLine, int iLength, int iScriptIndex, int iStartingLine, int *piCodeBlockLevel)
 {
+#ifdef _DEBUG
+	if (strcmp("<%=tableName%>", sLine) == 0)
+	{
+		printf("");
+	}
+#endif
+
 	int iTagIn = 0;
 	int iTagOut = 0;
 	int iLastStart = 0;
@@ -460,7 +559,17 @@ bool CLines::SplitComplexInlines(const char *sLine, int iLength, int iScriptInde
 				}
 
 				//strncpy_s(sDebug, sizeof(sDebug), sLine + iLastStart, iLastChar);
-				this->Add(sLine + iLastStart, iLastChar, iScriptIndex, iStartingLine, iCodeBlockLevel, true);
+
+				//Is the entire line an "inline"?
+				if (iLastChar + 4 == iLength)
+				{
+					this->Add(sPreservedWhitespace, iPreservedWhitespaceLen, sLine + iLastStart, iLastChar, iScriptIndex, iStartingLine, iCodeBlockLevel, true, true);
+				}
+				else
+				{
+					this->Add("", 0, sLine + iLastStart, iLastChar, iScriptIndex, iStartingLine, iCodeBlockLevel, true, false);
+				}
+
 				//printf("Code:[%d]/[%s]\n", iCodeBlockLevel, sDebug);
 			}
 			iCodeBlockLevel--;
@@ -487,7 +596,7 @@ bool CLines::SplitComplexInlines(const char *sLine, int iLength, int iScriptInde
 				}
 
 				//strncpy_s(sDebug, sizeof(sDebug), sLine + iLastStart, iLastChar);
-				this->Add(sLine + iLastStart, iLastChar, iScriptIndex, iStartingLine, iCodeBlockLevel, true);
+				this->Add(sPreservedWhitespace, iPreservedWhitespaceLen, sLine + iLastStart, iLastChar, iScriptIndex, iStartingLine, iCodeBlockLevel, true, false);
 				//printf("Code:[%d]/[%s]\n", iCodeBlockLevel, sDebug);
 			}
 			iCodeBlockLevel++;
@@ -512,7 +621,7 @@ bool CLines::SplitComplexInlines(const char *sLine, int iLength, int iScriptInde
 				}
 
 				//strncpy_s(sDebug, sizeof(sDebug), sLine + iLastStart, iLastChar);
-				this->Add(sLine + iLastStart, iLastChar, iScriptIndex, iStartingLine, iCodeBlockLevel, true);
+				this->Add("", 0, sLine + iLastStart, iLastChar, iScriptIndex, iStartingLine, iCodeBlockLevel, true, true);
 				//printf("Code:[%d]/[%s]\n", iCodeBlockLevel, sDebug);
 			}
 		}

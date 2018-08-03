@@ -13,3 +13,4 @@
 Source/IDE/bin/
 Source/IDE/obj/
 Source/packages/
+/Source/Engine/Debug/Win32/clines.obj.enc

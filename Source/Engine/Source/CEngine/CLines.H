@@ -40,11 +40,11 @@ public:
 	bool IsDefined(int iIndex);
 	ErrorLevel LoadFromScript(int iScriptIndex);
 	ErrorLevel LoadFromScriptEx(int iScriptIndex);
-	ErrorLevel Add(const char *sLine, int iLength, int iScriptIndex, int iLine, int iCodeBlockLevel, bool bIsInline);
-	bool SplitComplexInlines(const char *sLine, int iLength, int iScriptIndex, int iStartingLine, int *piCodeBlockLevel);
+	ErrorLevel Add(const char *sPreservedWhitespace, int iPreservedWhitespaceLen, const char *sLine, int iLength, int iScriptIndex, int iLine, int iCodeBlockLevel, bool bIsInline, bool bAppendLewLine);
+	bool SplitComplexInlines(const char *sPreservedWhitespace, int iPreservedWhitespaceLen, const char *sLine, int iLength, int iScriptIndex, int iStartingLine, int *piCodeBlockLevel);
 
 private:
-	ErrorLevel AddBase(const char *sLine, int iLength, int iScriptIndex, int iLine, int iCodeBlockLevel, bool bIsInline);
+	ErrorLevel AddBase(const char *sPreservedWhitespace, int iPreservedWhitespaceLen, const char *sLine, int iLength, int iScriptIndex, int iLine, int iCodeBlockLevel, bool bIsInline, bool bAppendLewLine);
 
 	void *pEngine; //Pointer to the owning CEngine class.
 };

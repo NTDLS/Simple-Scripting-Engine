@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("NetworkDLS")]
 [assembly: AssemblyProduct("Simple Script IDE")]
-[assembly: AssemblyCopyright("Copyright © 2016 NetworkDLS.")]
+[assembly: AssemblyCopyright("Copyright © 2018 NetworkDLS.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

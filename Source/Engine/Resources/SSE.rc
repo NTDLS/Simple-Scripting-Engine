@@ -73,7 +73,7 @@ BEGIN
             VALUE "FileDescription", "Simple Scripting Engine"
             VALUE "FileVersion", "1.0.7.0"
             VALUE "InternalName", "SSE.exe"
-            VALUE "LegalCopyright", "Copyright © 2016 NetworkDLS. All rights reserved."
+            VALUE "LegalCopyright", "Copyright © 2018 NetworkDLS. All rights reserved."
             VALUE "OriginalFilename", "SSE.exe"
             VALUE "ProductName", "Simple Scripting Engine"
             VALUE "ProductVersion", "1.0.7.0"
@@ -95,7 +95,7 @@ STRINGTABLE
 BEGIN
     IDS_TITLECAPTION        "Simple Scripting Engine"
     IDS_FILEVERSION         "1.0.7.0"
-    IDS_APPCOPYRIGHT        "Copyright © 2016 NetworkDLS. All rights reserved."
+    IDS_APPCOPYRIGHT        "Copyright © 2018 NetworkDLS. All rights reserved."
     IDS_REGISTRYKEY         "Software\\NetworkDLS\\Simple Scripting Engine"
 END
 
