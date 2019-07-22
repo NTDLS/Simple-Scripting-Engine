@@ -741,7 +741,7 @@ namespace HtmlHelpViewer
 		/// </summary>
 		private void LoadRegistryPreferences()
 		{
-			RegistryKey regKey = Registry.LocalMachine.CreateSubKey(global.RegistryKey + "\\IDE\\Help");
+			RegistryKey regKey = Registry.CurrentUser.CreateSubKey(global.RegistryKey + "\\IDE\\Help");
 			
 			bool bEnable = bool.Parse(regKey.GetValue("EnableDumping", true).ToString());
 
@@ -757,12 +757,13 @@ namespace HtmlHelpViewer
 			_prefURLPrefix = (string) regKey.GetValue("ITSUrlPrefix", _prefURLPrefix);
 			_prefUseHH2TreePics = bool.Parse(regKey.GetValue("UseHH2TreePics", _prefUseHH2TreePics).ToString());
 		}
+
 		/// <summary>
 		/// Saves viewer preferences to registry
 		/// </summary>
 		private void SaveRegistryPreferences()
 		{
-            RegistryKey regKey = Registry.LocalMachine.CreateSubKey(global.RegistryKey + "\\IDE\\Help");
+            RegistryKey regKey = Registry.CurrentUser.CreateSubKey(global.RegistryKey + "\\IDE\\Help");
 
 			regKey.SetValue("EnableDumping", (_dmpInfo!=null));
 			regKey.SetValue("DumpOutputDir", _prefDumpOutput);
