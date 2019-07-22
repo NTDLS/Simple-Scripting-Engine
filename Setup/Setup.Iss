@@ -60,7 +60,7 @@
  Root: HKCR; Subkey: "SimpleScript\Shell"; ValueType: string; ValueData:"Execute"; Tasks: FileAssociation\Execute;
  
  Root: HKCR; Subkey: "SimpleScript\Shell\Execute\Command"; Flags: uninsdeletekey; Tasks: FileAssociation;
- Root: HKCR; Subkey: "SimpleScript\Shell\Execute\Command"; ValueType: string; ValueData:"""{app}\SSE.Exe"" ""%1"""; Tasks: FileAssociation;
+ Root: HKCR; Subkey: "SimpleScript\Shell\Execute\Command"; ValueType: string; ValueData:"""{app}\SSE.Exe"" ""%1"" %*"; Tasks: FileAssociation;
  
  Root: HKCR; Subkey: "SimpleScript\Shell\Edit\Command"; Flags: uninsdeletekey; Components: SSIDE; Tasks: FileAssociation;
  Root: HKCR; Subkey: "SimpleScript\Shell\Edit\Command"; ValueType: string;  ValueData:"""{app}\IDE\SSIDE.exe"" ""%1"""; Components: SSIDE; Tasks: FileAssociation;
