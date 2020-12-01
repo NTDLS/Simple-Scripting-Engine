@@ -15,10 +15,75 @@ using namespace NSWFL::String;
 using namespace NSWFL::File;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ErrorLevel CScripts::AddString(const char* sScriptText)
+{
+	ErrorLevel Result = ERROR_OK;
+	CEngine* pEngine = ((CEngine*)this->pEngine);
+
+	char sFileName[255];
+	strcpy_s(sFileName, sizeof(sFileName), "<ad-hoc>");
+	int iScriptIndex = -1;
+
+	for (int i = 0; i < this->Collection.Count; i++)
+	{
+		if (_strcmpi(this->Collection.Items[i].FileName, sFileName) == 0)
+		{
+			iScriptIndex = i;
+			break;
+		}
+	}
+
+	if (iScriptIndex == -1)
+	{
+		this->Collection.Items = (SCRIPTITEM*)
+			pMem->ReAllocate(this->Collection.Items, sizeof(SCRIPTITEM), this->Collection.Count + 1);
+		if (!this->Collection.Items)
+		{
+			return this->Error->Hard("Memory allocation error");
+		}
+
+		SCRIPTITEM* pItem = &this->Collection.Items[this->Collection.Count++];
+
+		pItem->Namespace = NULL;
+
+		pItem->FileName = (char*)pMem->CloneString(sFileName);
+	}
+
+	for (int i = 0; i < this->Collection.Count; i++)
+	{
+		if (_strcmpi(this->Collection.Items[i].FileName, sFileName) == 0)
+		{
+			iScriptIndex = i;
+			break;
+		}
+	}
+
+	int iLineIndex = pEngine->State->LineIndex;
+	char** sLines = Split(sScriptText, strlen(sScriptText), "\n");
+
+	while (*sLines)
+	{
+		int iLength = CleanWhiteSpaces(*sLines);
+
+		if (pEngine->Lines->Add("", 0, *sLines, iLength,
+			iScriptIndex,
+			0, 1, false, false) != ERROR_OK)
+		{
+			break;
+		}
+
+		*sLines++;
+	}
+
+	return Result;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
 	Adds the contents of a file to the scripting engine.
 */
-ErrorLevel CScripts::Add(const char *sFileName)
+ErrorLevel CScripts::AddFile(const char *sFileName)
 {
 	ErrorLevel Result = ERROR_OK;
 	int iLOCStart = ((CEngine *)this->pEngine)->Lines->Collection.Count;

@@ -1064,6 +1064,30 @@ CProcs::CProcs(void *lpEngine)
 	//------------------------------------------------
 	pReqParams = new CReqParams(this->pEngine);
 	pReqParams->Add(PARENT_INDEX_VAR_NAME, VAR_TYPE_NUMERIC); //Variable index.
+	pReqParams->Add("Value", VAR_TYPE_NUMERIC);
+	this->AddSystem("Math.Sin", VAR_TYPE_NUMERIC, pReqParams);
+	delete pReqParams;
+	//------------------------------------------------
+	pReqParams = new CReqParams(this->pEngine);
+	pReqParams->Add(PARENT_INDEX_VAR_NAME, VAR_TYPE_NUMERIC); //Variable index.
+	pReqParams->Add("Value", VAR_TYPE_NUMERIC);
+	this->AddSystem("Math.Cos", VAR_TYPE_NUMERIC, pReqParams);
+	delete pReqParams;
+	//------------------------------------------------
+	pReqParams = new CReqParams(this->pEngine);
+	pReqParams->Add(PARENT_INDEX_VAR_NAME, VAR_TYPE_NUMERIC); //Variable index.
+	pReqParams->Add("Value", VAR_TYPE_NUMERIC);
+	this->AddSystem("Math.Tan", VAR_TYPE_NUMERIC, pReqParams);
+	delete pReqParams;
+	//------------------------------------------------
+	pReqParams = new CReqParams(this->pEngine);
+	pReqParams->Add(PARENT_INDEX_VAR_NAME, VAR_TYPE_NUMERIC); //Variable index.
+	pReqParams->Add("Value", VAR_TYPE_NUMERIC);
+	this->AddSystem("Math.Atan", VAR_TYPE_NUMERIC, pReqParams);
+	delete pReqParams;
+	//------------------------------------------------
+	pReqParams = new CReqParams(this->pEngine);
+	pReqParams->Add(PARENT_INDEX_VAR_NAME, VAR_TYPE_NUMERIC); //Variable index.
 	pReqParams->AddOptional("Min", VAR_TYPE_NUMERIC, (const char *)NULL);
 	pReqParams->AddOptional("Max", VAR_TYPE_NUMERIC, (const char *)NULL);
 	this->AddSystem("Math.Random", VAR_TYPE_NUMERIC, pReqParams);
@@ -2482,6 +2506,26 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				}
 				srand(GetTickCount());
 				return ERROR_OK;
+			}
+			//-----------------------------------------------------------------------------------------------------------------
+			else if (_StrEqlI(pProc->Name, "Math.Cos"))
+			{
+				return pReturn->Add((double)cos((long long)pParams->ToDouble(1)));
+			}
+			//-----------------------------------------------------------------------------------------------------------------
+			else if (_StrEqlI(pProc->Name, "Math.Sin"))
+			{
+				return pReturn->Add((double)sin((long long)pParams->ToDouble(1)));
+			}
+			//-----------------------------------------------------------------------------------------------------------------
+			else if (_StrEqlI(pProc->Name, "Math.Tan"))
+			{
+				return pReturn->Add((double)tan((long long)pParams->ToDouble(1)));
+			}
+			//-----------------------------------------------------------------------------------------------------------------
+			else if (_StrEqlI(pProc->Name, "Math.Atan"))
+			{
+				return pReturn->Add((double)atan((long long)pParams->ToDouble(1)));
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "Math.Abs"))
@@ -4093,7 +4137,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 					AppendPaths(sFilename, sizeof(sFilename), sCurrentScriptPath, pParams->ToString(1));
 				}
 
-				return pEngine->Scripts->Add(sFilename);
+				return pEngine->Scripts->AddFile(sFilename);
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "Code.Variables.Free"))

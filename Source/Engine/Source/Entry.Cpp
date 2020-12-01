@@ -29,6 +29,8 @@ char gsFileVersion[32];
 char gsTitleCaption[64];
 HINSTANCE ghAppInstance;
 
+void ProcessConsole(void);
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int __cdecl main(void)
@@ -36,13 +38,20 @@ int __cdecl main(void)
 	ghAppInstance = GetModuleHandle(NULL);
 	CommandLineParser CmdLine;
 
-	int iResult = 0;
+	const int iResult = 0;
 	int iNonHandledParamCount = 0;
 	bool bPause = false;
 
 	LoadString(ghAppInstance, IDS_APPCOPYRIGHT, gsAppCopyRight, sizeof(gsAppCopyRight));
 	LoadString(ghAppInstance, IDS_FILEVERSION, gsFileVersion, sizeof(gsFileVersion));
 	LoadString(ghAppInstance, IDS_TITLECAPTION, gsTitleCaption, sizeof(gsTitleCaption));
+
+
+	if (CmdLine.Count() == 2 && _stricmp(CmdLine.Item(1), "/Console") == 0)
+	{
+		ProcessConsole();
+		return 0;
+	}
 
 	CEngine Engine;
 
@@ -113,7 +122,7 @@ int __cdecl main(void)
 					sPathTranslated[iFoundPos + strlen(sScriptName)] = '\0';
 				}
 
-				Engine.Scripts->Add(sPathTranslated);
+				Engine.Scripts->AddFile(sPathTranslated);
 				iNonHandledParamCount++;
 
 				free(sPathTranslated);
@@ -154,7 +163,7 @@ int __cdecl main(void)
 					//We only add the first script to the collection - all subsequent parameters are command line.
 					if (Engine.Scripts->Collection.Count == 0)
 					{
-						Engine.Scripts->Add(CmdLine.Item(iArg));
+						Engine.Scripts->AddFile(CmdLine.Item(iArg));
 					}
 				}
 			}
@@ -187,6 +196,32 @@ int __cdecl main(void)
 	}
 
 	return iResult;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void ProcessConsole(void)
+{
+	CEngine engine;
+
+	while (true)
+	{
+		char sLine[255];
+		fgets(sLine, sizeof(sLine) - 1, stdin);
+		engine.Scripts->AddString(sLine); //Add a line to the execution pipeline.
+
+		engine.Process(); //Run the next line in the pipeline.
+
+		//Handle any errors that might come up:
+
+		ErrorLevel result = engine.Error->HardCount();
+		engine.Error->Throw(engine.ThrowSoftExceptions);
+
+		if (result != ERROR_OK)
+		{
+			engine.AdvanceLine(); //Skip the offending line.
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

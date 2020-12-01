@@ -512,6 +512,268 @@ ErrorLevel CLines::LoadFromScriptEx(int iScriptIndex)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+ErrorLevel CLines::LoadFromText(int iScriptIndex, const char* sText)
+{
+	CEngine* pEngine = (CEngine*)this->pEngine;
+
+	int iTextSize = strlen(sText);
+
+	char** sPreservedWhitespace = NULL;
+	char** sLines = NULL;
+	int iLines = 0;
+	int iActualLines = 0;
+
+	if (!(sLines = Split(sText, iTextSize, &iLines, "\n")))
+	{
+		return this->Error->Hard("File contains data but no lines");
+	}
+	sPreservedWhitespace = (char**)pMem->Allocate(sizeof(char*), iLines);
+
+	int* iLengths = (int*)pMem->Allocate(sizeof(int), iLines);
+	int* iPreservedWhitespaceLen = (int*)pMem->Allocate(sizeof(int), iLines);
+
+	//Calculate lengths, clean whitespaces and determine how many non-blank lines we have.
+	for (int iLine = 0; iLine < iLines; iLine++)
+	{
+		while (IsWhiteSpace(sLines[iLine][iPreservedWhitespaceLen[iLine]]))
+		{
+			iPreservedWhitespaceLen[iLine]++;
+		}
+
+		sPreservedWhitespace[iLine] = (char*)pMem->Allocate(sizeof(char), iPreservedWhitespaceLen[iLine] + 1);
+		strncpy_s(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine] + 1, sLines[iLine], iPreservedWhitespaceLen[iLine]);
+
+		iLengths[iLine] = CleanWhiteSpaces(sLines[iLine]);
+
+		if (sLines[iLine][0] == ';')
+		{
+			iLengths[iLine] = 0;
+		}
+		else if (_StrEql(sLines[iLine], "<%"))
+		{
+		}
+		else if (_StrEql(sLines[iLine], "%>"))
+		{
+		}
+		else if (iLengths[iLine] > 0)
+		{
+			iActualLines++;
+		}
+	}
+
+	if (iActualLines)
+	{
+		StringBuilder Line;
+		int iStartingLine = 0;
+
+		int iCodeBlockLevel = 0;
+
+		for (int iLine = 0; iLine < iLines; iLine++)
+		{
+			pEngine->State->LineIndex = this->Collection.Count;
+			Line.Clear();
+
+			if (iLengths[iLine] > 0)
+			{
+				if (sLines[iLine][iLengths[iLine] - 1] == '_')
+				{
+					sLines[iLine][iLengths[iLine] - 1] = '\0'; //Trim off the underscore.
+					iLengths[iLine] = CleanWhiteSpaces(sLines[iLine], iLengths[iLine] - 1);
+
+					Line.Append(sLines[iLine], iLengths[iLine]);
+					//Line.Append(" ", 1);
+
+					iLine++;
+
+					while (sLines[iLine][iLengths[iLine] - 1] == '_')
+					{
+						sLines[iLine][iLengths[iLine] - 1] = '\0'; //Trim off the underscore.
+						iLengths[iLine] = CleanWhiteSpaces(sLines[iLine], iLengths[iLine] - 1);
+
+						Line.Append(sLines[iLine], iLengths[iLine]);
+
+						iLine++;
+					}
+
+					if (iLine < iLines)
+					{
+						Line.Append(sLines[iLine], iLengths[iLine]);
+					}
+				}
+				else {
+					Line.Append(sLines[iLine], iLengths[iLine]);
+				}
+			}
+
+			if (Line.Length > 0)
+			{
+				iStartingLine = iLine;
+				if (_StrEql(Line.Buffer, "<%"))
+				{
+					iCodeBlockLevel++;
+					if (iCodeBlockLevel < 0 || iCodeBlockLevel > 1)
+					{
+						pMem->Free(iLengths);
+						pMem->Free(iPreservedWhitespaceLen);
+						FreeArray(sLines, iLines);
+						FreeArray(sPreservedWhitespace, iLines);
+						this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false); //Just add for debugging purposes.
+						return this->Error->Hard("Code block nesting error, nesting is not allowed");
+					}
+					continue;
+				}
+				else if (_StrEql(Line.Buffer, "%>"))
+				{
+					iCodeBlockLevel--;
+					if (iCodeBlockLevel < 0 || iCodeBlockLevel > 1)
+					{
+						pMem->Free(iLengths);
+						pMem->Free(iPreservedWhitespaceLen);
+						FreeArray(sLines, iLines);
+						FreeArray(sPreservedWhitespace, iLines);
+						this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false); //Just add for debugging purposes.
+						return this->Error->Hard(pEngine->State->LineIndex, "Code block nesting error, nesting is not allowed");
+					}
+					continue;
+				}
+
+				int iCodeTagIn = InStr("<%", 2, Line.Buffer, Line.Length, 0);
+				int iCodeTagOut = InStr("%>", 2, Line.Buffer, Line.Length, 0);
+
+				if (iCodeTagIn >= 0 && iCodeTagOut >= 0)
+				{
+					if (!this->SplitComplexInlines(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, &iCodeBlockLevel))
+					{
+						pMem->Free(iLengths);
+						pMem->Free(iPreservedWhitespaceLen);
+						FreeArray(sLines, iLines);
+						FreeArray(sPreservedWhitespace, iLines);
+						this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false); //Just add for debugging purposes.
+						return this->Error->Hard("Failed to parse complex inline code blocks");
+					}
+				}
+				else if (iCodeTagIn >= 0)
+				{
+					int iLastStart = 0;
+					int iLastEnd = 0;
+					int iStart = 0;
+					int iEnd = 0;
+
+					while ((iStart = InStr("<%", 2, Line.Buffer, Line.Length, iEnd)) >= 0)
+					{
+						this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer + iLastEnd, iStart - iLastEnd, iScriptIndex, iStartingLine, iCodeBlockLevel, true, false);
+
+						iCodeBlockLevel++;
+						if (iCodeBlockLevel < 0 || iCodeBlockLevel > 1)
+						{
+							pMem->Free(iLengths);
+							pMem->Free(iPreservedWhitespaceLen);
+							FreeArray(sLines, iLines);
+							FreeArray(sPreservedWhitespace, iLines);
+							this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false); //Just add for debugging purposes.
+							return this->Error->Hard("Code block nesting error, nesting is not allowed");
+						}
+
+						iLastStart = iStart;
+						iStart += 2; //Skip "<%".
+
+						if (((iEnd = InStr("%>", 2, Line.Buffer, Line.Length, iStart))) >= 0)
+						{
+							this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer + iStart, iEnd - iStart, iScriptIndex, iStartingLine, iCodeBlockLevel, true, false);
+
+							iCodeBlockLevel--;
+							if (iCodeBlockLevel < 0 || iCodeBlockLevel > 1)
+							{
+								pMem->Free(iLengths);
+								pMem->Free(iPreservedWhitespaceLen);
+								FreeArray(sLines, iLines);
+								FreeArray(sPreservedWhitespace, iLines);
+								this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false); //Just add for debugging purposes.
+								return this->Error->Hard("Code block nesting error, nesting is not allowed");
+							}
+							iEnd += 2; //Skip "%>".
+						}
+						else {
+							iEnd = iStart;
+						}
+
+						iLastEnd = iEnd;
+					}
+
+					this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer + iLastEnd, Line.Length - iLastEnd, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false);
+				}
+				else if (iCodeTagOut >= 0)
+				{
+					int iIndex = 0;
+
+					iIndex = InStr("%>", 2, Line.Buffer, Line.Length, 0);
+
+					this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, iIndex, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false);
+
+					iCodeBlockLevel--;
+					if (iCodeBlockLevel < 0 || iCodeBlockLevel > 1)
+					{
+						pMem->Free(iLengths);
+						pMem->Free(iPreservedWhitespaceLen);
+						FreeArray(sLines, iLines);
+						FreeArray(sPreservedWhitespace, iLines);
+						this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false); //Just add for debugging purposes.
+						return this->Error->Hard("Code block nesting error, nesting is not allowed");
+					}
+
+					iIndex += 2; //Skip "%>".
+
+					if (this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer + iIndex, Line.Length - iIndex, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false) != ERROR_OK)
+					{
+						((CEngine*)this->pEngine)->State->LineIndex = 0;
+						break;
+					}
+					((CEngine*)this->pEngine)->State->LineIndex = 0;
+				}
+				else {
+
+					if (iCodeBlockLevel == 0)
+					{
+						if (this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false) != ERROR_OK)
+						{
+							((CEngine*)this->pEngine)->State->LineIndex = 0;
+							break;
+						}
+					}
+					else
+					{
+						if (this->Add(sPreservedWhitespace[iLine], iPreservedWhitespaceLen[iLine], Line.Buffer, Line.Length, iScriptIndex, iStartingLine, iCodeBlockLevel, false, false) != ERROR_OK)
+						{
+							((CEngine*)this->pEngine)->State->LineIndex = 0;
+							break;
+						}
+					}
+					((CEngine*)this->pEngine)->State->LineIndex = 0;
+				}
+
+				if (iCodeBlockLevel < 0 || iCodeBlockLevel > 1)
+				{
+					pMem->Free(iLengths);
+					pMem->Free(iPreservedWhitespaceLen);
+					FreeArray(sLines, iLines);
+					FreeArray(sPreservedWhitespace, iLines);
+					return this->Error->Hard("Code block nesting error, nesting is not allowed");
+				}
+			}
+		}
+		Line.Destroy();
+	}
+
+	pMem->Free(iLengths);
+	pMem->Free(iPreservedWhitespaceLen);
+	FreeArray(sLines, iLines);
+	FreeArray(sPreservedWhitespace, iLines);
+
+	return this->Error->HardCount();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 bool CLines::SplitComplexInlines(const char *sPreservedWhitespace, int iPreservedWhitespaceLen, const char *sLine, int iLength, int iScriptIndex, int iStartingLine, int *piCodeBlockLevel)
 {
 #ifdef _DEBUG

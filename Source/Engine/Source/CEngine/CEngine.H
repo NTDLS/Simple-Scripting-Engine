@@ -65,6 +65,7 @@ public:
 	ErrorLevel ParseMath(const char *sText, int iLength, int *piRPos, NSWFL::String::StringBuilder *pResult);
 	double ParseMathD(const char *sText, int iLength);
 	int ParseMathI(const char *sText, int iLength);
+	void AdvanceLine(void);
 
 	ErrorLevel InitializeCGIEnvironment(void);
 	ErrorLevel InitializeCGIFormVariables(void);

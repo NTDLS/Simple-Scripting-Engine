@@ -40,6 +40,7 @@ public:
 	bool IsDefined(int iIndex);
 	ErrorLevel LoadFromScript(int iScriptIndex);
 	ErrorLevel LoadFromScriptEx(int iScriptIndex);
+	ErrorLevel LoadFromText(int iScriptIndex, const char *sText);
 	ErrorLevel Add(const char *sPreservedWhitespace, int iPreservedWhitespaceLen, const char *sLine, int iLength, int iScriptIndex, int iLine, int iCodeBlockLevel, bool bIsInline, bool bAppendLewLine);
 	bool SplitComplexInlines(const char *sPreservedWhitespace, int iPreservedWhitespaceLen, const char *sLine, int iLength, int iScriptIndex, int iStartingLine, int *piCodeBlockLevel);
 

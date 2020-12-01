@@ -31,7 +31,8 @@ public:
 	SCRIPTITEM *GetNameSpace(const char *sName);
 	SCRIPTITEM *GetPartialNameSpace(const char *sName);
 	SCRIPTITEM *GetPartialNameSpace(const char *sName, bool *fullQualified);
-	int Add(const char *sFileName);
+	ErrorLevel AddFile(const char* sFileName);
+	ErrorLevel AddString(const char* sScriptText);
 	bool IsDefined(int iIndex);
 	SCRIPTITEM *GetPointer(int iIndex);
 

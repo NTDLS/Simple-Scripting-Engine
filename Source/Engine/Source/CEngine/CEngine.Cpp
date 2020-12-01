@@ -2319,6 +2319,21 @@ ErrorLevel CEngine::Process(void)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/// <summary>
+/// Skips a single line of execution. Useful in manual coding mode when a line can't compile.
+/// </summary>
+/// <param name=""></param>
+/// <returns></returns>
+void CEngine::AdvanceLine(void)
+{
+	if (this->State->LineIndex < this->Lines->Collection.Count)
+	{
+		this->State->LineIndex++;
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 ErrorLevel CEngine::Process(CParams *pReturn)
 {
 	for (;this->State->LineIndex < this->Lines->Collection.Count; this->State->LineIndex++)
@@ -3085,7 +3100,7 @@ ErrorLevel CEngine::ParsePreprocessor(LINEITEM *pLine)
 
 						if (FileAccess(sLocalFile, FExist))
 						{
-							this->Scripts->Add(sLocalFile);
+							this->Scripts->AddFile(sLocalFile);
 						}
 						else {
 							CorrectReversePath(sLocalFile, sizeof(sLocalFile));
@@ -3108,7 +3123,7 @@ ErrorLevel CEngine::ParsePreprocessor(LINEITEM *pLine)
 							//If the include file was found, include it - if it wasnt, then check the standard library folder.
 							if (FileAccess(sLocalFile, FExist))
 							{
-								this->Scripts->Add(sLocalFile);
+								this->Scripts->AddFile(sLocalFile);
 							}
 							else {
 								char sLibraryPath[MAX_PATH];
@@ -3122,7 +3137,7 @@ ErrorLevel CEngine::ParsePreprocessor(LINEITEM *pLine)
 
 									if (FileAccess(sLibraryFile, FExist))
 									{
-										this->Scripts->Add(sLibraryFile);
+										this->Scripts->AddFile(sLibraryFile);
 									}
 									else {
 										this->Error->Soft("File not found: [%s]", sLocalFile);

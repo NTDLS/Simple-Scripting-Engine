@@ -18,3 +18,7 @@ Source/packages/
 *.lock
 
 Source/\.vs/
+
+Source/Engine/Debug/Win32/
+
+*.user
