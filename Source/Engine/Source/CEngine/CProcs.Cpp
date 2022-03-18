@@ -1195,6 +1195,34 @@ CProcs::CProcs(void *lpEngine)
 	//------------------------------------------------
 	pReqParams = new CReqParams(this->pEngine);
 	pReqParams->Add(PARENT_INDEX_VAR_NAME, VAR_TYPE_NUMERIC); //Variable index.
+	pReqParams->Add("OldFileName", VAR_TYPE_STRING);
+	pReqParams->Add("NewFileName", VAR_TYPE_STRING);
+	this->AddSystem("File.Rename", VAR_TYPE_NUMERIC, pReqParams);
+	delete pReqParams;
+	//------------------------------------------------
+	pReqParams = new CReqParams(this->pEngine);
+	pReqParams->Add(PARENT_INDEX_VAR_NAME, VAR_TYPE_NUMERIC); //Variable index.
+	pReqParams->Add("OldFileName", VAR_TYPE_STRING);
+	pReqParams->Add("NewFileName", VAR_TYPE_STRING);
+	this->AddSystem("File.Move", VAR_TYPE_NUMERIC, pReqParams);
+	delete pReqParams;
+	//------------------------------------------------
+	pReqParams = new CReqParams(this->pEngine);
+	pReqParams->Add(PARENT_INDEX_VAR_NAME, VAR_TYPE_NUMERIC); //Variable index.
+	pReqParams->Add("OldFileName", VAR_TYPE_STRING);
+	pReqParams->Add("NewFileName", VAR_TYPE_STRING);
+	pReqParams->AddOptional("FailIfExists", VAR_TYPE_NUMERIC, (int)1);
+	this->AddSystem("File.Copy", VAR_TYPE_NUMERIC, pReqParams);
+	delete pReqParams;
+	//------------------------------------------------
+	pReqParams = new CReqParams(this->pEngine);
+	pReqParams->Add(PARENT_INDEX_VAR_NAME, VAR_TYPE_NUMERIC); //Variable index.
+	pReqParams->Add("FileName", VAR_TYPE_STRING);
+	this->AddSystem("File.Delete", VAR_TYPE_NUMERIC, pReqParams);
+	delete pReqParams;
+	//------------------------------------------------
+	pReqParams = new CReqParams(this->pEngine);
+	pReqParams->Add(PARENT_INDEX_VAR_NAME, VAR_TYPE_NUMERIC); //Variable index.
 	pReqParams->Add("FileName", VAR_TYPE_STRING);
 	pReqParams->AddOptional("OpenMode", VAR_TYPE_NUMERIC, (int)-1);
 	pReqParams->AddOptional("CreationDisposition", VAR_TYPE_NUMERIC, (int)-1);
@@ -2510,22 +2538,22 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "Math.Cos"))
 			{
-				return pReturn->Add((double)cos((long long)pParams->ToDouble(1)));
+				return pReturn->Add(cos(pParams->ToDouble(1)));
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "Math.Sin"))
 			{
-				return pReturn->Add((double)sin((long long)pParams->ToDouble(1)));
+				return pReturn->Add(sin(pParams->ToDouble(1)));
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "Math.Tan"))
 			{
-				return pReturn->Add((double)tan((long long)pParams->ToDouble(1)));
+				return pReturn->Add(tan(pParams->ToDouble(1)));
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "Math.Atan"))
 			{
-				return pReturn->Add((double)atan((long long)pParams->ToDouble(1)));
+				return pReturn->Add(atan(pParams->ToDouble(1)));
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "Math.Abs"))
@@ -4339,6 +4367,69 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				VARIABLEITEM *pVar = (VARIABLEITEM *)pParams->ToVarIndexPointer(0);
 				PARAMITEM *pFileName = pParams->GetPointer(1);
 				return pReturn->Add((int)FileAccess((const char *)pFileName->Value, FReadWrite));
+			}
+			//-----------------------------------------------------------------------------------------------------------------
+			//Moves a file from one location to another.
+			else if (_StrEqlI(pProc->Name, "File.Rename") || _StrEqlI(pProc->Name, "File.Move"))
+			{
+				if (MoveFile(pParams->ToString(1), pParams->ToString(2)) == FALSE)
+				{
+					char sError[5120];
+					if (pEngine->GetLastSystemError(sError, sizeof(sError)))
+					{
+						this->Error->Soft("Failed to move file: [%s]->[%s]", pParams->ToString(1), sError);
+					}
+					else {
+						this->Error->Soft("Failed to move file: [%s]", pParams->ToString(1));
+					}
+					return pReturn->Add(false);
+				}
+				else {
+					return pReturn->Add(true);
+				}
+				return pReturn->Add(false);
+			}
+			//-----------------------------------------------------------------------------------------------------------------
+			//Copies a file from one location to another.
+			else if (_StrEqlI(pProc->Name, "File.Copy"))
+			{
+				if (CopyFile(pParams->ToString(1), pParams->ToString(2), pParams->ToBool(3)) == FALSE)
+				{
+					char sError[5120];
+					if (pEngine->GetLastSystemError(sError, sizeof(sError)))
+					{
+						this->Error->Soft("Failed to copy file: [%s]->[%s]", pParams->ToString(1), sError);
+					}
+					else {
+						this->Error->Soft("Failed to copy file: [%s]", pParams->ToString(1));
+					}
+					return pReturn->Add(false);
+				}
+				else {
+					return pReturn->Add(true);
+				}
+				return pReturn->Add(false);
+			}
+			//-----------------------------------------------------------------------------------------------------------------
+			//Deletes a file from the filesystem.
+			else if (_StrEqlI(pProc->Name, "File.Delete"))
+			{
+				if (DeleteFile(pParams->ToString(1)) == FALSE)
+				{
+					char sError[5120];
+					if (pEngine->GetLastSystemError(sError, sizeof(sError)))
+					{
+						this->Error->Soft("Failed to delete file: [%s]->[%s]", pParams->ToString(1), sError);
+					}
+					else {
+						this->Error->Soft("Failed to delete file: [%s]", pParams->ToString(1));
+					}
+					return pReturn->Add(false);
+				}
+				else {
+					return pReturn->Add(true);
+				}
+				return pReturn->Add(false);
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			//Opens a new file for read or write access.

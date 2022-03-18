@@ -1,14 +1,13 @@
 [Setup]
 ;-- Main Setup Information
  AppName                = Simple Scripting Engine
- AppVerName             = Simple Scripting Engine 1.0.7.2
+ AppVerName             = Simple Scripting Engine 1.0.7.3
  AppCopyright           = Copyright © 1995-2019 NetworkDLS.
- DefaultDirName         = {pf}\NetworkDLS\Simple Scripting Engine
+ DefaultDirName         = {commonpf}\NetworkDLS\Simple Scripting Engine
  DefaultGroupName       = NetworkDLS\Simple Scripting Engine
  UninstallDisplayIcon   = {app}\SSE.Exe
  PrivilegesRequired     = PowerUser
  Uninstallable          = Yes
- MinVersion             = 0.0,5.0
  Compression            = bZIP/9
  ChangesAssociations    = Yes
  OutputBaseFilename     = SSE

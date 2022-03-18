@@ -7,7 +7,7 @@ namespace SSIDE.Classes
 {
     public static partial class global
     {
-        public const string RegistryKey = "SOFTWARE\\NetWorkDLS\\Simple Scripting Engine";
+        public const string RegistryKey = "SOFTWARE\\NetworkDLS\\Simple Scripting Engine";
         public const string CodeFileExtension = ".ss";
         public const string ProjectFileExtension = ".ssepx";
 
