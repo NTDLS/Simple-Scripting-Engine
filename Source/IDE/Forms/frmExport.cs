@@ -66,7 +66,7 @@ namespace SSIDE.Forms
                 }
             }
 
-            global.SetRegistryString("IDE", "LastExportImagesURI", txtRelativeImageURI.Text);
+            //global.SetRegistryString("IDE", "LastExportImagesURI", txtRelativeImageURI.Text);
 
             NTDLS.Syntax.SyntaxDocumentExporters.HTMLExporter htmlExporter = new NTDLS.Syntax.SyntaxDocumentExporters.HTMLExporter();
 

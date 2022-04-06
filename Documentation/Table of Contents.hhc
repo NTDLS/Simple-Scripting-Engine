@@ -158,6 +158,10 @@
 						<param name="Local" value="Script\File.Close.htm">
 						</OBJECT>
 					<LI> <OBJECT type="text/sitemap">
+						<param name="Name" value="Copy">
+						<param name="Local" value="Script\File.Copy.htm">
+						</OBJECT>
+					<LI> <OBJECT type="text/sitemap">
 						<param name="Name" value="Delete">
 						<param name="Local" value="Script\File.Delete.htm">
 						</OBJECT>
@@ -178,6 +182,10 @@
 						<param name="Local" value="Script\File.Handle.htm">
 						</OBJECT>
 					<LI> <OBJECT type="text/sitemap">
+						<param name="Name" value="Move">
+						<param name="Local" value="Script\File.Move.htm">
+						</OBJECT>
+					<LI> <OBJECT type="text/sitemap">
 						<param name="Name" value="Name">
 						<param name="Local" value="Script\File.Name.htm">
 						</OBJECT>
@@ -192,6 +200,10 @@
 					<LI> <OBJECT type="text/sitemap">
 						<param name="Name" value="Path">
 						<param name="Local" value="Script\File.Path.htm">
+						</OBJECT>
+					<LI> <OBJECT type="text/sitemap">
+						<param name="Name" value="Rename">
+						<param name="Local" value="Script\File.Rename.htm">
 						</OBJECT>
 					<LI> <OBJECT type="text/sitemap">
 						<param name="Name" value="Read">

@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>File :: Copy</title>
+</head>
+
+<body Background="/Images/BGCode.gif">
+<font size="5">File :: Copy</font><br />
+<hr /><br /><br />
+
+<b>Description:</b>
+<blockquote>
+<!-- ##BEGIN_DESCRIPTION## -->
+Copies a file at one location in the filesystem to another location.
+<!-- ##END_DESCRIPTION## -->
+</blockquote>
+
+<b>Syntax:</b>
+<blockquote>
+<font color="0000EE">File.Copy</font>(<font color="#000088">OldFileName</font> as <font color="MediumVioletRed">String</font>, <font color="#000088">NewFileName</font> as <font color="MediumVioletRed">String</font>, <font color="#000088">FailIfExists</font> as <font color="MediumVioletRed">Numeric</font> = <font color="Blue">1</font>) as <font color="MediumVioletRed">Numeric</font> </blockquote>
+
+<b>Parameters:</b>
+<blockquote>
+<ul><li><font color="#000088">OldFileName</font> as <font color="MediumVioletRed">String</font><ul><li>
+Source file name and or path where file will be copied from.
+</ul><li><font color="#000088">NewFileName</font> as <font color="MediumVioletRed">String</font><ul><li>
+Target file name and or path where file will be copied to.
+</ul><li><font color="#000088">FailIfExists</font> as <font color="MediumVioletRed">Numeric</font><ul><li>
+TRUE to fail if the target alreasy exists. FALSE will cause the destination to be overwritten.
+</ul></ul>
+</blockquote>
+
+<b>Example:</b>
+<blockquote>
+<table  ><tr><td nowrap><div style=""><div style="display:none;" id="closed637848453634337586_1"><img src="/images/Code/PlusNoLines.gif" align=top onclick="open637848453634337586_1.style.display='block'; closed637848453634337586_1.style.display='none'; "><b><span style="color:#00008b;background-color:#c0c0c0;">&lt;%...%&gt;</span></b></div><div style="display:block;" id="open637848453634337586_1"><img src="/images/Code/minusNoTopLine.gif" align=top onclick="open637848453634337586_1.style.display='none'; closed637848453634337586_1.style.display='block'; "><span style="color:#000000;background-color:#ffff00;">&lt;%</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/I.gif"  align=top><span style="color:#0000ff">File.Copy</span><span style="color:#ff0000">(</span><span style="color:#ff0000">"</span><span style="color:#ff0000">C:\\Source.txt</span><span style="color:#ff0000">"</span><span style="color:#000000">,</span><span style="color:#000000">&nbsp;</span><span style="color:#000000"></span><span style="color:#ff0000">"</span><span style="color:#ff0000">C:\\target.txt</span><span style="color:#ff0000">"</span><span style="color:#ff0000">)</span><br>
+<img src="/images/Code/I.gif"  align=top><br>
+<img src="/images/Code/L.gif"  align=top><span style="color:#000000;background-color:#ffff00;">%&gt;</span></div>
+</div></td></tr></table>
+</blockquote>
+
+</body>
+</html>

@@ -1265,12 +1265,6 @@ CProcs::CProcs(void *lpEngine)
 	//------------------------------------------------
 	pReqParams = new CReqParams(this->pEngine);
 	pReqParams->Add(PARENT_INDEX_VAR_NAME, VAR_TYPE_NUMERIC); //Variable index.
-	pReqParams->Add("FileName", VAR_TYPE_STRING);
-	this->AddSystem("File.Delete", VAR_TYPE_NUMERIC, pReqParams);
-	delete pReqParams;
-	//------------------------------------------------
-	pReqParams = new CReqParams(this->pEngine);
-	pReqParams->Add(PARENT_INDEX_VAR_NAME, VAR_TYPE_NUMERIC); //Variable index.
 	pReqParams->AddOptional("FileName", VAR_TYPE_STRING, "");
 	this->AddSystem("File.Size", VAR_TYPE_NUMERIC, pReqParams);
 	delete pReqParams;
@@ -4644,26 +4638,6 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				}
 
 				return pReturn->Add((int)FileSeek(hFile, pParams->ToInt(1), FILE_END));
-			}
-			//-----------------------------------------------------------------------------------------------------------------
-			//Deletes a file.
-			else if (_StrEqlI(pProc->Name, "File.Delete"))
-			{
-				bool bResult = DeleteFile(pParams->ToString(1)) > 0;
-				if (!bResult)
-				{
-					char sError[5120];
-					if (pEngine->GetLastSystemError(sError, sizeof(sError)))
-					{
-						return this->Error->Soft("Delete file failed: [%s]->[%s]", pParams->ToString(1), sError);
-					}
-					else {
-						return this->Error->Soft("Delete file failed: [%s]", pParams->ToString(1));
-					}
-				}
-				pReturn->Add(bResult);
-
-				return this->Error->HardCount();
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "File.Drive"))
