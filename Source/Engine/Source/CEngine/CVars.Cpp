@@ -1400,7 +1400,7 @@ ErrorLevel CVars::SetPointer(VARIABLEITEM *pVar, void *pObject, int iSize)
 	}
 
 	this->Free(pNode, true);
-	pNode->Value = (char *)(int)pObject;
+	pNode->Value = (char *)pObject;
 	pNode->Length = iSize;
 
 	//Set the values of all children nodes in a variable dependency chain.
@@ -1444,7 +1444,7 @@ ErrorLevel CVars::AddNewStrongReference(const char *sNewName, int iReferencedInd
 
 		VARIABLEITEM *pChild = this->GetPointer(iNewIndex);
 		pChild->Length = sizeof(void *); //Copying the pointer.
-		pChild->Value = (char *)(int)pParent->Value;
+		pChild->Value = pParent->Value;
 		pChild->ArrayDefinition = pParent->ArrayDefinition;
 
 		//Associate the two variables.

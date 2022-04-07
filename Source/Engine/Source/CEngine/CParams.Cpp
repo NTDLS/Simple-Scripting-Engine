@@ -287,6 +287,21 @@ ErrorLevel CParams::Add(const char *sText, int iLength)
 	return this->Error->HardCount();
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+int CParams::Length(int iIndex)
+{
+	if (this->Collection.Count > iIndex)
+	{
+		return this->Collection.Items[iIndex].Length;
+	}
+	else {
+		this->Error->Hard("Invalid variable");
+		return 0;
+	}
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 char *CParams::ToString(int iIndex)

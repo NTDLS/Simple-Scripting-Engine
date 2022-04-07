@@ -913,6 +913,18 @@ CProcs::CProcs(void *lpEngine)
 	delete pReqParams;
 	//------------------------------------------------
 	pReqParams = new CReqParams(this->pEngine);
+	pReqParams->Add("String1", VAR_TYPE_STRING);
+	pReqParams->Add("String2", VAR_TYPE_STRING);
+	this->AddSystem("Equals", VAR_TYPE_NUMERIC, pReqParams);
+	delete pReqParams;
+	//------------------------------------------------
+	pReqParams = new CReqParams(this->pEngine);
+	pReqParams->Add("String1", VAR_TYPE_STRING);
+	pReqParams->Add("String2", VAR_TYPE_STRING);
+	this->AddSystem("NotEquals", VAR_TYPE_NUMERIC, pReqParams);
+	delete pReqParams;
+	//------------------------------------------------
+	pReqParams = new CReqParams(this->pEngine);
 	pReqParams->Add("Text", VAR_TYPE_STRING);
 	this->AddSystem("ToLower", VAR_TYPE_STRING, pReqParams);
 	delete pReqParams;
@@ -2886,7 +2898,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 					if (pType->IsStrictType)
 					{
 						const char *sBaseValue = pBaseVar->Value + pType->Members.Items[iMemberIndex].ByteOffset;
-						return pReturn->Add(strlen(sBaseValue));
+						return pReturn->Add((unsigned int)strlen(sBaseValue));
 					}
 					else {
 						return this->Error->Hard("Not implemented");
@@ -3372,7 +3384,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 			{
 				size_t pPointer = (int)pParams->ToIntPtr(1);
 
-				return pReturn->Add(strlen((char *)pPointer));
+				return pReturn->Add((unsigned int)strlen((char *)pPointer));
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "Convert.StringFromPointer"))
@@ -3393,7 +3405,7 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 			//-----------------------------------------------------------------------------------------------------------------
 			if (_StrEqlI(pProc->Name, "Env.CommandLine.Count"))
 			{
-				return pReturn->Add(pEngine->CommandLine->StackSize());
+				return pReturn->Add((unsigned int)pEngine->CommandLine->StackSize());
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			if (_StrEqlI(pProc->Name, "Env.CommandLine.Get"))
@@ -5786,6 +5798,30 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				return pReturn->Add((char *)sChar, 1);
 			}
 			//-----------------------------------------------------------------------------------------------------------------
+			else if (_StrEqlI(pProc->Name, "Equals"))
+			{
+				bool bResult = false;
+
+				if (pParams->Length(0) == pParams->Length(1))
+				{
+					bResult = strncmp(pParams->ToString(0), pParams->ToString(1), pParams->Length(0)) == 0;
+				}
+
+				return pReturn->Add(bResult);
+			}
+			//-----------------------------------------------------------------------------------------------------------------
+			else if (_StrEqlI(pProc->Name, "NotEquals"))
+			{
+				bool bResult = false;
+
+				if (pParams->Length(0) == pParams->Length(1))
+				{
+					bResult = strncmp(pParams->ToString(0), pParams->ToString(1), pParams->Length(0)) == 0;
+				}
+
+				return pReturn->Add(!bResult);
+			}
+			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "SubString"))
 			{
 				PARAMITEM *pString = pParams->First();
@@ -5938,11 +5974,14 @@ ErrorLevel CProcs::ExecuteInternal(int iIndex, CParams *pParams, CParams *pRetur
 				int iLength = (int)pParams->ToInt(1);
 				if (iLength < 0)
 				{
-					iLength = (int)strlen(sString);
+					iLength = pParams->Length(0);
 				}
 
 				CRC32 crc32;
-				return pReturn->Add((unsigned int)crc32.FullCRC((const unsigned char *)sString, iLength));
+
+				unsigned int checksum = crc32.FullCRC((const unsigned char*)sString, iLength);
+
+				return pReturn->Add(checksum);
 			}
 			//-----------------------------------------------------------------------------------------------------------------
 			else if (_StrEqlI(pProc->Name, "GUID"))

@@ -34,9 +34,9 @@ var client as Socket.Client
 server.Connect(serverName, serverPort, client)
 
 var getHeader as String = _
-	$"GET ${uri} HTTP/1.1${CrLf}" _
-	$"Connection: close${CrLf}" _
-	$"Host: ${serverName}${CrLf}${CrLf}"
+	$"GET {uri} HTTP/1.1{CrLf}" _
+	$"Connection: close{CrLf}" _
+	$"Host: {serverName}{CrLf}{CrLf}"
 
 If(client.Send(getHeader))
 

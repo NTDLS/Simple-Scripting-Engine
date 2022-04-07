@@ -924,7 +924,7 @@ StringBuilder *CEngine::EvaluateString(const char *sText, int iLength, int *piRP
 			delete pParam;
 			return NULL;
 		}
-		else if (sText[iRPos] == '$' && sText[iRPos + 1] == '{' && interpolation == true)
+		else if (sText[iRPos + 1] == '{' && interpolation == true)
 		{
 			iRPos += 2; //Skip the '${';
 
@@ -1201,6 +1201,11 @@ ErrorLevel CEngine::Evaluate(const char *sText, int iLength, CParams **returnVal
 			}
 			else {
 				int iPreviousSoftErrors = this->Error->SoftCount();
+
+				if (_strcmpi(sText, "(innerp.CRC == outerp.CRC && outer != inner)") == 0)
+				{
+					printf("");
+				}
 
 				//Parse math.
 				StringBuilder Param;
@@ -3618,17 +3623,6 @@ ErrorLevel CEngine::ExecuteLineOfCode(LINEITEM *pLine, CParams *pReturn)
 		}
 		else if (pLine->Text[iRPos] == '=')
 		{
-			if (_strnicmp("serviceStatus", pLine->Text, 13) != 0)
-			{
-				if (_strnicmp("enumValue", pLine->Text, 9) != 0)
-				{
-					if (_strnicmp("enumResult", pLine->Text, 10) != 0)
-					{
-						printf("");
-					}
-				}
-			}
-
 			iRPos++;
 			SkipWhiteSpaces(pLine->Text, pLine->Length, &iRPos);
 

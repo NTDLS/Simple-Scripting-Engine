@@ -38,6 +38,7 @@ public:
 	bool ToBool(int iIndex);
 	double ToDouble(int iIndex);
 	char *ToString(int iIndex);
+	int Length(int iIndex);
 
 	bool IsDefined(int iIndex);
 	PARAMITEM *GetPointer(int iIndex);

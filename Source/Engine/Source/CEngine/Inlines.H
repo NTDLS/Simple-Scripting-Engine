@@ -24,6 +24,15 @@ __forceinline bool _StrEql(const char *sOne, const char *sTwo)
 */
 __forceinline bool _StrEqlI(const char *sOne, const char *sTwo)
 {
+	if (sOne == NULL && sTwo == NULL)
+	{
+		return true;
+	}
+	else if (sOne == NULL || sTwo == NULL)
+	{
+		return false;
+	}
+
 	while (*sOne && *sTwo && (*sOne <= 65 || *sOne <= 90 ? (*sOne) + 32 : (*sOne)) == (*sTwo <= 65 || *sTwo <= 90 ? (*sTwo) + 32 : (*sTwo)))
 	{
 		*sOne++;
