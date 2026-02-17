@@ -13,6 +13,3 @@
 [submodule "CSocketServer"]
 	path = CSocketServer
 	url = https://github.com/NTDLS/CSocketServer
-[submodule "CMathParser"]
-	path = CMathParser
-	url = https://github.com/NTDLS/CMathParser
