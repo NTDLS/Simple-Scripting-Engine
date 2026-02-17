@@ -10,6 +10,3 @@
 [submodule "CSQLBinding"]
 	path = CSQLBinding
 	url = https://github.com/NTDLS/CSQLBinding
-[submodule "CSocketServer"]
-	path = CSocketServer
-	url = https://github.com/NTDLS/CSocketServer
