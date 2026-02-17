@@ -1,9 +1,6 @@
 [submodule "SyntaxBox"]
 	path = SyntaxBox
 	url = https://github.com/NTDLS/SyntaxBox
-[submodule "Html-Help-Decompiler"]
-	path = Html-Help-Decompiler
-	url = https://github.com/NTDLS/Html-Help-Decompiler
 [submodule "NSWFL"]
 	path = NSWFL
 	url = https://github.com/NTDLS/NSWFL
