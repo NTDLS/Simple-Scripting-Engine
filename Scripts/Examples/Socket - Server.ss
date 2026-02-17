@@ -126,10 +126,10 @@ Function SendHeader(socketClient as Socket.Client, contentType as String, conten
 
 	var httpHeader as String
 	
-	httpHeader.Append("HTTP/1.0 200 OK" & "\n")
-	httpHeader.Append("Content-Type: " & contentType & "\n")
-	httpHeader.Append("Content-Length: " & contentLength & "\n")
-	httpHeader.Append("Connection: Keep-Alive\n")
+	httpHeader.Append("HTTP/1.0 200 OK" & CrLf)
+	httpHeader.Append("Content-Type: " & contentType & CrLf)
+	httpHeader.Append("Content-Length: " & contentLength & CrLf)
+	httpHeader.Append("Connection: Keep-Alive" & CrLf)
 	httpHeader.Append(CrLf)
 
 	socketClient.Send(httpHeader)

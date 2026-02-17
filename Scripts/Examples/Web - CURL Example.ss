@@ -20,7 +20,7 @@ End If
 If(serverName.ToLower().IndexOf("http://") = 0)
 	serverName = serverName.SubString(7)
 	
-	var indexOfSlash as String = serverName.IndexOf("/")
+	var indexOfSlash as Numeric = serverName.IndexOf("/")
 	If(indexOfSlash > 0)
 		uri = serverName.SubString(indexOfSlash)
 		serverName = serverName.SubString(0, indexOfSlash)
