@@ -12,7 +12,7 @@
 #include "CEngine/CEngine.H"
 #include "../Dialogs/NetLogoDlg.H"
 #include "../Resources/Resource.H"
-#include "../../../NSWFL/NSWFL.h"
+#include "../../../Shared/NSWFL/NSWFL.h"
 
 #include "Entry.H"
 

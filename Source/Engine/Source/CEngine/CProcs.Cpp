@@ -13,8 +13,8 @@
 #include <Process.h>
 #include <Psapi.H>
 
-#include "../../../../NSWFL/NSWFL.h"
-#include "../../../../CMathParser/CMathParser.H"
+#include "../../../../Shared/NSWFL/NSWFL.h"
+#include "../../../../Shared/CMathParser/CMathParser.H"
 
 #include "CEngine.H"
 #include "CProcs.H"

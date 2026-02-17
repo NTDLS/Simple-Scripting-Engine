@@ -2,8 +2,8 @@
 #define _CVariable_H_
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include "../../../../CSQLBinding/CSQL.H"
-#include "../../../../CSocketServer/CSocketServer.H"
+#include "../../../../Shared/CSQLBinding/CSQL.H"
+#include "../../../../Shared/CSocketServer/CSocketServer.H"
 
 #include "CException.H"
 #include "CLines.H"

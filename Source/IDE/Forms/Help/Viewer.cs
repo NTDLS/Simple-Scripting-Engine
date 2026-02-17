@@ -1354,7 +1354,7 @@ namespace HtmlHelpViewer
 		{
 			object pvaIn = String.Empty;
 			object pvaOut = String.Empty;
-			axWebBrowser1.ExecWB(SHDocVw.OLECMDID.OLECMDID_PAGESETUP, SHDocVw.OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT, ref pvaIn, ref pvaOut);
+            axWebBrowser1.ExecWB(SHDocVw.OLECMDID.OLECMDID_PAGESETUP, SHDocVw.OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT, ref pvaIn, ref pvaOut);
 		}
 
 		/// <summary>

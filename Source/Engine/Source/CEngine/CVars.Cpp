@@ -6,9 +6,9 @@
 #include <Stdio.H>
 #include <Stdlib.H>
 
-#include "../../../../NSWFL/NSWFL.h"
-#include "../../../../CMathParser/CMathParser.H"
-#include "../../../../CSQLBinding/CSQLEncapsulation.H"
+#include "../../../../Shared/NSWFL/NSWFL.h"
+#include "../../../../Shared/CMathParser/CMathParser.H"
+#include "../../../../Shared/CSQLBinding/CSQLEncapsulation.H"
 
 #include "../Entry.H"
 

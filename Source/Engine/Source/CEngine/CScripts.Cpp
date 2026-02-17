@@ -9,7 +9,7 @@
 #include "CEngine.H"
 #include "CScripts.H"
 
-#include "../../../../NSWFL/NSWFL.h"
+#include "../../../../Shared/NSWFL/NSWFL.h"
 
 using namespace NSWFL::String;
 using namespace NSWFL::File;

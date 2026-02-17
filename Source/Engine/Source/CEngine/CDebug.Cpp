@@ -8,7 +8,7 @@
 #include <Process.H>
 #include <fcntl.h>
 #include "IO.H"
-#include "../../../../NSWFL/NSWFL.H"
+#include "../../../../Shared/NSWFL/NSWFL.H"
 
 #include "CEngine.H"
 #include "CDebug.H"

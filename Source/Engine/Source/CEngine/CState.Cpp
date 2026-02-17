@@ -6,7 +6,7 @@
 #include <Stdio.H>
 #include <Stdlib.H>
 
-#include "../../../../NSWFL/NSWFL.h"
+#include "../../../../Shared/NSWFL/NSWFL.h"
 
 #include "CEngine.H"
 #include "CState.H"

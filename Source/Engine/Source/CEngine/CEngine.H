@@ -12,7 +12,7 @@
 #include "CDebug.H"
 #include "CScriptTypes.H"
 #include "Inlines.H"
-#include "../../../../NSWFL/NSWFL.h"
+#include "../../../../Shared/NSWFL/NSWFL.h"
 
 int SQLErrorHandler(void *pCaller, const char *sSource, const char *sErrorMsg, const int iErrorNumber);
 

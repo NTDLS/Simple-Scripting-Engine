@@ -10,9 +10,9 @@
 #include <Limits.H>
 
 #include "CEngine.H"
-#include "../../../../NSWFL/NSWFL.h"
-#include "../../../../CMathParser/CMathParser.H"
-#include "../../../../CSQLBinding/CSQLEncapsulation.H"
+#include "../../../../Shared/NSWFL/NSWFL.h"
+#include "../../../../Shared/CMathParser/CMathParser.H"
+#include "../../../../Shared/CSQLBinding/CSQLEncapsulation.H"
 
 #ifdef _USE_GLOBAL_MEMPOOL
 NSWFL::Memory::MemoryPool *pMem = new NSWFL::Memory::MemoryPool; //pMem must be defined and initalized elsewhere.

@@ -22,3 +22,17 @@ Source/\.vs/
 Source/Engine/Debug/Win32/
 
 *.user
+
+Source/Engine/Debug/
+
+Source/Engine/Release/
+
+Source/HelpFileParser/.vs/
+
+Source/HelpFileParser/bin/
+
+Source/HelpFileParser/obj/
+
+Source/HelpFileParser/packages/
+
+Source/IDE/.vs/

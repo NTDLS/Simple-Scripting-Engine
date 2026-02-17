@@ -49,40 +49,40 @@
     <ApplicationIcon>AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AxInterop.SHDocVw">
-      <HintPath>..\..\Html-Help-Decompiler\libs\AxInterop.SHDocVw.dll</HintPath>
+    <Reference Include="AxSHDocVw">
+      <HintPath>..\..\Shared\Html-Help-Decompiler\Release\AxSHDocVw.dll</HintPath>
     </Reference>
     <Reference Include="HtmlHelp">
-      <HintPath>..\..\Html-Help-Decompiler\bin\Release\HtmlHelp.dll</HintPath>
+      <HintPath>..\..\Shared\Html-Help-Decompiler\Release\HtmlHelp.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\..\Html-Help-Decompiler\libs\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
-    <Reference Include="Interop.SHDocVw">
-      <HintPath>..\..\Html-Help-Decompiler\libs\Interop.SHDocVw.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\Shared\Html-Help-Decompiler\Release\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.8.0.2\lib\net35\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NTDLS.CodeEditor">
-      <HintPath>..\..\SyntaxBox\Release\NTDLS.CodeEditor.dll</HintPath>
+      <HintPath>..\..\Shared\SyntaxBox\Release\NTDLS.CodeEditor.dll</HintPath>
     </Reference>
     <Reference Include="NTDLS.CodeEditor.SyntaxFiles">
-      <HintPath>..\..\SyntaxBox\Release\NTDLS.CodeEditor.SyntaxFiles.dll</HintPath>
+      <HintPath>..\..\Shared\SyntaxBox\Release\NTDLS.CodeEditor.SyntaxFiles.dll</HintPath>
     </Reference>
     <Reference Include="NTDLS.Core">
-      <HintPath>..\..\SyntaxBox\Release\NTDLS.Core.dll</HintPath>
+      <HintPath>..\..\Shared\SyntaxBox\Release\NTDLS.Core.dll</HintPath>
     </Reference>
     <Reference Include="NTDLS.SyntaxDocument">
-      <HintPath>..\..\SyntaxBox\Release\NTDLS.SyntaxDocument.dll</HintPath>
+      <HintPath>..\..\Shared\SyntaxBox\Release\NTDLS.SyntaxDocument.dll</HintPath>
     </Reference>
     <Reference Include="NTDLS.Win32">
-      <HintPath>..\..\SyntaxBox\Release\NTDLS.Win32.dll</HintPath>
+      <HintPath>..\..\Shared\SyntaxBox\Release\NTDLS.Win32.dll</HintPath>
     </Reference>
     <Reference Include="NTDLS.Windows.Forms">
-      <HintPath>..\..\SyntaxBox\Release\NTDLS.Windows.Forms.dll</HintPath>
+      <HintPath>..\..\Shared\SyntaxBox\Release\NTDLS.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="SHDocVw">
+      <HintPath>..\..\Shared\Html-Help-Decompiler\Release\SHDocVw.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
