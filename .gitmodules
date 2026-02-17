@@ -7,6 +7,3 @@
 [submodule "NSWFL"]
 	path = NSWFL
 	url = https://github.com/NTDLS/NSWFL
-[submodule "CSQLBinding"]
-	path = CSQLBinding
-	url = https://github.com/NTDLS/CSQLBinding
